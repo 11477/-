@@ -1,5 +1,6 @@
 <template>
   <div id="app">
+    <NavBar/>
     <nav>
       <router-link to="/">Home</router-link> |
       <router-link to="/about">About</router-link>
@@ -7,6 +8,16 @@
     <router-view/>
   </div>
 </template>
+
+<script>
+import NavBar from '@/components/header/head.vue';
+export default {
+  components: {
+    // eslint-disable-next-line vue/no-unused-components
+    NavBar
+  }
+}
+</script>
 
 <style>
 #app {
