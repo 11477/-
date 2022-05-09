@@ -1,10 +1,12 @@
 <template>
   <div id="nav-bar">
   <el-menu :default-active="activeIndex" class="el-menu-demo" mode="horizontal" @select="handleSelect">
-    <el-menu-item index="1" @click="toHome">
-      <img src="../../assets/SBlogo.png" alt="banner">
-      首页
-    </el-menu-item>
+    <div class="left-entry">
+      <el-menu-item index="1" @click="toHome">
+        <img src="../../assets/SBlogo.png" alt="banner">
+        首页
+      </el-menu-item>
+    </div>
     <div class="searchInput">
       <el-input
           placeholder="请输入搜索内容"
@@ -12,11 +14,13 @@
         <i slot="prefix" class="el-input__icon el-icon-search"></i>
       </el-input>
     </div>
+    <div class="right-entry">
       <el-menu-item index="2" @click="toMessage">通知</el-menu-item>
       <el-menu-item index="3" @click="toStore">收藏</el-menu-item>
       <el-menu-item index="4" @click="toHistory">历史</el-menu-item>
       <el-menu-item index="5" @click="toFollow">关注</el-menu-item>
       <el-menu-item index="6" @click="upLoad">投稿</el-menu-item>
+    </div>
   </el-menu>
   </div>
 </template>
@@ -52,6 +56,15 @@ export default {
 }
 el-menu-item {
   font-size: 20px;
+}
+.left-entry {
+  float: left;
+  display: flex;
+  flex-shrink: 0;
+}
+.right-entry {
+  display: flex;
+  float: right;
 }
 </style>
 
