@@ -55,16 +55,18 @@ export default {
   margin-top: 10px;
 }
 el-menu-item {
+  position: absolute;
   font-size: 20px;
 }
 .left-entry {
-  float: left;
-  display: flex;
-  flex-shrink: 0;
+  position: relative;
+  display: inline-flex;
+  left: 0;
 }
 .right-entry {
-  display: flex;
-  float: right;
+  position: relative;
+  display: inline-flex;
+  right: 0;
 }
 </style>
 
