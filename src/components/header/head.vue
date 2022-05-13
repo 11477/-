@@ -15,11 +15,27 @@
       </el-input>
     </div>
     <div class="right-entry">
-      <el-menu-item index="2" @click="toMessage">通知</el-menu-item>
-      <el-menu-item index="3" @click="toStore">收藏</el-menu-item>
-      <el-menu-item index="4" @click="toHistory">历史</el-menu-item>
-      <el-menu-item index="5" @click="toFollow">关注</el-menu-item>
-      <el-menu-item index="6" @click="upLoad">投稿</el-menu-item>
+      <i class="el-icon-user"></i>
+      <div class="right-button" @click="toMessage">
+        <i class="el-icon-message"></i>
+        通知
+      </div>
+      <div class="right-button" @click="toStore">
+        <i class="el-icon-view"></i>
+        收藏
+      </div>
+      <div class="right-button" @click="toHistory">
+        <i class="el-icon-pie-chart"></i>
+        历史
+      </div>
+      <div class="right-button" @click="toFollow">
+        <i class="el-icon-star-off"></i>
+        关注
+      </div>
+      <div class="right-button" @click="upLoad">
+        <i class="el-icon-upload2"></i>
+        投稿
+      </div>
     </div>
   </el-menu>
   </div>
@@ -56,6 +72,13 @@ export default {
 }
 el-menu-item {
   font-size: 20px;
+  display: flex;
+  flex-direction: column;
+}
+.right-button{
+  display: flex;
+  flex-direction: column;
+  margin: 10px;
 }
 .left-entry {
   float: left;
@@ -65,6 +88,8 @@ el-menu-item {
 .right-entry {
   display: flex;
   float: right;
+  align-items: center;
+  text-align: center;
 }
 </style>
 
