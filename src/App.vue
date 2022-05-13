@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <NavBar/>
+    <NavBar v-if="$store.state.islogin"/>
     <nav>
     </nav>
     <router-view/>
