@@ -3,7 +3,7 @@
   <el-menu :default-active="activeIndex" class="el-menu-demo" mode="horizontal" @select="handleSelect">
     <div class="left-entry">
       <el-menu-item index="1" @click="toHome">
-        <img src="../../assets/SBlogo.png" alt="banner">
+        <img class="logo-pic" src="../../assets/SBlogo.png" alt="banner">
         首页
       </el-menu-item>
     </div>
@@ -15,7 +15,7 @@
       </el-input>
     </div>
     <div class="right-entry">
-      <i class="el-icon-user"></i>
+      <img class="head-pic" src="../../assets/head.jpeg" alt="banner">
       <div class="right-button" @click="toMessage">
         <i class="el-icon-message"></i>
         通知
@@ -62,8 +62,13 @@ export default {
   padding: 0 10% 0 10%;
   height: 61px;
 }
-#nav-bar img {
+.logo-pic {
   width: 30px;
+}
+.head-pic {
+  width: 50px;
+  margin-top: -5px;
+  margin-right: 20px;
 }
 .searchInput {
   display: inline-block;
@@ -78,7 +83,7 @@ el-menu-item {
 .right-button{
   display: flex;
   flex-direction: column;
-  margin: 10px;
+  margin: 10px 20px;
 }
 .left-entry {
   float: left;
