@@ -3,7 +3,7 @@
   <el-menu :default-active="activeIndex" class="el-menu-demo" mode="horizontal" @select="handleSelect">
     <div class="left-entry">
       <el-menu-item index="1" @click="toHome">
-        <img src="../../assets/SBlogo.png" alt="banner">
+        <img class="logo-pic" src="../../assets/SBlogo.png" alt="banner">
         首页
       </el-menu-item>
     </div>
@@ -15,11 +15,27 @@
       </el-input>
     </div>
     <div class="right-entry">
-      <el-menu-item index="2" @click="toMessage">通知</el-menu-item>
-      <el-menu-item index="3" @click="toStore">收藏</el-menu-item>
-      <el-menu-item index="4" @click="toHistory">历史</el-menu-item>
-      <el-menu-item index="5" @click="toFollow">关注</el-menu-item>
-      <el-menu-item index="6" @click="upLoad">投稿</el-menu-item>
+      <img class="head-pic" src="../../assets/head.jpeg" alt="banner">
+      <div class="right-button" @click="toMessage">
+        <i class="el-icon-message"></i>
+        通知
+      </div>
+      <div class="right-button" @click="toStore">
+        <i class="el-icon-view"></i>
+        收藏
+      </div>
+      <div class="right-button" @click="toHistory">
+        <i class="el-icon-pie-chart"></i>
+        历史
+      </div>
+      <div class="right-button" @click="toFollow">
+        <i class="el-icon-star-off"></i>
+        关注
+      </div>
+      <div class="right-button" @click="upLoad">
+        <i class="el-icon-upload2"></i>
+        投稿
+      </div>
     </div>
   </el-menu>
   </div>
@@ -46,8 +62,13 @@ export default {
   padding: 0 10% 0 10%;
   height: 61px;
 }
-#nav-bar img {
+.logo-pic {
   width: 30px;
+}
+.head-pic {
+  width: 50px;
+  margin-top: -5px;
+  margin-right: 20px;
 }
 .searchInput {
   display: inline-block;
@@ -55,18 +76,25 @@ export default {
   margin-top: 10px;
 }
 el-menu-item {
-  position: absolute;
   font-size: 20px;
+  display: flex;
+  flex-direction: column;
+}
+.right-button{
+  display: flex;
+  flex-direction: column;
+  margin: 10px 20px;
 }
 .left-entry {
-  position: relative;
-  display: inline-flex;
-  left: 0;
+  float: left;
+  display: flex;
+  flex-shrink: 0;
 }
 .right-entry {
-  position: relative;
-  display: inline-flex;
-  right: 0;
+  display: flex;
+  float: right;
+  align-items: center;
+  text-align: center;
 }
 </style>
 
