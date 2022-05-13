@@ -15,7 +15,10 @@ const routes = [
     // route level code-splitting
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../views/register/RegisterView')
+    component: () => import(/* webpackChunkName: "about" */ '../views/register/RegisterView'),
+    meta:{
+      unShowNav:true
+    }
   },
   {
     path: '/login',
@@ -23,7 +26,10 @@ const routes = [
     // route level code-splitting
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../views/login/LoginView')
+    component: () => import(/* webpackChunkName: "about" */ '../views/login/LoginView'),
+    meta:{
+      unShowNav:true
+    }
   },
   {
     path: '/search',
@@ -31,7 +37,10 @@ const routes = [
     // route level code-splitting
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../views/search/SearchView')
+    component: () => import(/* webpackChunkName: "about" */ '../views/search/SearchView'),
+    meta:{
+      unShowNav:true
+    }
   },
   {
     path: '/user',
@@ -55,7 +64,10 @@ const routes = [
     // route level code-splitting
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../views/upload/UploadView')
+    component: () => import(/* webpackChunkName: "about" */ '../views/upload/UploadView'),
+    meta:{
+      unShowNav:true
+    }
   },
   {
     path: '/administrator',
@@ -63,7 +75,10 @@ const routes = [
     // route level code-splitting
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../views/administrator/AdminView')
+    component: () => import(/* webpackChunkName: "about" */ '../views/administrator/AdminView'),
+    meta:{
+      unShowNav:true
+    }
   },
 
 ]

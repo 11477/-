@@ -1,8 +1,6 @@
 <template>
   <div id="app">
-    <NavBar v-if="$store.state.islogin"/>
-    <nav>
-    </nav>
+    <NavBar v-if="!$route.meta.unShowNav"/>
     <router-view/>
   </div>
 </template>
@@ -35,7 +33,4 @@ nav a {
   color: #2c3e50;
 }
 
-nav a.router-link-exact-active {
-  color: #42b983;
-}
 </style>
