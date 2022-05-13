@@ -1,6 +1,6 @@
 <template>
-  <div class="login">
-    <h1>This is an login page</h1>
+  <div id="login" class="login">
+    <div class="title">短视频分享网站</div>
   </div>
 </template>
 
@@ -11,5 +11,8 @@ export default {
 </script>
 
 <style scoped>
+#login .title{
+  font-size: 100px;
 
+}
 </style>
