@@ -8,8 +8,11 @@
     "lint": "vue-cli-service lint"
   },
   "dependencies": {
+    "artplayer": "^4.3.23",
     "core-js": "^3.8.3",
     "element-ui": "^2.15.8",
+    "video.js": "^7.18.1",
+    "videojs-flash": "^2.2.1",
     "vue": "^2.6.14",
     "vue-router": "^3.5.1",
     "vuex": "^3.6.2"
@@ -25,5 +28,8 @@
     "eslint": "^7.32.0",
     "eslint-plugin-vue": "^8.0.3",
     "vue-template-compiler": "^2.6.14"
+  },
+  "rules": {
+    "no-unused-vars": "off"
   }
 }

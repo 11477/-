@@ -1,5 +1,5 @@
 <template>
-  <div id="nav-bar">
+  <div id="nav-bar" v-show="!($route.path==='/administrator')">
   <el-menu :default-active="activeIndex" class="el-menu-demo" mode="horizontal" @select="handleSelect">
     <div class="left-entry">
       <el-menu-item index="1" @click="toHome">
@@ -53,7 +53,7 @@ export default {
     toHome() {
       window.location.href = '/';
     }
-  }
+  },
 }
 </script>
 
