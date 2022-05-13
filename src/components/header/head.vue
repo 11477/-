@@ -52,7 +52,7 @@ export default {
   methods:{
     toHome() {
       window.location.href = '/';
-    }
+    },
   },
 }
 </script>
