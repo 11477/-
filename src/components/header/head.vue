@@ -1,5 +1,5 @@
 <template>
-  <div id="nav-bar" v-show="!($route.path==='/administrator')">
+  <div id="nav-bar">
   <el-menu :default-active="activeIndex" class="el-menu-demo" mode="horizontal" @select="handleSelect">
     <div class="left-entry">
       <el-menu-item index="1" @click="toHome">
@@ -7,15 +7,21 @@
         首页
       </el-menu-item>
     </div>
-    <div class="searchInput">
-      <el-input
-          placeholder="请输入搜索内容"
-          v-model="input">
-        <i slot="prefix" class="el-input__icon el-icon-search"></i>
-      </el-input>
+    <div class="searchBar" v-show="!($route.path==='/search')">
+      <form id="nav-searchForm" class style="border-radius: 8px">
+        <div class="nav-search-content">
+          <input class="nav-search-input" type="text" placeholder="请输入关键词搜索" v-model="input" @keyup.enter="searchContent">
+        </div>
+        <div class="nav-search-button" @click="searchContent">
+          <i class="el-icon-search"></i>
+        </div>
+      </form>
     </div>
     <div class="right-entry">
-      <img class="head-pic" src="../../assets/head.jpeg" alt="banner">
+      <div class="right-button">
+        <div class="login-button">登录</div>
+        <img class="head-pic" v-if="$store.state.islogin" src="../../assets/head.jpeg" alt="banner">
+      </div>
       <div class="right-button" @click="toMessage">
         <i class="el-icon-message"></i>
         通知
@@ -70,10 +76,63 @@ export default {
   margin-top: -5px;
   margin-right: 20px;
 }
-.searchInput {
+.login-button{
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  color: #00aeec;
+  background: #f6f6f6;
+  text-align: center;
+  letter-spacing: 0;
+  font-size: 14px;
+  line-height: 36px;
+}
+.searchBar {
   display: inline-block;
   width: 40%;
-  margin-top: 10px;
+  margin-top: 5px;
+}
+#nav-searchForm{
+  display: flex;
+  align-items: center;
+  padding: 0 48px 0 4px;
+  position: relative;
+  z-index: 1;
+  overflow: hidden;
+  line-height: 38px;
+  border: 1px solid #E3E5E7;
+  height: 40px;
+  background-color: #F1F2F3;
+  opacity: .9;
+  transition: background-color .3s;
+}
+.nav-search-content{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: relative;
+  padding: 0 8px;
+  width: 100%;
+  height: 32px;
+  border: 2px solid transparent;
+  border-radius: 6px;
+}
+.nav-search-button{
+  float: right;
+}
+.nav-search-input{
+  flex: 1;
+  overflow: hidden;
+  padding-right: 8px;
+  border: none;
+  background-color: transparent;
+  box-shadow: none;
+  color: #61666D;
+  font-size: 14px;
+  line-height: 20px;
+}
+input:focus{
+  outline: none;
 }
 el-menu-item {
   font-size: 20px;
