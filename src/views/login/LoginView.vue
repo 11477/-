@@ -63,7 +63,7 @@ export default {
 
 .login-box{
   width: 550px;
-  background: rgba(255,255,255,0.6);
+  background: rgba(255,255,255,0.8);
   margin-top: 10px;
   border-radius: 20px;
   display: flex;
@@ -124,7 +124,7 @@ export default {
 .register-text {
   font-size:14px;
   line-height:10px;
-  color:#000;
+  color:#999;
   text-align: right;
   margin-bottom: 10px;
   margin-left: 370px;
