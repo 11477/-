@@ -118,7 +118,22 @@ export default {
   border-radius: 6px;
 }
 .nav-search-button{
-  float: right;
+  position: absolute;
+  top: 5px;
+  right: 7px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0;
+  padding: 0;
+  width: 32px;
+  height: 32px;
+  border: none;
+  border-radius: 6px;
+  color: #00aeec;
+  line-height: 32px;
+  cursor: pointer;
+  transition: background-color .3s;
 }
 .nav-search-input{
   flex: 1;
