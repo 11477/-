@@ -117,13 +117,14 @@
 
 .register-wrap {
   width: 350px;
-  height: 430px;
+  height: 350px;
   padding: 20px 25px 0 25px;
   line-height: 40px;
   position: relative;
   display: inline-block;
   background-color: rgba(255, 255, 255,0.8);
   border-radius: 20px;
+  margin-top: 40px;
 }
 </style>
 
