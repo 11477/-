@@ -34,17 +34,77 @@
       </div>
     </div>
     <div class="player">
-      <Artplayer @get-instance="getInstance" :option="option" :style="style" />
+      <ArtPlayer @get-instance="getInstance" :option="option" :style="style" />
+      <div class="interact">
+        <div class="interact-button">
+          <img src="../../assets/icons/like-after.png" class="button-icon" alt="liked" v-if="this.isLiked"
+               @click="changeLike">
+          <img :src="this.likeImg" class="button-icon" alt="not liked" v-else
+               @click="changeLike"
+               @mouseenter="onEnterLike"
+               @mouseleave="onLeaveLike">
+        </div>
+        <div class="interact-button">
+         <img src="../../assets/icons/favor-after.png" class="button-icon" alt="favored" v-if="this.isFavored" @click="changeFavor">
+         <img :src="this.favorImg" width="50px" class="button-icon" alt="not favored" v-else
+              @click="changeFavor"
+              @mouseenter="onEnterFavor"
+              @mouseleave="onLeaveFavor">
+        </div>
+        <div class="report">
+          <el-button type="primary" size="small" @click=" reportVisible=true" >投诉稿件</el-button>
+        </div>
+
+        <el-dialog title="稿件投诉" :visible.sync="reportVisible">
+          <el-form :model="reportForm" ref="reportForm">
+            <el-form-item label="">
+              <el-radio-group v-model="reportForm.resource" prop="reportReason">
+                <el-radio label="违法违纪" name="type"></el-radio>
+                <el-radio label="低俗内容" name="type"></el-radio>
+                <el-radio label="暴力血腥" name="type"></el-radio>
+                <el-radio label="人身攻击" name="type"></el-radio>
+              </el-radio-group>
+            </el-form-item>
+          </el-form>
+          <div slot="footer" class="dialog-footer">
+            <el-button @click="cancelReport">取 消</el-button>
+            <el-button type="primary" @click="reportVisible = false">确 定</el-button>
+          </div>
+        </el-dialog>
+
+
+      </div>
     </div>
   </div>
 </template>
 
 <script>
-import Artplayer from "@/components/player/ArtPlayer.vue";
+import ArtPlayer from "@/components/player/ArtPlayer.vue";
+import LikeBefore from "@/assets/icons/like-before.png";
+import LikeHover from "@/assets/icons/like-hover.png"
+import FavorBefore from "@/assets/icons/favor-before.png";
+import FavorHover from "@/assets/icons/favor-hover.png"
+
 export default {
   name: "VideoView",
   data() {
     return {
+      isLiked: false,
+      isFavored: false,
+      likeImg: LikeBefore,
+      favorImg: FavorBefore,
+      reportVisible: false,
+      formLabelWidth: '120px',
+      reportForm:{
+      name: '',
+          region: '',
+          date1: '',
+          date2: '',
+          delivery: false,
+          type: [],
+          resource: '',
+          desc: ''
+    },
       option: {
         url: "https://artplayer.org/assets/sample/video.mp4",
         title: "Your name",
@@ -67,17 +127,70 @@ export default {
     };
   },
   components: {
-    Artplayer,
+    ArtPlayer,
   },
   methods: {
     getInstance(art) {
       console.log(art);
     },
+    changeLike() {
+      this.isLiked=!this.isLiked;
+    },
+    changeFavor() {
+      this.isFavored=!this.isFavored;
+    },
+    onEnterLike(){
+      console.log("enter")
+      this.likeImg=LikeHover
+    },
+    onLeaveLike(){
+      console.log("leave")
+      this.likeImg=LikeBefore
+    },
+    onEnterFavor(){
+      console.log("enter")
+      this.favorImg=FavorHover
+    },
+    onLeaveFavor(){
+    this.favorImg=FavorBefore
+    },
+    resetForm(formName) {
+      console.log('nani')
+      this.$refs[formName].resetFields();
+    },
+    cancelReport(){
+      this.reportVisible=false
+      this.resetForm('reportForm')
+    }
   },
 }
 </script>
 
 <style scoped>
+.video-wrap .interact{
+  position: relative;
+  margin-top: 16px;
+  line-height: 30px;
+  height: 28px;
+  font-size: 14px;
+  color: #505050;
+  border-bottom: 1px solid #e5e9f0;
+  padding-bottom: 12px;
+}
+.interact .interact-button {
+  display: inline-block;
+  cursor: pointer;
+  margin-left: 15px;
+  float: left;
+}
+.interact-button .button-icon{
+  width: 30px;
+  height: 30px;
+}
+.report{
+  float: right;
+  margin-right: 30px;
+}
 .player {
   display: inline-block;
 }
