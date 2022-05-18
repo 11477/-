@@ -106,14 +106,21 @@ export default {
 
 <style scoped>
 
-#login .title1{
+.login {
+  width: 100%;
+  height: 800px;
+  background: url("../../assets/login_background.jpg") no-repeat;
+  background-size: cover;
+}
+
+.title1{
   background: rgba(255,255,255,0.8);
   position: relative;
   top: 20px;
   font-size: 50px;
   font-weight: 2500;
   line-height: 80px;
-  width: 30%;
+  width: 300px;
   height: 80px;
   border-radius: 25px;
   display: inline-block;
@@ -121,7 +128,7 @@ export default {
 
 
 .login-word{
-  width: 1000px;
+  width: 80%;
   height: 28px;
   margin: 0 auto;
   border-bottom: 1px solid #ddd;
@@ -141,12 +148,7 @@ export default {
   text-align: center;
 }
 
-.login {
-  width: 100%;
-  height: 721px;
-  background: url("../../assets/login_background.jpg") no-repeat;
-  background-size: cover;
-}
+
 .login-wrap {
   width: 350px;
   height: 220px;
