@@ -1,16 +1,21 @@
 <template>
   <div id="search-view">
-    <el-col :span="700">
-      <el-input
-          id="search"
-          v-model="input1"
-          placeholder="请输入关键字搜索"
-          @focus="Searching"
-      ></el-input>
-    </el-col>
-    <el-col :span="1">
-      <el-button type="primary" icon="el-icon-search">搜索</el-button>
-    </el-col>
+    <div class="flex-center">
+      <div class="search-input-wrap">
+        <div class="searchView-search-button">
+          <i class="el-icon-search"></i>
+        </div>
+        <input class="search-input-content" type="text" placeholder="输入关键字搜索" v-model="input2" @keyup.enter="searchContent">
+        <el-button type="primary" icon="el-icon-search" @click="searchContent">搜索</el-button>
+      </div>
+    </div>
+    <div class="menu-box">
+      <el-menu :default-active="activeIndex" class="el-menu-demo" mode="horizontal" @select="handleSelect">
+        <el-menu-item index="1">综合</el-menu-item>
+        <el-menu-item index="2">视频</el-menu-item>
+        <el-menu-item index="3">用户</el-menu-item>
+      </el-menu>
+    </div>
   </div>
 </template>
 
@@ -19,13 +24,15 @@ export default {
   name: "SearchView",
   data() {
     return {
-      input1: '',
-      isSearching: false
+      input2: '',
+      activeIndex: '1'
     }
   },
-  methods:{
-    Searching: function (){
-      this.isSearching = true;
+  methods: {
+    searchContent() {
+    },
+    handleSelect(key, keyPath) {
+      console.log(key, keyPath);
     }
   }
 }
@@ -35,7 +42,45 @@ export default {
 <style>
 #search-view {
   margin-top: 20px;
-  width: 50%;
-  margin-left: 30%;
+}
+.flex-center{
+  display: flex;
+  -webkit-box-pack: center;
+  justify-content: center;
+  -webkit-box-align: center;
+  align-items: center;
+}
+.search-input-wrap{
+  position: relative;
+  width: 640px;
+  margin: 0 auto;
+  padding: 5px;
+  background: #ffffff;
+  border: 1px solid #00aeec;
+  border-radius: 6px;
+  transition: all .2s;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  -webkit-box-align: center;
+}
+.searchView-search-button{
+  width: 20px;
+  color: #00aeec;
+  margin-left: 15px;
+  margin-right: 10px;
+}
+.search-input-content{
+  width: calc(100% - 160px);
+  height: 36px;
+  font-size: 18px;
+  color: #18191c;
+  margin-right: 15px;
+  border: none;
+  outline: none;
+  background: transparent;
+}
+.menu-box{
+  padding: 0 10%;
 }
 </style>
