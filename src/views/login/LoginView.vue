@@ -1,78 +1,112 @@
 <template>
   <div id="login" class="login">
-    <div class="title">ShareVideo</div>
+    <div class="title1">ShareVideo</div>
     <div class="login-word">
       <span class="word" style="font-size: 38px;">登录</span>
     </div>
-    <div class="login-box-out">
-      <div class="login-box">
-        <div class="email">
-          <el-input v-model="input1" placeholder="你的邮箱" clearable></el-input>
-        </div>
-        <div class="password">
-          <el-input placeholder="密码" v-model="input2" show-password></el-input>
-        </div>
-        <div class="register-text">
-          <p @click="handleCommand">没有账号？现在注册</p>
-        </div>
-      </div >
-      <el-button type="primary" @click="login" class="login-btn" round size="medium">登 录</el-button>
+    <div class="login-wrap">
+      <el-form :model="form" ref="form" class="demo-ruleForm">
+        <el-form-item prop="username">
+          <el-input placeholder="用户名" type="username" v-model="form.username" autocomplete="off"></el-input>
+        </el-form-item>
+        <el-form-item id="password" prop="pass">
+          <el-input
+              placeholder="密码"
+              type="password"
+              v-model="form.password"
+              autocomplete="off"
+              @keyup.enter.native="login"
+          ></el-input>
+        </el-form-item>
+        <el-form-item class="login-btn">
+          <el-button type="primary" @click="login">登 录</el-button>
+        </el-form-item>
+      </el-form>
+      <div class="register-text">
+        <p @click="handleCommand">注册帐号</p>
       </div>
+    </div>
   </div>
 </template>
 
 <script>
 export default {
   name: "LoginView.vue",
-  methods:{
-    login(){
-      this.$store.commit("login");
-    },
-    logout(){
-      this.$store.commit("logout");
-    },
-    handleCommand(){
-      this.$router.push("/register");
-    }
-  },
   data() {
     return {
-      input1: '',
-      input2: ''
-    }
+      is_login: true,
+      form: {
+        username: '',
+        password: '',
+      },
+    };
+  },
+  methods: {
+    login() {
+      const self = this;
+      const formData = new FormData();
+      formData.append("username", self.form.username);
+      formData.append("password", self.form.password);
+
+      self.$axios({
+        method: 'post',
+        url: '/login/',
+        data: formData,
+      })
+          .then(res => {
+            switch (res.data.status_code) {
+              case "2000":
+                location.reload();
+                // 前端保存用户信息
+                this.$store.dispatch('saveUserInfo', {user: {
+                    'username': this.form.username,
+                    'confirmed': true,
+                    'usertype': res.data.user_type,
+                  }});
+                break;
+              case "3001":
+                this.$message.error('请检查填写的内容！');
+                break;
+              case "4001":
+                this.$message.warning('用户已登录！');
+                break;
+              case "4002":
+                this.$message.error('用户名不存在！');
+                break;
+              case "4003":
+                this.$message.error('用户名或密码错误！');
+                break;
+              case "4004":
+                this.$message.warning('用户未通过邮件确认，请及时确认！');
+                this.$store.dispatch('saveUserInfo', {user: {
+                    'username': this.form.username,
+                    'confirmed': false,
+                  }});
+                this.$router.push('/unverified_email');
+                break;
+            }
+          })
+          .catch(err => {
+            console.log(err);
+          })
+    },
+    resetForm(formName) {
+      this.$refs[formName].resetFields();
+    },
+    handleCommand() {
+      this.$router.push("/register");
+    },
+    handleToHome() {
+      this.$router.push('/');
+    },
   }
 }
 
 </script>
 
 <style scoped>
-.login{
-  background: url("../../assets/login_background.jpg") no-repeat;
-  background-position: center;
-  height: 100%;
-  width: 100%;
-  background-size: cover;
-  position: fixed;
-  text-align: center;
-}
 
-.login-box-out{
-  display: inline-block;
-  margin-top: 50px;
-}
-
-.login-box{
-  width: 550px;
-  background: rgba(255,255,255,0.8);
-  margin-top: 10px;
-  border-radius: 20px;
-  display: flex;
-  align-items: center;
-  text-align: center;
-  flex-direction: column;
-}
-
-#login .title{
+#login .title1{
   background: rgba(255,255,255,0.8);
   position: relative;
   top: 20px;
@@ -85,12 +119,6 @@ export default {
   display: inline-block;
 }
 
-.login-box .email{
-  width: 500px;
-  height: 80px;
-  margin-top: 40px;
-  margin-bottom: -20px;
-}
 
 .login-word{
   width: 1000px;
@@ -100,14 +128,6 @@ export default {
   margin-top: 50px;
   margin-bottom: 28px;
   text-align: center;
-}
-
-.password{
-  width: 500px;
-  height: 80px;
-  /*display: inline-block;*/
-  margin-top:20px;
-
 }
 
 .login-word .word{
@@ -121,20 +141,53 @@ export default {
   text-align: center;
 }
 
+.login {
+  width: 100%;
+  height: 721px;
+  background: url("../../assets/login_background.jpg") no-repeat;
+  background-size: cover;
+}
+.login-wrap {
+  width: 350px;
+  height: 220px;
+  padding: 20px 25px 0 25px;
+  line-height: 40px;
+  position: relative;
+  display: inline-block;
+  background-color: rgba(255, 255, 255,0.8);
+  border-radius: 20px;
+  margin-top: 80px;
+}
+h3 {
+  color: #0babeab8;
+  font-size: 24px;
+}
+hr {
+  background-color: #444;
+  margin: 20px auto;
+}
+a {
+  text-decoration: none;
+  color: #aaa;
+  font-size: 15px;
+}
+a:hover {
+  color: coral;
+}
+.login-btn {
+  margin-top: 25px;
+  text-align: center;
+}
+.login-btn button{
+  width:100%;
+  height:38px;
+}
 .register-text {
   font-size:14px;
   line-height:10px;
   color:#999;
-  text-align: right;
-  margin-bottom: 10px;
-  margin-left: 370px;
-  cursor : pointer;
-}
-
-.login-btn{
-  margin-top: 50px;
-  width: 110px;
-  height: 50px;
+  cursor: pointer;
+  float:right;
 }
 
 </style>
