@@ -3,8 +3,8 @@
   <el-menu :default-active="activeIndex" class="el-menu-demo" mode="horizontal" @select="handleSelect">
     <div class="left-entry">
       <el-menu-item index="1" @click="toHome">
-        <img class="logo-pic" src="../../assets/SBlogo.png" alt="banner">
-        首页
+        <img class="logo-pic" src="../../assets/logo-long.jpeg" alt="banner">
+        <span class="home-char">首页</span>
       </el-menu-item>
     </div>
     <div class="searchBar" v-show="!($route.path==='/search')">
@@ -69,7 +69,10 @@ export default {
   height: 61px;
 }
 .logo-pic {
-  width: 30px;
+  width: 150px;
+}
+.home-char{
+  margin-left: 10px;
 }
 .head-pic {
   width: 50px;
@@ -90,7 +93,7 @@ export default {
 .searchBar {
   display: inline-block;
   width: 40%;
-  margin-top: 5px;
+  margin-top: 7px;
 }
 #nav-searchForm{
   display: flex;
