@@ -37,5 +37,8 @@ nav a {
   font-weight: bold;
   color: #2c3e50;
 }
-
+@font-face {
+  font-family: "user-name-black";
+  src: url("./assets/fonts/RuiZiTaiKongZhuMengHeiJian-Shan-TeHei(REEJI-TaikodreamGB-Flash-Black)-2.ttf");
+}
 </style>

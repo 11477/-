@@ -73,6 +73,7 @@ export default {
 }
 .home-char{
   margin-left: 10px;
+  font-size: 17px;
 }
 .head-pic {
   width: 50px;
