@@ -54,7 +54,6 @@
         <div class="report">
           <el-button type="primary" size="small" @click=" reportVisible=true" >投诉稿件</el-button>
         </div>
-
         <el-dialog title="稿件投诉" :visible.sync="reportVisible">
           <el-form :model="reportForm" ref="reportForm">
             <el-form-item label="">
@@ -71,10 +70,27 @@
             <el-button type="primary" @click="reportVisible = false">确 定</el-button>
           </div>
         </el-dialog>
-
-
       </div>
+      <div class="video-desc">
+        <div class="desc-info-open" v-if="this.descSpread">
+          这里是一段简介然后呢咱们就是说因为简介的内容需要比较长所以我需要在这里水一点东西就像这样在去年进行的东京奥运会男子4×100米决赛中，由苏炳添、谢震业、吴智强和汤星强组成的中国队跑出37秒79的成绩，位居第四，意大利队、英国队和加拿大队分获前三名。国际体育仲裁法庭（CAS）今年2月18日发布公告，认定英国短跑运动员奇金杜·乌贾在东京奥运会期间违反了反兴奋剂条例，乌贾在东京奥运会男子4×100米接力决赛和男子100米比赛中取得的成绩都被取消，英国队在东京奥运会男子4×100米接力决赛中获得的银牌也被剥夺。加拿大队递补获得银牌，中国队递补获得铜牌。这也是中国男子4×100米接力队在奥运会上获得的首枚奖牌。今年3月，世界田联官网更新了包括苏炳添在内的中国男子4×100米接力队成员资料介绍，在荣誉一栏中，均添加了“奥运会铜牌得主”。
+
+          递补获得奖牌，中国田径运动员们在过去几届奥运会中有过不少这样的经历，2008年北京奥运会，年仅19岁的巩立姣以19米20的成绩排名女子铅球第五。不过此后，亚军和季军米赫涅维奇、奥斯塔普丘克都未能通过药检，巩立姣因此递补获得了铜牌。2012年伦敦奥运会，铅球银牌得主俄罗斯人克洛德科在新一轮重检后，又被查出服用禁药。巩立姣又在没有站上领奖台的情况下，成为了奥运银牌得主。
+        </div>
+        <div class="desc-info" v-else>
+          这里是一段简介然后呢咱们就是说因为简介的内容需要比较长所以我需要在这里水一点东西就像这样在去年进行的东京奥运会男子4×100米决赛中，由苏炳添、谢震业、吴智强和汤星强组成的中国队跑出37秒79的成绩，位居第四，意大利队、英国队和加拿大队分获前三名。国际体育仲裁法庭（CAS）今年2月18日发布公告，认定英国短跑运动员奇金杜·乌贾在东京奥运会期间违反了反兴奋剂条例，乌贾在东京奥运会男子4×100米接力决赛和男子100米比赛中取得的成绩都被取消，英国队在东京奥运会男子4×100米接力决赛中获得的银牌也被剥夺。加拿大队递补获得银牌，中国队递补获得铜牌。这也是中国男子4×100米接力队在奥运会上获得的首枚奖牌。今年3月，世界田联官网更新了包括苏炳添在内的中国男子4×100米接力队成员资料介绍，在荣誉一栏中，均添加了“奥运会铜牌得主”。
+
+          递补获得奖牌，中国田径运动员们在过去几届奥运会中有过不少这样的经历，2008年北京奥运会，年仅19岁的巩立姣以19米20的成绩排名女子铅球第五。不过此后，亚军和季军米赫涅维奇、奥斯塔普丘克都未能通过药检，巩立姣因此递补获得了铜牌。2012年伦敦奥运会，铅球银牌得主俄罗斯人克洛德科在新一轮重检后，又被查出服用禁药。巩立姣又在没有站上领奖台的情况下，成为了奥运银牌得主。
+        </div>
+      </div>
+      <el-button size="mini" type="text" class="desc-shrink-button" @click="this.shrinkDesc" style="background-color: white;color: #505050" v-if="descSpread">
+        收起
+      </el-button>
+      <el-button size="mini" type="text" class="desc-spread-button" @click="this.spreadDesc" style="background-color: white;color: #505050" v-else>
+        展开
+      </el-button>
     </div>
+
   </div>
 </template>
 
@@ -91,6 +107,7 @@ export default {
     return {
       isLiked: false,
       isFavored: false,
+      descSpread: false,
       likeImg: LikeBefore,
       favorImg: FavorBefore,
       reportVisible: false,
@@ -131,16 +148,23 @@ export default {
   },
   methods: {
     getInstance(art) {
-      console.log(art);
+      console.log(art)
     },
     changeLike() {
-      this.isLiked=!this.isLiked;
+      this.isLiked=!this.isLiked
     },
     changeFavor() {
-      this.isFavored=!this.isFavored;
+      this.isFavored=!this.isFavored
+    },
+    spreadDesc() {
+      this.descSpread=true
+    },
+    shrinkDesc(){
+      this.descSpread=false
     },
     onEnterLike(){
       console.log("enter")
+      console.log(this.$route.params)
       this.likeImg=LikeHover
     },
     onLeaveLike(){
@@ -156,7 +180,7 @@ export default {
     },
     resetForm(formName) {
       console.log('nani')
-      this.$refs[formName].resetFields();
+      this.$refs[formName].resetFields()
     },
     cancelReport(){
       this.reportVisible=false
@@ -167,6 +191,50 @@ export default {
 </script>
 
 <style scoped>
+.video-wrap .video-desc{
+  margin-top: 16px;
+}
+.video-desc {
+  position: relative;
+  align-content: center;
+}
+
+.desc-shrink-button{
+  float: left;
+  cursor: pointer;
+  font-size: 14px;
+  color: #505050;
+}
+.desc-spread-button{
+  float: left;
+  cursor: pointer;
+  font-size: 14px;
+  color: #505050;
+}
+.desc-info {
+  white-space: pre-line;
+  transition: height 0.3s;
+  font-size: 12px;
+  color: #212121;
+  letter-spacing: 0;
+  line-height: 18px;
+  height: 63px;
+  width: 900px;
+  text-align: left;
+  overflow: hidden;
+}
+.desc-info-open{
+  white-space: pre-line;
+  transition: height 0.3s;
+  font-size: 12px;
+  color: #212121;
+  letter-spacing: 0;
+  line-height: 18px;
+  width: 900px;
+  text-align: left;
+  overflow: hidden;
+  height: auto;
+}
 .video-wrap .interact{
   position: relative;
   margin-top: 16px;
@@ -189,10 +257,11 @@ export default {
 }
 .report{
   float: right;
-  margin-right: 30px;
+  margin-right: 20px;
 }
 .player {
   display: inline-block;
+  margin-right: 100px;
 }
 .el-button {
   background: #00A1D6;
@@ -290,6 +359,7 @@ export default {
   height: 16px;
 }
 .l-con {
+  margin-top: 20px;
   width: 638px;
 }
 .r-con {
