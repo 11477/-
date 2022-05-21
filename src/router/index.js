@@ -49,7 +49,47 @@ const routes = [
     // route level code-splitting
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../views/user/UserView')
+    component: () => import(/* webpackChunkName: "about" */ '../views/user/UserHome')
+  },
+  {
+    path: '/user/fans',
+    name: 'fans',
+    // route level code-splitting
+    // this generates a separate chunk (about.[hash].js) for this route
+    // which is lazy-loaded when the route is visited.
+    component: () => import(/* webpackChunkName: "about" */ '../views/user/FansView')
+  },
+  {
+    path: '/user/favor',
+    name: 'favor',
+    // route level code-splitting
+    // this generates a separate chunk (about.[hash].js) for this route
+    // which is lazy-loaded when the route is visited.
+    component: () => import(/* webpackChunkName: "about" */ '../views/user/FavorView')
+  },
+  {
+    path: '/user/follow',
+    name: 'follow',
+    // route level code-splitting
+    // this generates a separate chunk (about.[hash].js) for this route
+    // which is lazy-loaded when the route is visited.
+    component: () => import(/* webpackChunkName: "about" */ '../views/user/FollowView')
+  },
+  {
+    path: '/user/history',
+    name: 'history',
+    // route level code-splitting
+    // this generates a separate chunk (about.[hash].js) for this route
+    // which is lazy-loaded when the route is visited.
+    component: () => import(/* webpackChunkName: "about" */ '../views/user/HistoryView')
+  },
+  {
+    path: '/user/notice',
+    name: 'notice',
+    // route level code-splitting
+    // this generates a separate chunk (about.[hash].js) for this route
+    // which is lazy-loaded when the route is visited.
+    component: () => import(/* webpackChunkName: "about" */ '../views/user/NoticeView')
   },
   {
     path: '/video',
