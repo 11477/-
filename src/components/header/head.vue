@@ -59,6 +59,30 @@ export default {
     toHome() {
       window.location.href = '/';
     },
+    activeIndex() {
+      console.log("activate")
+    },
+    handleSelect() {
+      console.log("select")
+    },
+    searchContent() {
+      console.log("search")
+    },
+    toMessage() {
+      console.log("message")
+    },
+    toStore() {
+      console.log("store")
+    },
+    toHistory() {
+      console.log("history")
+    },
+    toFollow() {
+      console.log("follow")
+    },
+    upLoad() {
+      this.$router.push({path: '/upload'})
+    }
   },
 }
 </script>
@@ -162,6 +186,9 @@ el-menu-item {
   display: flex;
   flex-direction: column;
   margin: 10px 20px;
+}
+.right-button :hover{
+  cursor: pointer;
 }
 .left-entry {
   float: left;

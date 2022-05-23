@@ -9,6 +9,7 @@
   },
   "dependencies": {
     "artplayer": "^4.3.23",
+    "bright-comment": "^1.5.7",
     "core-js": "^3.8.3",
     "element-ui": "^2.15.8",
     "video.js": "^7.18.1",
