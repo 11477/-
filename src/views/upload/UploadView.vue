@@ -1,21 +1,11 @@
 <template>
-  <div class="upload">
+  <div class="upload" v-title data-title="上传界面">
     <el-menu :default-active="activeIndex" class="el-menu-demo" mode="horizontal" @select="handleSelect">
-      <el-menu-item index="1">处理中心</el-menu-item>
-      <el-submenu index="2">
-        <template slot="title">我的工作台</template>
-        <el-menu-item index="2-1">选项1</el-menu-item>
-        <el-menu-item index="2-2">选项2</el-menu-item>
-        <el-menu-item index="2-3">选项3</el-menu-item>
-        <el-submenu index="2-4">
-          <template slot="title">选项4</template>
-          <el-menu-item index="2-4-1">选项1</el-menu-item>
-          <el-menu-item index="2-4-2">选项2</el-menu-item>
-          <el-menu-item index="2-4-3">选项3</el-menu-item>
-        </el-submenu>
-      </el-submenu>
-      <el-menu-item index="3" disabled>消息中心</el-menu-item>
-      <el-menu-item index="4"><a href="https://www.ele.me" target="_blank">订单管理</a></el-menu-item>
+      <el-menu-item index="1" @click="toHome">
+        <img class="logo-pic" src="../../assets/logos/logo-upload.png" alt="banner">
+        <span class="home-char">首页</span>
+      </el-menu-item>
+
     </el-menu>
   </div>
 </template>
@@ -32,14 +22,20 @@ export default {
   methods: {
     handleSelect(key, keyPath) {
       console.log(key, keyPath);
+    },
+    toHome(){
+      this.$router.push({path:'/'})
     }
   }
 }
 </script>
 
 <style scoped>
-.upload-bar {
-  padding: 0 10% 0 10%;
-  height: 61px;
+.logo-pic {
+  width: 150px;
 }
+.home-char{
+   margin-left: 10px;
+   font-size: 17px;
+ }
 </style>

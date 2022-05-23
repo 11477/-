@@ -145,7 +145,7 @@ export default {
       userLabel: '管理员',
       commentPlaceholder: 'say something',
       commentNum:2,
-      avatar:require('../../assets/SBlogo.png'),
+      avatar:require('../../assets/logos/init-logo.png'),
       commentList:[
         {
           id:2,

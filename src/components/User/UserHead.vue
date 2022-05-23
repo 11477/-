@@ -1,7 +1,7 @@
 <template>
   <div id="user-bar">
     <div class="box-outside">
-      <img class="head-in-box" src="../../assets/head.jpeg" alt="banner">
+      <img class="head-in-box" src="../../assets/avatar/head.jpeg" alt="banner">
       <div class="user-info">
         <div class="user-name">这是用户名</div>
         <div class="user-intro-box">

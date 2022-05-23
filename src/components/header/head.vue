@@ -3,7 +3,7 @@
     <el-menu :default-active="activeIndex" class="el-menu-demo" mode="horizontal" @select="handleSelect" style="display: flex">
       <div class="left-entry">
         <el-menu-item index="1" @click="toHome">
-          <img class="logo-pic" src="../../assets/logo-long.jpeg" alt="banner">
+          <img class="logo-pic" src="../../assets/logos/logo-long.png" alt="banner">
           <span class="home-char">首页</span>
         </el-menu-item>
       </div>
@@ -20,7 +20,7 @@
       <div class="right-entry">
         <div class="right-button">
           <div class="login-button">登录</div>
-          <img class="head-pic" v-if="$store.state.islogin" src="../../assets/head.jpeg" alt="banner">
+          <img class="head-pic" v-if="$store.state.islogin" src="../../assets/avatar/head.jpeg" alt="banner">
         </div>
         <div class="right-button" @click="toMessage">
           <i class="el-icon-message"></i>
@@ -59,9 +59,6 @@ export default {
     toHome() {
       window.location.href = '/';
     },
-    activeIndex() {
-      console.log("activate")
-    },
     handleSelect() {
       console.log("select")
     },
@@ -89,7 +86,6 @@ export default {
 
 <style>
 #nav-bar {
-  position: absolute;
   padding: 0 10% 0 10%;
   height: 61px;
   width: 100%;
