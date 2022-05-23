@@ -1,6 +1,6 @@
 <template>
   <div id="nav-bar">
-    <el-menu :default-active="activeIndex" class="el-menu-demo" mode="horizontal" @select="handleSelect" style="display: flex">
+    <el-menu class="el-menu-demo" mode="horizontal" @select="handleSelect" style="display: flex">
       <div class="left-entry">
         <el-menu-item index="1" @click="toHome">
           <img class="logo-pic" src="../../assets/logos/logo-long.png" alt="banner">
@@ -78,7 +78,7 @@ export default {
       console.log("follow")
     },
     upLoad() {
-      this.$router.push({path: '/upload'})
+      this.$router.push({path: '/upload/frame'})
     }
   },
 }

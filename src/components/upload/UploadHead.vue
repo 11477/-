@@ -1,0 +1,111 @@
+<template>
+  <div v-title :data-title=this.title>
+    <div class="upload-header">
+      <div class="upload-left-block">
+        <img src="../../assets/logos/logo-upload.png" class="upload-logo" alt="upload-logo" @click="toUploadHome">
+        <div class="upload-logo-site" @click="toHome">
+          首页
+        </div>
+      </div>
+      <div class="upload-right-block" @click="toUser">
+        <el-avatar :src=this.avatarSrc size="small"></el-avatar>
+        <div class="upload-user-id">{{this.userId}}</div>
+      </div>
+    </div>
+  </div>
+</template>
+
+<script>
+export default {
+  name: "UploadHead",
+  data() {
+    return {
+      title: "上传页面",
+      userId: "nohesitate",
+      avatarSrc: "https://cube.elemecdn.com/3/7c/3ea6beec64369c2642b92c6726f1epng.png"
+    };
+  },
+  methods: {
+    handleSelect(key, keyPath) {
+      console.log(key, keyPath);
+    },
+    toHome(){
+      this.$router.push({path:'/'})
+    },
+    toUploadHome() {
+      this.$router.push({path:'/upload/home'})
+    },
+    toUser (){
+      this.$router.push({path:'/user'})
+    },
+    //封面设置
+    uploadPicture(name){
+      this.cropperName = name;
+      this.cropperModel = true;
+    },
+    //图片上传成功后
+    handleUploadSuccess (data){
+      console.log(data)
+      switch(data.name){
+        case 'flagImg':
+          this.formValidate.mainImage = 'http://ydfblog.cn/dfs/'+data.url;
+          console.log('最终输出'+data.name)
+          break;
+      }
+      this.cropperModel = false;
+    }
+  }
+}
+</script>
+
+<style scoped>
+.upload-user-id {
+  margin-left: 15px;
+  font-size: 15px;
+}
+.upload-logo-site {
+  margin-left: 15px;
+  font-size: 15px;
+}
+.upload-logo {
+  height: 50px;
+}
+.upload-header :hover{
+  cursor: pointer;
+}
+.upload-header {
+  height: 60px;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+  justify-content: space-between;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+  align-items: center;
+  padding: 0 100px 0 32px;
+  box-sizing: border-box;
+  background: #fff;
+  box-shadow: 0 2px 10px 0 rgb(0 0 0 / 5%);
+}
+.upload-left-block {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+  align-items: center;
+}
+.upload-right-block {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+  align-items: center;
+  font-size: 16px;
+  color: #757575;
+}
+
+</style>
