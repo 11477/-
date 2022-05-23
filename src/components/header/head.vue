@@ -1,49 +1,49 @@
 <template>
   <div id="nav-bar">
-  <el-menu :default-active="activeIndex" class="el-menu-demo" mode="horizontal" @select="handleSelect">
-    <div class="left-entry">
-      <el-menu-item index="1" @click="toHome">
-        <img class="logo-pic" src="../../assets/logo-long.jpeg" alt="banner">
-        <span class="home-char">首页</span>
-      </el-menu-item>
-    </div>
-    <div class="searchBar" v-show="!($route.path==='/search')">
-      <form id="nav-searchForm" class style="border-radius: 8px">
-        <div class="nav-search-content">
-          <input class="nav-search-input" type="text" placeholder="请输入关键词搜索" v-model="input" @keyup.enter="searchContent">
+    <el-menu :default-active="activeIndex" class="el-menu-demo" mode="horizontal" @select="handleSelect" style="display: flex">
+      <div class="left-entry">
+        <el-menu-item index="1" @click="toHome">
+          <img class="logo-pic" src="../../assets/logo-long.jpeg" alt="banner">
+          <span class="home-char">首页</span>
+        </el-menu-item>
+      </div>
+      <div class="searchBar" v-show="!($route.path==='/search')">
+        <form id="nav-searchForm" class style="border-radius: 8px">
+          <div class="nav-search-content">
+            <input class="nav-search-input" type="text" placeholder="请输入关键词搜索" v-model="input" @keyup.enter="searchContent">
+          </div>
+          <div class="nav-search-button" @click="searchContent">
+            <i class="el-icon-search"></i>
+          </div>
+        </form>
+      </div>
+      <div class="right-entry">
+        <div class="right-button">
+          <div class="login-button">登录</div>
+          <img class="head-pic" v-if="$store.state.islogin" src="../../assets/head.jpeg" alt="banner">
         </div>
-        <div class="nav-search-button" @click="searchContent">
-          <i class="el-icon-search"></i>
+        <div class="right-button" @click="toMessage">
+          <i class="el-icon-message"></i>
+          <div>通知</div>
         </div>
-      </form>
-    </div>
-    <div class="right-entry">
-      <div class="right-button">
-        <div class="login-button">登录</div>
-        <img class="head-pic" v-if="$store.state.islogin" src="../../assets/head.jpeg" alt="banner">
+        <div class="right-button" @click="toStore">
+          <i class="el-icon-view"></i>
+          <div>收藏</div>
+        </div>
+        <div class="right-button" @click="toHistory">
+          <i class="el-icon-pie-chart"></i>
+          <div>历史</div>
+        </div>
+        <div class="right-button" @click="toFollow">
+          <i class="el-icon-star-off"></i>
+          <div>关注</div>
+        </div>
+        <div class="right-button" @click="upLoad">
+          <i class="el-icon-upload2"></i>
+          <div>投稿</div>
+        </div>
       </div>
-      <div class="right-button" @click="toMessage">
-        <i class="el-icon-message"></i>
-        通知
-      </div>
-      <div class="right-button" @click="toStore">
-        <i class="el-icon-view"></i>
-        收藏
-      </div>
-      <div class="right-button" @click="toHistory">
-        <i class="el-icon-pie-chart"></i>
-        历史
-      </div>
-      <div class="right-button" @click="toFollow">
-        <i class="el-icon-star-off"></i>
-        关注
-      </div>
-      <div class="right-button" @click="upLoad">
-        <i class="el-icon-upload2"></i>
-        投稿
-      </div>
-    </div>
-  </el-menu>
+    </el-menu>
   </div>
 </template>
 
@@ -89,8 +89,10 @@ export default {
 
 <style>
 #nav-bar {
+  position: absolute;
   padding: 0 10% 0 10%;
   height: 61px;
+  width: 100%;
 }
 .logo-pic {
   width: 150px;
@@ -186,6 +188,7 @@ el-menu-item {
   display: flex;
   flex-direction: column;
   margin: 10px 20px;
+  width: max-content;
 }
 .right-button :hover{
   cursor: pointer;
