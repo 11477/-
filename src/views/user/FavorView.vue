@@ -10,6 +10,11 @@ import UserView from "./UserView";
 export default {
   name: "FavorView",
   // eslint-disable-next-line vue/no-unused-components
-  components:{UserView}
+  components:{UserView},
+  data(){
+    return{
+      activeIndex: '2'
+    }
+  }
 }
 </script>

@@ -40,6 +40,11 @@ const routes = [
     component: () => import(/* webpackChunkName: "about" */ '../views/user/UserView')
   },
   {
+    path: '/user/favor',
+    name: 'favor',
+    component: () => import(/* webpackChunkName: "about" */ '../views/user/FavorView')
+  },
+  {
     path: '/video/:VideoID',
     name: 'video',
     template: '<div>video</div>',

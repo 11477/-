@@ -88,7 +88,7 @@ export default {
 #nav-bar {
   padding: 0 10% 0 10%;
   height: 61px;
-  width: 100%;
+  width: 80%;
 }
 .logo-pic {
   width: 150px;

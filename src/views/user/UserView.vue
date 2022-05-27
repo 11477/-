@@ -3,19 +3,19 @@
     <UserBar/>
     <div class="menu-box">
       <el-menu :default-active="activeIndex" class="el-menu-demo" mode="horizontal" @select="handleSelect">
-        <el-menu-item index="1" @click="toHome">我的视频</el-menu-item>
+        <el-menu-item index="1" @click="toVideo">我的视频</el-menu-item>
         <el-menu-item index="2" @click="toFavor">收藏</el-menu-item>
         <el-menu-item index="3" @click="toFollow">关注</el-menu-item>
         <el-menu-item index="4" @click="toFans">粉丝</el-menu-item>
         <el-menu-item index="5" @click="toNotice">通知</el-menu-item>
         <el-menu-item index="6" @click="toHistory">历史</el-menu-item>
-        <el-menu-item index="7" >个人信息</el-menu-item>
+        <el-menu-item index="7" @click="toInformation">个人信息</el-menu-item>
         <div class="user-statistic-box">
-          <div class="user-statistic info1 clickable">
+          <div class="user-statistic info1">
             <div class="statistic-char">关注数</div>
             <div>66</div>
           </div>
-          <div class="user-statistic info234 clickable">
+          <div class="user-statistic info234">
             <div class="statistic-char">粉丝数</div>
             <div>66</div>
           </div>
@@ -30,14 +30,43 @@
         </div>
       </el-menu>
     </div>
+    <div class="content-area">
+      <div class="video" v-if="this.activeIndex==='1'">
+        my-video
+      </div>
+      <div class="favor" v-else-if="this.activeIndex==='2'">
+        favor
+      </div>
+      <div class="follow" v-else-if="this.activeIndex==='3'">
+        <div class="sub-title">全部关注</div>
+        <UserDisplay/>
+        <UserDisplay/>
+        <UserDisplay/>
+      </div>
+      <div class="fans" v-else-if="this.activeIndex==='4'">
+        <div class="sub-title">我的粉丝</div>
+        <UserDisplay/>
+        <UserDisplay/>
+      </div>
+      <div class="notice" v-else-if="this.activeIndex==='5'">
+        notice
+      </div>
+      <div class="history" v-else-if="this.activeIndex==='6'">
+        history
+      </div>
+      <div class="information" v-else-if="this.activeIndex==='7'">
+        info
+      </div>
+    </div>
   </div>
 </template>
 
 <script>
 import UserBar from "@/components/User/UserHead";
+import UserDisplay from "@/components/User/UserDisplay";
 export default {
   name: "UserView",
-  components: {UserBar},
+  components: {UserDisplay, UserBar},
   data() {
     return {
       activeIndex: '1'
@@ -47,24 +76,27 @@ export default {
     handleSelect(key, keyPath) {
       console.log(key, keyPath);
     },
-    toHome() {
-      window.location.href = '/user';
+    toVideo() {
+      this.activeIndex = '1';
     },
     toFans(){
-      window.location.href = '/user/fans';
+      this.activeIndex = '4';
     },
     toFavor(){
-      window.location.href = '/user/favor';
+      this.activeIndex = '2';
     },
     toFollow(){
-      window.location.href = '/user/follow';
+      this.activeIndex = '3';
     },
     toHistory(){
-      window.location.href = '/user/history';
+      this.activeIndex = '6';
     },
     toNotice(){
-      window.location.href = '/user/notice';
+      this.activeIndex = '5';
     },
+    toInformation(){
+      this.activeIndex = '7';
+    }
   }
 }
 </script>
@@ -84,13 +116,22 @@ export default {
   display: flex;
   flex-direction: column;
 }
-.clickable:hover{
-  color: #66ccff ;
-}
 .info1{
   margin-left: 300px;
 }
 .info234{
   margin-left: 15px;
+}
+.content-area{
+  padding: 0 10%;
+  display: flex;
+  flex-direction: column;
+}
+.sub-title{
+  font-size: 20px;
+  text-align: left;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  margin-left: 10px;
 }
 </style>
