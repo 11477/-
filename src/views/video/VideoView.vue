@@ -90,12 +90,13 @@
         展开
       </el-button>
     </div>
-
+    <comment class="video-comment" :label="this.userLabel" :avatar="this.avatar" :commentList="this.commentList">123</comment>
   </div>
 </template>
 
 <script>
 import ArtPlayer from "@/components/player/ArtPlayer.vue";
+import comment from 'bright-comment'
 import LikeBefore from "@/assets/icons/like-before.png";
 import LikeHover from "@/assets/icons/like-hover.png"
 import FavorBefore from "@/assets/icons/favor-before.png";
@@ -141,10 +142,59 @@ export default {
         height: "550px",
         margin: "0",
       },
+      userLabel: '管理员',
+      commentPlaceholder: 'say something',
+      commentNum:2,
+      avatar:require('../../assets/logos/init-logo.png'),
+      commentList:[
+        {
+          id:2,
+          commentUser:{
+            id:1,
+            nickName:'花非花',
+            avatar:''
+          },
+          content:"日你妈,退钱",
+          createDate:'2019-9-23 17:36:02',
+          childrenList:[
+            {
+                id:2,
+                commentUser:{
+                  id:2,
+                  nickName:'坏菠萝',
+                  avatar:''
+                },
+                targetUser:{
+                  id:1,
+                  nickName:'花非花',
+                  avatar:''
+                },
+                content:'？素质捏',
+                createDate:'2019-9-23 17:45:26'
+            },
+            {
+              id:2,
+              commentUser:{
+                id:1,
+                nickName:'坏菠萝',
+                avatar:'../../assets/head.jpeg'
+              },
+              targetUser:{
+                id:2,
+                nickName:'花非花',
+                avatar:''
+              },
+              content:'？素质捏',
+              createDate:'2019-9-23 17:45:26'
+            },
+          ]
+        },
+      ]
     };
   },
   components: {
     ArtPlayer,
+    comment,
   },
   methods: {
     getInstance(art) {
@@ -193,6 +243,10 @@ export default {
 <style scoped>
 .video-wrap .video-desc{
   margin-top: 16px;
+}
+.video-comment {
+  width: 900px;
+  margin: 0 auto;
 }
 .video-desc {
   position: relative;

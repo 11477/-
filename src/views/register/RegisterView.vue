@@ -111,7 +111,7 @@
 .register {
   width: 100%;
   height: 800px;
-  background: url("../../assets/login_background.jpg") no-repeat;
+  background: url("../../assets/images/login_background.jpg") no-repeat;
   background-size: cover;
 }
 

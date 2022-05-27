@@ -1,17 +1,13 @@
 <template>
   <div id="user-bar">
     <div class="box-outside">
-      <img class="head-in-box" src="../../assets/head.jpeg" alt="banner">
+      <img class="head-in-box" src="../../assets/avatar/head.jpeg" alt="banner">
       <div class="user-info">
         <div class="user-name">这是用户名</div>
         <div class="user-intro-box">
           <div class="user-self-intro">wosabi wosabi wosabi wyc是傻逼wyc是傻逼啦啦啦啦啦啦啦啦啦啦啦啦啦啦噜噜噜噜噜还可以再长一点再长就受不了啦啊啊</div>
           <span class="user-sex">性别：火星人 </span>
           <span class="user-birthday">生日：1000年15月40日</span>
-          <div class="subscribe-box">
-            <el-button class="subscribe-before">+ 关注</el-button>
-            <el-button class="message">发消息</el-button>
-          </div>
         </div>
       </div>
     </div>
@@ -61,16 +57,5 @@
 .user-sex{
   margin-left: 20px;
   margin-right: 20px;
-}
-.subscribe-box{
-  margin-left: 100px;
-}
-.subscribe-before{
-  background: #00A1D6;
-  color: white;
-}
-.subscribe-before:hover {
-  background: #66ccff;
-  color: white;
 }
 </style>

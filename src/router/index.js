@@ -12,9 +12,6 @@ const routes = [
   {
     path: '/register',
     name: 'register',
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
     component: () => import(/* webpackChunkName: "about" */ '../views/register/RegisterView'),
     meta:{
       unShowNav:true
@@ -23,9 +20,6 @@ const routes = [
   {
     path: '/login',
     name: 'login',
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
     component: () => import(/* webpackChunkName: "about" */ '../views/login/LoginView'),
     meta:{
       unShowNav:true
@@ -34,9 +28,6 @@ const routes = [
   {
     path: '/search',
     name: 'search',
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
     component: () => import(/* webpackChunkName: "about" */ '../views/search/SearchView'),
     meta:{
       unShowNav:false,
@@ -46,80 +37,38 @@ const routes = [
   {
     path: '/user',
     name: 'user',
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../views/user/UserHome')
-  },
-  {
-    path: '/user/fans',
-    name: 'fans',
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../views/user/FansView')
-  },
-  {
-    path: '/user/favor',
-    name: 'favor',
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../views/user/FavorView')
-  },
-  {
-    path: '/user/follow',
-    name: 'follow',
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../views/user/FollowView')
-  },
-  {
-    path: '/user/history',
-    name: 'history',
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../views/user/HistoryView')
-  },
-  {
-    path: '/user/notice',
-    name: 'notice',
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../views/user/NoticeView')
+    component: () => import(/* webpackChunkName: "about" */ '../views/user/UserView')
   },
   {
     path: '/video/:VideoID',
     name: 'video',
     template: '<div>video</div>',
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
     component: () => import(/* webpackChunkName: "about" */ '../views/video/VideoView'),
     meta:{
-      unShowNav:true
+      unShowNav:false,
     }
   },
   {
-    path: '/upload',
-    name: 'upload',
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../views/upload/UploadView'),
+    path: '/upload/home',
+    name: 'uploadHome',
+    props: true,
+    component: () => import(/* webpackChunkName: "about" */ '../views/upload/UploadHome'),
     meta:{
       unShowNav:true
-    }
+    },
+  },
+  {
+    path: '/upload/frame',
+    name: 'uploadFrame',
+    props: true,
+    component: () => import(/* webpackChunkName: "about" */ '../views/upload/UploadFrame'),
+    meta:{
+      unShowNav:true
+    },
   },
   {
     path: '/administrator',
     name: 'administrator',
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
     component: () => import(/* webpackChunkName: "about" */ '../views/administrator/AdminView'),
     meta:{
       unShowNav:true
