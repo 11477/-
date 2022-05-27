@@ -7,9 +7,13 @@
           首页
         </div>
       </div>
-      <div class="upload-right-block" @click="toUser">
+      <div class="upload-right-block" @click="toUser" v-if="this.isLogin">
         <el-avatar :src=this.avatarSrc size="small"></el-avatar>
         <div class="upload-user-id">{{this.userId}}</div>
+      </div>
+      <div class="upload-right-block" @click="toLogin" v-else>
+        <div class="login-button">登录</div>
+        <img class="head-pic" v-if="$store.state.islogin" src="../../assets/avatar/head.jpeg" alt="banner">
       </div>
     </div>
   </div>
@@ -20,6 +24,7 @@ export default {
   name: "UploadHead",
   data() {
     return {
+      isLogin:false,
       title: "上传页面",
       userId: "nohesitate",
       avatarSrc: "https://cube.elemecdn.com/3/7c/3ea6beec64369c2642b92c6726f1epng.png"
@@ -28,6 +33,9 @@ export default {
   methods: {
     handleSelect(key, keyPath) {
       console.log(key, keyPath);
+    },
+    toLogin() {
+      this.$router.push({path: '/login'})
     },
     toHome(){
       this.$router.push({path:'/'})
