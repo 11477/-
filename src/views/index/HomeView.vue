@@ -43,13 +43,13 @@ export default {
   position: relative;
   text-align:center;
   margin:0 auto;
-  width: 100%;
+  width: 600px;
   grid-auto-flow: column;
   grid-column: span 4;
   grid-gap: 10px;
   grid-template-rows: repeat(2,1fr);
   top:15px;
-  background-color: #00A1D6;
+  background-color: white;
 
 }
 
