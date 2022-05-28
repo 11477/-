@@ -60,7 +60,7 @@ export default {
 .video-card {
   background-color: white;
   width: 400px;
-  height: 300px;
+  height: 250px;
 }
 
 .video-cover{
