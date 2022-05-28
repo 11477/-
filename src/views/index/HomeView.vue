@@ -97,7 +97,7 @@ export default {
   top:100px;
   left: 50px;
   width: 80px;
-  height: 450px;
+  height: 455px;
   margin-right: 30px;
   flex-flow: column;
   background-color: rgba(255,255,255,0.5);

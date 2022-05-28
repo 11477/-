@@ -135,7 +135,6 @@ export default {
 .upload-inf{
   flex: 1;
   display: flex;
-  cursor: pointer;
 }
 
 .video-title{
@@ -194,7 +193,6 @@ export default {
 }
 
 .title-inf-right span:hover{
-  cursor: pointer;
   color: #00A1D6;
 }
 
