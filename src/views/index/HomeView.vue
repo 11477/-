@@ -94,7 +94,7 @@ export default {
   display:flex;
   position: relative;
   text-align:center;
-  top:100px;
+  top:130px;
   left: 50px;
   width: 80px;
   height: 455px;
