@@ -1,9 +1,8 @@
 <template>
   <div id="VideoCover">
     <div class="video-card">
-      <a href="https://www.bilibili.com/video/BV1hA4y1Z77n">
         <div class="video-cover">
-          <div class="video-cover-img">
+          <div class="video-cover-img" @click="ToVideo">
             <img src="../../assets/images/login_background.jpg" alt="视频封面"/>
           </div>
           <div class="bottom-line">
@@ -21,22 +20,22 @@
               <span>22:50</span>
             </div>
           </div>
-        </div>
-      </a>
-      <div class="title-inf">
-        <div class="video-title">
-          <span @click="ToVideo">顶尖枪法与身法的视觉盛宴</span>
-        </div>
-        <div class="upload-inf" @click="ToUser">
-          <div class="title-inf-left" >
-            <span>P友</span>
-            <span>cbm的爹</span>
+          <div class="title-inf">
+            <div class="video-title">
+              <span @click="ToVideo">顶尖枪法与身法的视觉盛宴</span>
+            </div>
+            <div class="upload-inf" @click="ToUser">
+              <div class="title-inf-left" >
+                <span>P友</span>
+                <span>cbm的爹</span>
+              </div>
+              <div class="title-inf-right">
+                <span>5-21</span>
+              </div>
+            </div>
           </div>
-          <div class="title-inf-right">
-            <span>5-21</span>
-          </div>
         </div>
-      </div>
+
     </div>
   </div>
 </template>
@@ -75,11 +74,12 @@ export default {
   height: 100%;
   border-radius: 6px;
   z-index: 1;
+  cursor: pointer;
 }
 
 .bottom-line{
   position: absolute;
-  bottom: 5px;
+  bottom: 45px;
   left: 5px;
   z-index: 2;
   width: 100%;

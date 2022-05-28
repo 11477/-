@@ -19,7 +19,10 @@ export default {
 </script>
 <style>
 
-
+.video-cover{
+  margin-top: 40px;
+  margin-left: 50px;
+}
 
 
 </style>
