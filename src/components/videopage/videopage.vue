@@ -130,10 +130,7 @@ export default {
 .video-title span{
   font-weight: 1000;
   cursor: pointer;
-  transition-duration:0.5s;
-  transition-timing-function:ease;
-  transition-delay:0s;
-  transition-property:all;
+  transition: background-color .3s,color .3s;
   float: left;
 }
 
@@ -163,10 +160,7 @@ export default {
   color:gray;
   margin-left: 5px;
   float: left;
-  transition-duration:0.5s;
-  transition-timing-function:ease;
-  transition-delay:0s;
-  transition-property:all;
+  transition: background-color .3s,color .3s;
 }
 
 .title-inf-left span:hover{
@@ -179,10 +173,7 @@ export default {
   color:gray;
   margin-left: 5px;
   float: left;
-  transition-duration:0.5s;
-  transition-timing-function:ease;
-  transition-delay:0s;
-  transition-property:all;
+  transition: background-color .3s,color .3s;
 }
 
 .title-inf-right span:hover{

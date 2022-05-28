@@ -4,9 +4,18 @@
 <!--      <img src="">-->
     </div>
     <div class="video-channel">
-        <a class="channel-link">分区1</a>
-        <a class="channel-link">分区2</a>
-        <a class="channel-link">分区3</a>
+        <a class="channel-link">知识</a>
+        <a class="channel-link">科技</a>
+        <a class="channel-link">资讯</a>
+        <a class="channel-link">生活</a>
+        <a class="channel-link">公益</a>
+        <a class="channel-link">音乐</a>
+        <a class="channel-link">舞蹈</a>
+        <a class="channel-link">美食</a>
+        <a class="channel-link">运动</a>
+        <a class="channel-link">影视</a>
+        <a class="channel-link">历史</a>
+        <a class="channel-link">娱乐</a>
     </div>
     <div class="video-box">
       <VideoCover class="video-cover">
@@ -30,25 +39,38 @@ export default {
 }
 
 .video-channel{
-  display: flex;
-  align-items: center;
-  background: white;
-  width: 800px;
-  height:20px;
+  display: grid;
+  position: relative;
+  text-align:center;
+  margin:0 auto;
+  width: 100%;
+  grid-auto-flow: column;
+  grid-column: span 4;
+  grid-gap: 10px;
+  grid-template-rows: repeat(2,1fr);
+  top:15px;
+  background-color: #00A1D6;
+
 }
 
 .channel-link{
   display: inline-block;
   box-sizing: content-box;
-  width: 100%;
+  margin:0 auto;
+  width: 80px;
   height: 100%;
-  border: 1px solid white;
+  border: 1px solid rgb(241,242,243);
   border-radius: 6px;
-  background-color: gray;
-  color: black;
+  background-color: rgba(246,247,248,0.7);
+  color: rgb(97,102,109);
   text-align: center;
   font-weight: 400;
   transition: background-color .3s,color .3s;
+  cursor: pointer;
+}
+
+.channel-link:hover{
+  background-color: rgba(128,128,128,0.7);
 }
 
 </style>
