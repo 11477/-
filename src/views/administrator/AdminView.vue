@@ -1,123 +1,89 @@
 <template>
-  <div class="cropper-app">
-    <el-form :model="formValidate" :rules="ruleValidate" ref="formValidate" label-width="100px" class="demo-ruleForm">
-      <el-form-item label="封面上传" prop="mainImage">
-        <div class="list-img-box">
-          <div v-if="formValidate.mainImage !== ''">
-            <img :src="formValidate.mainImage" style='width:300px;height:150px' alt="自定义封面">
+  <div class="AdminView">
+      <el-tabs class="audit-tab" :tab-position="tabPosition" :stretch="true" type="border-card">
+        <el-tab-pane label="视频列表">
+          <div class="audit-videos" v-for="colum in 2" v-bind:key="colum">
+            <div v-for="row in 3" v-bind:key="row">
+              <VideoCover></VideoCover>
+              <div class="audit-info">
+                <el-button type="danger" class="audit-button" size="mini">删除</el-button>
+              </div>
+            </div>
           </div>
-          <div v-else class="upload-btn" style="height: 120px;" @click="uploadPicture('flagImg')">
-            <i class="el-icon-plus" style="font-size: 30px;"></i>
-            <span>封面设置</span>
+        </el-tab-pane>
+        <el-tab-pane label="投诉处理">
+          <div class="audit-videos" v-for="colum in 2" v-bind:key="colum">
+            <div v-for="row in 3" v-bind:key="row">
+              <VideoCover></VideoCover>
+              <div class="audit-info">
+                <div class="audit-reason">投诉理由 : {{reason}}</div>
+                <el-button type="primary" class="audit-button" size="mini">处理</el-button>
+              </div>
+            </div>
           </div>
-        </div>
-        <input type="hidden" v-model="formValidate.mainImage" placeholder="请添加封面">
-      </el-form-item>
-    </el-form>
-    <!-- 剪裁组件弹窗 -->
-    <el-dialog
-        title="裁切封面"
-        :visible.sync="cropperModel"
-        width="950px"
-        center
-    >
-      <cropper-image
-          :Name="cropperName"
-          @uploadImgSuccess = "handleUploadSuccess"
-          ref="child">
-      </cropper-image>
-    </el-dialog>
-    <!--查看大封面-->
-    <el-dialog
-        title="查看大封面"
-        :visible.sync="imgVisible"
-        center>
-      <img :src="imgName" v-if="imgVisible" style="width: 100%" alt="查看">
-    </el-dialog>
+        </el-tab-pane>
+      </el-tabs>
+    <div class="refresh">
+      换一批视频
+    </div>
   </div>
 </template>
 
 <script>
-import CropperImage from "@/components/imageCropper/ImageCropper";
+import VideoCover from "@/components/videopage/videopage";
 export default {
-  components: {CropperImage},
-  data () {
+  components: {VideoCover},
+  data() {
     return {
-      formValidate: {
-        mainImage: '',
-      },
-      ruleValidate: {
-        mainImage: [
-          {required: true, message: '请上传封面', trigger: 'blur'}
-        ],
-      },
-      //裁切图片参数
-      cropperModel:false,
-      cropperName:'',
-      imgName: '',
-      imgVisible: false
+      auditVideoList:[
+      ],
+      tabPosition: 'left',
+      reason: "看他不爽",
     }
   },
-  methods: {
-    //封面设置
-    uploadPicture(name){
-      this.cropperName = name;
-      this.cropperModel = true;
-    },
-    //图片上传成功后
-    handleUploadSuccess (data){
-      console.log(data)
-      switch(data.name){
-        case 'flagImg':
-          this.formValidate.mainImage = 'http://ydfblog.cn/dfs/'+data.url;
-          console.log('最终输出'+data.name)
-          break;
-      }
-      this.cropperModel = false;
-    }
-  }
+  methods: {}
 }
 </script>
 <style scoped>
-.upload-list-cover{
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
+.audit-tab{
+}
+.refresh{
+  background-color: #00A1D6;
+  margin-left: 50px;
+  border-radius: 30px;
   display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  padding: 0 40px;
   align-items: center;
-  background: rgba(0,0,0,.6);
-  opacity: 0;
-  transition: opacity 1s;
-}
-.cover_icon {
-  font-size: 30px;
-}
-.upload-btn{
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -ms-flex-wrap: wrap;
-  flex-wrap: wrap;
-  -webkit-box-pack: center;
-  -ms-flex-pack: center;
   justify-content: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-  border: 1px solid #cccccc;
-  border-radius: 5px;
-  overflow: hidden;
-  box-shadow: 0 0 1px #cccccc;
+  width: 70px;
+  font-size: 50px;
+  color: white;
 }
-.upload-btn:hover {
-  border: 1px solid #69b7ed;
+.refresh:hover{
+  background-color: #66ccff;
+  cursor: pointer;
 }
-.upload-btn i{
-  margin: 5px;
+.AdminView {
+  display: flex;
+}
+.audit-videos{
+  display: flex;
+  height: 250px;
+  margin-bottom: 75px;
+}
+.audit-frame{
+  display: flex;
+}
+.audit-info {
+  display: flex;
+  text-align: left;
+  margin-left: 50px;
+  font-size: 14px;
+}
+.audit-reason{
+  color: #000000;
+}
+.audit-button{
+  height: 80%;
+  margin-left: 170px;
 }
 </style>

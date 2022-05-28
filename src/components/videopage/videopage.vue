@@ -9,28 +9,28 @@
             <div class="bottom-line-left">
               <div class="view-line">
                 <span>播放：</span>
-                <span>4万</span>
+                <span>{{viewNum}}</span>
               </div>
               <div class="comment-line">
                 <span>评论：</span>
-                <span>293</span>
+                <span>{{commentNum}}</span>
               </div>
             </div>
             <div class="bottom-line-right">
-              <span>22:50</span>
+              <span>{{videoTime}}</span>
             </div>
           </div>
           <div class="title-inf">
             <div class="video-title">
-              <span @click="ToVideo">顶尖枪法与身法的视觉盛宴</span>
+              <span @click="ToVideo">{{videoTitle}}</span>
             </div>
             <div class="upload-inf">
               <div class="title-inf-left">
                 <span>P友</span>
-                <span @click="ToUser">cbm的爹</span>
+                <span @click="ToUser">{{uploaderName}}</span>
               </div>
               <div class="title-inf-right">
-                <span>5-21</span>
+                <span>{{videoDate}}</span>
               </div>
             </div>
           </div>
@@ -44,6 +44,16 @@
 export default {
   // eslint-disable-next-line vue/multi-word-component-names
   name: 'VideoCover',
+  data(){
+    return {
+      viewNum: 5674,
+      commentNum: 31,
+      videoTime: "22:21",
+      videoTitle: "操作系统k48",
+      uploaderName: "不知道捏",
+      videoDate: "5-28",
+    }
+  },
   methods:{
     ToVideo(){
       this.$router.push('/video/0');

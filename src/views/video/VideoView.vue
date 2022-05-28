@@ -3,14 +3,14 @@
     <div class="video-info" id="video-info">
       <div class="l-con" id="l-con">
         <h1 class="video-title" id="video-title" title="???">
-          <span class="tit">这里是视频标题</span>
+          <span class="tit">{{videoTitle}}</span>
         </h1>
         <div class="video-data" id="video-data">
           <span title="view" class="video-view">
-            这里是视频播放量
+            {{videoView}}
           </span>
           <span>
-            这里是视频上传时间
+            {{uploadDate}}
           </span>
         </div>
       </div>
@@ -21,10 +21,10 @@
           </div>
           <div class="up-info-right">
             <div class="up-info-name">
-              这里是UP主的名字
+              {{upName}}
             </div>
             <div class="up-info-desc">
-              这里是UP主的简介
+              {{upDesc}}
             </div>
             <div class="subscribe">
               <el-button size="mini">+ 关注</el-button>
@@ -73,14 +73,10 @@
       </div>
       <div class="video-desc">
         <div class="desc-info-open" v-if="this.descSpread">
-          这里是一段简介然后呢咱们就是说因为简介的内容需要比较长所以我需要在这里水一点东西就像这样在去年进行的东京奥运会男子4×100米决赛中，由苏炳添、谢震业、吴智强和汤星强组成的中国队跑出37秒79的成绩，位居第四，意大利队、英国队和加拿大队分获前三名。国际体育仲裁法庭（CAS）今年2月18日发布公告，认定英国短跑运动员奇金杜·乌贾在东京奥运会期间违反了反兴奋剂条例，乌贾在东京奥运会男子4×100米接力决赛和男子100米比赛中取得的成绩都被取消，英国队在东京奥运会男子4×100米接力决赛中获得的银牌也被剥夺。加拿大队递补获得银牌，中国队递补获得铜牌。这也是中国男子4×100米接力队在奥运会上获得的首枚奖牌。今年3月，世界田联官网更新了包括苏炳添在内的中国男子4×100米接力队成员资料介绍，在荣誉一栏中，均添加了“奥运会铜牌得主”。
-
-          递补获得奖牌，中国田径运动员们在过去几届奥运会中有过不少这样的经历，2008年北京奥运会，年仅19岁的巩立姣以19米20的成绩排名女子铅球第五。不过此后，亚军和季军米赫涅维奇、奥斯塔普丘克都未能通过药检，巩立姣因此递补获得了铜牌。2012年伦敦奥运会，铅球银牌得主俄罗斯人克洛德科在新一轮重检后，又被查出服用禁药。巩立姣又在没有站上领奖台的情况下，成为了奥运银牌得主。
+        {{videoDesc}}
         </div>
         <div class="desc-info" v-else>
-          这里是一段简介然后呢咱们就是说因为简介的内容需要比较长所以我需要在这里水一点东西就像这样在去年进行的东京奥运会男子4×100米决赛中，由苏炳添、谢震业、吴智强和汤星强组成的中国队跑出37秒79的成绩，位居第四，意大利队、英国队和加拿大队分获前三名。国际体育仲裁法庭（CAS）今年2月18日发布公告，认定英国短跑运动员奇金杜·乌贾在东京奥运会期间违反了反兴奋剂条例，乌贾在东京奥运会男子4×100米接力决赛和男子100米比赛中取得的成绩都被取消，英国队在东京奥运会男子4×100米接力决赛中获得的银牌也被剥夺。加拿大队递补获得银牌，中国队递补获得铜牌。这也是中国男子4×100米接力队在奥运会上获得的首枚奖牌。今年3月，世界田联官网更新了包括苏炳添在内的中国男子4×100米接力队成员资料介绍，在荣誉一栏中，均添加了“奥运会铜牌得主”。
-
-          递补获得奖牌，中国田径运动员们在过去几届奥运会中有过不少这样的经历，2008年北京奥运会，年仅19岁的巩立姣以19米20的成绩排名女子铅球第五。不过此后，亚军和季军米赫涅维奇、奥斯塔普丘克都未能通过药检，巩立姣因此递补获得了铜牌。2012年伦敦奥运会，铅球银牌得主俄罗斯人克洛德科在新一轮重检后，又被查出服用禁药。巩立姣又在没有站上领奖台的情况下，成为了奥运银牌得主。
+        {{videoDesc}}
         </div>
       </div>
       <el-button size="mini" type="text" class="desc-shrink-button" @click="this.shrinkDesc" style="background-color: white;color: #505050" v-if="descSpread">
@@ -90,7 +86,12 @@
         展开
       </el-button>
     </div>
-    <comment class="video-comment" :label="this.userLabel" :avatar="this.avatar" :commentList="this.commentList">123</comment>
+    <comment class="video-comment"
+             :label="this.userLabel"
+             :avatar="this.avatar"
+             :commentList="this.commentList"
+              :placeholder="this.commentPlaceholder"
+              :commentNum="this.commentNum"></comment>
   </div>
 </template>
 
@@ -106,6 +107,12 @@ export default {
   name: "VideoView",
   data() {
     return {
+      videoTitle: "你的名字",
+      videoView: 114514,
+      upName: "nohesitate",
+      upDesc: "不为所动，做最好的自己",
+      uploadDate: "2022年5月28日",
+      videoDesc:"https://github.com/Jiangli531/Video-Share-Django",
       isLiked: false,
       isFavored: false,
       descSpread: false,
@@ -144,7 +151,7 @@ export default {
       },
       userLabel: '管理员',
       commentPlaceholder: 'say something',
-      commentNum:2,
+      commentNum:1,
       avatar:require('../../assets/logos/init-logo.png'),
       commentList:[
         {
@@ -156,38 +163,6 @@ export default {
           },
           content:"日你妈,退钱",
           createDate:'2019-9-23 17:36:02',
-          childrenList:[
-            {
-                id:2,
-                commentUser:{
-                  id:2,
-                  nickName:'坏菠萝',
-                  avatar:''
-                },
-                targetUser:{
-                  id:1,
-                  nickName:'花非花',
-                  avatar:''
-                },
-                content:'？素质捏',
-                createDate:'2019-9-23 17:45:26'
-            },
-            {
-              id:2,
-              commentUser:{
-                id:1,
-                nickName:'坏菠萝',
-                avatar:'../../assets/head.jpeg'
-              },
-              targetUser:{
-                id:2,
-                nickName:'花非花',
-                avatar:''
-              },
-              content:'？素质捏',
-              createDate:'2019-9-23 17:45:26'
-            },
-          ]
         },
       ]
     };
