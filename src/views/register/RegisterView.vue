@@ -1,6 +1,8 @@
 <template>
   <div class="register">
-    <div class="title">ShareVideo</div>
+    <div >
+      <img class="title" src="../../assets/logos/logo-without-white-under.png" @click="handleToHome"/>
+    </div>
     <div class="register-word">
       <span class="word" style="font-size: 38px;">注册</span>
     </div>
@@ -67,16 +69,17 @@
 }
 
 .title{
-  background: rgba(255,255,255,0.8);
+  background: rgba(255,255,255,0);
   position: relative;
   top: 20px;
   font-size: 50px;
   font-weight: 2500;
   line-height: 80px;
-  width: 300px;
-  height: 80px;
+  width: 400px;
+  height: 150px;
   border-radius: 25px;
   display: inline-block;
+  cursor: pointer;
 }
 
 .login-text {

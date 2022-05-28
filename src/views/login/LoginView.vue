@@ -1,6 +1,8 @@
 <template>
   <div id="login" class="login">
-    <div class="title1">ShareVideo</div>
+    <div >
+      <img class="title1" src="../../assets/logos/logo-without-white-under.png" @click="handleToHome"/>
+    </div>
     <div class="login-word">
       <span class="word" style="font-size: 38px;">登录</span>
     </div>
@@ -114,16 +116,17 @@ export default {
 }
 
 .title1{
-  background: rgba(255,255,255,0.8);
+  background: rgba(255,255,255,0);
   position: relative;
   top: 20px;
   font-size: 50px;
   font-weight: 2500;
   line-height: 80px;
-  width: 300px;
-  height: 80px;
+  width: 400px;
+  height: 150px;
   border-radius: 25px;
   display: inline-block;
+  cursor: pointer;
 }
 
 
@@ -158,7 +161,7 @@ export default {
   display: inline-block;
   background-color: rgba(255, 255, 255,0.8);
   border-radius: 20px;
-  margin-top: 80px;
+  margin-top: 40px;
 }
 h3 {
   color: #0babeab8;
