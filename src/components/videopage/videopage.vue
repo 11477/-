@@ -83,6 +83,10 @@ export default {
   width: 400px;
   height: 250px;
   text-align: center;
+  margin-left: 15px;
+  margin-right: 15px;
+  margin-top: 20px;
+  margin-bottom: 20px;
 }
 
 .video-cover{
@@ -143,7 +147,6 @@ export default {
 .upload-inf{
   flex: 1;
   display: flex;
-  cursor: pointer;
 }
 
 .video-title{
@@ -202,7 +205,6 @@ export default {
 }
 
 .title-inf-right span:hover{
-  cursor: pointer;
   color: #00A1D6;
 }
 
