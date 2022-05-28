@@ -2,23 +2,25 @@
   <div v-title :data-title=this.title>
     <UploadHead></UploadHead>
     <div class="uploader-frame">
-      <div class="not-uploaded" v-if="!isUploaded">
-      <el-upload
-          class="video-uploader"
-          action="https://jsonplaceholder.typicode.com/posts/"
-          drag
-          :show-file-list="false"
-          :on-success="handleVideoSuccess"
-          :before-upload="beforeVideoUpload">
-        <i class="el-icon-plus video-uploader-icon"></i>
-      </el-upload>
-      <div class="upload-hint-info">在这里上传视频，拖拽也可以哦~</div>
-      </div>
-      <div class="uploaded" v-else>
-        <h1>114514</h1>
-      </div>
       <div class="video-form">
       <el-form ref="form" :model="form" label-width="80px">
+        <el-form-item label="视频上传">
+          <div class="not-uploaded" v-if="!isUploaded">
+            <el-upload
+                class="video-uploader"
+                action="https://jsonplaceholder.typicode.com/posts/"
+                drag
+                :show-file-list="false"
+                :on-success="handleVideoSuccess"
+                :before-upload="beforeVideoUpload">
+              <i class="el-icon-plus video-uploader-icon"></i>
+            </el-upload>
+            <div class="upload-hint-info">在这里上传视频，拖拽也可以哦~</div>
+          </div>
+          <div class="uploaded" v-else>
+            <h1>114514</h1>
+          </div>
+        </el-form-item>
         <el-form-item label="视频标题">
           <el-input v-model="form.name" maxlength="80" show-word-limit></el-input>
         </el-form-item>
@@ -95,6 +97,7 @@ export default {
         ],
       },
       //裁切图片参数
+      coverImg: "#",
       cropperModel:false,
       cropperName:'',
       imgName: '',
@@ -121,14 +124,18 @@ export default {
     },
     //图片上传成功后
     handleUploadSuccess (data){
-      console.log(data)
+      console.log(data+"nani")
+      this.coverImg=window.URL.createObjectURL(data)
       this.cropperModel = false;
+      console.log(this.coverImg)
     },
     onSubmit() {
       console.log('submit!');
     },
     handleVideoSuccess(res, file) {
       this.imageUrl = URL.createObjectURL(file.raw);
+      this.isUploaded=true
+      console.log(this.imageUrl)
     },
     beforeVideoUpload(file) {
       const isJPG = file.type === 'image/jpeg';
@@ -147,6 +154,12 @@ export default {
 </script>
 
 <style scoped>
+.uploader-frame {
+  display: inline-block;
+}
+.list-img-box{
+  width: 600px;
+}
 .video-form{
   text-align: left;
   width: 1200px;

@@ -138,6 +138,7 @@ export default {
       this.$refs.cropper.getCropBlob(data => {
         // do something
         console.log(data)
+        this.$emit('uploadImgSuccess',data);
       })
     },
   },
