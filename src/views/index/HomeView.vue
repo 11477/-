@@ -33,32 +33,42 @@ export default {
 </script>
 <style>
 
+.home{
+  background-image: url("../../assets/images/home-background.jpg");
+  width: 100%;
+  height: 800px;
+  overflow-x:hidden;
+}
+
+.home img{
+  vertical-align: middle;
+}
+
 .video-cover{
-  margin-top: 40px;
-  margin-left: 50px;
+  left: 20px;
+  top:40px;
 }
 
 .video-channel{
-  display: grid;
+  display:flex;
   position: relative;
   text-align:center;
   margin:0 auto;
-  width: 600px;
-  grid-auto-flow: column;
-  grid-column: span 4;
-  grid-gap: 10px;
-  grid-template-rows: repeat(2,1fr);
+  width: 80px;
+  height: 75px;
+  flex-flow: column;
   top:15px;
-  background-color: white;
-
+  background-color: rgba(255,255,255,0.5);
+  border-radius: 6px;
 }
 
 .channel-link{
   display: inline-block;
   box-sizing: content-box;
-  margin:0 auto;
-  width: 80px;
-  height: 100%;
+  margin-top: 10px;
+  margin-left: 5px;
+  width: 60px;
+  height: 25px;
   border: 1px solid rgb(241,242,243);
   border-radius: 6px;
   background-color: rgba(246,247,248,0.7);

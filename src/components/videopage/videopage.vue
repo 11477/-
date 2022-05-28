@@ -58,15 +58,16 @@ export default {
 <style scoped>
 
 .video-card {
-  background-color: white;
   width: 400px;
   height: 250px;
+  text-align: center;
 }
 
 .video-cover{
   position: relative;
   z-index: 1;
   border-radius: 6px;
+  margin: 0 auto;
 }
 
 .video-cover-img img{
@@ -141,8 +142,10 @@ export default {
 }
 
 .title-inf{
+  background-color: rgba(255,255,255,0.7);
   flex-flow: column;
   display: flex;
+  border-radius: 6px;
 }
 
 .title-inf-left{
