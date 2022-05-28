@@ -71,6 +71,10 @@ export default {
   width: 400px;
   height: 250px;
   text-align: center;
+  margin-left: 15px;
+  margin-right: 15px;
+  margin-top: 20px;
+  margin-bottom: 20px;
 }
 
 .video-cover{

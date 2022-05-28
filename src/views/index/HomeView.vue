@@ -1,9 +1,10 @@
 <template>
   <div class="home">
     <div class="img-box">
-<!--      <img src="">-->
+      <img src="../../assets/icons/home-wel.png">
     </div>
-    <div class="video-channel">
+    <div class="channel-video">
+      <div class="video-channel">
         <a class="channel-link">知识</a>
         <a class="channel-link">科技</a>
         <a class="channel-link">资讯</a>
@@ -16,11 +17,22 @@
         <a class="channel-link">影视</a>
         <a class="channel-link">历史</a>
         <a class="channel-link">娱乐</a>
+      </div>
+      <div class="video-box">
+        <div class="line-1">
+          <VideoCover class="video-cover"></VideoCover>
+          <VideoCover class="video-cover"></VideoCover>
+          <VideoCover class="video-cover"></VideoCover>
+        </div>
+        <div class="line-1">
+          <VideoCover class="video-cover"></VideoCover>
+          <VideoCover class="video-cover"></VideoCover>
+          <VideoCover class="video-cover"></VideoCover>
+        </div>
+
+      </div>
     </div>
-    <div class="video-box">
-      <VideoCover class="video-cover">
-      </VideoCover>
-    </div>
+
   </div>
 </template>
 
@@ -38,6 +50,19 @@ export default {
   width: 100%;
   height: 800px;
   overflow-x:hidden;
+  text-align: center;
+}
+
+.img-box{
+  width: 80%;
+  margin-left: 150px;
+  margin-top: 40px;
+  text-align: center;
+}
+
+.img-box img{
+  width: 100%;
+  height: 100%;
 }
 
 .home img{
@@ -45,19 +70,36 @@ export default {
 }
 
 .video-cover{
-  left: 20px;
-  top:40px;
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+.video-box{
+  margin-top:50px;
+  margin-left: 80px;
+}
+
+.line-1{
+  flex: 1;
+  display: flex;
+}
+
+
+.channel-video{
+  flex: 1;
+  display: flex;
 }
 
 .video-channel{
   display:flex;
   position: relative;
   text-align:center;
-  margin:0 auto;
+  top:100px;
+  left: 50px;
   width: 80px;
-  height: 75px;
+  height: 450px;
+  margin-right: 30px;
   flex-flow: column;
-  top:15px;
   background-color: rgba(255,255,255,0.5);
   border-radius: 6px;
 }
@@ -66,7 +108,7 @@ export default {
   display: inline-block;
   box-sizing: content-box;
   margin-top: 10px;
-  margin-left: 5px;
+  margin-left: 9px;
   width: 60px;
   height: 25px;
   border: 1px solid rgb(241,242,243);
