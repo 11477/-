@@ -24,10 +24,10 @@
             <div class="video-title">
               <span @click="ToVideo">顶尖枪法与身法的视觉盛宴</span>
             </div>
-            <div class="upload-inf" @click="ToUser">
-              <div class="title-inf-left" >
+            <div class="upload-inf">
+              <div class="title-inf-left">
                 <span>P友</span>
-                <span>cbm的爹</span>
+                <span @click="ToUser">cbm的爹</span>
               </div>
               <div class="title-inf-right">
                 <span>5-21</span>
@@ -123,6 +123,26 @@ export default {
   cursor: pointer;
 }
 
+.video-title{
+  float: left;
+}
+
+.video-title span{
+  font-weight: 1000;
+  cursor: pointer;
+  transition-duration:0.5s;
+  transition-timing-function:ease;
+  transition-delay:0s;
+  transition-property:all;
+  float: left;
+}
+
+.video-title span:hover{
+  font-weight: 1000;
+  cursor: pointer;
+  color: #00A1D6;
+}
+
 .title-inf{
   flex-flow: column;
   display: flex;
@@ -131,21 +151,44 @@ export default {
 .title-inf-left{
   flex: 1;
   display: flex;
-}
-
-.video-title{
   float: left;
 }
 
-.video-title span{
-  font-weight: 1000;
-  cursor: pointer;
+.title-inf-left{
+  float: left;
 }
 
-.upload-inf span{
+.title-inf-left span{
   font-size: 15px;
   color:gray;
   margin-left: 5px;
+  float: left;
+  transition-duration:0.5s;
+  transition-timing-function:ease;
+  transition-delay:0s;
+  transition-property:all;
 }
+
+.title-inf-left span:hover{
+  cursor: pointer;
+  color: #00A1D6;
+}
+
+.title-inf-right span{
+  font-size: 15px;
+  color:gray;
+  margin-left: 5px;
+  float: left;
+  transition-duration:0.5s;
+  transition-timing-function:ease;
+  transition-delay:0s;
+  transition-property:all;
+}
+
+.title-inf-right span:hover{
+  cursor: pointer;
+  color: #00A1D6;
+}
+
 
 </style>

@@ -126,7 +126,7 @@
   position: relative;
   display: inline-block;
   background-color: rgba(255, 255, 255,0.8);
-  border-radius: 20px;
+  border-radius: 10px;
   margin-top: 40px;
 }
 </style>
