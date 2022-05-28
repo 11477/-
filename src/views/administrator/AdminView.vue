@@ -46,10 +46,12 @@ export default {
 </script>
 <style scoped>
 .audit-tab{
+  width: 1500px;
 }
 .refresh{
   background-color: #00A1D6;
-  margin-left: 50px;
+  margin-right: 20px;
+  margin-left: 20px;
   border-radius: 30px;
   display: flex;
   align-items: center;
@@ -67,8 +69,7 @@ export default {
 }
 .audit-videos{
   display: flex;
-  height: 250px;
-  margin-bottom: 75px;
+  margin-bottom: auto;
 }
 .audit-frame{
   display: flex;
@@ -76,7 +77,8 @@ export default {
 .audit-info {
   display: flex;
   text-align: left;
-  margin-left: 50px;
+  margin-left: 20px;
+  margin-top: 60px;
   font-size: 14px;
 }
 .audit-reason{
