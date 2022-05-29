@@ -96,8 +96,8 @@ import qs from "qs"
 const COS = require('cos-js-sdk-v5')
 // 填写自己腾讯云cos中的key和id (密钥)
 const cosImg = new COS({
-  SecretId: '***', // 身份识别ID
-  SecretKey: '***' // 身份秘钥
+  SecretId: 'AKIDZy81dy2pLZWCbjZ8QRBftpVu1rQiiRt4', // 身份识别ID
+  SecretKey: 'uXx6yZsvhBOJxKQFo55nEOHtEI4ZmiMj' // 身份秘钥
 })
 
 export default {

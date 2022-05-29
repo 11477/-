@@ -19,7 +19,17 @@
       </div>
       <div class="right-entry">
         <div class="right-button">
-          <img class="head-pic" v-if="this.is_login" src="../../assets/avatar/head.jpeg" alt="banner">
+          <div v-if="this.is_login">
+            <el-dropdown>
+          <img class="head-pic" src="../../assets/avatar/head.jpeg" alt="banner" @click="toSpace">
+              <el-dropdown-menu slot="dropdown">
+                <el-dropdown-item @click.native="toSpace">我的关注:{{loginUserFollow}}</el-dropdown-item>
+                <el-dropdown-item @click.native="toSpace">我的粉丝:{{loginUserFans}}</el-dropdown-item>
+                <el-dropdown-item @click.native="toSpace">我的投稿:{{loginUserVideos}}</el-dropdown-item>
+                <el-dropdown-item style="color: crimson;text-align: center" @click.native="logout" >退出登录</el-dropdown-item>
+              </el-dropdown-menu>
+            </el-dropdown>
+          </div>
           <div class="login-button" v-else @click="toLogin">登录</div>
         </div>
         <div class="right-button" @click="toMessage">
@@ -55,6 +65,10 @@ export default {
     return {
       input: '',
       is_login: false,
+      loginUserID: 2,
+      loginUserFollow: 66,
+      loginUserFans: 66,
+      loginUserVideos: 66,
     }
   },
   created() {
@@ -90,6 +104,13 @@ export default {
     },
     upLoad() {
       this.$router.push({path: '/upload/frame'})
+    },
+    toSpace() {
+      this.$router.push({path: '/user/' + this.loginUserID})
+    },
+    logout() {
+      this.$store.dispatch('clearUserInfo')
+      location.reload()
     }
   },
 }
