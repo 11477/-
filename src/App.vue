@@ -42,4 +42,8 @@ nav a {
   font-family: "user-name-black";
   src: url("./assets/fonts/RuiZiTaiKongZhuMengHeiJian-Shan-TeHei(REEJI-TaikodreamGB-Flash-Black)-2.ttf");
 }
+@font-face {
+  font-family: "video-title-black";
+  src: url("./assets/fonts/AaJueXingHei-55J-2.ttf");
+}
 </style>

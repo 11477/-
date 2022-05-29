@@ -32,10 +32,14 @@
     </div>
     <div class="content-area">
       <div class="video" v-if="this.activeIndex==='1'">
-        my-video
+        <div class="sub-title">我的视频</div>
+        <MyVideo/>
+        <MyVideo/>
       </div>
       <div class="favor" v-else-if="this.activeIndex==='2'">
-        favor
+        <div class="sub-title">我的收藏</div>
+        <UserFavor/>
+        <UserFavor/>
       </div>
       <div class="follow" v-else-if="this.activeIndex==='3'">
         <div class="sub-title">全部关注</div>
@@ -52,7 +56,9 @@
         notice
       </div>
       <div class="history" v-else-if="this.activeIndex==='6'">
-        history
+        <div class="sub-title">历史记录</div>
+        <VideoHistory/>
+        <VideoHistory/>
       </div>
       <div class="information" v-else-if="this.activeIndex==='7'">
         info
@@ -64,9 +70,12 @@
 <script>
 import UserBar from "@/components/User/UserHead";
 import UserDisplay from "@/components/User/UserDisplay";
+import VideoHistory from "@/components/User/VideoHistory";
+import UserFavor from "@/components/User/UserFavor";
+import MyVideo from "@/components/User/MyVideo";
 export default {
   name: "UserView",
-  components: {UserDisplay, UserBar},
+  components: {MyVideo, UserFavor, UserDisplay, UserBar, VideoHistory},
   data() {
     return {
       activeIndex: '1'
