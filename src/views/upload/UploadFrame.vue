@@ -3,35 +3,35 @@
     <UploadHead></UploadHead>
     <div class="uploader-frame">
       <div class="video-form">
-      <el-form ref="form" :model="form" label-width="80px">
-        <el-form-item label="视频上传">
+      <el-form ref="form" :model="form" label-width="80px" :rules="formRule">
+        <el-form-item label="视频上传" prop="videoPath">
           <el-upload
               class="upload-video"
               action=""
               :http-request="uploadVideo"
               :before-upload="beforeVideoUpload"
               :file-list="videoList"
-              :drag="true"
+              accept="video/mp4, video/mkv"
               :limit="1">
             <el-button size="small" plain style="width: 100px">点击上传</el-button>
-            <span slot="tip" class="el-upload__tip">&emsp;只能上传mp4/mkv文件，且不超过1GB</span>
+            <span slot="tip" class="el-upload__tip">&emsp;只能上传mp4文件，且不超过300MB</span>
           </el-upload>
         </el-form-item>
-        <el-form-item label="视频标题">
+        <el-form-item label="视频标题" prop="videoTitle">
           <el-input v-model="form.videoTitle" maxlength="80" show-word-limit></el-input>
         </el-form-item>
-            <el-form-item label="封面上传" prop="mainImage">
+            <el-form-item label="封面上传" prop="videoCoverPath" >
               <div class="list-img-box">
-                <div v-if="formValidate.mainImage !== ''">
-                  <img :src="formValidate.mainImage" style='width:300px;height:150px' alt="自定义封面">
+                <div v-if="form.videoCoverPath !== ''">
+                  <img :src="form.videoCoverPath" style='width:320px;height:180px' alt="自定义封面">
                   <el-button type="primary" @click="uploadPicture('newImg')">更换封面</el-button>
                 </div>
-                <div v-else class="upload-btn" style="height: 120px;" @click="uploadPicture('cover')">
+                <div v-else class="upload-btn" style="height: 120px; width: 300px" @click="uploadPicture('cover')">
                   <i class="el-icon-plus" style="font-size: 30px;"></i>
                   <span>封面设置</span>
                 </div>
               </div>
-              <input type="hidden" v-model="formValidate.mainImage" placeholder="请添加封面">
+              <input type="hidden" v-model="form.videoCoverPath" placeholder="请添加封面">
 
             </el-form-item>
           <!-- 剪裁组件弹窗 -->
@@ -54,7 +54,7 @@
               center>
             <img :src="imgName" v-if="imgVisible" style="width: 100%" alt="查看">
           </el-dialog>
-        <el-form-item label="视频分区" >
+        <el-form-item label="视频分区" prop="videoPart">
           <el-select v-model="form.videoPart" placeholder="请选择视频分区">
             <el-option label="知识" value="knowledge"></el-option>
             <el-option label="科技" value="science"></el-option>
@@ -70,7 +70,7 @@
             <el-option label=娱乐 value="entertainment"></el-option>
           </el-select>
         </el-form-item>
-        <el-form-item label="视频简介">
+        <el-form-item label="视频简介" prop="videoDesc">
           <el-input type="textarea"
                     v-model="form.videoDesc"
                     maxlength="500"
@@ -91,26 +91,20 @@
 <script>
 import UploadHead from "@/components/upload/UploadHead";
 import CropperImage from "@/components/imageCropper/ImageCropper";
+import qs from "qs"
 // 下面的代码是固定写法
 const COS = require('cos-js-sdk-v5')
 // 填写自己腾讯云cos中的key和id (密钥)
 const cosImg = new COS({
-  SecretId: 'AKIDSmtiQwGOJ0Uu7A1g8ML7kBNNAmAKJ5dw', // 身份识别ID
-  SecretKey: '84nNn14vYyDF8qLd0GKxQgiW9cv1we9W' // 身份秘钥
+  SecretId: '***', // 身份识别ID
+  SecretKey: '***' // 身份秘钥
 })
-/*const cosVideo = new COS({
-  SecretId: 'AKIDWwD2kGeveBXlqvujXDoIypVxKg2FKJ7p', // 身份识别ID
-  SecretKey: '4xgDWghU6Zt1ymQuHhM6d1IRQODvfIkA' // 身份秘钥
-})*/
 
 export default {
   name: "UploadView",
   components: {UploadHead, CropperImage},
   data() {
     return {
-      formValidate: {
-        mainImage: '',
-      },
       ruleValidate: {
         mainImage: [
           {required: true, message: '请上传封面', trigger: 'blur'}
@@ -135,6 +129,7 @@ export default {
       imageUrl: '',
       isUploaded: false,
       downImg: '#',
+      //表单
       form: {
         videoPath: '',
         videoTitle: '',
@@ -143,6 +138,24 @@ export default {
         videoDesc: '',
         uploaderID: '',
         videoUpTime: '',
+      },
+      //表单规则
+      formRule: {
+        videoPath:[
+          {required: true, message:"您还没有上传视频哦~", trigger: 'blur'}
+        ],
+        videoTitle:[
+          {required: true, message:"您的视频需要一个标题", trigger: 'blur'}
+        ],
+        videoCoverPath:[
+          {required: true, message:"您还没有上传封面哦~", trigger: 'blur'}
+        ],
+        videoDesc:[
+          {required: true, message:"请为您的视频添加简介吧", trigger: 'blur'}
+        ],
+        videoPart:[
+          {required: true, message:"请选择分区", trigger: 'blur'}
+        ],
       }
     };
   },
@@ -159,7 +172,7 @@ export default {
       cosImg.putObject({
         Bucket: 'nohesitate-1312201606',
         Region: 'ap-beijing',
-        Key: file.lastModified.toString(),
+        Key: 'VideoCover/'+file.lastModified.toString(),
         StorageClass: 'STANDARD',
         Body: file // 上传文件对象
       }, (err, data) => {
@@ -167,7 +180,7 @@ export default {
         // 上传成功之后
         if (data.statusCode === 200) {
           console.log(data)
-          this.formValidate.mainImage='https://' + data.Location
+          this.form.videoCoverPath='https://' + data.Location
           this.$message.success('封面上传成功');
           // this.imageUrl = `https:${data.Location}`
         }
@@ -176,14 +189,28 @@ export default {
     },
     onSubmit() {
       console.log('submit!');
-      console.log(this.form)
+      this.$refs.form.validate((valid)=>{
+        if(valid){
+      this.form.uploaderID=0
+      this.form.videoUpTime=Date()
+          console.log('VideoManager/uploadvideo/')
+      this.$axios.post('VideoManager/uploadvideo/',qs.stringify(this.form))
+          .then(res=>{
+            console.log(res)
+          })
+}
+        else {
+          this.$message.error('信息不完整')
+        }
+      console.log(this.form)}
+      )
     },
     uploadVideo(request){
       console.log(request)
       cosImg.putObject({
         Bucket: 'nohesitate-1312201606',
         Region: 'ap-beijing',
-        Key: request.file.lastModified.toString(),
+        Key: 'Video/'+request.file.lastModified.toString(),
         StorageClass: 'STANDARD',
         Body: request.file // 上传文件对象
       }, (err, data) => {
@@ -191,7 +218,7 @@ export default {
         // 上传成功之后
         if (data.statusCode === 200) {
           console.log(data)
-          this.formValidate.mainImage='https://' + data.Location
+          this.form.videoPath='https://' + data.Location
           // this.imageUrl = `https:${data.Location}`
           this.$message.success('视频上传成功');
         }

@@ -54,6 +54,11 @@ const routes = [
     }
   },
   {
+    path: '/confirm',
+    name: 'Confirm',
+    component: () => import('../views/register/ConfirmView'),
+  },
+  {
     path: '/upload/home',
     name: 'uploadHome',
     props: true,

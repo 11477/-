@@ -10,7 +10,7 @@ Vue.use(ElementUI);
 
 Vue.config.productionTip = false
 Vue.prototype.$axios = axios;
-axios.defaults.baseURL = "http://43.138.86.76/api";
+axios.defaults.baseURL = "http://43.138.86.76/api/";
 
 new Vue({
   router,

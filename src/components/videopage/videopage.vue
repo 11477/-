@@ -61,14 +61,13 @@ export default {
     },
   },
   created() {
-    console.log(this.videoID)
   },
   mounted() {
     console.log(this.videoID)
   },
   methods:{
     ToVideo(){
-      this.$router.push('/video/0');
+      this.$router.push('/video/'+this.videoID);
     },
     ToUser(){
       this.$router.push('/user');

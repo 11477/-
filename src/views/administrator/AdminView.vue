@@ -4,7 +4,7 @@
         <el-tab-pane label="视频列表">
           <div class="audit-videos" v-for="colum in 2" v-bind:key="colum">
             <div v-for="row in 3" v-bind:key="row">
-              <VideoCover :videoID="8"></VideoCover>
+              <VideoCover :videoID="12"></VideoCover>
               <div class="audit-info">
                 <el-button type="danger" class="audit-button" size="mini">删除</el-button>
               </div>

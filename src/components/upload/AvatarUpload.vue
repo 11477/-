@@ -54,8 +54,8 @@
 const COS = require('cos-js-sdk-v5')
 // 填写自己腾讯云cos中的key和id (密钥)
 const cos = new COS({
-  SecretId: 'AKIDSmtiQwGOJ0Uu7A1g8ML7kBNNAmAKJ5dw', // 身份识别ID
-  SecretKey: '84nNn14vYyDF8qLd0GKxQgiW9cv1we9W' // 身份秘钥
+  SecretId: '***', // 身份识别ID
+  SecretKey: '***' // 身份秘钥
 })
 export default {
   name: 'UploadImg',

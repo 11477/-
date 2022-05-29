@@ -17,7 +17,7 @@
       <div class="r-con" id="r-con">
         <div class="up-info" id="up-info">
           <div class="up-avatar">
-            <el-avatar src="https://thumbnail1.baidupcs.com/thumbnail/54f1a42eb59f7dd81a6b0a062b13d3a1?fid=2595694748-250528-954926140138011&rt=pr&sign=FDTAER-DCb740ccc5511e5e8fedcff06b081203-8jgg73csXFKg57VELOOhUxG8p0U%3d&expires=8h&chkbd=0&chkv=0&dp-logid=8842066600362229220&dp-callid=0&time=1652428800&size=c1536_u864&quality=90&vuk=2595694748&ft=image&autopolicy=1"></el-avatar>
+            <el-avatar :src=upAvatar></el-avatar>
           </div>
           <div class="up-info-right">
             <div class="up-info-name">
@@ -91,6 +91,8 @@
              :avatar="this.avatar"
              :commentList="this.commentList"
               :placeholder="this.commentPlaceholder"
+             :authorID="9"
+             @doSend="sendComment"
               :commentNum="this.commentNum"></comment>
   </div>
 </template>
@@ -112,6 +114,7 @@ export default {
       upName: "nohesitate",
       upDesc: "不为所动，做最好的自己",
       uploadDate: "2022年5月28日",
+      upAvatar: "https://nohesitate-1312201606.cos.ap-beijing.myqcloud.com/1653807191450  ",
       videoDesc:"https://github.com/Jiangli531/Video-Share-Django",
       isLiked: false,
       isFavored: false,
@@ -149,7 +152,7 @@ export default {
         height: "550px",
         margin: "0",
       },
-      userLabel: '管理员',
+      userLabel: '',
       commentPlaceholder: 'say something',
       commentNum:1,
       avatar:require('../../assets/logos/init-logo.png'),
@@ -157,12 +160,22 @@ export default {
         {
           id:2,
           commentUser:{
-            id:1,
+            id:9,
             nickName:'花非花',
             avatar:''
           },
           content:"日你妈,退钱",
           createDate:'2019-9-23 17:36:02',
+        },
+        {
+          id:3,
+          commentUser:{
+            id:6,
+            nickName:'李宗钊',
+            avatar:''
+          },
+          content:"钝角",
+          createDate:'2021-9-23 17:36:02',
         },
       ]
     };
@@ -171,7 +184,13 @@ export default {
     ArtPlayer,
     comment,
   },
+  created() {
+    console.log(this.$route.params.VideoID)
+  },
   methods: {
+    sendComment(comment){
+      console.log(comment)
+    },
     getInstance(art) {
       console.log(art)
     },
