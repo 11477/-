@@ -9,7 +9,7 @@
     <div class="login-wrap">
       <el-form :model="form" ref="form" class="demo-ruleForm">
         <el-form-item prop="username">
-          <el-input placeholder="用户名" type="username" v-model="form.username" autocomplete="off"></el-input>
+          <el-input placeholder="邮箱" type="username" v-model="form.email" autocomplete="off"></el-input>
         </el-form-item>
         <el-form-item id="password" prop="pass">
           <el-input
@@ -38,7 +38,7 @@ export default {
     return {
       is_login: true,
       form: {
-        username: '',
+        email: '',
         password: '',
       },
     };
@@ -47,7 +47,7 @@ export default {
     login() {
       const self = this;
       const formData = new FormData();
-      formData.append("username", self.form.username);
+      formData.append("email", self.form.email);
       formData.append("password", self.form.password);
 
       self.$axios({
@@ -61,7 +61,7 @@ export default {
                 location.reload();
                 // 前端保存用户信息
                 this.$store.dispatch('saveUserInfo', {user: {
-                    'username': this.form.username,
+                    'email': this.form.username,
                     'confirmed': true,
                     'usertype': res.data.user_type,
                   }});

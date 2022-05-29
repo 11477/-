@@ -4,6 +4,18 @@
       <img src="../../assets/icons/home-wel.png">
     </div>
     <div class="channel-video">
+      <div class="video-box">
+        <div class="line-1">
+          <VideoCover class="video-cover"></VideoCover>
+          <VideoCover class="video-cover"></VideoCover>
+          <VideoCover class="video-cover"></VideoCover>
+        </div>
+        <div class="line-1">
+          <VideoCover class="video-cover"></VideoCover>
+          <VideoCover class="video-cover"></VideoCover>
+          <VideoCover class="video-cover"></VideoCover>
+        </div>
+      </div>
       <div class="video-channel">
         <a class="channel-link">知识</a>
         <a class="channel-link">科技</a>
@@ -17,19 +29,6 @@
         <a class="channel-link">影视</a>
         <a class="channel-link">历史</a>
         <a class="channel-link">娱乐</a>
-      </div>
-      <div class="video-box">
-        <div class="line-1">
-          <VideoCover class="video-cover"></VideoCover>
-          <VideoCover class="video-cover"></VideoCover>
-          <VideoCover class="video-cover"></VideoCover>
-        </div>
-        <div class="line-1">
-          <VideoCover class="video-cover"></VideoCover>
-          <VideoCover class="video-cover"></VideoCover>
-          <VideoCover class="video-cover"></VideoCover>
-        </div>
-
       </div>
     </div>
 
@@ -76,7 +75,7 @@ export default {
 
 .video-box{
   margin-top:50px;
-  margin-left: 80px;
+  margin-left: 40px;
 }
 
 .line-1{
