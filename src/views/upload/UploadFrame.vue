@@ -5,36 +5,34 @@
       <div class="video-form">
       <el-form ref="form" :model="form" label-width="80px">
         <el-form-item label="视频上传">
-          <div class="not-uploaded" v-if="!isUploaded">
-            <el-upload
-                class="video-uploader"
-                action="https://jsonplaceholder.typicode.com/posts/"
-                drag
-                :show-file-list="false"
-                :on-success="handleVideoSuccess"
-                :before-upload="beforeVideoUpload">
-              <i class="el-icon-plus video-uploader-icon"></i>
-            </el-upload>
-            <div class="upload-hint-info">在这里上传视频，拖拽也可以哦~</div>
-          </div>
-          <div class="uploaded" v-else>
-            <h1>114514</h1>
-          </div>
+          <el-upload
+              class="upload-video"
+              action=""
+              :http-request="uploadVideo"
+              :before-upload="beforeVideoUpload"
+              :file-list="videoList"
+              :drag="true"
+              :limit="1">
+            <el-button size="small" plain style="width: 100px">点击上传</el-button>
+            <span slot="tip" class="el-upload__tip">&emsp;只能上传mp4/mkv文件，且不超过1GB</span>
+          </el-upload>
         </el-form-item>
         <el-form-item label="视频标题">
-          <el-input v-model="form.name" maxlength="80" show-word-limit></el-input>
+          <el-input v-model="form.videoTitle" maxlength="80" show-word-limit></el-input>
         </el-form-item>
             <el-form-item label="封面上传" prop="mainImage">
               <div class="list-img-box">
                 <div v-if="formValidate.mainImage !== ''">
                   <img :src="formValidate.mainImage" style='width:300px;height:150px' alt="自定义封面">
+                  <el-button type="primary" @click="uploadPicture('newImg')">更换封面</el-button>
                 </div>
-                <div v-else class="upload-btn" style="height: 120px;" @click="uploadPicture('flagImg')">
+                <div v-else class="upload-btn" style="height: 120px;" @click="uploadPicture('cover')">
                   <i class="el-icon-plus" style="font-size: 30px;"></i>
                   <span>封面设置</span>
                 </div>
               </div>
               <input type="hidden" v-model="formValidate.mainImage" placeholder="请添加封面">
+
             </el-form-item>
           <!-- 剪裁组件弹窗 -->
           <el-dialog
@@ -45,7 +43,7 @@
           >
             <cropper-image
                 :Name="cropperName"
-                @uploadImgSuccess = "handleUploadSuccess"
+                @uploadImgSuccess = "handleUploadImgSuccess"
                 ref="child">
             </cropper-image>
           </el-dialog>
@@ -57,14 +55,24 @@
             <img :src="imgName" v-if="imgVisible" style="width: 100%" alt="查看">
           </el-dialog>
         <el-form-item label="视频分区" >
-          <el-select v-model="form.region" placeholder="请选择视频分区">
-            <el-option label="分区一" value="math"></el-option>
-            <el-option label="分区二" value="OS"></el-option>
+          <el-select v-model="form.videoPart" placeholder="请选择视频分区">
+            <el-option label="知识" value="knowledge"></el-option>
+            <el-option label="科技" value="science"></el-option>
+            <el-option label="咨询" value="info"></el-option>
+            <el-option label="生活" value="life"></el-option>
+            <el-option label="公益" value="charity"></el-option>
+            <el-option label="音乐" value="music"></el-option>
+            <el-option label="舞蹈" value="dance"></el-option>
+            <el-option label="美食" value="food"></el-option>
+            <el-option label="运动" value="sport"></el-option>
+            <el-option label="影视" value="movie"></el-option>
+            <el-option label="历史" value="history"></el-option>
+            <el-option label=娱乐 value="entertainment"></el-option>
           </el-select>
         </el-form-item>
         <el-form-item label="视频简介">
           <el-input type="textarea"
-                    v-model="form.desc"
+                    v-model="form.videoDesc"
                     maxlength="500"
                     show-word-limit
                     :rows="10"
@@ -83,6 +91,18 @@
 <script>
 import UploadHead from "@/components/upload/UploadHead";
 import CropperImage from "@/components/imageCropper/ImageCropper";
+// 下面的代码是固定写法
+const COS = require('cos-js-sdk-v5')
+// 填写自己腾讯云cos中的key和id (密钥)
+const cosImg = new COS({
+  SecretId: 'AKIDSmtiQwGOJ0Uu7A1g8ML7kBNNAmAKJ5dw', // 身份识别ID
+  SecretKey: '84nNn14vYyDF8qLd0GKxQgiW9cv1we9W' // 身份秘钥
+})
+/*const cosVideo = new COS({
+  SecretId: 'AKIDWwD2kGeveBXlqvujXDoIypVxKg2FKJ7p', // 身份识别ID
+  SecretKey: '4xgDWghU6Zt1ymQuHhM6d1IRQODvfIkA' // 身份秘钥
+})*/
+
 export default {
   name: "UploadView",
   components: {UploadHead, CropperImage},
@@ -97,23 +117,32 @@ export default {
         ],
       },
       //裁切图片参数
-      coverImg: "#",
+      coverImg: "",
       cropperModel:false,
       cropperName:'',
       imgName: '',
       imgVisible: false,
+      //视频上传参数
+      videoList: [],
+      videoInfo: {
+        videoID: '',
+        videoName: '',
+        percentage: 0,
+        showPercentage: false,
+        videoData: {},
+      },
       title: "投稿中心",
       imageUrl: '',
       isUploaded: false,
+      downImg: '#',
       form: {
-        name: '',
-        region: '',
-        date1: '',
-        date2: '',
-        delivery: false,
-        type: [],
-        resource: '',
-        desc: ''
+        videoPath: '',
+        videoTitle: '',
+        videoCoverPath: '',
+        videoPart: '',
+        videoDesc: '',
+        uploaderID: '',
+        videoUpTime: '',
       }
     };
   },
@@ -123,32 +152,76 @@ export default {
       this.cropperModel = true;
     },
     //图片上传成功后
-    handleUploadSuccess (data){
-      console.log(data+"nani")
-      this.coverImg=window.URL.createObjectURL(data)
-      this.cropperModel = false;
-      console.log(this.coverImg)
+    handleUploadImgSuccess (cover){
+      console.log(cover.type);
+      let file = new window.File([cover], "1145514", {type:cover.type})
+      console.log(file)
+      cosImg.putObject({
+        Bucket: 'nohesitate-1312201606',
+        Region: 'ap-beijing',
+        Key: file.lastModified.toString(),
+        StorageClass: 'STANDARD',
+        Body: file // 上传文件对象
+      }, (err, data) => {
+        console.log(err || data)
+        // 上传成功之后
+        if (data.statusCode === 200) {
+          console.log(data)
+          this.formValidate.mainImage='https://' + data.Location
+          this.$message.success('封面上传成功');
+          // this.imageUrl = `https:${data.Location}`
+        }
+      })
+      this.cropperModel=false
     },
     onSubmit() {
       console.log('submit!');
+      console.log(this.form)
     },
-    handleVideoSuccess(res, file) {
-      this.imageUrl = URL.createObjectURL(file.raw);
-      this.isUploaded=true
-      console.log(this.imageUrl)
+    uploadVideo(request){
+      console.log(request)
+      cosImg.putObject({
+        Bucket: 'nohesitate-1312201606',
+        Region: 'ap-beijing',
+        Key: request.file.lastModified.toString(),
+        StorageClass: 'STANDARD',
+        Body: request.file // 上传文件对象
+      }, (err, data) => {
+        console.log(err || data)
+        // 上传成功之后
+        if (data.statusCode === 200) {
+          console.log(data)
+          this.formValidate.mainImage='https://' + data.Location
+          // this.imageUrl = `https:${data.Location}`
+          this.$message.success('视频上传成功');
+        }
+      })
     },
     beforeVideoUpload(file) {
-      const isJPG = file.type === 'image/jpeg';
-      const isLt2M = file.size / 1024 / 1024 < 2;
-
-      if (!isJPG) {
-        this.$message.error('上传头像图片只能是 JPG 格式!');
+      const filename = file.name;
+      var suffix = '';
+      var isVideo = false;
+      const isLt2M = file.size / 1024 / 1024 < 300;
+      try {
+        var flieArr = filename.split('.');
+        suffix = flieArr[flieArr.length - 1];
+      } catch (err) {
+        suffix = '';
       }
-      if (!isLt2M) {
-        this.$message.error('上传头像图片大小不能超过 2MB!');
+      var videoList = ['mp4', 'mkv'];
+      var judge = videoList.some(function (item) {
+        return item === suffix;
+      });
+      if (judge) {
+        isVideo = true;
       }
-      return isJPG && isLt2M;
-    }
+      if (!isVideo) {
+        this.$message.error('上传视频文件只能是 MP4/MKV 格式!');
+      } else if (!isLt2M) {
+        this.$message.error('上传视频文件大小不能超过 300MB!');
+      }
+      return isLt2M && isVideo;
+    },
   }
 }
 </script>
@@ -166,7 +239,7 @@ export default {
   margin: 0 auto;
   display: inline-block;
 }
-.not-uploaded {
+.upload-video {
   margin: 0 auto;
 }
 .video-uploader .el-upload {
