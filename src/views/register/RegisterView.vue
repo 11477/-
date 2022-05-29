@@ -227,7 +227,8 @@ export default {
                         'username': this.ruleForm.username,
                         'confirmed': false,
                       }});
-                    this.$message.success('注册成功！');
+                    this.$message.success('注册成功，请前往邮箱验证！');
+                    this.$router.push("/login");
                     break;
                   case 3001:
                     this.$message.warning('请检查填写的内容！');

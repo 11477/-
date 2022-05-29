@@ -64,21 +64,18 @@ export default {
       data: codeForm,
     })
         .then(res => {
-          switch (res.data.status_code) {
-            case '0':
+          switch (res.data.error) {
+            case 0:
               this.success = true;
               break;
-            case '4001':
-              this.$message.error('无效的确认请求');
-              setTimeout(()=> {
-                this.$router.push('/');
-              }, 2000);
+            case 2001:
+              this.$message.error('请求方式错误');
               break;
-            case '4002':
+            case 4001:
+              this.$message.error('验证码不存在');
+              break;
+            case 4002:
               this.$message.error('验证码已过期，请重新注册');
-              setTimeout(()=> {
-                this.$router.push('/unverified_email');
-              }, 2000);
               break;
           }
         })
