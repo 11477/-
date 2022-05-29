@@ -28,6 +28,11 @@ export default {
       uploaderName: "up名",
       videoCover: ""
     };
+  },
+  props:{
+    hasLogin:{
+      default: true
+    }
   }
 }
 </script>

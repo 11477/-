@@ -8,7 +8,7 @@
       <div style="color: grey; margin-bottom: 5px">上传时间: {{ videoDate }}</div>
       <div style="color: #444444">播放数: {{ viewNum }} 点赞数: {{ likeNum }}  收藏数: {{ favorNum }}  评论数: {{ commentNum }}</div>
     </div>
-    <div class="favor-in-user-favor" style="margin-top: 40px; margin-left: 10px">
+    <div class="favor-in-user-favor" style="margin-top: 40px; margin-left: 10px" v-if="isMine">
       <template>
         <el-popconfirm
             title="确定删除此视频？"
@@ -16,6 +16,15 @@
           <el-button slot="reference">删除</el-button>
         </el-popconfirm>
       </template>
+    </div>
+    <div class="favor-in-user-favor" style="margin-top: 38px" v-else>
+      <el-popover placement="bottom" v-model="visible" trigger="hover" v-if="hasFavored">
+        <div style="text-align: center">
+          <el-button @click="hasFavored=false; visible=false">取消收藏</el-button>
+        </div>
+        <el-button style="background: #00aeec; color: white" slot="reference">已收藏</el-button>
+      </el-popover>
+      <el-button @click="hasFavored=true" v-else> + 收藏</el-button>
     </div>
   </div>
 </template>
@@ -43,6 +52,12 @@ export default {
       type: Number,
       default: 0,
     },
+    isMine:{
+      default: false
+    },
+    hasLogin:{
+      default: true
+    }
   },
   methods:{
     toVideo(){

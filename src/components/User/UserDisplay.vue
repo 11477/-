@@ -36,6 +36,9 @@ export default {
       type: Number,
       default: 0,
     },
+    hasLogin:{
+      default: true
+    }
   },
   methods:{
     toUser(){

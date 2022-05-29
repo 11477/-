@@ -5,10 +5,19 @@
       <div class="user-info">
         <div class="user-name">{{ username }}</div>
         <div class="user-intro-box">
-          <div class="user-self-intro">{{ userInfo }}</div>
+          <div class="user-self-intro">{{ userIntro }}</div>
           <span class="user-sex">性别：{{userSex}} </span>
           <span class="user-birthday">生日：{{userBirthday}}</span>
         </div>
+      </div>
+      <div class="subscribe-in-user-display" v-if="!isMine">
+        <el-popover placement="bottom" v-model="visible" trigger="hover" v-if="hasFollowed">
+          <div style="text-align: center">
+            <el-button @click="hasFollowed=false; visible=false">取消关注</el-button>
+          </div>
+          <el-button style="background: #00aeec; color: white" slot="reference">已关注</el-button>
+        </el-popover>
+        <el-button @click="hasFollowed=true" v-else> + 关注</el-button>
       </div>
     </div>
   </div>
@@ -22,8 +31,15 @@ export default {
      userPortrait: {type: String},
      userSex: {type: String},
      userBirthday: {type: String},
-     userInfo: {type: String}
-   }
+     userIntro: {type: String},
+     isMine: {}
+   },
+  data(){
+    return{
+      visible: false,
+      hasFollowed: true,
+    }
+  }
  }
 </script>
 
@@ -47,6 +63,7 @@ export default {
   display: flex;
   flex-direction: column;
   margin-left: 20px;
+  margin-right: 253px;
 }
 .user-name{
   margin-top: 5px;
