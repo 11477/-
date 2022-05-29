@@ -19,8 +19,8 @@
       </div>
       <div class="right-entry">
         <div class="right-button">
-          <div class="login-button" v-if="this.is_login===false" @click="toLogin">登录</div>
-          <img class="head-pic" v-else src="../../assets/avatar/head.jpeg" alt="banner">
+          <img class="head-pic" v-if="this.is_login" src="../../assets/avatar/head.jpeg" alt="banner">
+          <div class="login-button" v-else @click="toLogin">登录</div>
         </div>
         <div class="right-button" @click="toMessage">
           <i class="el-icon-message"></i>
@@ -59,7 +59,7 @@ export default {
     }
   },
   created() {
-    const userInfo = user.getters.getUser(user.state())
+    var userInfo = user.getters.getUser(user.state())
     if (userInfo) {
       this.is_login = true
     }
