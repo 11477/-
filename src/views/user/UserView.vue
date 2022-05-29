@@ -1,5 +1,5 @@
 <template>
-  <div class="user">
+  <div class="user" v-if="playNum">
     <UserBar :username=username
              :userPortrait=userPortrait
              :userInfo=userInfo
@@ -69,6 +69,62 @@
       </div>
     </div>
   </div>
+  <div v-else>
+    <UserBar :username=username
+             :userPortrait=userPortrait
+             :userInfo=userInfo
+             :userBirthday=userBirthday
+             :userSex=userSex></UserBar>
+    <div class="menu-box">
+      <el-menu :default-active="activeIndex" class="el-menu-demo" mode="horizontal" @select="handleSelect">
+        <el-menu-item index="1" @click="toVideo">TA的视频</el-menu-item>
+        <el-menu-item index="2" @click="toFavor">收藏</el-menu-item>
+        <el-menu-item index="3" @click="toFollow">关注</el-menu-item>
+        <el-menu-item index="4" @click="toFans">粉丝</el-menu-item>
+        <div class="user-statistic-box">
+          <div class="user-statistic info1">
+            <div class="statistic-char">关注数</div>
+            <div>{{ favorNum }}</div>
+          </div>
+          <div class="user-statistic info234">
+            <div class="statistic-char">粉丝数</div>
+            <div>{{ fansNum }}</div>
+          </div>
+          <div class="user-statistic info234">
+            <div class="statistic-char">点赞数</div>
+            <div>{{ likeNum }}</div>
+          </div>
+          <div class="user-statistic info234">
+            <div class="statistic-char">播放数</div>
+            <div>{{ playNum }}</div>
+          </div>
+        </div>
+      </el-menu>
+    </div>
+    <div class="content-area">
+      <div class="video" v-if="this.activeIndex==='1'">
+        <div class="sub-title">TA的视频</div>
+        <MyVideo/>
+        <MyVideo/>
+      </div>
+      <div class="favor" v-else-if="this.activeIndex==='2'">
+        <div class="sub-title">TA的收藏</div>
+        <UserFavor/>
+        <UserFavor/>
+      </div>
+      <div class="follow" v-else-if="this.activeIndex==='3'">
+        <div class="sub-title">TA的关注</div>
+        <UserDisplay/>
+        <UserDisplay/>
+        <UserDisplay/>
+      </div>
+      <div class="fans" v-else-if="this.activeIndex==='4'">
+        <div class="sub-title">TA的粉丝</div>
+        <UserDisplay/>
+        <UserDisplay/>
+      </div>
+    </div>
+  </div>
 </template>
 
 <script>
@@ -88,7 +144,7 @@ export default {
       userInfo: "用户介绍",
       userBirthday: "2020年1月1日",
       fansNum: 66,
-      playNum: 66,
+      playNum: 0,
       favorNum: 66,
       likeNum: 78,
       userSex: "男",

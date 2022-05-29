@@ -1,9 +1,9 @@
 <template>
   <div id="video-history">
-    <img class="cover-in-video-history" src="../../assets/avatar/head.jpeg" alt="banner">
+    <img class="cover-in-video-history" src="../../assets/avatar/head.jpeg" alt="banner" style="cursor: pointer">
     <div class="info-in-user-favor">
-      <div class="title-in-video-history">{{videoTitle}}</div>
-      <div>{{uploaderName}}</div>
+      <div class="title-in-video-history" style="cursor: pointer">{{videoTitle}}</div>
+      <div style="cursor: pointer">{{uploaderName}}</div>
     </div>
     <div class="favor-in-user-favor" style="margin-top: 38px">
       <el-popover placement="bottom" v-model="visible" trigger="hover" v-if="hasFavored">

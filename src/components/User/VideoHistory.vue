@@ -36,6 +36,9 @@ export default {
   height: 100px;
   margin: 10px;
 }
+.cover-in-video-history:hover{
+  cursor: pointer;
+}
 .info-in-video-history{
   display: flex;
   flex-direction: column;
@@ -46,5 +49,8 @@ export default {
   margin-bottom: 5px;
   font-size: 25px;
   font-family: "video-title-black",serif;
+}
+.title-in-video-history:hover{
+  cursor: pointer;
 }
 </style>

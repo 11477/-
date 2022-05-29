@@ -63,6 +63,7 @@ export default {
                 this.$store.dispatch('saveUserInfo', {user: {
                     'email': this.form.email,
                     'confirmed': true,
+                    'userID':res.data.userID,
                   }});
                 this.$router.push('/');
                 break;

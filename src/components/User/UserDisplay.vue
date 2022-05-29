@@ -1,8 +1,10 @@
 <template>
   <div id="user-display">
-    <img class="head-in-user-display" src="../../assets/avatar/head.jpeg" alt="banner">
+    <div @click="toUser">
+      <img class="head-in-user-display" src="../../assets/avatar/head.jpeg" alt="banner">
+    </div>
     <div class="info-in-user-display">
-      <div class="name-in-user-display">{{ username }}</div>
+      <div class="name-in-user-display" @click="toUser">{{ username }}</div>
       {{ userInfo }}
     </div>
     <div class="subscribe-in-user-display">
@@ -28,6 +30,17 @@ export default {
       userPortrait: "../../assets/avatar/head.jpeg",
       userInfo: "用户介绍",
     };
+  },
+  props:{
+    userID:{
+      type: Number,
+      default: 0,
+    },
+  },
+  methods:{
+    toUser(){
+      this.$router.push('/user/'+this.userID);
+    }
   }
 }
 </script>
@@ -46,6 +59,9 @@ export default {
     height: 60px;
     margin: 10px;
   }
+  .head-in-user-display:hover{
+    cursor: pointer;
+  }
   .info-in-user-display{
     display: flex;
     flex-direction: column;
@@ -56,6 +72,9 @@ export default {
     margin-bottom: 7px;
     font-size: 20px;
     font-family: "user-name-black",serif;
+  }
+  .name-in-user-display:hover{
+    cursor: pointer;
   }
   .subscribe-in-user-display{
     margin-top: 20px;
