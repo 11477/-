@@ -4,7 +4,7 @@
         <el-tab-pane label="视频列表">
           <div class="audit-videos" v-for="colum in 2" v-bind:key="colum">
             <div v-for="row in 3" v-bind:key="row">
-              <VideoCover></VideoCover>
+              <VideoCover :videoID="8"></VideoCover>
               <div class="audit-info">
                 <el-button type="danger" class="audit-button" size="mini">删除</el-button>
               </div>
@@ -14,7 +14,7 @@
         <el-tab-pane label="投诉处理">
           <div class="audit-videos" v-for="colum in 2" v-bind:key="colum">
             <div v-for="row in 3" v-bind:key="row">
-              <VideoCover></VideoCover>
+              <VideoCover :videoID="6"></VideoCover>
               <div class="audit-info">
                 <div class="audit-reason">投诉理由 : {{reason}}</div>
                 <el-button type="primary" class="audit-button" size="mini">处理</el-button>
@@ -39,6 +39,9 @@ export default {
       ],
       tabPosition: 'left',
       reason: "看他不爽",
+      AdministratorID: 1,
+      AdministratorName: "nohesitate",
+      AuditResult:  true,
     }
   },
   methods: {}
@@ -71,9 +74,7 @@ export default {
   display: flex;
   margin-bottom: auto;
 }
-.audit-frame{
-  display: flex;
-}
+
 .audit-info {
   display: flex;
   text-align: left;

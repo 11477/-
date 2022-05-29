@@ -54,6 +54,18 @@ export default {
       videoDate: "5-28",
     }
   },
+  props:{
+    videoID:{
+      type: Number,
+      default: 0,
+    },
+  },
+  created() {
+    console.log(this.videoID)
+  },
+  mounted() {
+    console.log(this.videoID)
+  },
   methods:{
     ToVideo(){
       this.$router.push('/video/0');

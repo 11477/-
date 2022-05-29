@@ -1,5 +1,23 @@
 <template>
   <div class="about">
-    <h1>This is an about page</h1>
+    <UploadImg @input="getInput" :value="avatarSrc"></UploadImg>
   </div>
 </template>
+<script>
+import UploadImg from "@/components/upload/AvatarUpload";
+export default {
+  components: {UploadImg},
+  data(){
+    return{
+      avatarSrc:''
+    }
+  },
+  methods: {
+    getInput(msg){
+      this.avatarSrc=msg
+      console.log('avatarSrc:',this.avatarSrc)
+    }
+  }
+}
+
+</script>
