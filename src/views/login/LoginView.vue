@@ -53,7 +53,7 @@ export default {
 
       self.$axios({
         method: 'post',
-        url: 'Weblogin/login/',
+        url: '/Weblogin/login/',
         data: formData,
       })
           .then(res => {
@@ -69,24 +69,19 @@ export default {
                   this.$router.push('/');
                 break;
               case 3001:
-                this.$message.error('请检查填写的内容！');
+                this.$message.error('表单验证失败！');
                 break;
               case 4001:
                 this.$message.warning('用户已登录！');
                 break;
               case 4002:
-                this.$message.error('用户名不存在！');
+                this.$message.error('邮箱未注册！');
                 break;
               case 4003:
-                this.$message.error('用户名或密码错误！');
+                this.$message.error('密码错误！');
                 break;
               case 4004:
-                this.$message.warning('用户未通过邮件确认，请及时确认！');
-                this.$store.dispatch('saveUserInfo', {user: {
-                    'username': this.form.username,
-                    'confirmed': false,
-                  }});
-                this.$router.push('/unverified_email');
+                this.$message.error('用户未通过邮件确认，请及时确认！');
                 break;
             }
           })
