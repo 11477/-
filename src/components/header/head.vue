@@ -88,22 +88,37 @@ export default {
       console.log("search")
     },
     toMessage() {
-      this.$router.push({path: '/login'})
+      if(!this.is_login)
+        this.$router.push({path: '/login'})
+      else
+        this.$router.push({path: '/user/' + this.loginUserID})
     },
     toStore() {
-      console.log("store")
+      if(!this.is_login)
+        this.$router.push({path: '/login'})
+      else
+        this.$router.push({path: '/user/' + this.loginUserID})
     },
     toHistory() {
-      console.log("history")
+      if(!this.is_login)
+        this.$router.push({path: '/login'})
+      else
+        this.$router.push({path: '/user/' + this.loginUserID})
     },
     toFollow() {
-      console.log("follow")
+      if(!this.is_login)
+        this.$router.push({path: '/login'})
+      else
+        this.$router.push({path: '/user/' + this.loginUserID})
     },
     toLogin() {
       this.$router.push({path: '/login'})
     },
     upLoad() {
-      this.$router.push({path: '/upload/frame'})
+      if(!this.is_login)
+        this.$router.push({path: '/login'})
+      else
+        this.$router.push({path: '/upload/frame'})
     },
     toSpace() {
       this.$router.push({path: '/user/' + this.loginUserID})
@@ -129,7 +144,7 @@ export default {
   font-size: 17px;
 }
 .head-pic {
-  width: 45px;
+  width: 41px;
   margin-top: -5px;
   margin-right: 20px;
 }
