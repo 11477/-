@@ -96,8 +96,8 @@ import qs from "qs"
 const COS = require('cos-js-sdk-v5')
 // 填写自己腾讯云cos中的key和id (密钥)
 const cosImg = new COS({
-  SecretId: '***', // 身份识别ID
-  SecretKey: '***' // 身份秘钥
+  SecretId: 'AKIDxpVzHOM6cstlNmxta2FDvOddNs77rMek', // 身份识别ID
+  SecretKey: 'zrUrzwe8NM6brrc8PREm7D4h5FB5wogf' // 身份秘钥
 })
 
 export default {
@@ -194,10 +194,24 @@ export default {
       this.form.uploaderID=0
       this.form.videoUpTime=Date()
           console.log('VideoManager/uploadvideo/')
-      this.$axios.post('VideoManager/uploadvideo/',qs.stringify(this.form))
-          .then(res=>{
-            console.log(res)
+          this.$axios({
+            method: 'post',
+            url: '/VideoManager/uploadvideo/',
+            data: this.form,
           })
+              .then(res => {
+                switch (res.data.error) {
+                  case '0':
+                    this.$message.success('上传成功')
+                    break;
+                  default:
+                    this.$message.error(res.data.error);
+                    setTimeout(()=> {
+                      this.$router.push('/');
+                    }, 2000);
+                    break;
+                }
+              })
 }
         else {
           this.$message.error('信息不完整')

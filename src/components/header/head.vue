@@ -49,7 +49,6 @@
 
 <script>
 import user from "@/store/user";
-
 export default {
   name: 'NavBar',
   data() {
@@ -100,7 +99,6 @@ export default {
 #nav-bar {
   padding: 0 10% 0 10%;
   height: 61px;
-
 }
 .logo-pic {
   width: 150px;
@@ -125,7 +123,6 @@ export default {
   font-size: 14px;
   line-height: 36px;
 }
-
 .searchBar {
   display: inline-block;
   width: 40%;
@@ -214,4 +211,3 @@ el-menu-item {
   text-align: center;
 }
 </style>
-

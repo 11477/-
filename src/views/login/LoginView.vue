@@ -32,7 +32,6 @@
 </template>
 
 <script>
-
 export default {
   name: "LoginView.vue",
   data() {
@@ -50,7 +49,6 @@ export default {
       const formData = new FormData();
       formData.append("email", self.form.email);
       formData.append("password", self.form.password);
-
       self.$axios({
         method: 'post',
         url: '/Weblogin/login/',
@@ -66,7 +64,7 @@ export default {
                     'email': this.form.email,
                     'confirmed': true,
                   }});
-                  this.$router.push('/');
+                this.$router.push('/');
                 break;
               case 3001:
                 this.$message.error('表单验证失败！');
@@ -100,18 +98,15 @@ export default {
     },
   }
 }
-
 </script>
 
 <style scoped>
-
 .login {
   width: 100%;
   height: 800px;
   background: url("../../assets/images/login_background.jpg") no-repeat;
   background-size: cover;
 }
-
 .title1{
   background: rgba(255,255,255,0);
   position: relative;
@@ -125,8 +120,6 @@ export default {
   display: inline-block;
   cursor: pointer;
 }
-
-
 .login-word{
   width: 80%;
   height: 28px;
@@ -136,7 +129,6 @@ export default {
   margin-bottom: 28px;
   text-align: center;
 }
-
 .login-word .word{
   height: 56px;
   line-height: 56px;
@@ -147,8 +139,6 @@ export default {
   border-radius: 10px;
   text-align: center;
 }
-
-
 .login-wrap {
   width: 350px;
   height: 220px;
@@ -191,5 +181,4 @@ a:hover {
   cursor: pointer;
   float:right;
 }
-
 </style>

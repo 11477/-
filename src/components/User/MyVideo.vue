@@ -45,7 +45,7 @@ export default {
     },
   },
   methods:{
-    ToVideo(){
+    toVideo(){
       this.$router.push('/video/'+this.videoID);
     },
   }

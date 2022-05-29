@@ -36,17 +36,13 @@ export default {
   text-align: center;
   color: #2c3e50;
 }
-
 *{
   padding: 0;
   margin: 0;
-
 }
-
 nav {
   padding: 30px;
 }
-
 nav a {
   font-weight: bold;
   color: #2c3e50;
