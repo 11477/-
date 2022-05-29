@@ -1,6 +1,8 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import HomeView from '../views/index/HomeView.vue'
+import user from "@/store/user";
+
 Vue.use(VueRouter)
 
 const routes = [

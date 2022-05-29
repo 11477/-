@@ -7,10 +7,23 @@
 
 <script>
 import NavBar from '@/components/header/head.vue';
+import user from "@/store/user";
 export default {
   components: {
     // eslint-disable-next-line vue/no-unused-components
     NavBar
+  },
+  data() {
+    return {
+      is_login: false,
+      Height: 0,
+    }
+  },
+  created() {
+    const userInfo = user.getters.getUser(user.state())
+    if (userInfo) {
+      this.is_login = true
+    }
   }
 }
 </script>

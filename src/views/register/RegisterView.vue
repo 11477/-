@@ -217,7 +217,7 @@ export default {
         if (valid) {
           self.$axios({
             method: 'post',
-            url: '/register/',
+            url: '/Weblogin/register/',
             data: formData,
           })
               .then(res => {
