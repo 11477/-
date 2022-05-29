@@ -2,8 +2,8 @@
   <div id="user-display">
     <img class="head-in-user-display" src="../../assets/avatar/head.jpeg" alt="banner">
     <div class="info-in-user-display">
-      <div class="name-in-user-display">这是用户名</div>
-      sdgsbvsdbsb
+      <div class="name-in-user-display">{{ username }}</div>
+      {{ userInfo }}
     </div>
     <div class="subscribe-in-user-display">
       <el-popover placement="bottom" v-model="visible" trigger="hover" v-if="hasFollowed">
@@ -23,7 +23,10 @@ export default {
   data(){
     return{
       visible: false,
-      hasFollowed: true
+      hasFollowed: true,
+      username: "用户名",
+      userPortrait: "../../assets/avatar/head.jpeg",
+      userInfo: "用户介绍",
     };
   }
 }

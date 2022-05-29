@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import HomeView from '../views/index/HomeView.vue'
-import user from "@/store/user";
+
 
 Vue.use(VueRouter)
 
@@ -42,7 +42,7 @@ const routes = [
     component: () => import(/* webpackChunkName: "about" */ '../views/AboutView'),
   },
   {
-    path: '/user',
+    path: '/user/:UserID',
     name: 'user',
     component: () => import(/* webpackChunkName: "about" */ '../views/user/UserView')
   },

@@ -2,8 +2,8 @@
   <div id="video-history">
     <img class="cover-in-video-history" src="../../assets/avatar/head.jpeg" alt="banner">
     <div class="info-in-user-favor">
-      <div class="title-in-video-history">视频标题</div>
-      <div>up猪名字</div>
+      <div class="title-in-video-history">{{videoTitle}}</div>
+      <div>{{uploaderName}}</div>
     </div>
     <div class="favor-in-user-favor" style="margin-top: 38px">
       <el-popover placement="bottom" v-model="visible" trigger="hover" v-if="hasFavored">
@@ -23,7 +23,10 @@ export default {
   data(){
     return{
       visible: false,
-      hasFavored: true
+      hasFavored: true,
+      videoTitle: "视频标题",
+      uploaderName: "up名",
+      videoCover: ""
     };
   }
 }

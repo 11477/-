@@ -2,16 +2,23 @@
   <div id="video-history">
     <img class="cover-in-video-history" src="../../assets/avatar/head.jpeg" alt="banner">
     <div class="info-in-video-history">
-      <div class="title-in-video-history">视频标题</div>
-      <div>up猪名字</div>
-      <div style="color: grey; margin-top: 10px">2020-02-13 12:05</div>
+      <div class="title-in-video-history">{{ videoTitle }}</div>
+      <div>{{ uploaderName }}</div>
+      <div style="color: grey; margin-top: 10px">{{ viewTime }}</div>
     </div>
   </div>
 </template>
 
 <script>
 export default {
-  name: "VideoHistory"
+  name: "VideoHistory",
+  data(){
+    return{
+      viewTime: "5-18 22:21",
+      videoTitle: "操作系统k48",
+      uploaderName: "up名"
+    }
+  }
 }
 </script>
 

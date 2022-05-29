@@ -3,11 +3,11 @@
     <div class="box-outside">
       <img class="head-in-box" src="../../assets/avatar/head.jpeg" alt="banner">
       <div class="user-info">
-        <div class="user-name">这是用户名</div>
+        <div class="user-name">{{ username }}</div>
         <div class="user-intro-box">
-          <div class="user-self-intro">wosabi wosabi wosabi wyc是傻逼wyc是傻逼啦啦啦啦啦啦啦啦啦啦啦啦啦啦噜噜噜噜噜还可以再长一点再长就受不了啦啊啊</div>
-          <span class="user-sex">性别：火星人 </span>
-          <span class="user-birthday">生日：1000年15月40日</span>
+          <div class="user-self-intro">{{ userInfo }}</div>
+          <span class="user-sex">性别：{{userSex}} </span>
+          <span class="user-birthday">生日：{{userBirthday}}</span>
         </div>
       </div>
     </div>
@@ -15,8 +15,15 @@
 </template>
 
 <script>
- export default {
-   name: "UserBar"
+export default {
+   name: "UserBar",
+   props:{
+     username: {type: String},
+     userPortrait: {type: String},
+     userSex: {type: String},
+     userBirthday: {type: String},
+     userInfo: {type: String}
+   }
  }
 </script>
 

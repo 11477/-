@@ -1,10 +1,12 @@
 <template>
   <div id="video-history">
-    <img class="cover-in-video-history" src="../../assets/avatar/head.jpeg" alt="banner">
+    <div @click="toVideo">
+      <img class="cover-in-video-history" src="../../assets/avatar/head.jpeg" alt="banner">
+    </div>
     <div class="info-in-user-favor">
-      <div class="title-in-video-history">视频标题</div>
-      <div style="color: grey; margin-bottom: 5px">上传时间: 2020-02-13 12:05</div>
-      <div style="color: #444444">播放数: 66 点赞数: 66  收藏数: 66  评论数: 66</div>
+      <div class="title-in-video-history" @click="toVideo">{{ videoTitle }}</div>
+      <div style="color: grey; margin-bottom: 5px">上传时间: {{ videoDate }}</div>
+      <div style="color: #444444">播放数: {{ viewNum }} 点赞数: {{ likeNum }}  收藏数: {{ favorNum }}  评论数: {{ commentNum }}</div>
     </div>
     <div class="favor-in-user-favor" style="margin-top: 40px; margin-left: 10px">
       <template>
@@ -24,8 +26,28 @@ export default {
   data(){
     return{
       visible: false,
-      hasFavored: true
+      hasFavored: true,
+      viewNum: 5674,
+      commentNum: 31,
+      likeNum: 66,
+      favorNum: 77,
+      videoTime: "22:21",
+      videoTitle: "操作系统k48",
+      uploaderName: "不知道捏",
+      videoDate: "5-28",
+      videoCover: ""
     };
+  },
+  props:{
+    videoID:{
+      type: Number,
+      default: 0,
+    },
+  },
+  methods:{
+    ToVideo(){
+      this.$router.push('/video/'+this.videoID);
+    },
   }
 }
 </script>

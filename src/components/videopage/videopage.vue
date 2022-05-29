@@ -70,7 +70,7 @@ export default {
       this.$router.push('/video/'+this.videoID);
     },
     ToUser(){
-      this.$router.push('/user');
+      this.$router.push('/user/1');
     }
   }
 }
