@@ -1,0 +1,500 @@
+commit 0a35d825c151d512b304e8930e962302317bc500
+Author: nohesitate <20373441@buaa.edu.cn>
+Date:   Sun May 29 21:42:38 2022 +0800
+
+    strange
+
+commit 3caba7a34771e85b3c5673eda03ea510be5754b2
+Author: nohesitate <20373441@buaa.edu.cn>
+Date:   Sun May 29 21:41:14 2022 +0800
+
+    wtf
+
+commit 512d5028c10ead5e9c1d5d16be69f9a8a0355eca
+Author: cYw <1147701986@qq.com>
+Date:   Sun May 29 21:25:02 2022 +0800
+
+    wo shi sha bi
+
+commit 8082260b9f93239f30b355c9bcf928423f076b5c
+Author: cYw <1147701986@qq.com>
+Date:   Sun May 29 21:05:27 2022 +0800
+
+    wo shi sha bi
+
+commit e0d7a899c4afca070a64cf31713387eb7faccde4
+Merge: 1b4b423 e7b9e84
+Author: 陈百铭 <957167412@qq.com>
+Date:   Sun May 29 20:54:52 2022 +0800
+
+    Merge remote-tracking branch 'origin/main'
+    
+    # Conflicts:
+    #       src/store/index.js
+
+commit 1b4b423929e1028861e499a2d05645db47123a2e
+Author: 陈百铭 <957167412@qq.com>
+Date:   Sun May 29 20:53:49 2022 +0800
+
+    user page update
+
+commit e7b9e841eef44f5b0b05fad5229f6e0a28bf0a3d
+Author: cYw <1147701986@qq.com>
+Date:   Sun May 29 20:47:34 2022 +0800
+
+    wo shi sha bi
+
+commit 7abb1ff92f65da6f9d7d451966de8a37d68b5611
+Author: cYw <1147701986@qq.com>
+Date:   Sun May 29 20:25:05 2022 +0800
+
+    wo shi sha bi
+
+commit a3fcd776764cf396fe15abd3823e960df75f2def
+Author: cYw <1147701986@qq.com>
+Date:   Sun May 29 19:57:57 2022 +0800
+
+    wo shi sha bi
+
+commit a05f879d4ae1e201cc194c338ca9e72615da46d7
+Author: cYw <1147701986@qq.com>
+Date:   Sun May 29 19:34:07 2022 +0800
+
+    wo shi sha bi
+
+commit 5d94b3cf78bdd4c3f4d94972788c66edbbc18303
+Merge: 33df3fc 4a8eb0d
+Author: nohesitate <20373441@buaa.edu.cn>
+Date:   Sun May 29 19:15:38 2022 +0800
+
+    Merge remote-tracking branch 'origin/main'
+    
+    # Conflicts:
+    #       src/main.js
+    #       vue.config.js
+
+commit 33df3fc6472d89218490520820d1318db5e19e2f
+Author: nohesitate <20373441@buaa.edu.cn>
+Date:   Sun May 29 19:12:54 2022 +0800
+
+    finish some basic function of UploadView
+
+commit 4a8eb0d62fc7582ee528a995badafb4bea3b4980
+Author: cYw <1147701986@qq.com>
+Date:   Sun May 29 18:44:33 2022 +0800
+
+    wo shi sha bi
+
+commit ca588c872d03cffd39ced5d83ed3b1072693bc2d
+Author: cYw <1147701986@qq.com>
+Date:   Sun May 29 17:57:41 2022 +0800
+
+    wo shi sha bi
+
+commit 4e43e57ab5f5fa0244d4a7f62f158d54d62725af
+Author: cYw <1147701986@qq.com>
+Date:   Sun May 29 17:16:18 2022 +0800
+
+    wo shi sha bi
+
+commit 58e8e34298e5dcfad3d9862c7c6a11df70367157
+Author: cYw <1147701986@qq.com>
+Date:   Sun May 29 15:57:10 2022 +0800
+
+    wo shi sha bi
+
+commit c2ea3258c632ec6d03b3ff4344a69a012d70df61
+Merge: 13564a4 8342213
+Author: 陈百铭 <957167412@qq.com>
+Date:   Sun May 29 15:43:04 2022 +0800
+
+    Merge branch 'main' of https://github.com/11477/pilipili
+
+commit 13564a49aa0935f81f8039549320f85cafd8a340
+Author: 陈百铭 <957167412@qq.com>
+Date:   Sun May 29 15:22:33 2022 +0800
+
+    user page update
+
+commit 8342213ffc318248776d4dba2c6a242b69c1edce
+Author: nohesitate <20373441@buaa.edu.cn>
+Date:   Sun May 29 15:17:56 2022 +0800
+
+    finish some basic function of UploadView
+
+commit 5d9ad92b3a7637c27c209d8064845dfcccb6e7d9
+Merge: 9f26e39 4e142b9
+Author: nohesitate <20373441@buaa.edu.cn>
+Date:   Sun May 29 05:35:20 2022 +0800
+
+    Merge remote-tracking branch 'origin/main'
+
+commit 9f26e3993e529bfd44b21ce5b413c223e6e4120b
+Author: nohesitate <20373441@buaa.edu.cn>
+Date:   Sat May 28 21:03:47 2022 +0800
+
+    add props for videopage
+
+commit 4e142b949aafe17aa7fa736b5164ebd028d5983e
+Author: cYw <1147701986@qq.com>
+Date:   Sat May 28 19:30:24 2022 +0800
+
+    wo shi sha bi
+
+commit 2b4a6ae0cca532dbaf8970ac191573d41f3effd0
+Author: cYw <1147701986@qq.com>
+Date:   Sat May 28 19:22:41 2022 +0800
+
+    wo shi sha bi
+
+commit 547d790ce8605deaf2ba0a239a220f98d1957714
+Author: cYw <1147701986@qq.com>
+Date:   Sat May 28 18:37:34 2022 +0800
+
+    wo shi sha bi
+
+commit 9400bba10c55fda7ce79768d0d6f35bcb4f7dc92
+Author: nohesitate <20373441@buaa.edu.cn>
+Date:   Sat May 28 18:05:07 2022 +0800
+
+    finish adminView
+
+commit 6a22399072c41fa8769b50b154e7910a0b37662d
+Author: nohesitate <20373441@buaa.edu.cn>
+Date:   Sat May 28 17:51:08 2022 +0800
+
+    finish adminView
+
+commit a6517813422c97f549a0bda1dba217d6ec2a5a53
+Author: cYw <1147701986@qq.com>
+Date:   Sat May 28 17:49:47 2022 +0800
+
+    wo shi sha bi
+
+commit c720f114aca536273eb136fa370a40fab3827a07
+Author: cYw <1147701986@qq.com>
+Date:   Sat May 28 17:16:17 2022 +0800
+
+    wo shi sha bi
+
+commit b17584195bc9ce9ff6c11bf748fae7ad8adee232
+Author: cYw <1147701986@qq.com>
+Date:   Sat May 28 17:10:32 2022 +0800
+
+    wo shi sha bi
+
+commit fed8a538206025f0ab1a277f1e61dd8eccd7726a
+Author: cYw <1147701986@qq.com>
+Date:   Sat May 28 17:09:47 2022 +0800
+
+    wo shi sha bi
+
+commit e320bcd0ed704f9b39787e23d08c662096e563b8
+Author: cYw <1147701986@qq.com>
+Date:   Sat May 28 16:27:43 2022 +0800
+
+    wo shi sha bi
+
+commit 00cd78514cd1e8bcaa092a4369b41af93df57251
+Author: cYw <1147701986@qq.com>
+Date:   Sat May 28 16:05:40 2022 +0800
+
+    wo shi sha bi
+
+commit 7c058d4907139e4d7c257c738c2f1222146fea02
+Author: cYw <1147701986@qq.com>
+Date:   Sat May 28 15:32:06 2022 +0800
+
+    wo shi sha bi
+
+commit b482786f3a0597f9c4e07167a2bceac91add38ee
+Author: cYw <1147701986@qq.com>
+Date:   Sat May 28 15:22:22 2022 +0800
+
+    wo shi sha bi
+
+commit 871f5767dd245fcfe6831dd276c7d562b092aa30
+Merge: 81a1307 eb7c950
+Author: 陈百铭 <957167412@qq.com>
+Date:   Sat May 28 10:26:15 2022 +0800
+
+    Merge remote-tracking branch 'origin/main'
+
+commit 81a130752136f2272f66152c5ee57a05e050a341
+Author: 陈百铭 <957167412@qq.com>
+Date:   Sat May 28 00:48:16 2022 +0800
+
+    user page update
+
+commit eb7c950f461e82fb133589ee177dfd6d362e6a07
+Author: nohesitate <20373441@buaa.edu.cn>
+Date:   Sat May 28 00:46:51 2022 +0800
+
+    update upload view
+
+commit 5a5c756de0d88a9d1412d323f0aef91b261c6919
+Merge: 6b775bb 9aa2ed8
+Author: 陈百铭 <957167412@qq.com>
+Date:   Fri May 27 18:53:49 2022 +0800
+
+    Merge remote-tracking branch 'origin/main'
+    
+    # Conflicts:
+    #       src/components/User/UserHead.vue
+    #       src/router/index.js
+
+commit 9aa2ed8f7d94d05a08c784b7b30f8c4dbc68acb3
+Author: nohesitate <20373441@buaa.edu.cn>
+Date:   Mon May 23 21:14:55 2022 +0800
+
+    update UploadView
+
+commit 5d68e6439126470a7014939f4108f1945c43630e
+Author: nohesitate <20373441@buaa.edu.cn>
+Date:   Mon May 23 15:17:33 2022 +0800
+
+    import update nav-bar
+
+commit f12e762a1bde789008e6a0ad853725dda2a6e736
+Author: nohesitate <20373441@buaa.edu.cn>
+Date:   Mon May 23 14:39:02 2022 +0800
+
+    update nav-bar fit
+
+commit e3f0ef3dcf226cd7f51e2dd54483da347bce9c80
+Author: nohesitate <20373441@buaa.edu.cn>
+Date:   Mon May 23 09:29:05 2022 +0800
+
+    add method implements in head
+
+commit 6b775bbc95b97a1794ac11bfa563b1ecb624d44e
+Merge: 45a7565 a706d12
+Author: 陈百铭 <957167412@qq.com>
+Date:   Sat May 21 10:58:10 2022 +0800
+
+    Merge remote-tracking branch 'origin/main'
+
+commit 45a7565f3054f68ac339a7a62f66ce3e5fff8440
+Author: 陈百铭 <957167412@qq.com>
+Date:   Sat May 21 10:50:20 2022 +0800
+
+    user page update
+
+commit a706d1213d50b126299e2c2ec45fbd46102d27f9
+Author: nohesitate <20373441@buaa.edu.cn>
+Date:   Sat May 21 10:48:59 2022 +0800
+
+    update router
+
+commit 291f861e8d1b75c41322c9e8263d15af06f9fb15
+Author: 陈百铭 <957167412@qq.com>
+Date:   Fri May 20 11:52:29 2022 +0800
+
+    user page update
+
+commit 35418945918b5054240158212e782c2f309c4dd1
+Author: 陈百铭 <957167412@qq.com>
+Date:   Fri May 20 09:22:12 2022 +0800
+
+    new logo!
+
+commit 25d0f5edbdecf4d0772db657efd7206ed541b578
+Author: cYw <1147701986@qq.com>
+Date:   Thu May 19 21:21:30 2022 +0800
+
+    wo shi sha bi
+
+commit 9caaad489b34ea3cd5df62d70caff9b669276eff
+Author: cYw <1147701986@qq.com>
+Date:   Wed May 18 21:53:20 2022 +0800
+
+    wo shi sha bi
+
+commit 3433a9c5c0e68f428cde3e06ea90ce3cafaa7eaf
+Author: cYw <1147701986@qq.com>
+Date:   Wed May 18 18:17:54 2022 +0800
+
+    wo shi sha bi
+
+commit a084b691ac14d8f0fea5d8c225edaa0db8fe8df8
+Author: cYw <1147701986@qq.com>
+Date:   Wed May 18 17:37:13 2022 +0800
+
+    wo shi sha bi
+
+commit d190ae51d8b67bba1a3b18feb7bf362067e5aee6
+Merge: 3f1fa30 99c8169
+Author: cYw <1147701986@qq.com>
+Date:   Wed May 18 17:36:59 2022 +0800
+
+    Merge remote-tracking branch 'origin/main'
+
+commit 99c816972b986d1b899546136fa6021c29cc3666
+Author: nohesitate <20373441@buaa.edu.cn>
+Date:   Wed May 18 17:06:44 2022 +0800
+
+    update report button
+
+commit 4dfc0d81981c2d07f954a214f79a6b3097401e56
+Author: 陈百铭 <957167412@qq.com>
+Date:   Sat May 14 20:20:31 2022 +0800
+
+    搜索界面更新
+
+commit 3f1fa30879cf8859fdd9f5258e87b2f63b8378ad
+Author: cYw <1147701986@qq.com>
+Date:   Sat May 14 17:24:08 2022 +0800
+
+    wo shi sha bi
+
+commit 03512377729dbab5a018f76284fa91af6607934c
+Merge: b6a8358 3985e14
+Author: cYw <1147701986@qq.com>
+Date:   Sat May 14 17:23:12 2022 +0800
+
+    Merge remote-tracking branch 'origin/main'
+
+commit 3985e1455a548116c578e48f31f01eb4543f7f13
+Author: 陈百铭 <957167412@qq.com>
+Date:   Sat May 14 17:12:30 2022 +0800
+
+    nav-Bar更更新
+
+commit b6a8358877a32be115b7555a071833f663493684
+Author: cYw <1147701986@qq.com>
+Date:   Sat May 14 17:10:00 2022 +0800
+
+    wo shi sha bi
+
+commit 2d6a6aac6b6cb89f7bc5abd87dd8f769380107b3
+Merge: b8d0ed5 8b8f0ac
+Author: cYw <1147701986@qq.com>
+Date:   Sat May 14 17:08:34 2022 +0800
+
+    Merge remote-tracking branch 'origin/main'
+
+commit 8b8f0ac47b492144781da393b71aa669c8839747
+Author: 陈百铭 <957167412@qq.com>
+Date:   Sat May 14 17:03:20 2022 +0800
+
+    nav-Bar更新
+
+commit b8d0ed53c74657adb53d840d4b0d78788b1c8f5c
+Author: cYw <1147701986@qq.com>
+Date:   Fri May 13 21:51:58 2022 +0800
+
+    wo shi sha bi
+
+commit 73687d34f1c0e293b527bba57acf293d507e4797
+Author: nohesitate <20373441@buaa.edu.cn>
+Date:   Fri May 13 19:49:50 2022 +0800
+
+    import ArtPlayer component
+
+commit 4620a1e55d7a432eba4db2094bf235a4a92bec7f
+Author: 陈百铭 <957167412@qq.com>
+Date:   Fri May 13 17:35:20 2022 +0800
+
+    更改了NavBar在不同页面是否出现的判定
+
+commit ef58d36dca28e197d29f7389607169efd250cc1b
+Merge: 76af5a8 8d5b794
+Author: cYw <1147701986@qq.com>
+Date:   Fri May 13 17:14:32 2022 +0800
+
+    Merge remote-tracking branch 'origin/main'
+    
+    # Conflicts:
+    #       src/App.vue
+
+commit 76af5a8ceb8ffd7c6d155f8a7b4687565cd67fc8
+Author: cYw <1147701986@qq.com>
+Date:   Fri May 13 17:12:37 2022 +0800
+
+    wo shi sha bi
+
+commit 8d5b794927125062650ac3710ea8dc71f2a4098d
+Author: 陈百铭 <957167412@qq.com>
+Date:   Fri May 13 16:46:42 2022 +0800
+
+    算了app.vue还是先写上header吧
+
+commit b8083468c8d6b2a9a2f1bbfaa5a39b645c3a304f
+Author: 陈百铭 <957167412@qq.com>
+Date:   Fri May 13 16:42:48 2022 +0800
+
+    app.vue中删去header
+
+commit 171de7680f9af8c9117e3565fa4b7f32475d1c39
+Merge: 95bb91a 0b92146
+Author: cYw <1147701986@qq.com>
+Date:   Fri May 13 16:19:52 2022 +0800
+
+    Merge remote-tracking branch 'origin/main'
+
+commit 95bb91a1d3e0ccbefe0232ffe342f00205f4d749
+Author: cYw <1147701986@qq.com>
+Date:   Fri May 13 16:18:44 2022 +0800
+
+    wo shi sha bi
+
+commit 0b9214638e4644c169e9f343ac6b8c83bcde1e5c
+Merge: fb6615c 0c5bcac
+Author: 陈百铭 <957167412@qq.com>
+Date:   Fri May 13 16:05:09 2022 +0800
+
+    head.vue更新
+
+commit fb6615c763ba117a1ee691ae0510a0de6c0b9bbf
+Author: 陈百铭 <957167412@qq.com>
+Date:   Fri May 13 15:21:46 2022 +0800
+
+    默认头像
+
+commit 665c7f7d388466cd09ef3a62f855d32e488e6a3f
+Author: 陈百铭 <957167412@qq.com>
+Date:   Fri May 13 15:21:07 2022 +0800
+
+    默认头像
+
+commit 0c5bcac2b3c9fbbc533cabbc1178d990efc438e8
+Author: nohesitate <20373441@buaa.edu.cn>
+Date:   Fri May 13 12:22:36 2022 +0800
+
+    finish search bar
+
+commit 5067e6f27c6fdb259d6de4e3906d953fbe0cb1a6
+Author: nohesitate <20373441@buaa.edu.cn>
+Date:   Mon May 9 20:34:08 2022 +0800
+
+    update head
+
+commit 4841d0760e79c21d63a6bd9f4b4c2626a44bc3cb
+Author: 陈百铭 <957167412@qq.com>
+Date:   Mon May 9 19:44:55 2022 +0800
+
+    头部导航栏
+
+commit 47e8c885f35ab58d27c2357654032bdbe48ec750
+Author: nohesitate <20373441@buaa.edu.cn>
+Date:   Sun May 1 16:07:34 2022 +0800
+
+    router views
+
+commit f24538bb2cb0bfc7e051a98f79aa30c3f03ec7b3
+Author: nohesitate <20373441@buaa.edu.cn>
+Date:   Sun May 1 15:47:56 2022 +0800
+
+    init pilipili
+
+commit 8dcec6f55ec44c35128acbf64105c2ed2023ad71
+Author: 777xQcLLL <1147701986@qq.com>
+Date:   Sun May 1 15:33:41 2022 +0800
+
+    Create README.md
+
+commit 33b98a705dea81e9a45628f4899426f546f328cc
+Author: 777xQcLLL <1147701986@qq.com>
+Date:   Sun May 1 15:33:12 2022 +0800
+
+    Initial commit
