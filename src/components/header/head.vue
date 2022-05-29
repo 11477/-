@@ -19,7 +19,7 @@
       </div>
       <div class="right-entry">
         <div class="right-button">
-          <div class="login-button" @click="toLogin">登录</div>
+          <div class="login-button" v-if="!$store.state.islogin" @click="toLogin">登录</div>
           <img class="head-pic" v-if="$store.state.islogin" src="../../assets/avatar/head.jpeg" alt="banner">
         </div>
         <div class="right-button" @click="toMessage">
