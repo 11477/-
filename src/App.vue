@@ -7,6 +7,7 @@
 
 <script>
 import NavBar from '@/components/header/head.vue';
+import user from "@/store/user";
 export default {
   components: {
     // eslint-disable-next-line vue/no-unused-components

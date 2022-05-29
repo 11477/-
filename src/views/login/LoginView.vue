@@ -52,33 +52,39 @@ export default {
 
       self.$axios({
         method: 'post',
-        url: '/login/',
+        url: 'Weblogin/login/',
         data: formData,
       })
           .then(res => {
-            switch (res.data.status_code) {
-              case "2000":
-                location.reload();
+            switch (res.data.error) {
+              case 0:
+                // location.reload();
                 // 前端保存用户信息
+                this.$message.success("登录成功");
                 this.$store.dispatch('saveUserInfo', {user: {
-                    'email': this.form.username,
+                    'email': this.data.email,
                     'confirmed': true,
-                    'usertype': res.data.user_type,
                   }});
+                var curr = localStorage.getItem('preRoute');
+                if (curr == null) {
+                  this.$router.push('/index');
+                } else {
+                  this.$router.push({ path: curr });
+                }
                 break;
-              case "3001":
+              case 3001:
                 this.$message.error('请检查填写的内容！');
                 break;
-              case "4001":
+              case 4001:
                 this.$message.warning('用户已登录！');
                 break;
-              case "4002":
+              case 4002:
                 this.$message.error('用户名不存在！');
                 break;
-              case "4003":
+              case 4003:
                 this.$message.error('用户名或密码错误！');
                 break;
-              case "4004":
+              case 4004:
                 this.$message.warning('用户未通过邮件确认，请及时确认！');
                 this.$store.dispatch('saveUserInfo', {user: {
                     'username': this.form.username,
