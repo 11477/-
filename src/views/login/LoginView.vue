@@ -32,6 +32,7 @@
 </template>
 
 <script>
+
 export default {
   name: "LoginView.vue",
   data() {
@@ -62,15 +63,10 @@ export default {
                 // 前端保存用户信息
                 this.$message.success("登录成功");
                 this.$store.dispatch('saveUserInfo', {user: {
-                    'email': this.data.email,
+                    'email': this.form.email,
                     'confirmed': true,
                   }});
-                var curr = localStorage.getItem('preRoute');
-                if (curr == null) {
-                  this.$router.push('/index');
-                } else {
-                  this.$router.push({ path: curr });
-                }
+                  this.$router.push('/');
                 break;
               case 3001:
                 this.$message.error('请检查填写的内容！');

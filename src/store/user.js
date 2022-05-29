@@ -25,7 +25,7 @@ const user = {
     },
     actions: {
         saveUserInfo({ commit }, data) {
-            commit('$_setStorage', data)
+            commit('$_setStorage', data);
         },
         clearUserInfo({ commit }) {
             commit('$_removeStorage');
