@@ -1,10 +1,10 @@
 <template>
   <div id="video-history">
     <div @click="toVideo">
-      <img class="cover-in-video-history" src="../../assets/avatar/head.jpeg" alt="banner">
+      <img class="cover-in-video-history" src="../../assets/avatar/head.jpeg" alt="banner" style="cursor: pointer">
     </div>
     <div class="info-in-user-favor">
-      <div class="title-in-video-history" @click="toVideo">{{ videoTitle }}</div>
+      <div class="title-in-video-history" @click="toVideo" style="cursor: pointer">{{ videoTitle }}</div>
       <div style="color: grey; margin-bottom: 5px">上传时间: {{ videoDate }}</div>
       <div style="color: #444444">播放数: {{ viewNum }} 点赞数: {{ likeNum }}  收藏数: {{ favorNum }}  评论数: {{ commentNum }}</div>
     </div>

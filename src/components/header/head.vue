@@ -74,7 +74,7 @@ export default {
       console.log("search")
     },
     toMessage() {
-      console.log("message")
+      this.$router.push({path: '/login'})
     },
     toStore() {
       console.log("store")
