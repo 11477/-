@@ -125,6 +125,7 @@ export default {
     },
     logout() {
       this.$store.dispatch('clearUserInfo')
+      this.$router.push({path: '/'})
       location.reload()
     }
   },
