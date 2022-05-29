@@ -221,28 +221,30 @@ export default {
             data: formData,
           })
               .then(res => {
-                switch (res.data.status_code) {
-                  case "2000":
+                switch (res.data.error) {
+                  case 0:
                     this.$store.dispatch('saveUserInfo', {user: {
                         'username': this.ruleForm.username,
                         'confirmed': false,
-                        'usertype': '读者',
                       }});
                     this.$message.success('注册成功！');
-                    setTimeout(()=> {
-                      this.$router.push('/unverified_email');
-                    },1500);
                     break;
-                  case "3001":
+                  case 3001:
                     this.$message.warning('请检查填写的内容！');
                     break;
-                  case "4001":
+                  case 4001:
                     this.$message.warning('用户名已注册！');
                     break;
-                  case "4002":
+                  case 4002:
                     this.$message.error('邮箱已注册或不可用！');
                     break;
-                  case "4005":
+                  case 4003:
+                    this.$message.error('密码不符合规范！');
+                    break;
+                  case 4004:
+                    this.$message.error('两次密码不一致！');
+                    break;
+                  case 4005:
                     this.$message.error('邮件验证码发送失败，请检查邮箱是否填写正确！');
                     break;
                 }
