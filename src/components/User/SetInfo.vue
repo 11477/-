@@ -28,7 +28,7 @@
         </el-form-item>
         <el-form-item label="用户简介" prop="userIntro">
           <el-input type="textarea"
-                    v-model="form.userIntro"
+                    v-model="form.userInformation"
                     placeholder="请输入您的用户简介"
                     maxlength="100"
                     show-word-limit
@@ -45,9 +45,12 @@
         <el-form-item label="生日" prop="userBirthday">
           <el-date-picker type="date"
                           placeholder="请选择日期"
-                          placement="bottom"
                           v-model="form.userBirthday"
+                          value-format="yyyy-MM-dd"
                           style="float: left"></el-date-picker>
+        </el-form-item>
+        <el-form-item>
+          <el-button type="primary" @click="onSubmit">设置信息</el-button>
         </el-form-item>
       </el-form>
     </div>
@@ -55,21 +58,24 @@
 </template>
 
 <script>
+import user from "@/store/user";
+
 export default {
   name: "SetInfo",
   data(){
     return{
       form: {
         username: this.prevUsername,
-        userIntro: this.prevUserIntro,
-        userBirthday: this.prevBirthday,
-        userSex: this.prevSex
+        userInformation: this.prevUserIntro,
+        userBirthday: '',
+        userSex: this.prevSex,
+        userID: 0
       },
       formRule: {
         username:[
           {required: true, message:"请输入用户名", trigger: 'blur'}
         ],
-        userIntro:[
+        userInformation:[
           {required: false}
         ],
         userSex:[
@@ -85,7 +91,7 @@ export default {
     prevUsername:{},
     prevUserIntro:{},
     prevSex:{},
-    prevBirthday:{}
+    prevBirthday:{},
   },
   methods: {
     handleOpen(key, keyPath) {
@@ -93,7 +99,56 @@ export default {
     },
     handleClose(key, keyPath) {
       //console.log(key, keyPath);
-    }
+    },
+    onSubmit() {
+      //  console.log('submit!');
+      this.$refs.form.validate((valid)=>{
+            if(valid){
+              const userInfo = user.getters.getUser(user.state());
+              this.form.userID=userInfo.user.userID
+              // console.log(this.$qs.stringify(this.form))
+              this.$axios({
+                method: 'post',
+                url: 'Webhome/edit/',
+                data: this.$qs.stringify(this.form)
+              })
+                  .then(res => {
+                    //   console.log(res)
+                    switch (res.data.error) {
+                      case 0:
+                        this.$message.success('上传成功')
+                        location.reload()
+                        break;
+                      case 2001:
+                        this.$message.warning('上传失败！');
+                        console.log('请求方式错误')
+                        break;
+                      case 3001:
+                        this.$message.warning('上传失败！');
+                        console.log(this.form.userBirthday)
+                        console.log('表单信息错误')
+                        break;
+                      case 4001:
+                        this.$message.warning('用户不存在！');
+                        break;
+                      case 4002:
+                        this.$message.warning('用户未登录！');
+                        break;
+                      case 4003:
+                        this.$message.warning('用户名重复！');
+                        break;
+                    }
+                  })
+                  .catch(err => {
+                    console.log(err);
+                  })
+            }
+            else {
+              this.$message.error('信息不完整')
+            }
+          }
+      )
+    },
   }
 }
 </script>
