@@ -122,6 +122,7 @@
 
 <script>
 import avatar from "./AvatarComponent.vue";
+import user from "../../store/user"
 export default {
   name: "BrightComment",
   props: {
@@ -203,6 +204,7 @@ export default {
   },
   data() {
     return {
+      localUserID: 0,
       replyMap: [],
       buttonMap: [false],
       pBodyMap: [],
@@ -362,6 +364,7 @@ export default {
     // '$route':'routeChange'
   },
   created() {
+    this.localUserID= user.getters.getUser(user.state()).user.userID
     //生命周期函数
   },
   mounted() {

@@ -1,6 +1,6 @@
 <template>
-  <div v-title :data-title=this.title>
-    <UploadHead></UploadHead>
+  <div v-title :data-title=this.title style="position: absolute;margin-left: 100px">
+    <UploadHead style="width: 1300px"></UploadHead>
     <div class="welcome" >
       <el-container>
         <el-main>
@@ -15,7 +15,7 @@
             </span>
               </el-row>
               <el-row class="button-row">
-                <el-button type="primary" @click="toRegister">我要投稿</el-button>
+                <el-button type="primary" @click="handleUp">我要投稿</el-button>
               </el-row>
               <el-row class="data-row">
                 <el-col>
@@ -62,11 +62,13 @@
 
 <script>
 import UploadHead from "@/components/upload/UploadHead";
+import user from "@/store/user";
 export default {
   name: "UploadView",
   components: {UploadHead},
   data() {
     return {
+      isLogin: true,
       title: "创作中心",
       users: 0,
       uploaders: 0,
@@ -74,8 +76,16 @@ export default {
       videos: 0,
     };
   },
+  created() {
+    if(user.getters.getUser(user.state()).user.userID)
+      this.isLogin=true
+  },
   methods: {
-    toRegister() {
+    handleUp() {
+      if(this.isLogin){
+        this.$router.push('/upload/frame')
+      }
+      else
       this.$router.push('/register')
     },
     toHome() {
@@ -92,7 +102,6 @@ export default {
 }
 .welcome{
   height: 100%;
-  width: 100%;
   background-size: cover;
   position: absolute;
 }
@@ -101,7 +110,6 @@ export default {
   margin-top: 100px;
   margin-left: 120px;
   height: 400px;
-  width: 40%;
 }
 .welcome .msg{
   background-color: rgba(255, 255, 255, 0.88);

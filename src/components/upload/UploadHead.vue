@@ -20,15 +20,21 @@
 </template>
 
 <script>
+import user from "@/store/user";
+
 export default {
   name: "UploadHead",
   data() {
     return {
-      isLogin:true,
+      isLogin:false,
       title: "上传页面",
       userId: "nohesitate",
       avatarSrc: "https://cube.elemecdn.com/3/7c/3ea6beec64369c2642b92c6726f1epng.png"
     };
+  },
+  created() {
+    if(user.getters.getUser(user.state()).user.userID)
+      this.isLogin=true
   },
   methods: {
     handleSelect(key, keyPath) {
@@ -44,7 +50,7 @@ export default {
       this.$router.push({path:'/upload/home'})
     },
     toUser (){
-      this.$router.push({path:'/user'})
+      this.$router.push({path: '/user/'+user.getters.getUser(user.state()).user.userID})
     },
     //封面设置
     uploadPicture(name){

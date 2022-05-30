@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div style="position: absolute">
   <div v-if="showVideo" class="video-wrap" id="video-wrap">
     <div class="video-info" id="video-info">
       <div class="l-con" id="l-con">
@@ -421,7 +421,7 @@ export default {
 .video-comment {
   position: absolute;
   width: 1000px;
-  margin-left: 250px;
+  margin: auto 0;
 }
 .video-desc {
   position: relative;
@@ -547,7 +547,7 @@ export default {
 .video-wrap {
   max-width: 1984px;
   min-width: 988px;
-  margin: 0 auto;
+  margin-left: 250px;
   justify-content: center;
   background: #fff;
 }

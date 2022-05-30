@@ -71,6 +71,7 @@ export default {
 <style>
 
 .home{
+  position: absolute;
   background-image: url("../../assets/images/home-background.jpg");
   width: 100%;
   height: 800px;
@@ -102,7 +103,6 @@ export default {
 .video-box{
   display: flex;
   flex-wrap: wrap;
-  margin-bottom: auto;
   margin-left: 100px;
 }
 
@@ -113,6 +113,7 @@ export default {
 
 
 .channel-video{
+  width: 1450px;
   flex: 1;
   display: flex;
 }
@@ -124,7 +125,7 @@ export default {
   width: 80px;
   height: 455px;
   margin-left: 1400px;
-  margin-top: 100px;
+  margin-top: 50px;
   flex-flow: column;
   background-color: rgba(255,255,255,0.5);
   border-radius: 6px;

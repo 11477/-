@@ -1,6 +1,6 @@
 <template>
-  <div v-title :data-title=this.title>
-    <UploadHead></UploadHead>
+  <div v-title :data-title=this.title style="position: absolute;margin-left: 100px">
+    <UploadHead style="width: 1300px"></UploadHead>
     <div class="uploader-frame">
       <div class="video-form">
       <el-form ref="form" :model="form" label-width="80px" :rules="formRule">

@@ -86,7 +86,7 @@ export default {
 </script>
 <style scoped>
 .audit-tab{
-  width: 1500px;
+  width: 1450px;
 }
 .refresh{
   background-color: #00A1D6;
@@ -105,6 +105,7 @@ export default {
   cursor: pointer;
 }
 .AdminView {
+  position: absolute;
   display: flex;
 }
 .audit-videos{

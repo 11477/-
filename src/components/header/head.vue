@@ -147,6 +147,7 @@ export default {
                 location.reload()
                 break;
               default:
+                this.$store.dispatch('clearUserInfo')
                   this.$message.error(res.data.msg);}
     })}
   },
