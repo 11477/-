@@ -82,7 +82,7 @@ export default {
           {required: true}
         ],
         userBirthday: [
-          {required: false}
+          {required: true, message:"请选择生日", trigger: 'blur'}
         ]
       }
     }
@@ -106,6 +106,9 @@ export default {
             if(valid){
               const userInfo = user.getters.getUser(user.state());
               this.form.userID=userInfo.user.userID
+              if(this.form.userInformation===""){
+                this.form.userInformation = "这个人很懒，什么也没有写~"
+              }
               // console.log(this.$qs.stringify(this.form))
               this.$axios({
                 method: 'post',

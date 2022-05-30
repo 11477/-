@@ -180,7 +180,7 @@ export default {
               this.userSex = userMsg.userSex;
               this.userIntro = userMsg.userInformation;
               if(this.userIntro===""){
-                this.userIntroDisplay = "这个人很神秘，什么也没有写~"
+                this.userIntroDisplay = "这个人很懒，什么也没有写~"
               } else{
                 this.userIntroDisplay = this.userIntro
               }
