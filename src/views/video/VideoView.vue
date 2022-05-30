@@ -155,9 +155,7 @@ export default {
       commentPlaceholder: 'say something',
       commentNum:1,
       avatar:require('../../assets/logos/init-logo.png'),
-      commentList:[
-
-      ]
+      commentList:[]
     };
   },
   components: {
@@ -187,6 +185,11 @@ export default {
           this.upName=res.data.upName
           if(res.data.upDesc)
           this.upDesc=res.data.upDesc
+          this.videoView=res.data.videoPlayNum
+          this.commentList = eval(res.data.videoComment)
+          console.log(res.data.videoComment)
+          console.log(this.commentList)
+          this.commentNum=res.data.videoCommentNum
         }
     )
   },
@@ -195,10 +198,12 @@ export default {
       var commentForm = new FormData()
       const vid = this.$route.params.VideoID
       const uid = user.getters.getUser(user.state()).user.userID
-      commentForm.append("videoid",vid)
-      commentForm.append("userid",uid)
+      commentForm.append("videoID",vid)
+      commentForm.append("userID",uid)
       commentForm.append("comment",comment)
-      //console.log(commentForm.get("comment"))
+      console.log(commentForm.get("comment"))
+      console.log(commentForm.get("videoID"))
+      console.log(commentForm.get("userID"))
       this.$axios({
         method: 'post',
         url: '/VideoInteraction/comment/',
