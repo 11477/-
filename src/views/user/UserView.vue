@@ -66,7 +66,7 @@
         <VideoHistory/>
       </div>
       <div class="information" v-else-if="this.activeIndex==='7'">
-        info
+        <SetInfo></SetInfo>
       </div>
     </div>
   </div>
@@ -137,9 +137,10 @@ import VideoHistory from "@/components/User/VideoHistory";
 import UserFavor from "@/components/User/UserFavor";
 import MyVideo from "@/components/User/MyVideo";
 import user from "@/store/user";
+import SetInfo from "@/components/User/SetInfo";
 export default {
   name: "UserView",
-  components: {MyVideo, UserFavor, UserDisplay, UserBar, VideoHistory},
+  components: {SetInfo, MyVideo, UserFavor, UserDisplay, UserBar, VideoHistory},
   created() {
     const userInfo = user.getters.getUser(user.state());
     this.pageUserID = this.$route.params.userID;
@@ -151,6 +152,26 @@ export default {
     } else{
       this.hasLogin = false;
     }
+    const formData = new FormData();
+    formData.append("userID", this.loginUserID);
+    this.$axios({
+      method: 'post',
+      url: 'UserCommunication/enterhomepage/',
+      data: formData,
+    })
+        .then(res => {
+          switch (res.data.error) {
+            case 0:
+              console.log(res.data)
+              break;
+            case 2001:
+              this.$message.warning('用户信息加载失败！');
+              break;
+          }
+        })
+        .catch(err => {
+          console.log(err);
+        })
   },
   data() {
     return {
@@ -168,6 +189,7 @@ export default {
       favorNum: 66,
       likeNum: 78,
       userSex: "男",
+      avatarSrc:''
     }
   },
   methods:{
@@ -194,7 +216,7 @@ export default {
     },
     toInformation(){
       this.activeIndex = '7';
-    }
+    },
   }
 }
 </script>
