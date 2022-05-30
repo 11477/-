@@ -3,7 +3,7 @@
     <div class="video-card">
         <div class="video-cover">
           <div class="video-cover-img" @click="ToVideo">
-            <img src="../../assets/images/login_background.jpg" alt="视频封面"/>
+            <img :src=coverUrl alt="视频封面"/>
           </div>
           <div class="bottom-line">
             <div class="bottom-line-left">
@@ -41,6 +41,9 @@
 </template>
 
 <script>
+
+import user from "@/store/user";
+
 export default {
   // eslint-disable-next-line vue/multi-word-component-names
   name: 'VideoCover',
@@ -52,20 +55,78 @@ export default {
       videoTitle: "操作系统k48",
       uploaderName: "不知道捏",
       videoDate: "5-28",
+      coverUrl: "https://nohesitate-1312201606.cos.ap-beijing.myqcloud.com/VideoCover/1653828877544"
     }
   },
   props:{
     videoID:{
       type: Number,
-      default: 0,
+      default: 11,
     },
   },
   created() {
   },
   mounted() {
-    console.log(this.videoID)
+    const uid = user.getters.getUser(user.state()).user.userID
+    console.log("uid=",uid)
+    //console.log("wtf",this.videoID)
+    const vid = this.videoID
+    const dataForm = new FormData()
+    dataForm.append("videoID",vid.toString())
+    dataForm.append("userID",uid)
+    //console.log('?',dataForm.get("videoID"))
+    this.$axios({
+      method: 'post',
+      url: '/VideoManager/getVideoByID/',
+      data: dataForm,
+    })
+        .then(
+            res=>{
+                 //console.log(res.data)
+              if(res.data.error===0){
+                this.viewNum=res.data.videoPlayNum
+                this.videoTitle=res.data.videoTitle
+                this.commentNum=res.data.videoCommentNum
+                this.videoDate=res.data.uploadDate
+                this.uploaderName=res.data.upName
+                this.coverUrl=res.data.VideoCover
+                this.getVideoDuration(res.data.videoSrc)
+                }
+              else {
+                this.$message(res.data.msg)
+              }
+            }
+        )
   },
   methods:{
+    getVideoDuration(url){
+      const audioElement = new Audio(url);
+      console.log("auditelement",audioElement)
+      let result;
+      const self = this;
+      let tmp;
+      audioElement.addEventListener("loadedmetadata",function (){
+        result=audioElement.duration;
+        console.log("place1",result);
+        tmp=parseInt(result);
+        const h=Math.floor(tmp/(60*60));
+        const m=Math.floor((tmp%(60*60))/60);
+        const s=Math.floor(tmp%60);
+        if(h>0){
+          self.videoTime=h;
+          self.videoTime+=":";
+          self.videoTime+=m<10?'0'+m:m;
+          self.videoTime+=":";
+          self.videoTime+=s<10?'0+s':s;
+        }
+        else {
+          self.videoTime=m<10?'0'+m:m;
+          self.videoTime+=":";
+          self.videoTime+=s<10?'0'+s:s;
+        }
+        console.log(self.videoTime);
+      })
+    },
     ToVideo(){
       this.$router.push('/video/'+this.videoID);
     },
