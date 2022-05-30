@@ -74,29 +74,28 @@
           </div>
         </el-dialog>
       </div>
-      <div class="video-desc">
-        <div class="desc-info-open" v-if="this.descSpread">
-        {{videoDesc}}
-        </div>
-        <div class="desc-info" v-else>
+      <div class="video-desc" ref="videoDesc" @change="checkOverflow">
+        <div :class="descClass">
         {{videoDesc}}
         </div>
       </div>
+      <div v-if="descMayOverflow">
       <el-button size="mini" type="text" class="desc-shrink-button" @click="this.shrinkDesc" style="background-color: white;color: #505050" v-if="descSpread">
         收起
       </el-button>
       <el-button size="mini" type="text" class="desc-spread-button" @click="this.spreadDesc" style="background-color: white;color: #505050" v-else>
         展开
       </el-button>
+      </div>
     </div>
-    <comment class="video-comment"
+    <BrightComment  class="video-comment"
              :label="this.userLabel"
              :avatar="this.avatar"
              :commentList="this.commentList"
               :placeholder="this.commentPlaceholder"
              :authorID="this.loginUserID"
              @doSend="sendComment"
-              :commentNum="this.commentNum"></comment>
+              :commentNum="this.commentNum"></BrightComment>
   </div>
     <div v-else>
       <span>视频似乎不存在捏</span>
@@ -106,7 +105,7 @@
 
 <script>
 import ArtPlayer from "@/components/player/ArtPlayer.vue";
-import comment from 'bright-comment'
+import BrightComment from "@/components/comment/CommentComponent"
 import LikeBefore from "@/assets/icons/like-before.png";
 import LikeHover from "@/assets/icons/like-hover.png"
 import FavorBefore from "@/assets/icons/favor-before.png";
@@ -117,6 +116,8 @@ export default {
   name: "VideoView",
   data() {
     return {
+      descClass: "desc-info",
+      descMayOverflow: false,
       showVideo: true,
       loginUserID: 0,
       videoKey: 0,
@@ -126,7 +127,7 @@ export default {
       upDesc: "这个人的简介什么都没有写哦~",
       uploadDate: "",
       upAvatar: "https://nohesitate-1312201606.cos.ap-beijing.myqcloud.com/UserAvatar/mkm1.png",
-      videoDesc:"https://github.com/Jiangli531/Video-Share-Django",
+      videoDesc:"",
       isLiked: false,
       isFavored: false,
       descSpread: false,
@@ -169,7 +170,7 @@ export default {
         margin: "0",
       },
       userLabel: '',
-      commentPlaceholder: 'say something',
+      commentPlaceholder: '发送友好的评论吧~',
       commentNum:1,
       avatar:require('../../assets/logos/init-logo.png'),
       commentList:[]
@@ -177,7 +178,7 @@ export default {
   },
   components: {
     ArtPlayer,
-    comment,
+    BrightComment,
   },
   created() {
    // console.log(this.$route.params.VideoID)
@@ -195,7 +196,7 @@ export default {
     .then(
         res=>{
        //   console.log(res.data)
-          if(res.data.error==0){
+          if(res.data.error===0){
           this.videoTitle=res.data.videoTitle
           this.option.url=res.data.videoSrc
           this.uploadDate=res.data.uploadDate
@@ -220,8 +221,20 @@ export default {
           console.log(res.data.isLiked)
         }
     )
+    .finally(()=>{
+      const height = this.$refs.videoDesc.offsetHeight
+      console.log(height)
+      if(height===63){
+        this.descMayOverflow=true
+      }
+        }
+    )
   },
   methods: {
+    checkOverflow(){
+      console.log("change!")
+      console.log(this.videoDesc)
+    },
     sendComment(comment){
       var commentForm = new FormData()
       const vid = this.$route.params.VideoID
@@ -262,7 +275,7 @@ export default {
         data: likeForm
       })
           .then(res=>{
-            if(res.data.error==0){
+            if(res.data.error===0){
               this.isLiked=true
               this.likeNum++
             }
@@ -283,7 +296,7 @@ export default {
         data: likeForm
       })
           .then(res=>{
-            if(res.data.error==0){
+            if(res.data.error===0){
               this.isLiked=false
               this.likeNum--
             }
@@ -304,7 +317,7 @@ export default {
         data: favorForm
       })
       .then(res=>{
-        if(res.data.error==0){
+        if(res.data.error===0){
           this.isFavored=true
           this.favorNum++
         }
@@ -325,7 +338,7 @@ export default {
         data: favorForm
       })
           .then(res=>{
-            if(res.data.error==0){
+            if(res.data.error===0){
               this.isFavored=false
               this.favorNum--
             }
@@ -336,9 +349,11 @@ export default {
     },
     spreadDesc() {
       this.descSpread=true
+      this.descClass="desc-info-open"
     },
     shrinkDesc(){
       this.descSpread=false
+      this.descClass="desc-info"
     },
     onEnterLike(){
       //console.log("enter")
@@ -412,7 +427,8 @@ export default {
   color: #212121;
   letter-spacing: 0;
   line-height: 18px;
-  height: 63px;
+  height: auto;
+  max-height: 63px;
   width: 900px;
   text-align: left;
   overflow: hidden;
