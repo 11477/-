@@ -1,10 +1,11 @@
 <template>
-  <div class="user" v-if="playNum">
+  <div class="user" v-if="!isMine">
     <UserBar :username=username
              :userPortrait=userPortrait
-             :userInfo=userInfo
+             :userIntro=userIntro
              :userBirthday=userBirthday
-             :userSex=userSex></UserBar>
+             :userSex=userSex
+             :isMine="true"></UserBar>
     <div class="menu-box">
       <el-menu :default-active="activeIndex" class="el-menu-demo" mode="horizontal" @select="handleSelect">
         <el-menu-item index="1" @click="toVideo">我的视频</el-menu-item>
@@ -37,8 +38,8 @@
     <div class="content-area">
       <div class="video" v-if="this.activeIndex==='1'">
         <div class="sub-title">我的视频</div>
-        <MyVideo/>
-        <MyVideo/>
+        <MyVideo :isMine="true"></MyVideo>
+        <MyVideo :isMine="true"></MyVideo>
       </div>
       <div class="favor" v-else-if="this.activeIndex==='2'">
         <div class="sub-title">我的收藏</div>
@@ -69,12 +70,15 @@
       </div>
     </div>
   </div>
+
   <div v-else>
     <UserBar :username=username
              :userPortrait=userPortrait
-             :userInfo=userInfo
+             :userIntro=userIntro
              :userBirthday=userBirthday
-             :userSex=userSex></UserBar>
+             :userSex=userSex
+             :isMine="false"
+             :hasLogin=hasLogin></UserBar>
     <div class="menu-box">
       <el-menu :default-active="activeIndex" class="el-menu-demo" mode="horizontal" @select="handleSelect">
         <el-menu-item index="1" @click="toVideo">TA的视频</el-menu-item>
@@ -104,24 +108,23 @@
     <div class="content-area">
       <div class="video" v-if="this.activeIndex==='1'">
         <div class="sub-title">TA的视频</div>
-        <MyVideo/>
-        <MyVideo/>
+        <MyVideo :isMine="false" :hasLogin=hasLogin></MyVideo>
+        <MyVideo :isMine="false" :hasLogin=hasLogin></MyVideo>
       </div>
       <div class="favor" v-else-if="this.activeIndex==='2'">
         <div class="sub-title">TA的收藏</div>
-        <UserFavor/>
-        <UserFavor/>
+        <UserFavor :hasLogin=hasLogin></UserFavor>
+        <UserFavor :hasLogin=hasLogin></UserFavor>
       </div>
       <div class="follow" v-else-if="this.activeIndex==='3'">
         <div class="sub-title">TA的关注</div>
-        <UserDisplay/>
-        <UserDisplay/>
-        <UserDisplay/>
+        <UserDisplay :hasLogin=hasLogin></UserDisplay>
+        <UserDisplay :hasLogin=hasLogin></UserDisplay>
       </div>
       <div class="fans" v-else-if="this.activeIndex==='4'">
         <div class="sub-title">TA的粉丝</div>
-        <UserDisplay/>
-        <UserDisplay/>
+        <UserDisplay :hasLogin=hasLogin></UserDisplay>
+        <UserDisplay :hasLogin=hasLogin></UserDisplay>
       </div>
     </div>
   </div>
@@ -133,15 +136,32 @@ import UserDisplay from "@/components/User/UserDisplay";
 import VideoHistory from "@/components/User/VideoHistory";
 import UserFavor from "@/components/User/UserFavor";
 import MyVideo from "@/components/User/MyVideo";
+import user from "@/store/user";
 export default {
   name: "UserView",
   components: {MyVideo, UserFavor, UserDisplay, UserBar, VideoHistory},
+  created() {
+    const userInfo = user.getters.getUser(user.state());
+    this.pageUserID = this.$route.params.userID;
+    if(userInfo){
+      this.loginUserID = userInfo.user.userID;
+      if(this.loginUserID===this.pageUserID){
+        this.isMine = true;
+      }
+    } else{
+      this.hasLogin = false;
+    }
+  },
   data() {
     return {
       activeIndex: '1',
+      loginUserID: 0,
+      pageUserID: 0,
+      hasLogin: true,
+      isMine: false,
       username: "用户名",
       userPortrait: "../../assets/avatar/head.jpeg",
-      userInfo: "用户介绍",
+      userIntro: "用户介绍",
       userBirthday: "2020年1月1日",
       fansNum: 66,
       playNum: 0,

@@ -75,7 +75,6 @@ export default {
     var userInfo = user.getters.getUser(user.state())
     if (userInfo) {
       this.is_login = true
-      console.log('userID: ',userInfo.user.userID)
     }
   },
   methods:{
@@ -89,22 +88,37 @@ export default {
       console.log("search")
     },
     toMessage() {
-      this.$router.push({path: '/login'})
+      if(!this.is_login)
+        this.$router.push({path: '/login'})
+      else
+        this.$router.push({path: '/user/' + this.loginUserID})
     },
     toStore() {
-      console.log("store")
+      if(!this.is_login)
+        this.$router.push({path: '/login'})
+      else
+        this.$router.push({path: '/user/' + this.loginUserID})
     },
     toHistory() {
-      console.log("history")
+      if(!this.is_login)
+        this.$router.push({path: '/login'})
+      else
+        this.$router.push({path: '/user/' + this.loginUserID})
     },
     toFollow() {
-      console.log("follow")
+      if(!this.is_login)
+        this.$router.push({path: '/login'})
+      else
+        this.$router.push({path: '/user/' + this.loginUserID})
     },
     toLogin() {
       this.$router.push({path: '/login'})
     },
     upLoad() {
-      this.$router.push({path: '/upload/frame'})
+      if(!this.is_login)
+        this.$router.push({path: '/login'})
+      else
+        this.$router.push({path: '/upload/frame'})
     },
     toSpace() {
       this.$router.push({path: '/user/' + this.loginUserID})
@@ -135,7 +149,7 @@ export default {
 <style>
 #nav-bar {
   padding: 0 10% 0 10%;
-  height: 65px;
+  height: 61px;
 }
 .logo-pic {
   width: 150px;
@@ -145,7 +159,7 @@ export default {
   font-size: 17px;
 }
 .head-pic {
-  width: 45px;
+  width: 41px;
   margin-top: -5px;
   margin-right: 20px;
 }
