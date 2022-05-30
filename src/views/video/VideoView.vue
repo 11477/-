@@ -215,7 +215,7 @@ export default {
           this.isLiked=res.data.isLiked
           this.isFavored=res.data.isFavored}
           else {
-            this.showVideo=true
+            this.showVideo=false
           }
           this.loginUserID=user.getters.getUser(user.state()).user.userID
           console.log(res.data.isLiked)
