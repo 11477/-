@@ -4,31 +4,22 @@
       <img src="../../assets/icons/home-wel.png">
     </div>
     <div class="channel-video">
-      <div class="video-box">
-        <div class="line-1">
-          <VideoCover class="video-cover"></VideoCover>
-          <VideoCover class="video-cover"></VideoCover>
-          <VideoCover class="video-cover"></VideoCover>
-        </div>
-        <div class="line-1">
-          <VideoCover class="video-cover"></VideoCover>
-          <VideoCover class="video-cover"></VideoCover>
-          <VideoCover class="video-cover"></VideoCover>
-        </div>
+      <div class="video-box" >
+        <VideoCover :videoID=colum v-for="colum in auditVideoList" v-bind:key="colum"></VideoCover>
       </div>
       <div class="video-channel">
-        <a class="channel-link">知识</a>
-        <a class="channel-link">科技</a>
-        <a class="channel-link">资讯</a>
-        <a class="channel-link">生活</a>
-        <a class="channel-link">公益</a>
-        <a class="channel-link">音乐</a>
-        <a class="channel-link">舞蹈</a>
-        <a class="channel-link">美食</a>
-        <a class="channel-link">运动</a>
-        <a class="channel-link">影视</a>
-        <a class="channel-link">历史</a>
-        <a class="channel-link">娱乐</a>
+        <a class="channel-link" @click="getNewVideo('knowledge')">知识</a>
+        <a class="channel-link" @click="getNewVideo('science')">科技</a>
+        <a class="channel-link" @click="getNewVideo('info')">资讯</a>
+        <a class="channel-link" @click="getNewVideo('life')">生活</a>
+        <a class="channel-link" @click="getNewVideo('charity')">公益</a>
+        <a class="channel-link" @click="getNewVideo('music')">音乐</a>
+        <a class="channel-link" @click="getNewVideo('dance')">舞蹈</a>
+        <a class="channel-link" @click="getNewVideo('food')">美食</a>
+        <a class="channel-link" @click="getNewVideo('sport')">运动</a>
+        <a class="channel-link" @click="getNewVideo('movie')">影视</a>
+        <a class="channel-link" @click="getNewVideo('history')">历史</a>
+        <a class="channel-link" @click="getNewVideo('entertainment')">娱乐</a>
       </div>
     </div>
 
@@ -40,6 +31,41 @@ import VideoCover from "@/components/videopage/videopage";
 export default {
   name: 'HomeView',
   components: {VideoCover},
+  data(){
+    return{
+      auditVideoList:[
+      ],
+    }
+  },
+  created() {
+    const requestForm = new FormData()
+    requestForm.append('Type','Any')
+    this.$axios({
+      method: 'post',
+      url: '/VideoManager/getVideoIDByCondition/',
+      data: requestForm
+    })
+        .then(res=>{
+          console.log(res)
+          this.auditVideoList=res.data.videoID_list
+        })
+  },
+  methods:{
+    getNewVideo(param){
+      console.log(param)
+      const requestForm = new FormData()
+      requestForm.append('Type',param)
+      this.$axios({
+        method: 'post',
+        url: '/VideoManager/getVideoIDByCondition/',
+        data: requestForm
+      })
+          .then(res=>{
+            console.log(res)
+            this.auditVideoList=res.data.videoID_list
+          })
+    },
+  }
 }
 </script>
 <style>
@@ -74,8 +100,10 @@ export default {
 }
 
 .video-box{
-  margin-top:50px;
-  margin-left: 40px;
+  display: flex;
+  flex-wrap: wrap;
+  margin-bottom: auto;
+  margin-left: 100px;
 }
 
 .line-1{
@@ -90,14 +118,13 @@ export default {
 }
 
 .video-channel{
-  display:flex;
-  position: relative;
+  position: absolute;
   text-align:center;
   top:130px;
-  left: 50px;
   width: 80px;
   height: 455px;
-  margin-right: 30px;
+  margin-left: 1400px;
+  margin-top: 100px;
   flex-flow: column;
   background-color: rgba(255,255,255,0.5);
   border-radius: 6px;

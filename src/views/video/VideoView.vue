@@ -74,7 +74,7 @@
           </div>
         </el-dialog>
       </div>
-      <div class="video-desc" ref="videoDesc" @change="checkOverflow">
+      <div class="video-desc" ref="videoDesc">
         <div :class="descClass">
         {{videoDesc}}
         </div>
@@ -152,7 +152,29 @@ export default {
         autoplay: false,
         pip: true,
         setting: true,
-        loop: true,
+        settings: [
+          {
+          html: '循环播放',
+            selector: [
+              {
+                html: '关闭',
+              },
+              {
+                html: '开启',
+              }
+            ],
+            onSelect: function (item){
+            const self = this
+              if(item.html=='关闭'){
+                self.option.loop=false
+              }
+              else {
+                self.option.loop=true
+              }
+            }
+          }
+        ],
+        loop: false,
         flip: true,
         playbackRate: true,
         aspectRatio: true,
@@ -184,10 +206,11 @@ export default {
    // console.log(this.$route.params.VideoID)
     const vid = this.$route.params.VideoID
     const uid = user.getters.getUser(user.state()).user.userID
+    //const uid=0
     const dataForm = new FormData()
     dataForm.append("videoID",vid)
     dataForm.append("userID",uid)
-    //console.log('?',dataForm.get("videoID"))
+   // console.log('?',dataForm.get("videoID"))
     this.$axios({
       method: 'post',
       url: '/VideoManager/getVideoByID/',
@@ -195,7 +218,7 @@ export default {
     })
     .then(
         res=>{
-       //   console.log(res.data)
+          console.log(res.data)
           if(res.data.error===0){
           this.videoTitle=res.data.videoTitle
           this.option.url=res.data.videoSrc
@@ -223,7 +246,7 @@ export default {
     )
     .finally(()=>{
       const height = this.$refs.videoDesc.offsetHeight
-      console.log(height)
+     // console.log(height)
       if(height===63){
         this.descMayOverflow=true
       }
@@ -231,10 +254,6 @@ export default {
     )
   },
   methods: {
-    checkOverflow(){
-      console.log("change!")
-      console.log(this.videoDesc)
-    },
     sendComment(comment){
       var commentForm = new FormData()
       const vid = this.$route.params.VideoID
@@ -400,8 +419,9 @@ export default {
   margin-top: 16px;
 }
 .video-comment {
-  width: 900px;
-  margin: 0 auto;
+  position: absolute;
+  width: 1000px;
+  margin-left: 250px;
 }
 .video-desc {
   position: relative;

@@ -49,13 +49,13 @@ export default {
   name: 'VideoCover',
   data(){
     return {
-      viewNum: 5674,
-      commentNum: 31,
-      videoTime: "22:21",
-      videoTitle: "操作系统k48",
-      uploaderName: "不知道捏",
-      videoDate: "5-28",
-      coverUrl: "https://nohesitate-1312201606.cos.ap-beijing.myqcloud.com/VideoCover/1653828877544"
+      viewNum: 22,
+      commentNum: 11,
+      videoTime: "05:31",
+      videoTitle: "no title",
+      uploaderName: "syk",
+      videoDate: "2004-07-22",
+      coverUrl: "https://nohesitate-1312201606.cos.ap-beijing.myqcloud.com/VideoCover/default-cover.png"
     }
   },
   props:{
@@ -68,7 +68,6 @@ export default {
   },
   mounted() {
     const uid = user.getters.getUser(user.state()).user.userID
-    console.log("uid=",uid)
     //console.log("wtf",this.videoID)
     const vid = this.videoID
     const dataForm = new FormData()
@@ -101,13 +100,11 @@ export default {
   methods:{
     getVideoDuration(url){
       const audioElement = new Audio(url);
-      console.log("auditelement",audioElement)
       let result;
       const self = this;
       let tmp;
       audioElement.addEventListener("loadedmetadata",function (){
         result=audioElement.duration;
-        console.log("place1",result);
         tmp=parseInt(result);
         const h=Math.floor(tmp/(60*60));
         const m=Math.floor((tmp%(60*60))/60);
@@ -124,7 +121,6 @@ export default {
           self.videoTime+=":";
           self.videoTime+=s<10?'0'+s:s;
         }
-        console.log(self.videoTime);
       })
     },
     ToVideo(){
@@ -143,10 +139,7 @@ export default {
   width: 400px;
   height: 250px;
   text-align: center;
-  margin-left: 15px;
-  margin-right: 15px;
-  margin-top: 20px;
-  margin-bottom: 20px;
+  margin: 20px 15px;
 }
 
 .video-cover{

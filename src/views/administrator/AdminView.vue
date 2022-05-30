@@ -1,29 +1,18 @@
 <template>
   <div class="AdminView">
-      <el-tabs class="audit-tab" :tab-position="tabPosition" :stretch="true" type="border-card">
+      <el-tabs class="audit-tab" :tab-position="tabPosition" :stretch="true" type="border-card" @tab-click="handleTabClick">
         <el-tab-pane label="视频列表">
-          <div class="audit-videos" v-for="colum in 2" v-bind:key="colum">
-            <div v-for="row in 3" v-bind:key="row">
-              <VideoCover :videoID="16"></VideoCover>
-              <div class="audit-info">
-                <el-button type="danger" class="audit-button" size="mini">删除</el-button>
-              </div>
-            </div>
+          <div class="audit-videos">
+              <VideoCover :videoID=colum v-for="colum in auditVideoList" v-bind:key="colum"></VideoCover>
           </div>
         </el-tab-pane>
         <el-tab-pane label="投诉处理">
-          <div class="audit-videos" v-for="colum in 2" v-bind:key="colum">
-            <div v-for="row in 3" v-bind:key="row">
-              <VideoCover :videoID="9"></VideoCover>
-              <div class="audit-info">
-                <div class="audit-reason">投诉理由 : {{reason}}</div>
-                <el-button type="primary" class="audit-button" size="mini">处理</el-button>
-              </div>
-            </div>
+          <div class="audit-videos">
+            <VideoCover :videoID=colum v-for="colum in auditVideoList" v-bind:key="colum"></VideoCover>
           </div>
         </el-tab-pane>
       </el-tabs>
-    <div class="refresh">
+    <div class="refresh" @click="reloadList()">
       换一批视频
     </div>
   </div>
@@ -42,21 +31,57 @@ export default {
       AdministratorID: 1,
       AdministratorName: "nohesitate",
       AuditResult:  true,
+      stateNow: "any",
     }
   },
- /* created() {
-    const requestForm = new FormData()
-    requestForm.append('Type','Any')
-    this.$axios({
-      method: 'post',
-      url: '/VideoManager/getVideoIDByCondition/',
-      data: requestForm
-    })
-    .then(res=>{
-      console.log(res)
-    })
-  },*/
-  methods: {}
+  created() {
+    this.getAny()
+  },
+  methods: {
+    reloadList(){
+      console.log(this.stateNow)
+      if(this.stateNow==="any"){
+        this.getAny()
+      }
+      else {
+        this.getAudit()
+      }
+    },
+    handleTabClick(tab){
+      if(tab.label==="视频列表"){
+        this.getAny()
+        this.stateNow="any"
+      }
+      else {
+        this.getAudit()
+        this.stateNow="audit"
+      }
+    },
+    getAny(){
+      const requestForm = new FormData()
+      requestForm.append('Type','Any')
+      this.$axios({
+        method: 'post',
+        url: '/VideoManager/getVideoIDByCondition/',
+        data: requestForm
+      })
+          .then(res=>{
+            this.auditVideoList=res.data.videoID_list
+          })
+    },
+    getAudit(){
+      const requestForm = new FormData()
+      requestForm.append('Type','Audit')
+      this.$axios({
+        method: 'post',
+        url: '/VideoManager/getVideoIDByCondition/',
+        data: requestForm
+      })
+          .then(res=>{
+            this.auditVideoList=res.data.videoID_list
+          })
+    }
+  }
 }
 </script>
 <style scoped>
@@ -71,8 +96,8 @@ export default {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 70px;
-  font-size: 50px;
+  width: 50px;
+  font-size: 40px;
   color: white;
 }
 .refresh:hover{
@@ -84,13 +109,14 @@ export default {
 }
 .audit-videos{
   display: flex;
+  flex-wrap: wrap;
   margin-bottom: auto;
 }
 
 .audit-info {
   display: flex;
   text-align: left;
-  margin-left: 20px;
+  margin-left: 10px;
   margin-top: 30px;
   font-size: 14px;
 }
