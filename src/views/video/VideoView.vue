@@ -165,12 +165,7 @@ export default {
             ],
             onSelect: function (item){
             const self = this
-              if(item.html=='关闭'){
-                self.option.loop=false
-              }
-              else {
-                self.option.loop=true
-              }
+              self.option.loop = item.html !== '关闭';
             }
           }
         ],
@@ -205,8 +200,12 @@ export default {
   created() {
    // console.log(this.$route.params.VideoID)
     const vid = this.$route.params.VideoID
-    const uid = user.getters.getUser(user.state()).user.userID
-    //const uid=0
+    let uid;
+    const userInfo = user.getters.getUser(user.state())
+    if(userInfo){
+    uid=userInfo.user.userID
+    }else {
+       uid=0}
     const dataForm = new FormData()
     dataForm.append("videoID",vid)
     dataForm.append("userID",uid)
@@ -240,8 +239,11 @@ export default {
           else {
             this.showVideo=false
           }
-          this.loginUserID=user.getters.getUser(user.state()).user.userID
-          console.log(res.data.isLiked)
+          const userInfo = user.getters.getUser(user.state())
+          if(userInfo){
+            this.loginUserID=userInfo.user.userID
+          }else {
+            this.loginUserID=0}
         }
     )
     .finally(()=>{
@@ -254,10 +256,20 @@ export default {
     )
   },
   methods: {
+    toLogin(){
+      this.$router.push({path: '/login'})
+    },
     sendComment(comment){
-      var commentForm = new FormData()
+      let commentForm = new FormData();
       const vid = this.$route.params.VideoID
-      const uid = user.getters.getUser(user.state()).user.userID
+      let uid;
+      const userInfo = user.getters.getUser(user.state())
+      if(userInfo){
+        uid=userInfo.user.userID
+      }else {
+        uid=0}
+      if(uid===0){this.toLogin()}
+      else {
       commentForm.append("videoID",vid)
       commentForm.append("userID",uid)
       commentForm.append("comment",comment)
@@ -276,7 +288,7 @@ export default {
           this.$message.error(res.data.msg)
         }
         location.reload()
-      })
+      })}
      // console.log(comment)
     },
     getInstance(art) {
@@ -285,9 +297,15 @@ export default {
     like() {
       const likeForm = new FormData
       const vid = this.$route.params.VideoID
-      const uid = user.getters.getUser(user.state()).user.userID
+      let uid;
+      const userInfo = user.getters.getUser(user.state())
+      if(userInfo){
+        uid=userInfo.user.userID
+      }else {
+        uid=0}
       likeForm.append("videoID",vid)
       likeForm.append("userID",uid)
+      if(uid!==0){
       this.$axios({
         method: 'post',
         url: '/VideoInteraction/like/',
@@ -301,12 +319,22 @@ export default {
             else {
               this.$message.error("点赞失败")
             }
-          })
+          })}
+      else {
+        this.toLogin()
+      }
     },
     cancelLike() {
       const likeForm = new FormData
       const vid = this.$route.params.VideoID
-      const uid = user.getters.getUser(user.state()).user.userID
+      let uid;
+      const userInfo = user.getters.getUser(user.state())
+      if(userInfo){
+        uid=userInfo.user.userID
+      }else {
+        uid=0}
+      if(uid===0){this.toLogin()}
+      else {
       likeForm.append("videoID",vid)
       likeForm.append("userID",uid)
       this.$axios({
@@ -322,12 +350,19 @@ export default {
             else {
               this.$message.error("取消点赞失败")
             }
-          })
+          })}
     },
     favor() {
       const favorForm = new FormData
       const vid = this.$route.params.VideoID
-      const uid = user.getters.getUser(user.state()).user.userID
+      let uid;
+      const userInfo = user.getters.getUser(user.state())
+      if(userInfo){
+        uid=userInfo.user.userID
+      }else {
+        uid=0}
+      if(uid===0){this.toLogin()}
+      else {
       favorForm.append("videoID",vid)
       favorForm.append("userID",uid)
       this.$axios({
@@ -343,12 +378,19 @@ export default {
         else {
           this.$message.error("收藏失败")
         }
-      })
+      })}
     },
     cancelFavor(){
       const favorForm = new FormData
       const vid = this.$route.params.VideoID
-      const uid = user.getters.getUser(user.state()).user.userID
+      let uid;
+      const userInfo = user.getters.getUser(user.state())
+      if(userInfo){
+        uid=userInfo.user.userID
+      }else {
+        uid=0}
+      if(uid===0){this.toLogin()}
+      else {
       favorForm.append("videoID",vid)
       favorForm.append("userID",uid)
       this.$axios({
@@ -364,7 +406,7 @@ export default {
             else {
               this.$message.error("取消收藏失败")
             }
-          })
+          })}
     },
     spreadDesc() {
       this.descSpread=true
@@ -400,6 +442,14 @@ export default {
       this.$refs.reportForm.resetFields()
     },
     submitReportForm() {
+      let uid;
+      const userInfo = user.getters.getUser(user.state())
+      if(userInfo){
+        uid=userInfo.user.userID
+      }else {
+        uid=0}
+      if(uid===0){this.toLogin()}
+      else {
       this.$refs.reportForm.validate((valid) => {
         if (valid) {
           this.$message.info("已收到投诉")
@@ -408,7 +458,7 @@ export default {
         } else {
           console.log('error submit!!');
         }
-      });
+      });}
     },
   },
 }

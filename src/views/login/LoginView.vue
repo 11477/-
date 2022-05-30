@@ -66,7 +66,12 @@ export default {
                     'userID':res.data.userID,
                   }});
                 console.log()
-                this.$router.push('/');
+                var curr = localStorage.getItem('preRoute');
+                if (curr == null) {
+                  this.$router.push('/index');
+                } else {
+                  this.$router.push({ path: curr });
+                }
                 break;
               case 3001:
                 this.$message.error('表单验证失败！');

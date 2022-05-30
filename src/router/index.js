@@ -94,5 +94,10 @@ const router = new VueRouter({
   base: process.env.BASE_URL,
   routes
 })
-
+router.beforeEach((to, from, next) => {
+  if (to.path === '/login') {
+    localStorage.setItem("preRoute", router.currentRoute.fullPath);
+  }
+  next()
+})
 export default router

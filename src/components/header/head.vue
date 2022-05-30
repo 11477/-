@@ -148,7 +148,8 @@ export default {
                 break;
               default:
                 this.$store.dispatch('clearUserInfo')
-                  this.$message.error(res.data.msg);}
+                  this.$message.error(res.data.msg);
+            location.reload()}
     })}
   },
 }

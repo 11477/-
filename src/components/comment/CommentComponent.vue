@@ -364,7 +364,11 @@ export default {
     // '$route':'routeChange'
   },
   created() {
-    this.localUserID= user.getters.getUser(user.state()).user.userID
+    const userInfo = user.getters.getUser(user.state())
+    if(userInfo){
+      this.localUserID=userInfo.user.userID
+    }else {
+      this.localUserID=0}
     //生命周期函数
   },
   mounted() {
