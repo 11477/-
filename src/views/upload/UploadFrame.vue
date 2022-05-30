@@ -13,8 +13,15 @@
               :file-list="videoList"
               accept="video/mp4, video/mkv"
               :limit="1">
-            <el-button size="small" plain style="width: 100px">点击上传</el-button>
-            <span slot="tip" class="el-upload__tip">&emsp;只能上传mp4文件，且不超过300MB</span>
+            <el-progress
+                :text-inside="true"
+                :stroke-width="26"
+                v-if="showPercent"
+                style="width: 300px" :percentage="percent" />
+            <el-button v-else size="small" plain style="width: 100px">点击上传</el-button>
+            <span slot="tip" class="el-upload__tip">&emsp;只能上传mp4文件，且不超过300MB
+              <el-button v-if="showReload" size="small" plain style="width: 100px">重新上传</el-button>
+            </span>
           </el-upload>
         </el-form-item>
         <el-form-item label="视频标题" prop="videoTitle">
@@ -83,6 +90,17 @@
           <el-button type="primary" @click="onSubmit">立即投稿</el-button>
         </el-form-item>
       </el-form>
+        <el-dialog
+            title="上传成功！"
+            :visible.sync="dialogVisible"
+            width="30%"
+            :before-close="backToHome">
+          <span>您要继续上传视频吗？</span>
+          <span slot="footer" class="dialog-footer">
+    <el-button @click="backToHome">回到主页</el-button>
+    <el-button type="primary" @click="uploadAgain">继续上传</el-button>
+  </span>
+        </el-dialog>
       </div>
     </div>
   </div>
@@ -110,6 +128,12 @@ export default {
           {required: true, message: '请上传封面', trigger: 'blur'}
         ],
       },
+      //上传完成弹框
+      dialogVisible: false,
+      //进度条相关
+      showPercent: false,
+      percent: 0,
+      showReload: false,
       //裁切图片参数
       coverImg: "",
       cropperModel:false,
@@ -157,6 +181,13 @@ export default {
       this.cropperName = name;
       this.cropperModel = true;
     },
+    //视频上传成功对话框
+    backToHome(){
+      this.$router.push({path: '/'})
+    },
+    uploadAgain(){
+      location.reload()
+    },
     //图片上传成功后
     handleUploadImgSuccess (cover){
       //console.log(cover.type);
@@ -198,6 +229,7 @@ export default {
                 switch (res.data.error) {
                   case '0':
                     this.$message.success('上传成功')
+                      this.dialogVisible=true
                     break;
                   default:
                     this.$message.error(res.data.msg);
@@ -218,7 +250,11 @@ export default {
         Region: 'ap-beijing',
         Key: 'Video/'+request.file.lastModified.toString(),
         StorageClass: 'STANDARD',
-        Body: request.file // 上传文件对象
+        Body: request.file, // 上传文件对象
+          //进度条
+        onProgress: (params) => {
+          this.percent = params.percent * 100
+        }
       }, (err, data) => {
         console.log(err || data)
         // 上传成功之后
@@ -227,6 +263,7 @@ export default {
           this.form.videoPath='https://' + data.Location
           // this.imageUrl = `https:${data.Location}`
           this.$message.success('视频上传成功');
+          this.showReload=true
         }
       })
     },
@@ -253,6 +290,9 @@ export default {
       } else if (!isLt2M) {
         this.$message.error('上传视频文件大小不能超过 300MB!');
       }
+    if(isLt2M && isVideo){
+      this.showPercent=true
+    }
       return isLt2M && isVideo;
     },
   }

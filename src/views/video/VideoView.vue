@@ -55,19 +55,19 @@
           <el-button type="primary" size="small" @click=" reportVisible=true" >投诉稿件</el-button>
         </div>
         <el-dialog title="稿件投诉" :visible.sync="reportVisible">
-          <el-form :model="reportForm" ref="reportForm">
-            <el-form-item label="">
-              <el-radio-group v-model="reportForm.resource" prop="reportReason">
-                <el-radio label="违法违纪" name="type"></el-radio>
-                <el-radio label="低俗内容" name="type"></el-radio>
-                <el-radio label="暴力血腥" name="type"></el-radio>
-                <el-radio label="人身攻击" name="type"></el-radio>
+          <el-form :model="reportForm" ref="reportForm" :rules="rules">
+            <el-form-item label="" prop="reportReason">
+              <el-radio-group v-model="reportForm.reportReason" >
+                <el-radio label="违法违纪"></el-radio>
+                <el-radio label="低俗内容"></el-radio>
+                <el-radio label="暴力血腥"></el-radio>
+                <el-radio label="人身攻击"></el-radio>
               </el-radio-group>
             </el-form-item>
           </el-form>
           <div slot="footer" class="dialog-footer">
-            <el-button @click="cancelReport">取 消</el-button>
-            <el-button type="primary" @click="reportVisible = false">确 定</el-button>
+            <el-button @click="cancelReportForm">取 消</el-button>
+            <el-button type="primary" @click="submitReportForm">确 定</el-button>
           </div>
         </el-dialog>
       </div>
@@ -114,8 +114,8 @@ export default {
       videoTitle: "你的名字",
       videoView: 114514,
       upName: "nohesitate",
-      upDesc: "不为所动，做最好的自己",
-      uploadDate: "2022年5月28日",
+      upDesc: "这个人的简介什么都没有写哦~",
+      uploadDate: "",
       upAvatar: "https://nohesitate-1312201606.cos.ap-beijing.myqcloud.com/UserAvatar/mkm1.png",
       videoDesc:"https://github.com/Jiangli531/Video-Share-Django",
       isLiked: false,
@@ -126,15 +126,12 @@ export default {
       reportVisible: false,
       formLabelWidth: '120px',
       reportForm:{
-      name: '',
-          region: '',
-          date1: '',
-          date2: '',
-          delivery: false,
-          type: [],
-          resource: '',
-          desc: ''
-    },
+          reportReason:'',
+      },
+      rules: {
+        reportReason: [
+          { required: true, message: '请选择投诉理由', trigger: 'blur' }]
+      },
       option: {
         url: "https://nohesitate-1312201606.cos.ap-beijing.myqcloud.com/Video/1605246838000",
         title: "Your name",
@@ -183,12 +180,13 @@ export default {
           console.log(res)
           this.videoTitle=res.data.videoTitle
           this.option.url=res.data.videoSrc
+          this.uploadDate=res.data.uploadDate
           //this.commentList=res.data.videoComment
           this.videoKey=1
           this.videoDesc=res.data.videoDesc
           this.upName=res.data.upName
+          if(res.data.upDesc)
           this.upDesc=res.data.upDesc
-
         }
     )
   },
@@ -248,13 +246,25 @@ export default {
     this.favorImg=FavorBefore
     },
     resetForm(formName) {
-      //console.log('nani')
+      console.log('nani')
+      console.log(formName)
       this.$refs[formName].resetFields()
     },
-    cancelReport(){
+    cancelReportForm(){
       this.reportVisible=false
-      this.resetForm('reportForm')
-    }
+      this.$refs.reportForm.resetFields()
+    },
+    submitReportForm() {
+      this.$refs.reportForm.validate((valid) => {
+        if (valid) {
+          this.$message.info("已收到投诉")
+          this.reportVisible=false
+          this.$refs.reportForm.resetFields()
+        } else {
+          console.log('error submit!!');
+        }
+      });
+    },
   },
 }
 </script>
@@ -359,7 +369,7 @@ export default {
 }
 .up-info .up-info-right{
   float: left;
-  margin-left: 15px;
+  margin-left: 5px;
 }
 .up-info .up-info-desc {
   margin-top: 4px;
