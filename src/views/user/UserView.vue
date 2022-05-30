@@ -1,5 +1,5 @@
 <template>
-  <div class="user" v-if="!isMine">
+  <div class="user" v-if="isMine">
     <UserBar :username=username
              :userPortrait=userPortrait
              :userIntro=userIntro
@@ -143,7 +143,7 @@ export default {
   components: {SetInfo, MyVideo, UserFavor, UserDisplay, UserBar, VideoHistory},
   created() {
     const userInfo = user.getters.getUser(user.state());
-    this.pageUserID = this.$route.params.userID;
+    this.pageUserID = eval(this.$route.params.UserID);
     if(userInfo){
       this.loginUserID = userInfo.user.userID;
       if(this.loginUserID===this.pageUserID){
@@ -152,8 +152,15 @@ export default {
     } else{
       this.hasLogin = false;
     }
+    /*
+    console.log('loginID:')
+    console.log(this.loginUserID)
+    console.log('pageID')
+    console.log(this.pageUserID)
+    console.log(this.isMine)
+    */
     const formData = new FormData();
-    formData.append("userID", this.loginUserID);
+    formData.append("enteredUserID", this.loginUserID);
     this.$axios({
       method: 'post',
       url: 'UserCommunication/enterhomepage/',
@@ -162,10 +169,34 @@ export default {
         .then(res => {
           switch (res.data.error) {
             case 0:
-              console.log(res.data)
+              console.log('请求成功');
+              // eslint-disable-next-line no-case-declarations
+              const userMsg = JSON.parse(res.data.msg_list)[0];
+              //console.log(userMsg);
+              this.username = userMsg.username;
+              this.userSex = userMsg.userSex;
+              if(userMsg.userInformation===""){
+                this.userIntro = "这个人很神秘，什么也没有写~"
+              } else{
+                this.userIntro = userMsg.userInformation
+              }
+              if(userMsg.userBirthday==="None"){
+                this.userBirthday = "未知"
+              } else{
+                this.userBirthday = userMsg.userBirthday
+              }
+              this.fansNum = userMsg.fansNum;
+              this.playNum = userMsg.playNum;
+              this.favorNum = userMsg.concernsNum;
+              this.likeNum = userMsg.likeNum;
               break;
             case 2001:
               this.$message.warning('用户信息加载失败！');
+              console.log('请求方式错误')
+              break;
+            case 4001:
+              this.$message.warning('用户不存在！');
+              console.log('用户不存在')
               break;
           }
         })
@@ -180,15 +211,15 @@ export default {
       pageUserID: 0,
       hasLogin: true,
       isMine: false,
-      username: "用户名",
+      username: "",
       userPortrait: "../../assets/avatar/head.jpeg",
-      userIntro: "用户介绍",
-      userBirthday: "2020年1月1日",
+      userIntro: "",
+      userBirthday: "",
       fansNum: 66,
-      playNum: 0,
-      favorNum: 66,
-      likeNum: 78,
-      userSex: "男",
+      playNum: 78,
+      favorNum: 56,
+      likeNum: 75,
+      userSex: "",
       avatarSrc:''
     }
   },
