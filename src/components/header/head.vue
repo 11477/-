@@ -75,6 +75,7 @@ export default {
     var userInfo = user.getters.getUser(user.state())
     if (userInfo) {
       this.is_login = true
+      console.log('userID: ',userInfo.user.userID)
     }
   },
   methods:{
@@ -109,9 +110,24 @@ export default {
       this.$router.push({path: '/user/' + this.loginUserID})
     },
     logout() {
-      this.$store.dispatch('clearUserInfo')
-      location.reload()
-    }
+      this.$axios(
+          {
+            method: 'get',
+            url: '/Weblogin/logout/'
+          }
+      )
+          .then(res => {
+            switch (res.data.error) {
+              case 0:
+                // location.reload();
+                // 前端保存用户信息
+                this.$store.dispatch('clearUserInfo')
+                this.$message.success("登出成功");
+                location.reload()
+                break;
+              default:
+                  this.$message.error(res.data.msg);}
+    })}
   },
 }
 </script>
@@ -119,7 +135,7 @@ export default {
 <style>
 #nav-bar {
   padding: 0 10% 0 10%;
-  height: 61px;
+  height: 65px;
 }
 .logo-pic {
   width: 150px;

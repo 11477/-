@@ -65,6 +65,7 @@ export default {
                     'confirmed': true,
                     'userID':res.data.userID,
                   }});
+                console.log()
                 this.$router.push('/');
                 break;
               case 3001:

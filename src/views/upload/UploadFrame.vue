@@ -92,12 +92,13 @@
 import UploadHead from "@/components/upload/UploadHead";
 import CropperImage from "@/components/imageCropper/ImageCropper";
 import qs from "qs"
+import user from "@/store/user";
 // 下面的代码是固定写法
 const COS = require('cos-js-sdk-v5')
 // 填写自己腾讯云cos中的key和id (密钥)
 const cosImg = new COS({
-  SecretId: 'AKIDZy81dy2pLZWCbjZ8QRBftpVu1rQiiRt4', // 身份识别ID
-  SecretKey: 'uXx6yZsvhBOJxKQFo55nEOHtEI4ZmiMj' // 身份秘钥
+  SecretId: '***', // 身份识别ID
+  SecretKey: '***' // 身份秘钥
 })
 
 export default {
@@ -129,7 +130,7 @@ export default {
         videoCoverPath: '',
         videoPart: '',
         videoDesc: '',
-        uploaderID: '',
+        uploaderID: 0,
         videoUpTime: '',
       },
       //表单规则
@@ -159,9 +160,9 @@ export default {
     },
     //图片上传成功后
     handleUploadImgSuccess (cover){
-      console.log(cover.type);
-      let file = new window.File([cover], "1145514", {type:cover.type})
-      console.log(file)
+      //console.log(cover.type);
+      let file = new window.File([cover], Date.now(), {type:cover.type})
+     // console.log(file)
       cosImg.putObject({
         Bucket: 'nohesitate-1312201606',
         Region: 'ap-beijing',
@@ -172,7 +173,7 @@ export default {
         console.log(err || data)
         // 上传成功之后
         if (data.statusCode === 200) {
-          console.log(data)
+       //   console.log(data)
           this.form.videoCoverPath='https://' + data.Location
           this.$message.success('封面上传成功');
           // this.imageUrl = `https:${data.Location}`
@@ -181,18 +182,20 @@ export default {
       this.cropperModel=false
     },
     onSubmit() {
-      console.log('submit!');
+    //  console.log('submit!');
       this.$refs.form.validate((valid)=>{
         if(valid){
-      this.form.uploaderID=2
+          var userInfo = user.getters.getUser(user.state())
+      this.form.uploaderID=userInfo.user.userID
       this.form.videoUpTime=Date()
-          console.log('VideoManager/uploadvideo/')
+         // console.log(this.$qs.stringify(this.form))
           this.$axios({
             method: 'post',
             url: '/VideoManager/uploadvideo/',
-            data: this.form,
+            data: this.$qs.stringify(this.form)
           })
               .then(res => {
+             //   console.log(res)
                 switch (res.data.error) {
                   case '0':
                     this.$message.success('上传成功')
@@ -206,11 +209,11 @@ export default {
         else {
           this.$message.error('信息不完整')
         }
-      console.log(this.form)}
+    }
       )
     },
     uploadVideo(request){
-      console.log(request)
+    //  console.log(request)
       cosImg.putObject({
         Bucket: 'nohesitate-1312201606',
         Region: 'ap-beijing',
@@ -221,7 +224,7 @@ export default {
         console.log(err || data)
         // 上传成功之后
         if (data.statusCode === 200) {
-          console.log(data)
+      //    console.log(data)
           this.form.videoPath='https://' + data.Location
           // this.imageUrl = `https:${data.Location}`
           this.$message.success('视频上传成功');

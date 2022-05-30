@@ -79,7 +79,7 @@ export default {
   display: flex;
   text-align: left;
   margin-left: 20px;
-  margin-top: 60px;
+  margin-top: 30px;
   font-size: 14px;
 }
 .audit-reason{
