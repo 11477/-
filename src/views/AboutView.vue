@@ -1,22 +1,59 @@
 <template>
-  <div class="about">
-    <UploadImg @uploadAvatarSuccess="getInput" :value="avatarSrc"></UploadImg>
+  <div>
+    <Artplayer @get-instance="getInstance" :option="option" :style="style" />
+    <h1>Test</h1>
+    <h1>Test</h1>
+    <h1>Test</h1>
+    <h1>Test</h1>
+    <h1>Test</h1>
+    <h1>Test</h1>
+    <h1>Test</h1>
+    <h1>Test</h1>
+    <h1>Test</h1>
+    <h1>Test</h1>
   </div>
 </template>
+
 <script>
-import UploadImg from "@/components/upload/AvatarUpload";
+import Artplayer from '../components/player/ArtPlayer';
+
 export default {
-  components: {UploadImg},
-  data(){
-    return{
-      avatarSrc:''
-    }
+  data() {
+    return {
+      option: {
+        url: "https://nohesitate-1312201606.cos.ap-beijing.myqcloud.com/Video/1605246838000",
+        title: "Your name",
+        volume: 0.5,
+        pip: true,
+        autoMini: true,
+        setting: true,
+        loop: true,
+        flip: true,
+        playbackRate: true,
+        aspectRatio: true,
+        fullscreen: true,
+        fullscreenWeb: true,
+        subtitleOffset: true,
+        mutex: true,
+        backdrop: true,
+        playsInline: true,
+        autoPlayback: true,
+        hotkey: true
+      },
+      style: {
+        width: '600px',
+        height: '400px',
+        margin: '60px auto 0',
+      },
+    };
+  },
+  components: {
+    Artplayer,
   },
   methods: {
-    getInput(msg){
-      console.log(msg.avatarUrl)
-    }
-  }
-}
-
+    getInstance(art) {
+      console.log(art);
+    },
+  },
+};
 </script>
