@@ -3,7 +3,7 @@
 </template>
 
 <script>
-import Artplayer from "artplayer";
+import Artplayer from 'artplayer';
 
 export default {
   data() {
@@ -24,7 +24,7 @@ export default {
     });
 
     this.$nextTick(() => {
-      this.$emit("get-instance", this.instance);
+      this.$emit('get-instance', this.instance);
     });
   },
   beforeUnmount() {
