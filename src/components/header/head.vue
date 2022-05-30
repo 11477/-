@@ -10,7 +10,10 @@
       <div class="searchBar" v-show="!($route.path==='/search')">
         <form id="nav-searchForm" class style="border-radius: 8px">
           <div class="nav-search-content">
-            <input class="nav-search-input" type="text" placeholder="请输入关键词搜索" v-model="input" @keyup.enter="searchContent">
+            <input class="nav-search-input" type="text" placeholder="请输入关键词搜索"
+                   v-model="input"
+                   ref="searchContent"
+                   @keyup.enter="searchContent" >
           </div>
           <div class="nav-search-button" @click="searchContent">
             <i class="el-icon-search"></i>
@@ -85,7 +88,11 @@ export default {
       console.log("select")
     },
     searchContent() {
-      console.log("search")
+      console.log(this.$refs.searchContent.value)
+      const content = this.$refs.searchContent.value
+      if(content){
+        this.$router.push({path: '/search', query: {searchContent: content}})
+      }
     },
     toMessage() {
       if(!this.is_login)

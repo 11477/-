@@ -34,7 +34,7 @@
       </div>
     </div>
     <div class="player">
-      <ArtPlayer @get-instance="getInstance" :option="option" :style="style" />
+      <ArtPlayer @get-instance="getInstance" :option="option" :style="style" :key="videoKey"/>
       <div class="interact">
         <div class="interact-button">
           <img src="../../assets/icons/like-after.png" class="button-icon" alt="liked" v-if="this.isLiked"
@@ -104,17 +104,19 @@ import LikeBefore from "@/assets/icons/like-before.png";
 import LikeHover from "@/assets/icons/like-hover.png"
 import FavorBefore from "@/assets/icons/favor-before.png";
 import FavorHover from "@/assets/icons/favor-hover.png"
+import user from "@/store/user";
 
 export default {
   name: "VideoView",
   data() {
     return {
+      videoKey: 0,
       videoTitle: "你的名字",
       videoView: 114514,
       upName: "nohesitate",
       upDesc: "不为所动，做最好的自己",
       uploadDate: "2022年5月28日",
-      upAvatar: "https://nohesitate-1312201606.cos.ap-beijing.myqcloud.com/1653807191450  ",
+      upAvatar: "https://nohesitate-1312201606.cos.ap-beijing.myqcloud.com/UserAvatar/mkm1.png",
       videoDesc:"https://github.com/Jiangli531/Video-Share-Django",
       isLiked: false,
       isFavored: false,
@@ -134,7 +136,7 @@ export default {
           desc: ''
     },
       option: {
-        url: "https://artplayer.org/assets/sample/video.mp4",
+        url: "https://nohesitate-1312201606.cos.ap-beijing.myqcloud.com/Video/1605246838000",
         title: "Your name",
         volume: 0.5,
         autoMini: true,
@@ -157,26 +159,7 @@ export default {
       commentNum:1,
       avatar:require('../../assets/logos/init-logo.png'),
       commentList:[
-        {
-          id:2,
-          commentUser:{
-            id:9,
-            nickName:'花非花',
-            avatar:''
-          },
-          content:"日你妈,退钱",
-          createDate:'2019-9-23 17:36:02',
-        },
-        {
-          id:3,
-          commentUser:{
-            id:6,
-            nickName:'李宗钊',
-            avatar:''
-          },
-          content:"钝角",
-          createDate:'2021-9-23 17:36:02',
-        },
+
       ]
     };
   },
@@ -185,14 +168,56 @@ export default {
     comment,
   },
   created() {
-    console.log(this.$route.params.VideoID)
+   // console.log(this.$route.params.VideoID)
+    const vid = this.$route.params.VideoID
+    const dataForm = new FormData()
+    dataForm.append("videoID",vid)
+    //console.log('?',dataForm.get("videoID"))
+    this.$axios({
+      method: 'post',
+      url: '/VideoManager/getVideoByID/',
+      data: dataForm,
+    })
+    .then(
+        res=>{
+          console.log(res)
+          this.videoTitle=res.data.videoTitle
+          this.option.url=res.data.videoSrc
+          //this.commentList=res.data.videoComment
+          this.videoKey=1
+          this.videoDesc=res.data.videoDesc
+          this.upName=res.data.upName
+          this.upDesc=res.data.upDesc
+
+        }
+    )
   },
   methods: {
     sendComment(comment){
-      console.log(comment)
+      var commentForm = new FormData()
+      const vid = this.$route.params.VideoID
+      const uid = user.getters.getUser(user.state()).user.userID
+      commentForm.append("videoid",vid)
+      commentForm.append("userid",uid)
+      commentForm.append("comment",comment)
+      //console.log(commentForm.get("comment"))
+      this.$axios({
+        method: 'post',
+        url: '/VideoInteraction/comment/',
+        data: commentForm,
+      })
+      .then(res=>{
+        if(res.data.error===0){
+          this.$message.success(res.data.msg)
+        }else {
+          this.$message.error(res.data.msg)
+        }
+        location.reload()
+      })
+     // console.log(comment)
     },
     getInstance(art) {
-      console.log(art)
+     // console.log(art)
     },
     changeLike() {
       this.isLiked=!this.isLiked
@@ -207,23 +232,23 @@ export default {
       this.descSpread=false
     },
     onEnterLike(){
-      console.log("enter")
-      console.log(this.$route.params)
+      //console.log("enter")
+      //console.log(this.$route.params)
       this.likeImg=LikeHover
     },
     onLeaveLike(){
-      console.log("leave")
+      //console.log("leave")
       this.likeImg=LikeBefore
     },
     onEnterFavor(){
-      console.log("enter")
+      //console.log("enter")
       this.favorImg=FavorHover
     },
     onLeaveFavor(){
     this.favorImg=FavorBefore
     },
     resetForm(formName) {
-      console.log('nani')
+      //console.log('nani')
       this.$refs[formName].resetFields()
     },
     cancelReport(){

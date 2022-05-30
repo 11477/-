@@ -91,14 +91,13 @@
 <script>
 import UploadHead from "@/components/upload/UploadHead";
 import CropperImage from "@/components/imageCropper/ImageCropper";
-import qs from "qs"
 import user from "@/store/user";
 // 下面的代码是固定写法
 const COS = require('cos-js-sdk-v5')
 // 填写自己腾讯云cos中的key和id (密钥)
 const cosImg = new COS({
-  SecretId: '***', // 身份识别ID
-  SecretKey: '***' // 身份秘钥
+  SecretId: 'AKIDZy81dy2pLZWCbjZ8QRBftpVu1rQiiRt4', // 身份识别ID
+  SecretKey: 'uXx6yZsvhBOJxKQFo55nEOHtEI4ZmiMj' // 身份秘钥
 })
 
 export default {
@@ -185,8 +184,8 @@ export default {
     //  console.log('submit!');
       this.$refs.form.validate((valid)=>{
         if(valid){
-          var userInfo = user.getters.getUser(user.state())
-      this.form.uploaderID=userInfo.user.userID
+          const userInfo = user.getters.getUser(user.state());
+          this.form.uploaderID=userInfo.user.userID
       this.form.videoUpTime=Date()
          // console.log(this.$qs.stringify(this.form))
           this.$axios({
@@ -233,17 +232,17 @@ export default {
     },
     beforeVideoUpload(file) {
       const filename = file.name;
-      var suffix = '';
-      var isVideo = false;
+      let suffix = '';
+      let isVideo = false;
       const isLt2M = file.size / 1024 / 1024 < 300;
       try {
-        var flieArr = filename.split('.');
+        const flieArr = filename.split('.');
         suffix = flieArr[flieArr.length - 1];
       } catch (err) {
         suffix = '';
       }
-      var videoList = ['mp4', 'mkv'];
-      var judge = videoList.some(function (item) {
+      const videoList = ['mp4', 'mkv'];
+      const judge = videoList.some(function (item) {
         return item === suffix;
       });
       if (judge) {
@@ -286,37 +285,7 @@ export default {
 .video-uploader .el-upload:hover {
   border-color: #409EFF;
 }
-.video-uploader-icon {
-  font-size: 28px;
-  color: #8c939d;
-  width: 178px;
-  height: 178px;
-  line-height: 178px;
-  text-align: center;
-}
-.video-cover {
-  width: 178px;
-  height: 178px;
-  display: block;
-}
-.upload-list-cover{
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  padding: 0 40px;
-  align-items: center;
-  background: rgba(0,0,0,.6);
-  opacity: 0;
-  transition: opacity 1s;
-}
-.cover_icon {
-  font-size: 30px;
-}
+
 .upload-btn{
   display: -webkit-box;
   display: -ms-flexbox;

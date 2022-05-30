@@ -1,6 +1,6 @@
 <template>
   <div class="about">
-    <UploadImg @input="getInput" :value="avatarSrc"></UploadImg>
+    <UploadImg @uploadAvatarSuccess="getInput" :value="avatarSrc"></UploadImg>
   </div>
 </template>
 <script>
@@ -14,8 +14,7 @@ export default {
   },
   methods: {
     getInput(msg){
-      this.avatarSrc=msg
-      console.log('avatarSrc:',this.avatarSrc)
+      console.log(msg.avatarUrl)
     }
   }
 }

@@ -5,7 +5,11 @@
         <div class="searchView-search-button">
           <i class="el-icon-search"></i>
         </div>
-        <input class="search-input-content" type="text" placeholder="输入关键字搜索" v-model="input2" @keyup.enter="searchContent">
+        <input class="search-input-content" type="text"
+               :placeholder=placeHolder
+               v-model="input2"
+               ref="searchContent"
+               @keyup.enter="searchContent">
         <el-button type="primary" icon="el-icon-search" @click="searchContent">搜索</el-button>
       </div>
     </div>
@@ -25,11 +29,33 @@ export default {
   data() {
     return {
       input2: '',
-      activeIndex: '1'
+      activeIndex: '1',
+      placeHolder: '请输入关键词搜索'
     }
+  },
+  created() {
+    const searchForm = new FormData()
+    if(this.$route.query.searchContent){
+    console.log(1)
+    searchForm.append("key",this.$route.query.searchContent)
+    console.log(searchForm.get("key"))
+    this.$axios({
+      method: 'post',
+      url: '/Websurf/search/',
+      data: searchForm
+    })
+    .then(res=>{
+      console.log(res)
+      this.$message.success(res.data.error)
+    })}
   },
   methods: {
     searchContent() {
+      const content = this.$refs.searchContent.value
+      if(content){
+        this.$router.push({path: '/search', query: {searchContent: content}})
+        location.reload()
+      }
     },
     handleSelect(key, keyPath) {
       console.log(key, keyPath);
