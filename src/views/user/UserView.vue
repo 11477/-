@@ -2,7 +2,7 @@
   <div class="user" v-if="isMine">
     <UserBar :username=username
              :userPortrait=userPortrait
-             :userIntro=userIntro
+             :userIntro=userIntroDisplay
              :userBirthday=userBirthday
              :userSex=userSex
              :isMine="true"></UserBar>
@@ -66,7 +66,10 @@
         <VideoHistory/>
       </div>
       <div class="information" v-else-if="this.activeIndex==='7'">
-        <SetInfo></SetInfo>
+        <SetInfo :prev-sex="userSex"
+                 :prev-user-intro="userIntro"
+                 :prev-username="username"
+                 :prev-birthday="userBirthday"></SetInfo>
       </div>
     </div>
   </div>
@@ -169,16 +172,17 @@ export default {
         .then(res => {
           switch (res.data.error) {
             case 0:
-              console.log('请求成功');
+              console.log('用户主页请求成功');
               // eslint-disable-next-line no-case-declarations
               const userMsg = JSON.parse(res.data.msg_list)[0];
               //console.log(userMsg);
               this.username = userMsg.username;
               this.userSex = userMsg.userSex;
-              if(userMsg.userInformation===""){
-                this.userIntro = "这个人很神秘，什么也没有写~"
+              this.userIntro = userMsg.userInformation;
+              if(this.userIntro===""){
+                this.userIntroDisplay = "这个人很神秘，什么也没有写~"
               } else{
-                this.userIntro = userMsg.userInformation
+                this.userIntroDisplay = this.userIntro
               }
               if(userMsg.userBirthday==="None"){
                 this.userBirthday = "未知"
@@ -213,6 +217,7 @@ export default {
       isMine: false,
       username: "",
       userPortrait: "../../assets/avatar/head.jpeg",
+      userIntroDisplay: "",
       userIntro: "",
       userBirthday: "",
       fansNum: 66,

@@ -60,10 +60,10 @@ export default {
   data(){
     return{
       form: {
-        username: '',
-        userIntro: '',
-        userBirthday: '',
-        userSex: ''
+        username: this.prevUsername,
+        userIntro: this.prevUserIntro,
+        userBirthday: this.prevBirthday,
+        userSex: this.prevSex
       },
       formRule: {
         username:[
