@@ -227,7 +227,7 @@ export default {
               .then(res => {
              //   console.log(res)
                 switch (res.data.error) {
-                  case '0':
+                  case 0:
                     this.$message.success('上传成功')
                       this.dialogVisible=true
                     break;

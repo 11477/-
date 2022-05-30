@@ -44,6 +44,18 @@ export default {
       AuditResult:  true,
     }
   },
+  created() {
+    const requestForm = new FormData()
+    requestForm.append('Type','Any')
+    this.$axios({
+      method: 'post',
+      url: '/VideoManager/getVideoIDByCondition/',
+      data: requestForm
+    })
+    .then(res=>{
+      console.log(res)
+    })
+  },
   methods: {}
 }
 </script>

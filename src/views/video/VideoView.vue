@@ -1,5 +1,6 @@
 <template>
-  <div class="video-wrap" id="video-wrap">
+  <div>
+  <div v-if="showVideo" class="video-wrap" id="video-wrap">
     <div class="video-info" id="video-info">
       <div class="l-con" id="l-con">
         <h1 class="video-title" id="video-title" title="???">
@@ -27,7 +28,7 @@
               {{upDesc}}
             </div>
             <div class="subscribe">
-              <el-button size="mini">+ 关注</el-button>
+              <el-button size="mini" style="width: 200px">+ 关注</el-button>
             </div>
           </div>
         </div>
@@ -38,18 +39,20 @@
       <div class="interact">
         <div class="interact-button">
           <img src="../../assets/icons/like-after.png" class="button-icon" alt="liked" v-if="this.isLiked"
-               @click="changeLike">
+               @click="cancelLike">
           <img :src="this.likeImg" class="button-icon" alt="not liked" v-else
-               @click="changeLike"
+               @click="like"
                @mouseenter="onEnterLike"
                @mouseleave="onLeaveLike">
+          {{likeNum}}
         </div>
         <div class="interact-button">
-         <img src="../../assets/icons/favor-after.png" class="button-icon" alt="favored" v-if="this.isFavored" @click="changeFavor">
+         <img src="../../assets/icons/favor-after.png" class="button-icon" alt="favored" v-if="this.isFavored" @click="cancelFavor">
          <img :src="this.favorImg" width="50px" class="button-icon" alt="not favored" v-else
-              @click="changeFavor"
+              @click="favor"
               @mouseenter="onEnterFavor"
               @mouseleave="onLeaveFavor">
+          {{favorNum}}
         </div>
         <div class="report">
           <el-button type="primary" size="small" @click=" reportVisible=true" >投诉稿件</el-button>
@@ -91,9 +94,13 @@
              :avatar="this.avatar"
              :commentList="this.commentList"
               :placeholder="this.commentPlaceholder"
-             :authorID="9"
+             :authorID="this.loginUserID"
              @doSend="sendComment"
               :commentNum="this.commentNum"></comment>
+  </div>
+    <div v-else>
+      <span>视频似乎不存在捏</span>
+    </div>
   </div>
 </template>
 
@@ -110,6 +117,8 @@ export default {
   name: "VideoView",
   data() {
     return {
+      showVideo: true,
+      loginUserID: 0,
       videoKey: 0,
       videoTitle: "你的名字",
       videoView: 114514,
@@ -121,7 +130,9 @@ export default {
       isLiked: false,
       isFavored: false,
       descSpread: false,
+      likeNum: 0,
       likeImg: LikeBefore,
+      favorNum: 0,
       favorImg: FavorBefore,
       reportVisible: false,
       formLabelWidth: '120px',
@@ -165,8 +176,10 @@ export default {
   created() {
    // console.log(this.$route.params.VideoID)
     const vid = this.$route.params.VideoID
+    const uid = user.getters.getUser(user.state()).user.userID
     const dataForm = new FormData()
     dataForm.append("videoID",vid)
+    dataForm.append("userID",uid)
     //console.log('?',dataForm.get("videoID"))
     this.$axios({
       method: 'post',
@@ -175,7 +188,8 @@ export default {
     })
     .then(
         res=>{
-          console.log(res)
+       //   console.log(res.data)
+          if(res.data.error==0){
           this.videoTitle=res.data.videoTitle
           this.option.url=res.data.videoSrc
           this.uploadDate=res.data.uploadDate
@@ -187,9 +201,17 @@ export default {
           this.upDesc=res.data.upDesc
           this.videoView=res.data.videoPlayNum
           this.commentList = eval(res.data.videoComment)
-          console.log(res.data.videoComment)
-          console.log(this.commentList)
           this.commentNum=res.data.videoCommentNum
+          this.upAvatar=res.data.upAvatar
+          this.likeNum=res.data.videoLikeNum
+          this.favorNum=res.data.videoFavorNum
+          this.isLiked=res.data.isLiked
+          this.isFavored=res.data.isFavored}
+          else {
+            this.showVideo=true
+          }
+          this.loginUserID=user.getters.getUser(user.state()).user.userID
+          console.log(res.data.isLiked)
         }
     )
   },
@@ -222,11 +244,89 @@ export default {
     getInstance(art) {
      // console.log(art)
     },
-    changeLike() {
-      this.isLiked=!this.isLiked
+    like() {
+      const likeForm = new FormData
+      const vid = this.$route.params.VideoID
+      const uid = user.getters.getUser(user.state()).user.userID
+      likeForm.append("videoID",vid)
+      likeForm.append("userID",uid)
+      this.$axios({
+        method: 'post',
+        url: '/VideoInteraction/like/',
+        data: likeForm
+      })
+          .then(res=>{
+            if(res.data.error==0){
+              this.isLiked=true
+              this.likeNum++
+            }
+            else {
+              this.$message.error("点赞失败")
+            }
+          })
     },
-    changeFavor() {
-      this.isFavored=!this.isFavored
+    cancelLike() {
+      const likeForm = new FormData
+      const vid = this.$route.params.VideoID
+      const uid = user.getters.getUser(user.state()).user.userID
+      likeForm.append("videoID",vid)
+      likeForm.append("userID",uid)
+      this.$axios({
+        method: 'post',
+        url: '/VideoInteraction/cancellike/',
+        data: likeForm
+      })
+          .then(res=>{
+            if(res.data.error==0){
+              this.isLiked=false
+              this.likeNum--
+            }
+            else {
+              this.$message.error("取消点赞失败")
+            }
+          })
+    },
+    favor() {
+      const favorForm = new FormData
+      const vid = this.$route.params.VideoID
+      const uid = user.getters.getUser(user.state()).user.userID
+      favorForm.append("videoID",vid)
+      favorForm.append("userID",uid)
+      this.$axios({
+        method: 'post',
+        url: '/VideoInteraction/favourites/',
+        data: favorForm
+      })
+      .then(res=>{
+        if(res.data.error==0){
+          this.isFavored=true
+          this.favorNum++
+        }
+        else {
+          this.$message.error("收藏失败")
+        }
+      })
+    },
+    cancelFavor(){
+      const favorForm = new FormData
+      const vid = this.$route.params.VideoID
+      const uid = user.getters.getUser(user.state()).user.userID
+      favorForm.append("videoID",vid)
+      favorForm.append("userID",uid)
+      this.$axios({
+        method: 'post',
+        url: '/VideoInteraction/cancalfavourites/',
+        data: favorForm
+      })
+          .then(res=>{
+            if(res.data.error==0){
+              this.isFavored=false
+              this.favorNum--
+            }
+            else {
+              this.$message.error("取消收藏失败")
+            }
+          })
     },
     spreadDesc() {
       this.descSpread=true
@@ -251,8 +351,8 @@ export default {
     this.favorImg=FavorBefore
     },
     resetForm(formName) {
-      console.log('nani')
-      console.log(formName)
+     // console.log('nani')
+     // console.log(formName)
       this.$refs[formName].resetFields()
     },
     cancelReportForm(){
