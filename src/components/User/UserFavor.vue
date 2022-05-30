@@ -12,7 +12,7 @@
         </div>
         <el-button style="background: #00aeec; color: white" slot="reference">已收藏</el-button>
       </el-popover>
-      <el-button @click="hasFavored=true" v-else> + 收藏</el-button>
+      <el-button @click="changeFavor" v-else> + 收藏</el-button>
     </div>
   </div>
 </template>
@@ -32,6 +32,15 @@ export default {
   props:{
     hasLogin:{
       default: true
+    }
+  },
+  methods:{
+    changeFavor() {
+      if(this.hasLogin){
+        this.hasFavored = true;
+      }else {
+        this.$router.push({path: '/login'});
+      }
     }
   }
 }

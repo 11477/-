@@ -14,7 +14,7 @@
         </div>
         <el-button style="background: #00aeec; color: white" slot="reference">已关注</el-button>
       </el-popover>
-      <el-button @click="hasFollowed=true" v-else> + 关注</el-button>
+      <el-button @click="changeFollow" v-else> + 关注</el-button>
     </div>
   </div>
 </template>
@@ -43,6 +43,13 @@ export default {
   methods:{
     toUser(){
       this.$router.push('/user/'+this.userID);
+    },
+    changeFollow() {
+      if(this.hasLogin){
+        this.hasFollowed = true;
+      }else {
+        this.$router.push({path: '/login'});
+      }
     }
   }
 }

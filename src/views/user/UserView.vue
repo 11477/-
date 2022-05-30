@@ -1,5 +1,5 @@
 <template>
-  <div class="user" v-if="isMine">
+  <div class="user" v-if="!isMine">
     <UserBar :username=username
              :userPortrait=userPortrait
              :userIntro=userIntro
@@ -77,7 +77,8 @@
              :userIntro=userIntro
              :userBirthday=userBirthday
              :userSex=userSex
-             :isMine="false"></UserBar>
+             :isMine="false"
+             :hasLogin=hasLogin></UserBar>
     <div class="menu-box">
       <el-menu :default-active="activeIndex" class="el-menu-demo" mode="horizontal" @select="handleSelect">
         <el-menu-item index="1" @click="toVideo">TA的视频</el-menu-item>
