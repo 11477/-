@@ -72,11 +72,15 @@ export default {
 
 .home{
   position: absolute;
-  background-image: url("../../assets/images/home-background.jpg");
+  background: url("../../assets/images/home-background.jpg") no-repeat;
   width: 100%;
   height: 800px;
   overflow-x:hidden;
   text-align: center;
+  background-size: cover;
+  background-color: #464646;
+  background-attachment: fixed;
+  background-position: center center;
 }
 
 .img-box{
