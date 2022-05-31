@@ -139,7 +139,6 @@ export default {
   display: inline-block;
   box-sizing: content-box;
   margin-top: 10px;
-  margin-left: 9px;
   width: 60px;
   height: 25px;
   border: 1px solid rgb(241,242,243);
