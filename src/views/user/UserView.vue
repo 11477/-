@@ -38,8 +38,10 @@
     <div class="content-area">
       <div class="video" v-if="this.activeIndex==='1'">
         <div class="sub-title">我的视频</div>
-        <MyVideo :isMine="true"></MyVideo>
-        <MyVideo :isMine="true"></MyVideo>
+        <MyVideo :isMine="true"
+                 :videoID="video.videoID"
+                 v-for="video in this.videoList" v-bind:key="video.videoID"></MyVideo>
+
       </div>
       <div class="favor" v-else-if="this.activeIndex==='2'">
         <div class="sub-title">我的收藏</div>
@@ -111,8 +113,10 @@
     <div class="content-area">
       <div class="video" v-if="this.activeIndex==='1'">
         <div class="sub-title">TA的视频</div>
-        <MyVideo :isMine="false" :hasLogin=hasLogin></MyVideo>
-        <MyVideo :isMine="false" :hasLogin=hasLogin></MyVideo>
+        <MyVideo :isMine="false"
+                 :hasLogin=hasLogin
+                 :videoID="video.videoID"
+                 v-for="video in this.videoList" v-bind:key="video.videoID"></MyVideo>
       </div>
       <div class="favor" v-else-if="this.activeIndex==='2'">
         <div class="sub-title">TA的收藏</div>
@@ -193,6 +197,11 @@ export default {
               this.playNum = userMsg.playNum;
               this.favorNum = userMsg.concernsNum;
               this.likeNum = userMsg.likeNum;
+
+              // eslint-disable-next-line no-case-declarations
+              this.videoList = JSON.parse(res.data.video_list);
+              console.log('视频列表')
+              console.log(this.videoList)
               break;
             case 2001:
               this.$message.warning('用户信息加载失败！');
@@ -225,7 +234,8 @@ export default {
       favorNum: 56,
       likeNum: 75,
       userSex: "",
-      avatarSrc:''
+      avatarSrc:'',
+      videoList: []
     }
   },
   methods:{
