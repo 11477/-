@@ -163,7 +163,7 @@ export default {
     console.log(this.isMine)
     */
     const formData = new FormData();
-    formData.append("enteredUserID", this.loginUserID);
+    formData.append("enteredUserID", this.pageUserID);
     this.$axios({
       method: 'post',
       url: 'UserCommunication/enterhomepage/',
