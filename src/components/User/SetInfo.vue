@@ -28,7 +28,7 @@
           <el-input type="textarea"
                     v-model="form.userInformation"
                     placeholder="请输入您的用户简介"
-                    maxlength="100"
+                    maxlength="80"
                     show-word-limit
                     :rows="4"
                     resize="none"></el-input>
