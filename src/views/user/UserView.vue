@@ -343,4 +343,7 @@ export default {
   margin-bottom: 20px;
   margin-left: 10px;
 }
+.el-menu-demo {
+  display: flex;
+}
 </style>

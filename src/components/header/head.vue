@@ -147,8 +147,10 @@ export default {
         this.$router.push({path: '/upload/frame'})
     },
     toSpace() {
-      this.$router.push({path: '/user/' + this.loginUserID})
-      location.reload()
+      console.log('tospace!')
+      let path = this.$router.resolve({path: '/user/' + this.loginUserID})
+      //console.log(path)
+        window.open(path.href)
     },
     logout() {
       this.$axios(

@@ -103,7 +103,8 @@ export default {
   },
   methods:{
     toVideo(){
-      this.$router.push('/video/'+this.videoID);
+      let path = this.$router.resolve('/video/'+this.videoID);
+      window.open(path.href)
     },
     changeFavor() {
       if(this.hasLogin){

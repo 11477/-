@@ -76,8 +76,8 @@ export default {
   */
   methods:{
     toUser(){
-      this.$router.push('/user/'+this.userID);
-      location.reload();
+      let path = this.$router.resolve('/user/'+this.userID);
+      window.open(path.href)
     },
     changeFollow() {
       if(this.hasLogin){
