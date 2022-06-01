@@ -148,6 +148,7 @@ export default {
     },
     toSpace() {
       this.$router.push({path: '/user/' + this.loginUserID})
+      location.reload()
     },
     logout() {
       this.$axios(

@@ -55,7 +55,7 @@ export default {
 
 <style>
 #user-bar{
-
+  margin-top: 10px;
 }
 .box-outside{
   padding: 0 10%;
@@ -70,6 +70,7 @@ export default {
   margin-left: 10px;
 }
 .user-info{
+  font-size: 14px;
   display: flex;
   flex-direction: column;
   margin-left: 20px;
@@ -81,15 +82,22 @@ export default {
   font-size: 30px;
   font-family: "user-name-black",serif;
 }
+.user-birthday{
+  margin-left: 20px;
+  margin-right: 20px;
+  white-space: nowrap;
+}
 .user-intro-box{
   display: flex;
   flex-direction: row;
 }
 .user-self-intro{
-  max-width: 300px;
+  width: 300px;
+  font-size: 10px;
 }
 .user-sex{
   margin-left: 20px;
   margin-right: 20px;
+  white-space: nowrap;
 }
 </style>
