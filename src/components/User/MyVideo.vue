@@ -26,7 +26,7 @@
     <div class="favor-in-user-favor" style="margin-top: 38px" v-else>
       <el-popover placement="bottom" v-model="visible" trigger="hover" v-if="hasFavored">
         <div style="text-align: center">
-          <el-button @click="hasFavored=false; visible=false">取消收藏</el-button>
+          <el-button @click="cancelFavor">取消收藏</el-button>
         </div>
         <el-button style="background: #00aeec; color: white" slot="reference">已收藏</el-button>
       </el-popover>
@@ -100,6 +100,32 @@ export default {
     if(userInfo){
       this.loginUserID = userInfo.user.userID;
     }
+    if(!this.hasLogin){
+      this.hasFavored = false
+    } else{
+      const dataForm = new FormData()
+      dataForm.append("videoID",this.videoID)
+      dataForm.append("userID",this.loginUserID)
+      // console.log('?',dataForm.get("videoID"))
+      this.$axios({
+        method: 'post',
+        url: '/VideoManager/getVideoByID/',
+        data: dataForm
+      })
+          .then(res =>{
+            switch (res.data.error) {
+              case 0:
+                this.hasFavored = res.data.isFavored
+                break;
+              case 4001:
+                this.$message.warning('视频不存在！');
+                break;
+            }
+          })
+          .catch(err => {
+            console.log(err);
+          })
+    }
   },
   methods:{
     toVideo(){
@@ -108,7 +134,55 @@ export default {
     },
     changeFavor() {
       if(this.hasLogin){
-        this.hasFavored = true;
+        const userInfo = user.getters.getUser(user.state());
+        const loginUserID = userInfo.user.userID;
+        const favorForm = new FormData()
+        favorForm.append("userID",loginUserID)
+        favorForm.append("videoID",this.videoID)
+        // console.log('?',dataForm.get("videoID"))
+        this.$axios({
+          method: 'post',
+          url: '/VideoInteraction/favourites/',
+          data: favorForm
+        })
+            .then(res =>{
+              switch (res.data.error) {
+                case 0:
+                  this.hasFavored = true;
+                  break;
+              }
+            })
+            .catch(err => {
+              console.log(err);
+            })
+      }else {
+        this.$router.push({path: '/login'});
+      }
+    },
+    cancelFavor() {
+      this.visible=false
+      if(this.hasLogin){
+        const userInfo = user.getters.getUser(user.state());
+        const loginUserID = userInfo.user.userID;
+        const favorForm = new FormData()
+        favorForm.append("userID",loginUserID)
+        favorForm.append("videoID",this.videoID)
+        // console.log('?',dataForm.get("videoID"))
+        this.$axios({
+          method: 'post',
+          url: '/VideoInteraction/cancelfavourites/',
+          data: favorForm
+        })
+            .then(res =>{
+              switch (res.data.error) {
+                case 0:
+                  this.hasFavored = false;
+                  break;
+              }
+            })
+            .catch(err => {
+              console.log(err);
+            })
       }else {
         this.$router.push({path: '/login'});
       }

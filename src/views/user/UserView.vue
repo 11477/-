@@ -46,7 +46,7 @@
       </div>
       <div class="favor" v-else-if="this.activeIndex==='2'">
         <div class="sub-title">我的收藏</div>
-        <UserFavor :videoID="video.videoID"
+        <UserFavor :videoID=video.videoID
                    v-for="video in this.favorList" v-bind:key="video.videoID"></UserFavor>
       </div>
       <div class="follow" v-else-if="this.activeIndex==='3'">
@@ -74,7 +74,7 @@
       </div>
       <div class="history" v-else-if="this.activeIndex==='6'">
         <div class="sub-title">历史记录</div>
-        <VideoHistory :videoID="video.browseVIdeoID"
+        <VideoHistory :videoID="video.browseVideoID"
                       :uploader-name="video.browseVideoUser"
                       :video-cover="video.browseVideoCover"
                       :view-time="video.browseTime"
@@ -135,7 +135,7 @@
       </div>
       <div class="favor" v-else-if="this.activeIndex==='2'">
         <div class="sub-title">TA的收藏</div>
-        <UserFavor :videoID="video.videoID"
+        <UserFavor :videoID=video.videoID
                    :hasLogin=hasLogin
                    v-for="video in this.favorList" v-bind:key="video.videoID"></UserFavor>
       </div>
