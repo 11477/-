@@ -5,7 +5,7 @@
     </div>
     <div class="info-in-user-favor">
       <div class="title-in-video-history" @click="toVideo" style="cursor: pointer">{{videoTitle}}</div>
-      <div style="cursor: pointer">{{uploaderName}}</div>
+      <div style="cursor: pointer" @click="ToUser">{{uploaderName}}</div>
     </div>
     <div class="favor-in-user-favor" style="margin-top: 38px">
       <el-popover placement="bottom" v-model="visible" trigger="hover" v-if="hasFavored">
@@ -30,7 +30,8 @@ export default {
       hasFavored: true,
       videoTitle: "视频标题",
       uploaderName: "up名",
-      videoCover: ""
+      videoCover: "",
+      uploadID:0,
     };
   },
   props:{
@@ -89,6 +90,7 @@ export default {
                 this.videoTitle = res.data.videoTitle
                 this.uploaderName = res.data.upName
                 this.videoCover = res.data.VideoCover
+                this.uploadID=res.data.upID
               } else {
                 this.$message(res.data.msg)
               }
@@ -155,6 +157,10 @@ export default {
       let path = this.$router.resolve('/video/'+this.videoID);
       window.open(path.href)
     },
+    ToUser(){
+      this.$router.push('/user/'+this.uploadID);
+      location.reload();
+    }
   }
 }
 </script>

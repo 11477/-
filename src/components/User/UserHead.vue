@@ -153,6 +153,7 @@ export default {
   width: 100px;
   height: 100px;
   margin-left: 10px;
+  border-radius: 15px;
 }
 .user-info{
   font-size: 14px;

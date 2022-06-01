@@ -151,7 +151,7 @@ export default {
 
 <style>
   #user-display{
-    box-shadow: 0 2px 4px rgba(0, 0, 0, .12), 0 0 6px rgba(0, 0, 0, .04);
+    //box-shadow: 0 2px 4px rgba(0, 0, 0, .12), 0 0 6px rgba(0, 0, 0, .04);
     border-radius: 20px;
     width: 800px;
     display: flex;
@@ -162,6 +162,7 @@ export default {
     width: 60px;
     height: 60px;
     margin: 10px;
+    border-radius: 5px;
   }
   .head-in-user-display:hover{
     cursor: pointer;
@@ -170,6 +171,10 @@ export default {
     display: flex;
     flex-direction: column;
     width: 620px;
+    border: 1px solid lightgray;
+    border-left: none;
+    border-right: none;
+    border-top: none;
   }
   .name-in-user-display{
     margin-top: 15px;

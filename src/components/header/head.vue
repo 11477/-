@@ -200,6 +200,7 @@ export default {
   margin-top: -5px;
   margin-right: -10px;
   margin-left: 10px;
+  border-radius: 20px;
 }
 .login-button{
   width: 36px;

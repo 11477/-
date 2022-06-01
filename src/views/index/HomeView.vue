@@ -100,22 +100,12 @@ export default {
   vertical-align: middle;
 }
 
-.video-cover{
-  margin-left: 10px;
-  margin-right: 10px;
-}
-
 .video-box{
   display: flex;
   flex-wrap: wrap;
-  margin-left: 100px;
+  margin-left: 50px;
+  margin-top: 20px;
 }
-
-.line-1{
-  flex: 1;
-  display: flex;
-}
-
 
 .channel-video{
   width: 1450px;
@@ -129,8 +119,9 @@ export default {
   top:130px;
   width: 80px;
   height: 455px;
-  margin-left: 1400px;
-  margin-top: 50px;
+  margin-left: 1375px;
+  margin-top: 70px;
+  margin-right: 50px;
   flex-flow: column;
   background-color: rgba(255,255,255,0.5);
   border-radius: 6px;
