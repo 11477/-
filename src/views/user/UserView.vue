@@ -18,7 +18,7 @@
         <div class="user-statistic-box">
           <div class="user-statistic info1">
             <div class="statistic-char">关注数</div>
-            <div>{{ favorNum }}</div>
+            <div>{{ followNum }}</div>
           </div>
           <div class="user-statistic info234">
             <div class="statistic-char">粉丝数</div>
@@ -49,14 +49,19 @@
       </div>
       <div class="follow" v-else-if="this.activeIndex==='3'">
         <div class="sub-title">全部关注</div>
-        <UserDisplay/>
-        <UserDisplay/>
-        <UserDisplay/>
+        <UserDisplay :userID="user.userID"
+                     :username="user.username"
+                     :userPortrait="user.userPortrait"
+                     :userInfo="user.userInformation"
+                     v-for="user in this.followList" v-bind:key="user.userID"></UserDisplay>
       </div>
       <div class="fans" v-else-if="this.activeIndex==='4'">
         <div class="sub-title">我的粉丝</div>
-        <UserDisplay/>
-        <UserDisplay/>
+        <UserDisplay :userID="user.userID"
+                     :username="user.username"
+                     :userPortrait="user.userPortrait"
+                     :userInfo="user.userInformation"
+                     v-for="user in this.fansList" v-bind:key="user.userID"></UserDisplay>
       </div>
       <div class="notice" v-else-if="this.activeIndex==='5'">
         notice
@@ -92,7 +97,7 @@
         <div class="user-statistic-box">
           <div class="user-statistic info1">
             <div class="statistic-char">关注数</div>
-            <div>{{ favorNum }}</div>
+            <div>{{ followNum }}</div>
           </div>
           <div class="user-statistic info234">
             <div class="statistic-char">粉丝数</div>
@@ -125,13 +130,21 @@
       </div>
       <div class="follow" v-else-if="this.activeIndex==='3'">
         <div class="sub-title">TA的关注</div>
-        <UserDisplay :hasLogin=hasLogin></UserDisplay>
-        <UserDisplay :hasLogin=hasLogin></UserDisplay>
+        <UserDisplay :userID="user.userID"
+                     :username="user.username"
+                     :userPortrait="user.userPortrait"
+                     :userInfo="user.userInformation"
+                     :hasLogin=hasLogin
+                     v-for="user in this.followList" v-bind:key="user.userID"></UserDisplay>
       </div>
       <div class="fans" v-else-if="this.activeIndex==='4'">
         <div class="sub-title">TA的粉丝</div>
-        <UserDisplay :hasLogin=hasLogin></UserDisplay>
-        <UserDisplay :hasLogin=hasLogin></UserDisplay>
+        <UserDisplay :userID="user.userID"
+                     :username="user.username"
+                     :userPortrait="user.userPortrait"
+                     :userInfo="user.userInformation"
+                     :hasLogin=hasLogin
+                     v-for="user in this.fansList" v-bind:key="user.userID"></UserDisplay>
       </div>
     </div>
   </div>
@@ -212,6 +225,9 @@ export default {
               this.noticeList = JSON.parse(res.data.letter_list);
               console.log('通知列表');
               console.log(this.noticeList);
+              this.followList = JSON.parse(res.data.concerns_list);
+              console.log('关注列表');
+              console.log(this.followList);
               break;
             case 2001:
               this.$message.warning('用户信息加载失败！');
@@ -241,13 +257,14 @@ export default {
       userBirthday: "",
       fansNum: 66,
       playNum: 78,
-      favorNum: 56,
+      followNum: 56,
       likeNum: 75,
       userSex: "",
       avatarSrc:'',
       videoList: [],
       favorList: [],
       fansList: [],
+      followList: [],
       historyList: [],
       noticeList: [],
     }
