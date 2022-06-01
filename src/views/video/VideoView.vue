@@ -17,11 +17,11 @@
       </div>
       <div class="r-con" id="r-con">
         <div class="up-info" id="up-info">
-          <div class="up-avatar">
+          <div class="up-avatar" @click="toUpSpace">
             <el-avatar :src=upAvatar></el-avatar>
           </div>
           <div class="up-info-right">
-            <div class="up-info-name">
+            <div class="up-info-name" @click="toUpSpace">
               {{upName}}
             </div>
             <div class="up-info-desc">
@@ -218,6 +218,18 @@ export default {
     dataForm.append("videoID",vid)
     dataForm.append("userID",uid)
    // console.log('?',dataForm.get("videoID"))
+    if(this.loginUserID!=0){
+      this.$axios({
+        method: 'post',
+        url: '/VideoManager/browseVideo/',
+        data: dataForm
+      }).then(res =>{
+        console.log("browse success")
+        if(res.data.error!=0){
+          this.$message.error(res.data.error)
+        }
+      })
+    }
     this.$axios({
       method: 'post',
       url: '/VideoManager/getVideoByID/',
@@ -225,7 +237,7 @@ export default {
     })
     .then(
         res=>{
-          console.log(res.data)
+          //console.log(res.data)
           if(res.data.error===0){
           this.videoTitle=res.data.videoTitle
           this.option.url=res.data.videoSrc
@@ -507,6 +519,10 @@ export default {
         this.$message.warning("你时刻在关注你自己")
       }}
     },
+    toUpSpace(){
+      let path = this.$router.resolve({path: '/user/' + this.upID})
+      window.open(path.href)
+    },
     cancelFollowUp(){
       if(this.loginUserID===0){
         this.toLogin()
@@ -626,6 +642,7 @@ export default {
   width: 48px;
   height: 48px;
   position: relative;
+  cursor: pointer;
 }
 .up-info .up-info-right{
   float: left;
@@ -656,6 +673,10 @@ export default {
   text-overflow: ellipsis;
   white-space: nowrap;
   vertical-align: top;
+  cursor: pointer;
+}
+.up-info .up-info-name:hover {
+  color: #00aeec;
 }
 .video-wrap {
   max-width: 1984px;

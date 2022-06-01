@@ -91,8 +91,10 @@ export default {
       }).then(res =>{
         if(res.data.error===0){
           const resdata=JSON.parse(res.data.user_info)
-          console.log(resdata)
+          //console.log(resdata)
           this.loginUserFans=resdata.userFansNum
+          this.loginUserVideos=resdata.userVideosNum
+          this.loginUserFollow=resdata.userFollowNum
         }else {
           this.$message.warning(res.data.error)
         }
@@ -147,8 +149,10 @@ export default {
         this.$router.push({path: '/upload/frame'})
     },
     toSpace() {
-      this.$router.push({path: '/user/' + this.loginUserID})
-      location.reload()
+      console.log('tospace!')
+      let path = this.$router.resolve({path: '/user/' + this.loginUserID})
+      //console.log(path)
+        window.open(path.href)
     },
     logout() {
       this.$axios(

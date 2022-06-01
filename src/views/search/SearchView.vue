@@ -15,9 +15,8 @@
     </div>
     <div class="menu-box">
       <el-menu :default-active="activeIndex" class="el-menu-demo" mode="horizontal" @select="handleSelect">
-        <el-menu-item index="1">综合</el-menu-item>
-        <el-menu-item index="2">视频</el-menu-item>
-        <el-menu-item index="3">用户</el-menu-item>
+        <el-menu-item index="1">视频</el-menu-item>
+        <el-menu-item index="2">用户</el-menu-item>
       </el-menu>
     </div>
   </div>
@@ -73,6 +72,8 @@ export default {
 }
 .flex-center{
   display: flex;
+  width: 600px;
+  margin-left: 200px;
   -webkit-box-pack: center;
   justify-content: center;
   -webkit-box-align: center;
@@ -110,5 +111,6 @@ export default {
 }
 .menu-box{
   margin-left: 0;
+  width: 1000px;
 }
 </style>

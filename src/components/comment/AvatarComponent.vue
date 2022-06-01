@@ -24,7 +24,6 @@
 
 <style type="text/css" scoped>
 	.user{
-    margin-top: 60px;
 		height: 50px;
 		width: 50px;
 	}

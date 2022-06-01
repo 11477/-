@@ -129,7 +129,8 @@ export default {
       })
     },
     ToVideo(){
-      this.$router.push('/video/'+this.videoID);
+      let path = this.$router.resolve('/video/'+this.videoID);
+      window.open(path.href)
     },
     ToUser(){
       this.$router.push('/user/1');
