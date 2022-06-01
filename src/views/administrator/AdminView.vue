@@ -86,7 +86,7 @@ export default {
 </script>
 <style scoped>
 .audit-tab{
-  width: 1450px;
+  width: 1440px;
 }
 .refresh{
   background-color: #00A1D6;
@@ -111,7 +111,6 @@ export default {
 .audit-videos{
   display: flex;
   flex-wrap: wrap;
-  margin-bottom: auto;
 }
 
 .audit-info {

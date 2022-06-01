@@ -212,7 +212,6 @@ export default {
       formData.append("email", self.ruleForm.email);
       formData.append("password1", self.ruleForm.pass);
       formData.append("password2", self.ruleForm.checkPass);
-
       this.$refs[formName].validate((valid) => {
         if (valid) {
           self.$axios({
@@ -221,6 +220,7 @@ export default {
             data: formData,
           })
               .then(res => {
+                console.log(res.data)
                 switch (res.data.error) {
                   case 0:
                     this.$store.dispatch('saveUserInfo', {user: {

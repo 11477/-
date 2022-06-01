@@ -40,8 +40,8 @@ import CropperImage from "@/components/imageCropper/AvatarCropper";
 const COS = require('cos-js-sdk-v5')
 // 填写自己腾讯云cos中的key和id (密钥)
 const cosImg = new COS({
-  SecretId: '***', // 身份识别ID
-  SecretKey: '***' // 身份秘钥
+  SecretId: 'AKIDlNlupUt1vZx5zd2B4h4A0aFfohJfkZ8Q', // 身份识别ID
+  SecretKey: '5uXqthEVXKtDH6g290cz6yby6ze4FBsK' // 身份秘钥
 })
 export default {
   components: { CropperImage},
