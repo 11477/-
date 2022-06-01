@@ -18,7 +18,7 @@
         <div class="user-statistic-box">
           <div class="user-statistic info1">
             <div class="statistic-char">关注数</div>
-            <div>{{ favorNum }}</div>
+            <div>{{ followNum }}</div>
           </div>
           <div class="user-statistic info234">
             <div class="statistic-char">粉丝数</div>
@@ -38,32 +38,42 @@
     <div class="content-area">
       <div class="video" v-if="this.activeIndex==='1'">
         <div class="sub-title">我的视频</div>
-        <MyVideo :isMine="true"></MyVideo>
-        <MyVideo :isMine="true"></MyVideo>
+        <MyVideo :isMine="true"
+                 :videoID="video.videoID"
+                 v-for="video in this.videoList" v-bind:key="video.videoID"></MyVideo>
       </div>
       <div class="favor" v-else-if="this.activeIndex==='2'">
         <div class="sub-title">我的收藏</div>
-        <UserFavor/>
-        <UserFavor/>
+        <UserFavor :videoID="video.videoID"
+                   v-for="video in this.favorList" v-bind:key="video.videoID"></UserFavor>
       </div>
       <div class="follow" v-else-if="this.activeIndex==='3'">
         <div class="sub-title">全部关注</div>
-        <UserDisplay/>
-        <UserDisplay/>
-        <UserDisplay/>
+        <UserDisplay :userID="user.userID"
+                     :username="user.username"
+                     :userPortrait="user.userPortrait"
+                     :userInfo="user.userInformation"
+                     v-for="user in this.followList" v-bind:key="user.userID"></UserDisplay>
       </div>
       <div class="fans" v-else-if="this.activeIndex==='4'">
         <div class="sub-title">我的粉丝</div>
-        <UserDisplay/>
-        <UserDisplay/>
+        <UserDisplay :userID="user.userID"
+                     :username="user.username"
+                     :userPortrait="user.userPortrait"
+                     :userInfo="user.userInformation"
+                     v-for="user in this.fansList" v-bind:key="user.userID"></UserDisplay>
       </div>
       <div class="notice" v-else-if="this.activeIndex==='5'">
         notice
       </div>
       <div class="history" v-else-if="this.activeIndex==='6'">
         <div class="sub-title">历史记录</div>
-        <VideoHistory/>
-        <VideoHistory/>
+        <VideoHistory :videoID="video.browseVIdeoID"
+                      :uploader-name="video.browseVideoUser"
+                      :video-cover="video.browseVideoCover"
+                      :view-time="video.browseTime"
+                      :video-title="video.browseVideoTitle"
+                      v-for="video in this.historyList" v-bind:key="video.browseTime"></VideoHistory>
       </div>
       <div class="information" v-else-if="this.activeIndex==='7'">
         <SetInfo :prev-sex="userSex"
@@ -91,7 +101,7 @@
         <div class="user-statistic-box">
           <div class="user-statistic info1">
             <div class="statistic-char">关注数</div>
-            <div>{{ favorNum }}</div>
+            <div>{{ followNum }}</div>
           </div>
           <div class="user-statistic info234">
             <div class="statistic-char">粉丝数</div>
@@ -111,23 +121,34 @@
     <div class="content-area">
       <div class="video" v-if="this.activeIndex==='1'">
         <div class="sub-title">TA的视频</div>
-        <MyVideo :isMine="false" :hasLogin=hasLogin></MyVideo>
-        <MyVideo :isMine="false" :hasLogin=hasLogin></MyVideo>
+        <MyVideo :isMine="false"
+                 :hasLogin=hasLogin
+                 :videoID="video.videoID"
+                 v-for="video in this.videoList" v-bind:key="video.videoID"></MyVideo>
       </div>
       <div class="favor" v-else-if="this.activeIndex==='2'">
         <div class="sub-title">TA的收藏</div>
-        <UserFavor :hasLogin=hasLogin></UserFavor>
-        <UserFavor :hasLogin=hasLogin></UserFavor>
+        <UserFavor :videoID="video.videoID"
+                   :hasLogin=hasLogin
+                   v-for="video in this.favorList" v-bind:key="video.videoID"></UserFavor>
       </div>
       <div class="follow" v-else-if="this.activeIndex==='3'">
         <div class="sub-title">TA的关注</div>
-        <UserDisplay :hasLogin=hasLogin></UserDisplay>
-        <UserDisplay :hasLogin=hasLogin></UserDisplay>
+        <UserDisplay :userID="user.userID"
+                     :username="user.username"
+                     :userPortrait="user.userPortrait"
+                     :userInfo="user.userInformation"
+                     :hasLogin=hasLogin
+                     v-for="user in this.followList" v-bind:key="user.userID"></UserDisplay>
       </div>
       <div class="fans" v-else-if="this.activeIndex==='4'">
         <div class="sub-title">TA的粉丝</div>
-        <UserDisplay :hasLogin=hasLogin></UserDisplay>
-        <UserDisplay :hasLogin=hasLogin></UserDisplay>
+        <UserDisplay :userID="user.userID"
+                     :username="user.username"
+                     :userPortrait="user.userPortrait"
+                     :userInfo="user.userInformation"
+                     :hasLogin=hasLogin
+                     v-for="user in this.fansList" v-bind:key="user.userID"></UserDisplay>
       </div>
     </div>
   </div>
@@ -163,7 +184,7 @@ export default {
     console.log(this.isMine)
     */
     const formData = new FormData();
-    formData.append("enteredUserID", this.loginUserID);
+    formData.append("enteredUserID", this.pageUserID);
     this.$axios({
       method: 'post',
       url: 'UserCommunication/enterhomepage/',
@@ -191,8 +212,26 @@ export default {
               }
               this.fansNum = userMsg.fansNum;
               this.playNum = userMsg.playNum;
-              this.favorNum = userMsg.concernsNum;
+              this.followNum = userMsg.concernsNum;
               this.likeNum = userMsg.likeNum;
+
+              // eslint-disable-next-line no-case-declarations
+              this.videoList = JSON.parse(res.data.video_list);
+              this.favorList = JSON.parse(res.data.favour_list);
+              console.log('收藏列表')
+              console.log(this.favorList);
+              this.fansList = JSON.parse(res.data.fans_list);
+              console.log('粉丝列表');
+              console.log(this.fansList);
+              this.historyList = JSON.parse(res.data.browse_list);
+              console.log('浏览列表');
+              console.log(this.historyList);
+              this.noticeList = JSON.parse(res.data.letter_list);
+              console.log('通知列表');
+              console.log(this.noticeList);
+              this.followList = JSON.parse(res.data.concerns_list);
+              console.log('关注列表');
+              console.log(this.followList);
               break;
             case 2001:
               this.$message.warning('用户信息加载失败！');
@@ -222,10 +261,16 @@ export default {
       userBirthday: "",
       fansNum: 66,
       playNum: 78,
-      favorNum: 56,
+      followNum: 56,
       likeNum: 75,
       userSex: "",
-      avatarSrc:''
+      avatarSrc:'',
+      videoList: [],
+      favorList: [],
+      fansList: [],
+      followList: [],
+      historyList: [],
+      noticeList: [],
     }
   },
   methods:{

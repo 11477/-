@@ -65,7 +65,7 @@
           <el-select v-model="form.videoPart" placeholder="请选择视频分区">
             <el-option label="知识" value="knowledge"></el-option>
             <el-option label="科技" value="science"></el-option>
-            <el-option label="咨询" value="info"></el-option>
+            <el-option label="资讯" value="info"></el-option>
             <el-option label="生活" value="life"></el-option>
             <el-option label="公益" value="charity"></el-option>
             <el-option label="音乐" value="music"></el-option>
@@ -74,7 +74,7 @@
             <el-option label="运动" value="sport"></el-option>
             <el-option label="影视" value="movie"></el-option>
             <el-option label="历史" value="history"></el-option>
-            <el-option label=娱乐 value="entertainment"></el-option>
+            <el-option label="娱乐" value="entertainment"></el-option>
           </el-select>
         </el-form-item>
         <el-form-item label="视频简介" prop="videoDesc">

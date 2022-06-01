@@ -1,11 +1,11 @@
 <template>
   <div id="user-display">
     <div @click="toUser">
-      <img class="head-in-user-display" src="../../assets/avatar/head.jpeg" alt="banner">
+      <img class="head-in-user-display" :src=userPortrait alt="头像">
     </div>
     <div class="info-in-user-display">
       <div class="name-in-user-display" @click="toUser">{{ username }}</div>
-      {{ userInfo }}
+      {{ userInfoDisplay }}
     </div>
     <div class="subscribe-in-user-display">
       <el-popover placement="bottom" v-model="visible" trigger="hover" v-if="hasFollowed">
@@ -26,9 +26,9 @@ export default {
     return{
       visible: false,
       hasFollowed: true,
-      username: "用户名",
-      userPortrait: "../../assets/avatar/head.jpeg",
-      userInfo: "用户介绍",
+      //username: "用户名",
+      //userPortrait: "../../assets/avatar/head.jpeg",
+      userInfoDisplay: "这个人很懒，什么也没有写~",
     };
   },
   props:{
@@ -38,8 +38,42 @@ export default {
     },
     hasLogin:{
       default: true
+    },
+    username:{default: "用户名"},
+    userPortrait: {default: "../../assets/avatar/head.jpeg"},
+    userInfo: {default: "这个人很懒，什么也没有写~"},
+  },
+  mounted() {
+    if(this.userInfo===""){
+      this.userInfoDisplay = "这个人很懒，什么也没有写~"
     }
   },
+  /*
+  mounted() {
+    //console.log("wtf",this.videoID)
+    const uid = this.userID
+    const dataForm = new FormData()
+    dataForm.append("userID", uid.toString())
+    //console.log('?',dataForm.get("videoID"))
+    this.$axios({
+      method: 'post',
+      url: '/Websurf/getUserInfoByID',
+      data: dataForm,
+    })
+        .then(
+            res => {
+              //console.log(res.data)
+              if (res.data.error === 0) {
+                this.username = res.data.username
+                this.userInfo = res.data.userDesc
+                this.userPortrait = res.data.userAvatar
+              } else {
+                this.$message(res.data.msg)
+              }
+            }
+        )
+  },
+  */
   methods:{
     toUser(){
       this.$router.push('/user/'+this.userID);

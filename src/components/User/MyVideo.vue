@@ -1,7 +1,7 @@
 <template>
   <div id="video-history">
     <div @click="toVideo">
-      <img class="cover-in-video-history" src="../../assets/avatar/head.jpeg" alt="banner" style="cursor: pointer">
+      <img class="cover-in-video-history" :src=videoCover alt="视频封面" style="cursor: pointer">
     </div>
     <div class="info-in-user-favor">
       <div class="title-in-video-history" @click="toVideo" style="cursor: pointer">{{ videoTitle }}</div>
@@ -17,7 +17,7 @@
           <p style="text-align: center">确认删除视频？</p>
           <div style="text-align: center; margin-top: 10px">
             <el-button size="mini" type="text" @click="deleteVisible = false">取消</el-button>
-            <el-button type="primary" size="mini" @click="deleteVisible = false; deleteVideo">确定</el-button>
+            <el-button type="primary" size="mini" @click="deleteVideo">确定</el-button>
           </div>
           <el-button slot="reference">删除</el-button>
         </el-popover>
@@ -36,6 +36,8 @@
 </template>
 
 <script>
+import user from "@/store/user";
+
 export default {
   name: "MyVideo",
   data(){
@@ -43,15 +45,14 @@ export default {
       visible: false,
       deleteVisible: false,
       hasFavored: true,
-      viewNum: 5674,
-      commentNum: 31,
-      likeNum: 66,
-      favorNum: 77,
-      videoTime: "22:21",
-      videoTitle: "操作系统k48",
-      uploaderName: "不知道捏",
-      videoDate: "5-28",
-      videoCover: ""
+      loginUserID: 0,
+      videoCover: '',
+      videoTitle: 'title',
+      videoDate: '日期',
+      viewNum: 0,
+      likeNum: 0,
+      favorNum: 0,
+      commentNum: 0
     };
   },
   props:{
@@ -64,8 +65,40 @@ export default {
     hasLogin:{
       default: true
     },
-    loginUserID:{
-      default: 0
+
+  },
+  mounted() {
+    //console.log("wtf",this.videoID)
+    const vid = this.videoID
+    const dataForm = new FormData()
+    dataForm.append("videoID", vid.toString())
+    //console.log('?',dataForm.get("videoID"))
+    this.$axios({
+      method: 'post',
+      url: '/VideoManager/getVideoByID/',
+      data: dataForm,
+    })
+        .then(
+            res => {
+              //console.log(res.data)
+              if (res.data.error === 0) {
+                this.viewNum = res.data.videoPlayNum
+                this.likeNum = res.data.videoLikeNum
+                this.favorNum = res.data.videoFavorNum
+                this.videoTitle = res.data.videoTitle
+                this.commentNum = res.data.videoCommentNum
+                this.videoDate = res.data.uploadDate
+                this.videoCover = res.data.VideoCover
+              } else {
+                this.$message(res.data.msg)
+              }
+            }
+        )
+  },
+  created() {
+    const userInfo = user.getters.getUser(user.state());
+    if(userInfo){
+      this.loginUserID = userInfo.user.userID;
     }
   },
   methods:{
@@ -80,10 +113,11 @@ export default {
       }
     },
     deleteVideo(){
+      this.deleteVisible = false;
       const formData = new FormData();
       formData.append("videoID", this.videoID);
       formData.append("userID", this.loginUserID);
-      self.$axios({
+      this.$axios({
         method: 'post',
         url: 'VideoManager/deletevideo/',
         data: formData,

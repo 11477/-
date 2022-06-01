@@ -1,6 +1,6 @@
 <template>
   <div id="video-history">
-    <img class="cover-in-video-history" src="../../assets/avatar/head.jpeg" alt="banner">
+    <img class="cover-in-video-history" :src=videoCover alt="视频封面">
     <div class="info-in-video-history">
       <div class="title-in-video-history">{{ videoTitle }}</div>
       <div>{{ uploaderName }}</div>
@@ -14,11 +14,16 @@ export default {
   name: "VideoHistory",
   data(){
     return{
-      viewTime: "5-18 22:21",
-      videoTitle: "操作系统k48",
-      uploaderName: "up名"
+
     }
-  }
+  },
+  props:{
+    viewTime:{default: "浏览时间"},
+    videoTitle:{default: "视频标题"},
+    uploaderName:{default: "up用户名"},
+    videoID:{required:true},
+    videoCover:{}
+  },
 }
 </script>
 
