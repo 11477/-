@@ -41,12 +41,11 @@
         <MyVideo :isMine="true"
                  :videoID="video.videoID"
                  v-for="video in this.videoList" v-bind:key="video.videoID"></MyVideo>
-
       </div>
       <div class="favor" v-else-if="this.activeIndex==='2'">
         <div class="sub-title">我的收藏</div>
-        <UserFavor/>
-        <UserFavor/>
+        <UserFavor :videoID="video.videoID"
+                   v-for="video in this.favorList" v-bind:key="video.videoID"></UserFavor>
       </div>
       <div class="follow" v-else-if="this.activeIndex==='3'">
         <div class="sub-title">全部关注</div>
@@ -120,8 +119,9 @@
       </div>
       <div class="favor" v-else-if="this.activeIndex==='2'">
         <div class="sub-title">TA的收藏</div>
-        <UserFavor :hasLogin=hasLogin></UserFavor>
-        <UserFavor :hasLogin=hasLogin></UserFavor>
+        <UserFavor :videoID="video.videoID"
+                   :hasLogin=hasLogin
+                   v-for="video in this.favorList" v-bind:key="video.videoID"></UserFavor>
       </div>
       <div class="follow" v-else-if="this.activeIndex==='3'">
         <div class="sub-title">TA的关注</div>
@@ -200,8 +200,18 @@ export default {
 
               // eslint-disable-next-line no-case-declarations
               this.videoList = JSON.parse(res.data.video_list);
-              console.log('视频列表')
-              console.log(this.videoList)
+              this.favorList = JSON.parse(res.data.favour_list);
+              console.log('收藏列表')
+              console.log(this.favorList);
+              this.fansList = JSON.parse(res.data.fans_list);
+              console.log('粉丝列表');
+              console.log(this.fansList);
+              this.historyList = JSON.parse(res.data.browse_list);
+              console.log('浏览列表');
+              console.log(this.historyList);
+              this.noticeList = JSON.parse(res.data.letter_list);
+              console.log('通知列表');
+              console.log(this.noticeList);
               break;
             case 2001:
               this.$message.warning('用户信息加载失败！');
@@ -235,7 +245,11 @@ export default {
       likeNum: 75,
       userSex: "",
       avatarSrc:'',
-      videoList: []
+      videoList: [],
+      favorList: [],
+      fansList: [],
+      historyList: [],
+      noticeList: [],
     }
   },
   methods:{

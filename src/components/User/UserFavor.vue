@@ -1,8 +1,10 @@
 <template>
   <div id="video-history">
-    <img class="cover-in-video-history" src="../../assets/avatar/head.jpeg" alt="banner" style="cursor: pointer">
+    <div @click="toVideo">
+      <img class="cover-in-video-history" :src=videoCover alt="视频封面" style="cursor: pointer">
+    </div>
     <div class="info-in-user-favor">
-      <div class="title-in-video-history" style="cursor: pointer">{{videoTitle}}</div>
+      <div class="title-in-video-history" @click="toVideo" style="cursor: pointer">{{videoTitle}}</div>
       <div style="cursor: pointer">{{uploaderName}}</div>
     </div>
     <div class="favor-in-user-favor" style="margin-top: 38px">
@@ -32,7 +34,34 @@ export default {
   props:{
     hasLogin:{
       default: true
-    }
+    },
+    videoID:{
+      default: 0
+    },
+  },
+  mounted() {
+    //console.log("wtf",this.videoID)
+    const vid = this.videoID
+    const dataForm = new FormData()
+    dataForm.append("videoID", vid.toString())
+    //console.log('?',dataForm.get("videoID"))
+    this.$axios({
+      method: 'post',
+      url: '/VideoManager/getVideoByID/',
+      data: dataForm,
+    })
+        .then(
+            res => {
+              //console.log(res.data)
+              if (res.data.error === 0) {
+                this.videoTitle = res.data.videoTitle
+                this.uploaderName = res.data.upName
+                this.videoCover = res.data.VideoCover
+              } else {
+                this.$message(res.data.msg)
+              }
+            }
+        )
   },
   methods:{
     changeFavor() {
@@ -41,7 +70,10 @@ export default {
       }else {
         this.$router.push({path: '/login'});
       }
-    }
+    },
+    toVideo(){
+      this.$router.push('/video/'+this.videoID);
+    },
   }
 }
 </script>
