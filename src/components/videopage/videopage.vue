@@ -67,7 +67,12 @@ export default {
   created() {
   },
   mounted() {
-    const uid = user.getters.getUser(user.state()).user.userID
+    let uid;
+    const userInfo = user.getters.getUser(user.state())
+    if(userInfo){
+      uid=userInfo.user.userID
+    }else {
+      uid=0}
     //console.log("wtf",this.videoID)
     const vid = this.videoID
     const dataForm = new FormData()

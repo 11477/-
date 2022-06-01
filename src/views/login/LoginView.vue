@@ -65,7 +65,7 @@ export default {
                     'confirmed': true,
                     'userID':res.data.userID,
                   }});
-                console.log()
+                console.log(res.data.userID)
                 var curr = localStorage.getItem('preRoute');
                 if (curr == null) {
                   this.$router.push('/index');

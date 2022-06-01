@@ -7,7 +7,7 @@
           <span class="home-char">首页</span>
         </el-menu-item>
       </div>
-      <div class="searchBar" v-show="!($route.path==='/search')">
+      <div class="searchBar" v-if="!($route.path==='/search')">
         <form id="nav-searchForm" class style="border-radius: 8px">
           <div class="nav-search-content">
             <input class="nav-search-input" type="text" placeholder="请输入关键词搜索"
@@ -78,6 +78,22 @@ export default {
     var userInfo = user.getters.getUser(user.state())
     if (userInfo) {
       this.is_login = true
+      this.loginUserID = userInfo.user.userID
+      const fdata = new FormData
+      fdata.append('userID',userInfo.user.userID)
+      this.$axios({
+        method: 'post',
+        url: '/Websurf/getUserInfoByID/',
+        data: fdata
+      }).then(res =>{
+        if(res.data.error===0){
+          const resdata=JSON.parse(res.data.user_info)
+          console.log(resdata)
+          this.loginUserFans=resdata.userFansNum
+        }else {
+          this.$message.warning(res.data.error)
+        }
+      })
     }
   },
   methods:{
@@ -157,6 +173,7 @@ export default {
 
 <style>
 #nav-bar {
+  position: absolute;
   padding: 0 10% 0 10%;
   height: 61px;
 }
@@ -266,8 +283,8 @@ el-menu-item {
 }
 .right-entry {
   display: flex;
-  float: right;
   align-items: center;
   text-align: center;
+  margin-right: 10px;
 }
 </style>

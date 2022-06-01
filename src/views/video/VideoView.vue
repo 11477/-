@@ -28,7 +28,8 @@
               {{upDesc}}
             </div>
             <div class="subscribe">
-              <el-button size="mini" style="width: 200px">+ 关注</el-button>
+              <el-button size="mini" style="width: 200px" type="info" v-if="isFollow" @click="cancelFollowUp"> 已关注 {{upFans}}</el-button>
+              <el-button size="mini" style="width: 200px" type="primary" @click="followUp" v-else> + 关注 {{upFans}}</el-button>
             </div>
           </div>
         </div>
@@ -89,6 +90,7 @@
       </div>
     </div>
     <BrightComment  class="video-comment"
+                    key="commentKey"
              :label="this.userLabel"
              :avatar="this.avatar"
              :commentList="this.commentList"
@@ -116,13 +118,17 @@ export default {
   name: "VideoView",
   data() {
     return {
+      commentKey: 0,
       descClass: "desc-info",
       descMayOverflow: false,
       showVideo: true,
       loginUserID: 0,
+      loginUserAvatar: '',
       videoKey: 0,
       videoTitle: "你的名字",
       videoView: 114514,
+      upID: 0,
+      upFans: 0,
       upName: "nohesitate",
       upDesc: "这个人的简介什么都没有写哦~",
       uploadDate: "",
@@ -130,6 +136,7 @@ export default {
       videoDesc:"",
       isLiked: false,
       isFavored: false,
+      isFollow: true,
       descSpread: false,
       likeNum: 0,
       likeImg: LikeBefore,
@@ -206,6 +213,7 @@ export default {
     uid=userInfo.user.userID
     }else {
        uid=0}
+    this.loginUserID=uid
     const dataForm = new FormData()
     dataForm.append("videoID",vid)
     dataForm.append("userID",uid)
@@ -235,15 +243,13 @@ export default {
           this.likeNum=res.data.videoLikeNum
           this.favorNum=res.data.videoFavorNum
           this.isLiked=res.data.isLiked
-          this.isFavored=res.data.isFavored}
+          this.isFavored=res.data.isFavored
+          this.isFollow=res.data.isFollowed
+          this.upID=res.data.upID
+            this.upFans=res.data.upUserFansNum}
           else {
             this.showVideo=false
           }
-          const userInfo = user.getters.getUser(user.state())
-          if(userInfo){
-            this.loginUserID=userInfo.user.userID
-          }else {
-            this.loginUserID=0}
         }
     )
     .finally(()=>{
@@ -251,9 +257,25 @@ export default {
      // console.log(height)
       if(height===63){
         this.descMayOverflow=true
-      }
-        }
+      }}
     )
+    if(this.loginUserID!=0){
+    const fdata = new FormData
+    fdata.append('userID',this.loginUserID)
+    this.$axios({
+      method: 'post',
+      url: '/Websurf/getUserInfoByID/',
+      data: fdata
+    })
+    .then(res=>{
+      if(res.data.error===0){
+        const resdata=JSON.parse(res.data.user_info)
+        this.avatar=resdata.userAvatar
+       // console.log(this.avatar)
+      }else {
+        this.$message.error(res.data.msg)
+      }
+    })}
   },
   methods: {
     toLogin(){
@@ -273,9 +295,6 @@ export default {
       commentForm.append("videoID",vid)
       commentForm.append("userID",uid)
       commentForm.append("comment",comment)
-      console.log(commentForm.get("comment"))
-      console.log(commentForm.get("videoID"))
-      console.log(commentForm.get("userID"))
       this.$axios({
         method: 'post',
         url: '/VideoInteraction/comment/',
@@ -460,6 +479,58 @@ export default {
         }
       });}
     },
+    followUp(){
+      if(this.loginUserID===0){
+        this.toLogin()
+      }else {
+        if(this.loginUserID!=this.upID){
+        const uid = this.loginUserID
+        const upid = this.upID
+        const fdata = new FormData
+        fdata.append("userID",uid)
+        fdata.append("followedUserID",upid)
+        this.$axios({
+          method: 'post',
+          url: '/UserCommunication/followuser/',
+          data: fdata
+        })
+        .then(res=>{
+          if(res.data.error===0){
+            this.isFollow=true
+            this.upFans++
+          }else {
+            this.$message.error(this.res.msg)
+          }
+        })
+      }
+      else {
+        this.$message.warning("你时刻在关注你自己")
+      }}
+    },
+    cancelFollowUp(){
+      if(this.loginUserID===0){
+        this.toLogin()
+      }else {
+        const uid = this.loginUserID
+        const upid = this.upID
+        const fdata = new FormData
+        fdata.append("userID",uid)
+        fdata.append("followedUserID",upid)
+        this.$axios({
+          method: 'post',
+          url: '/UserCommunication/cancelfollow/',
+          data: fdata
+        })
+            .then(res=>{
+              if(res.data.error===0){
+                this.isFollow=false
+                this.upFans--
+              }else {
+                this.$message.error(this.res.msg)
+              }
+            })
+      }
+    }
   },
 }
 </script>
@@ -542,14 +613,6 @@ export default {
 .player {
   display: inline-block;
   margin-right: 100px;
-}
-.el-button {
-  background: #00A1D6;
-  color: white;
-}
-.el-button:hover {
-  background: #66ccff;
-  color: white;
 }
 .video-wrap .up-info {
   display: flex;
