@@ -212,7 +212,7 @@ export default {
               }
               this.fansNum = userMsg.fansNum;
               this.playNum = userMsg.playNum;
-              this.favorNum = userMsg.concernsNum;
+              this.followNum = userMsg.concernsNum;
               this.likeNum = userMsg.likeNum;
 
               // eslint-disable-next-line no-case-declarations

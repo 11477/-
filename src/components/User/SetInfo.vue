@@ -16,7 +16,7 @@
         </el-menu-item>
       </el-menu>
     </div>
-    <div class="right-set-info">
+    <div class="right-set-info" v-if="index===2">
       <el-form ref="form" :model="form" label-width="80px" :rules="formRule">
         <el-form-item label="用户名" prop="username">
           <el-input v-model="form.username"
