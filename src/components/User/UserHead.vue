@@ -1,7 +1,7 @@
 <template>
   <div id="user-bar">
     <div class="box-outside">
-      <img class="head-in-box" src="../../assets/avatar/head.jpeg" alt="banner">
+      <img class="head-in-box" :src="userPortrait" alt="用户头像">
       <div class="user-info">
         <div class="user-name">{{ username }}</div>
         <div class="user-intro-box">

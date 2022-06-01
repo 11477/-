@@ -77,6 +77,7 @@ export default {
   methods:{
     toUser(){
       this.$router.push('/user/'+this.userID);
+      location.reload();
     },
     changeFollow() {
       if(this.hasLogin){

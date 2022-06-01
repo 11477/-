@@ -2,21 +2,19 @@
   <div id="set-info">
     <div class="left-nav">
       <el-menu
-          default-active="2"
-          class="el-menu-vertical-demo"
-          @open="handleOpen"
-          @close="handleClose">
-        <el-menu-item index="1">
+          :default-active="activeIndex"
+          class="el-menu-vertical-demo">
+        <el-menu-item index="1" @click="toSetAvatar">
           <i class="el-icon-user"></i>
           <span>我的头像</span>
         </el-menu-item>
-        <el-menu-item index="2">
+        <el-menu-item index="2" @click="toSetInfo">
           <i class="el-icon-document"></i>
           <span>个人信息</span>
         </el-menu-item>
       </el-menu>
     </div>
-    <div class="right-set-info" >
+    <div class="right-set-info" v-if="this.activeIndex==='2'">
       <el-form ref="form" :model="form" label-width="80px" :rules="formRule">
         <el-form-item label="用户名" prop="username">
           <el-input v-model="form.username"
@@ -54,16 +52,21 @@
         </el-form-item>
       </el-form>
     </div>
+    <div class="right-set-avatar" v-if="this.activeIndex==='1'">
+       <UploadImg/>
+    </div>
   </div>
 </template>
 
 <script>
 import user from "@/store/user";
-
+import UploadImg from "@/components/upload/AvatarUpload";
 export default {
   name: "SetInfo",
+  components: {UploadImg},
   data(){
     return{
+      activeIndex: '2',
       form: {
         username: this.prevUsername,
         userInformation: this.prevUserIntro,
@@ -94,11 +97,14 @@ export default {
     prevBirthday:{},
   },
   methods: {
-    handleOpen(key, keyPath) {
-      //console.log(key, keyPath);
+    handleSelect(key, keyPath) {
+      console.log(key, keyPath);
     },
-    handleClose(key, keyPath) {
-      //console.log(key, keyPath);
+    toSetAvatar(){
+      this.activeIndex = '1'
+    },
+    toSetInfo(){
+      this.activeIndex = '2'
     },
     onSubmit() {
       //  console.log('submit!');

@@ -199,6 +199,7 @@ export default {
               //console.log(userMsg);
               this.username = userMsg.username;
               this.userSex = userMsg.userSex;
+              this.userPortrait = userMsg.userPortrait;
               this.userIntro = userMsg.userInformation;
               if(this.userIntro===""){
                 this.userIntroDisplay = "这个人很懒，什么也没有写~"

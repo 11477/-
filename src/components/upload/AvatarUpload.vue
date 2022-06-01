@@ -1,13 +1,10 @@
 <template>
   <div>
-    <div >
-      <div class="list-img-box">
-        <div class="upload-btn" style="height: 120px; width: 300px" @click="uploadPicture('cover')">
-          <i class="el-icon-plus" style="font-size: 30px;"></i>
-          <span>头像设置</span>
-        </div>
+    <div>
+      <h3 style="margin-top: 23px; margin-left: 100px">上传头像</h3>
+      <div class="avatar-uploader" @click="uploadPicture('cover')">
+        <i class="el-icon-plus" style="font-size: 30px; margin-top: 110px;"></i>
       </div>
-
     </div>
     <!-- 剪裁组件弹窗 -->
     <el-dialog
@@ -37,21 +34,16 @@
 <script>
 // 下面的代码是固定写法
 import CropperImage from "@/components/imageCropper/AvatarCropper";
+import user from "@/store/user";
 const COS = require('cos-js-sdk-v5')
 // 填写自己腾讯云cos中的key和id (密钥)
 const cosImg = new COS({
-  SecretId: '***', // 身份识别ID
-  SecretKey: '***' // 身份秘钥
+  SecretId: 'AKIDlNlupUt1vZx5zd2B4h4A0aFfohJfkZ8Q', // 身份识别ID
+  SecretKey: '5uXqthEVXKtDH6g290cz6yby6ze4FBsK' // 身份秘钥
 })
 export default {
   components: { CropperImage},
   name: 'UploadImg',
-  props: {
-    value: {
-      type: String,
-      required: true
-    }
-  },
   data() {
     return {
       //裁切图片参数
@@ -61,6 +53,10 @@ export default {
       imgName: '',
       imgVisible: false,
       avatarPath: '',
+      form: {
+        userID: '',
+        portrait: '',
+      },
     }
   },
   methods: {
@@ -102,7 +98,7 @@ export default {
         if (data.statusCode === 200) {
            //  console.log(data)
           //console.log('https://' + data.Location)
-          this.$message.success('头像上传成功');
+          //this.$message.success('头像设置成功');
           //   console.log(`https:${data.Location}`)
          //  this.imageUrl = `https:${data.Location}`
           let msg = {
@@ -110,6 +106,35 @@ export default {
           }
          // console.log(msg.avatarUrl)
           this.$emit('uploadAvatarSuccess',msg)
+          const userInfo = user.getters.getUser(user.state())
+          this.form.userID = userInfo.user.userID
+          this.form.portrait = msg.avatarUrl
+          this.$axios({
+            method: 'post',
+            url: '/Webhome/uploadPortrait/',
+            data: this.$qs.stringify(this.form)
+          })
+              .then(res => {
+                //   console.log(res)
+                switch (res.data.error) {
+                  case 0:
+                    this.$message.success('头像设置成功')
+                    location.reload()
+                    break;
+                  case 4001:
+                    this.$message.warning('用户不存在！');
+                    break;
+                  case 4002:
+                    this.$message.error('未登录！');
+                    break;
+                  case 3001:
+                    this.$message.error('表单信息有有误！');
+                    break;
+                  default:
+                    this.$message.error(res.data.msg);
+                    break;
+                }
+              })
         }
       })
       this.cropperModel=false
@@ -117,3 +142,21 @@ export default {
   }
 }
 </script>
+
+<style>
+.avatar-uploader{
+  width: 250px;
+  height: 250px;
+  border: 1px dashed #409EFF;
+  border-radius: 6px;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  background: #f7f7f7;
+  margin-left: 100px;
+  margin-top: 30px;
+}
+.avatar-uploader :hover {
+  border: #409EFF;
+}
+</style>

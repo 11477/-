@@ -126,7 +126,7 @@ export default {
             switch (res.data.error) {
               case 0:
                 this.$message.success("删除成功");
-                this.$router.push('/');
+                location.reload();
                 break;
               case 4001:
                 this.$message.warning('用户不存在！');
