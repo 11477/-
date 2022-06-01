@@ -74,7 +74,7 @@
       </div>
       <div class="history" v-else-if="this.activeIndex==='6'">
         <div class="sub-title">历史记录</div>
-        <VideoHistory :videoID="video.browseVIdeoID"
+        <VideoHistory :videoID="video.browseVideoID"
                       :uploader-name="video.browseVideoUser"
                       :video-cover="video.browseVideoCover"
                       :view-time="video.browseTime"

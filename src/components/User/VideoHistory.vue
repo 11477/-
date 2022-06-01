@@ -1,9 +1,9 @@
 <template>
   <div id="video-history">
-    <img class="cover-in-video-history" :src=videoCover alt="视频封面">
+    <img class="cover-in-video-history" :src=videoCover alt="视频封面" @click="ToVideo">
     <div class="info-in-video-history">
-      <div class="title-in-video-history">{{ videoTitle }}</div>
-      <div>{{ uploaderName }}</div>
+      <div class="title-in-video-history" @click="ToVideo">{{ videoTitle }}</div>
+      <div @click="ToUser" class="upload-name">{{ uploaderName }}</div>
       <div style="color: grey; margin-top: 10px">{{ viewTime }}</div>
     </div>
   </div>
@@ -14,16 +14,47 @@ export default {
   name: "VideoHistory",
   data(){
     return{
-
+      uploadID:0,
     }
   },
   props:{
     viewTime:{default: "浏览时间"},
     videoTitle:{default: "视频标题"},
     uploaderName:{default: "up用户名"},
-    videoID:{required:true},
-    videoCover:{}
+    videoID:{default:0},
+    videoCover:{},
   },
+  mounted() {
+    //console.log("wtf",this.videoID)
+    const vid = this.videoID
+    const dataForm = new FormData()
+    dataForm.append("videoID", vid.toString())
+    this.$axios({
+      method: 'post',
+      url: '/VideoManager/getVideoByID/',
+      data: dataForm,
+    })
+        .then(
+            res => {
+              if (res.data.error === 0) {
+                this.uploadID=res.data.upID
+              } else {
+                this.$message(res.data.msg)
+              }
+            }
+        )
+  },
+  methods:{
+    ToVideo(){
+      let path = this.$router.resolve('/video/'+this.videoID);
+      window.open(path.href)
+    },
+    ToUser(){
+      this.$router.push('/user/'+this.uploadID);
+      location.reload();
+    }
+  },
+
 }
 </script>
 
@@ -40,6 +71,7 @@ export default {
   width: 150px;
   height: 100px;
   margin: 10px;
+  border-radius: 5px;
 }
 .cover-in-video-history:hover{
   cursor: pointer;
@@ -56,6 +88,9 @@ export default {
   font-family: "video-title-black",serif;
 }
 .title-in-video-history:hover{
+  cursor: pointer;
+}
+.upload-name{
   cursor: pointer;
 }
 </style>

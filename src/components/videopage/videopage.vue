@@ -55,7 +55,8 @@ export default {
       videoTitle: "no title",
       uploaderName: "syk",
       videoDate: "2004-07-22",
-      coverUrl: "https://nohesitate-1312201606.cos.ap-beijing.myqcloud.com/VideoCover/default-cover.png"
+      coverUrl: "https://nohesitate-1312201606.cos.ap-beijing.myqcloud.com/VideoCover/default-cover.png",
+      uploadID:0,
     }
   },
   props:{
@@ -95,6 +96,7 @@ export default {
                 this.uploaderName=res.data.upName
                 this.coverUrl=res.data.VideoCover
                 this.getVideoDuration(res.data.videoSrc)
+                this.uploadID=res.data.upID
                 }
               else {
                 this.$message(res.data.msg)
@@ -133,7 +135,7 @@ export default {
       window.open(path.href)
     },
     ToUser(){
-      this.$router.push('/user/1');
+      this.$router.push('/user/'+this.uploadID);
     }
   }
 }

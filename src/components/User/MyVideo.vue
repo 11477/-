@@ -156,5 +156,9 @@ export default {
   display: flex;
   flex-direction: column;
   width: 520px;
+  /*border: 1px solid lightgray;*/
+  /*border-left: none;*/
+  /*border-right: none;*/
+  /*border-top: none;*/
 }
 </style>
