@@ -426,7 +426,7 @@ export default {
       favorForm.append("userID",uid)
       this.$axios({
         method: 'post',
-        url: '/VideoInteraction/cancalfavourites/',
+        url: '/VideoInteraction/cancelfavourites/',
         data: favorForm
       })
           .then(res=>{
