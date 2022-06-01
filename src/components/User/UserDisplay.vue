@@ -5,7 +5,7 @@
     </div>
     <div class="info-in-user-display">
       <div class="name-in-user-display" @click="toUser">{{ username }}</div>
-      {{ userInfo }}
+      {{ userInfoDisplay }}
     </div>
     <div class="subscribe-in-user-display">
       <el-popover placement="bottom" v-model="visible" trigger="hover" v-if="hasFollowed">
@@ -28,7 +28,7 @@ export default {
       hasFollowed: true,
       //username: "用户名",
       //userPortrait: "../../assets/avatar/head.jpeg",
-      //userInfo: "这个人很懒，什么也没有写~",
+      userInfoDisplay: "这个人很懒，什么也没有写~",
     };
   },
   props:{
@@ -45,8 +45,7 @@ export default {
   },
   mounted() {
     if(this.userInfo===""){
-      // eslint-disable-next-line vue/no-mutating-props
-      this.userInfo = "这个人很懒，什么也没有写~"
+      this.userInfoDisplay = "这个人很懒，什么也没有写~"
     }
   },
   /*

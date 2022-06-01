@@ -68,8 +68,12 @@
       </div>
       <div class="history" v-else-if="this.activeIndex==='6'">
         <div class="sub-title">历史记录</div>
-        <VideoHistory/>
-        <VideoHistory/>
+        <VideoHistory :videoID="video.browseVIdeoID"
+                      :uploader-name="video.browseVideoUser"
+                      :video-cover="video.browseVideoCover"
+                      :view-time="video.browseTime"
+                      :video-title="video.browseVideoTitle"
+                      v-for="video in this.historyList" v-bind:key="video.browseTime"></VideoHistory>
       </div>
       <div class="information" v-else-if="this.activeIndex==='7'">
         <SetInfo :prev-sex="userSex"
