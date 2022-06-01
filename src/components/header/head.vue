@@ -91,8 +91,10 @@ export default {
       }).then(res =>{
         if(res.data.error===0){
           const resdata=JSON.parse(res.data.user_info)
-          console.log(resdata)
+          //console.log(resdata)
           this.loginUserFans=resdata.userFansNum
+          this.loginUserVideos=resdata.userVideosNum
+          this.loginUserFollow=resdata.userFollowNum
         }else {
           this.$message.warning(res.data.error)
         }

@@ -14,29 +14,6 @@
         >
         </el-input>
 
-        <div v-if="buttonMap[0]" class="hbl-owo">
-          <div
-            :class="pBodyMap[0] ? 'OwO' : 'OwO OwO-open'"
-            class="emoj publish"
-            :style="{ width: emojiWidth }"
-          >
-            <div class="OwO-logo" >
-              <span @blur="blur" @click="pBodyStatus(0)">Emoji表情</span>
-            </div>
-            <div class="OwO-body">
-              <ul class="OwO-items OwO-items-show">
-                <li
-                  class="OwO-item"
-                  v-for="(oitem, index) in OwOlist"
-                  :key="'oitem' + index"
-                  @click="choseEmoji(0, oitem.title)"
-                >
-                  <img :src="require('./img/face/' + oitem.url)" alt="" />
-                </li>
-              </ul>
-            </div>
-          </div>
-        </div>
         <div class="publish publish-btn">
           <button class="btn" @click="doSend()">发送</button>
           <button @click="cancel(0)" class="btn btn-cancel">取消</button>
@@ -402,7 +379,7 @@ export default {
   height: 30px; /* 高度 */
   border-width: 0px; /* 边框宽度 */
   border-radius: 3px; /* 边框半径 */
-  background: #3cb371; /* 背景颜色 */
+  background: #00aeec; /* 背景颜色 */
   cursor: pointer; /* 鼠标移入按钮范围时出现手势 */
   outline: none; /* 不显示轮廓线 */
   font-family: Microsoft YaHei; /* 设置字体 */
@@ -415,8 +392,14 @@ export default {
   margin-left: 5px;
   margin-right: 5px;
 }
+.btn:hover{
+  background: #66ccff;
+}
 .btn-cancel {
   background: grey; /* 背景颜色 */
+}
+.btn-cancel:hover {
+  background: #61666D;
 }
 
 .tmsgBox {
@@ -1004,7 +987,7 @@ export default {
   display: inline-block;
   margin-left: 10px;
   background: #dff0d8;
-  color: #3c763d;
+  color: #00aeec;
   border-radius: 5px;
   padding: 3px 6px;
   font-size: 12px;
@@ -1036,7 +1019,7 @@ export default {
   margin-top: 2px;
   width: 5px;
   height: 23px;
-  background: #3cb371; /*#1E90FF*/
+  background: #00aeec; /*#1E90FF*/
 }
 .com-rep {
   display: inline-block;
@@ -1075,7 +1058,7 @@ export default {
 }
 .icon {
   background: #dff0d8;
-  color: #3c763d;
+  color: #66ccff;
   border-radius: 5px;
   padding: 3px 6px;
   font-size: 12px;
@@ -1120,6 +1103,7 @@ export default {
   margin-top: 2px;
 }
 .hbl-child {
-  padding: 20px;
+  padding: 10px;
+  width: 900px;
 }
 </style>

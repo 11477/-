@@ -313,6 +313,7 @@ export default {
 }
 .menu-box{
   padding: 0 10%;
+  width: 850px;
 }
 .user-statistic-box{
   width: 600px;
@@ -326,10 +327,12 @@ export default {
   flex-direction: column;
 }
 .info1{
-  margin-left: 300px;
+  margin-left: 50px;
+  width: 50px;
 }
 .info234{
   margin-left: 15px;
+  width: 50px;
 }
 .content-area{
   padding: 0 10%;
