@@ -65,7 +65,11 @@
                      v-for="user in this.fansList" v-bind:key="user.userID"></UserDisplay>
       </div>
       <div class="notice" v-else-if="this.activeIndex==='5'">
-        notice
+        <div class="sub-title">我的通知</div>
+        <UserNotice :letterTime="letter.letterTime"
+                     :letterText="letter.letterText"
+                     :letterUser="letter.letterUser"
+                     v-for="letter in this.noticeList" v-bind:key="letter.letterTime"></UserNotice>
       </div>
       <div class="history" v-else-if="this.activeIndex==='6'">
         <div class="sub-title">历史记录</div>
@@ -164,9 +168,10 @@ import UserFavor from "@/components/User/UserFavor";
 import MyVideo from "@/components/User/MyVideo";
 import user from "@/store/user";
 import SetInfo from "@/components/User/SetInfo";
+import UserNotice from "@/components/User/UserNotice";
 export default {
   name: "UserView",
-  components: {SetInfo, MyVideo, UserFavor, UserDisplay, UserBar, VideoHistory},
+  components: {UserNotice, SetInfo, MyVideo, UserFavor, UserDisplay, UserBar, VideoHistory},
   created() {
     const userInfo = user.getters.getUser(user.state());
     this.pageUserID = eval(this.$route.params.UserID);

@@ -74,7 +74,7 @@ export default {
   margin-top: 60px;
   position: absolute;
   background: url("../../assets/images/home-background.jpg") no-repeat;
-  width: 100%;
+  /*width: 100%;*/
   height: 800px;
   overflow-x:hidden;
   text-align: center;
