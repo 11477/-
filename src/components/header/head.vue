@@ -119,25 +119,46 @@ export default {
     },
     toMessage() {
       if(!this.is_login)
-        this.$router.push({path: '/login'})
+        this.$router.push({
+          path: '/login',
+          params:{
+            active:'5',
+          }
+            }
+        )
       else
         this.$router.push({path: '/user/' + this.loginUserID})
     },
     toStore() {
       if(!this.is_login)
-        this.$router.push({path: '/login'})
+        this.$router.push({
+          path: '/login',
+          params:{
+            active:'2',
+          }
+        })
       else
         this.$router.push({path: '/user/' + this.loginUserID})
     },
     toHistory() {
       if(!this.is_login)
-        this.$router.push({path: '/login'})
+        this.$router.push({
+          path: '/login',
+          params:{
+            active:'6',
+          }
+        })
       else
         this.$router.push({path: '/user/' + this.loginUserID})
     },
     toFollow() {
       if(!this.is_login)
-        this.$router.push({path: '/login'})
+        this.$router.push({
+          path: '/login',
+          params:{
+            active:'3',
+          }
+        })
       else
         this.$router.push({path: '/user/' + this.loginUserID})
     },
@@ -151,7 +172,7 @@ export default {
         this.$router.push({path: '/upload/frame'})
     },
     toSpace() {
-      console.log('tospace!')
+      //console.log('tospace!')
       let path = this.$router.resolve({path: '/user/' + this.loginUserID})
       //console.log(path)
         window.open(path.href)

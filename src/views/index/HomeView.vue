@@ -7,6 +7,12 @@
       <div class="video-box" >
         <VideoCover :videoID=colum v-for="colum in auditVideoList" v-bind:key="colum"></VideoCover>
       </div>
+      <div class="switch-box">
+        <div class="switch-btn" @click="flash">
+          <i class="el-icon-refresh"></i>
+          <span>换换</span>
+        </div>
+      </div>
       <div class="video-channel">
         <a class="channel-link" @click="getNewVideo('knowledge')">知识</a>
         <a class="channel-link" @click="getNewVideo('science')">科技</a>
@@ -65,6 +71,9 @@ export default {
             this.auditVideoList=res.data.videoID_list
           })
     },
+    flash(){
+      location.reload();
+    }
   }
 }
 </script>
@@ -116,7 +125,7 @@ export default {
 .video-channel{
   position: absolute;
   text-align:center;
-  top:130px;
+  top:160px;
   width: 80px;
   height: 455px;
   margin-left: 1375px;
@@ -144,6 +153,39 @@ export default {
 }
 
 .channel-link:hover{
+  background-color: rgba(128,128,128,0.7);
+}
+
+.switch-box{
+  position: absolute;
+  text-align:center;
+  width: 80px;
+  height: 40px;
+  margin-left: 1375px;
+  margin-top: 60px;
+  margin-right: 50px;
+  flex-flow: column;
+  background-color: rgba(255,255,255,0.5);
+  border-radius: 6px;
+}
+
+.switch-btn{
+  display: inline-block;
+  box-sizing: content-box;
+  margin-top: 7px;
+  width: 60px;
+  height: 25px;
+  border: 1px solid rgb(241,242,243);
+  border-radius: 6px;
+  background-color: rgba(246,247,248,0.7);
+  color: black;
+  text-align: center;
+  font-weight: 400;
+  transition: background-color .3s,color .3s;
+  cursor: pointer;
+}
+
+.switch-btn:hover{
   background-color: rgba(128,128,128,0.7);
 }
 
