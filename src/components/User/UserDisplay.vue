@@ -5,12 +5,12 @@
     </div>
     <div class="info-in-user-display">
       <div class="name-in-user-display" @click="toUser">{{ username }}</div>
-      {{ userInfoDisplay }}
+      <span style="font-size: 10px">{{ userInfoDisplay }}</span>
     </div>
     <div class="subscribe-in-user-display">
       <el-popover placement="bottom" v-model="visible" trigger="hover" v-if="hasFollowed">
         <div style="text-align: center">
-          <el-button @click="hasFollowed=false; visible=false">取消关注</el-button>
+          <el-button @click="cancelFollow">取消关注</el-button>
         </div>
         <el-button style="background: #00aeec; color: white" slot="reference">已关注</el-button>
       </el-popover>
@@ -20,6 +20,8 @@
 </template>
 
 <script>
+import user from "@/store/user";
+
 export default {
   name: "UserDisplay",
   data(){
@@ -33,7 +35,6 @@ export default {
   },
   props:{
     userID:{
-      type: Number,
       default: 0,
     },
     hasLogin:{
@@ -46,34 +47,40 @@ export default {
   mounted() {
     if(this.userInfo===""){
       this.userInfoDisplay = "这个人很懒，什么也没有写~"
+    } else{
+      this.userInfoDisplay = this.userInfo
     }
   },
-  /*
-  mounted() {
-    //console.log("wtf",this.videoID)
-    const uid = this.userID
-    const dataForm = new FormData()
-    dataForm.append("userID", uid.toString())
-    //console.log('?',dataForm.get("videoID"))
-    this.$axios({
-      method: 'post',
-      url: '/Websurf/getUserInfoByID',
-      data: dataForm,
-    })
-        .then(
-            res => {
-              //console.log(res.data)
-              if (res.data.error === 0) {
-                this.username = res.data.username
-                this.userInfo = res.data.userDesc
-                this.userPortrait = res.data.userAvatar
-              } else {
-                this.$message(res.data.msg)
-              }
+  created() {
+    if(!this.hasLogin){
+      this.hasFollowed = false
+    } else{
+      const userInfo = user.getters.getUser(user.state());
+      const loginUserID = userInfo.user.userID;
+      const dataForm = new FormData()
+      dataForm.append("userAID",loginUserID)
+      dataForm.append("userBID",this.userID)
+      // console.log('?',dataForm.get("videoID"))
+      this.$axios({
+        method: 'post',
+        url: '/Websurf/getConnectionInfoByID/',
+        data: dataForm
+      })
+          .then(res =>{
+            switch (res.data.error) {
+              case 0:
+                this.hasFollowed = res.data.hasFollowed
+                break;
+              case 4001:
+                this.$message.warning('用户不存在！');
+                break;
             }
-        )
+          })
+          .catch(err => {
+            console.log(err);
+          })
+    }
   },
-  */
   methods:{
     toUser(){
       let path = this.$router.resolve('/user/'+this.userID);
@@ -81,7 +88,59 @@ export default {
     },
     changeFollow() {
       if(this.hasLogin){
-        this.hasFollowed = true;
+        const userInfo = user.getters.getUser(user.state());
+        const loginUserID = userInfo.user.userID;
+        if(this.userID===loginUserID){
+          this.$message.warning('这么自恋呀~');
+          return;
+        }
+        const followForm = new FormData()
+        followForm.append("userID",loginUserID)
+        followForm.append("followedUserID",this.userID)
+        // console.log('?',dataForm.get("videoID"))
+        this.$axios({
+          method: 'post',
+          url: '/UserCommunication/followuser/',
+          data: followForm
+        })
+            .then(res =>{
+              switch (res.data.error) {
+                case 0:
+                  this.hasFollowed = true;
+                  break;
+              }
+            })
+            .catch(err => {
+              console.log(err);
+            })
+      }else {
+        this.$router.push({path: '/login'});
+      }
+    },
+    cancelFollow(){
+      this.visible=false
+      if(this.hasLogin){
+        const userInfo = user.getters.getUser(user.state());
+        const loginUserID = userInfo.user.userID;
+        const followForm = new FormData()
+        followForm.append("userID",loginUserID)
+        followForm.append("followedUserID",this.userID)
+        // console.log('?',dataForm.get("videoID"))
+        this.$axios({
+          method: 'post',
+          url: '/UserCommunication/cancelfollow/',
+          data: followForm
+        })
+            .then(res =>{
+              switch (res.data.error) {
+                case 0:
+                  this.hasFollowed = false;
+                  break;
+              }
+            })
+            .catch(err => {
+              console.log(err);
+            })
       }else {
         this.$router.push({path: '/login'});
       }

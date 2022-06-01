@@ -27,7 +27,7 @@
         <div class="right-button">
           <div v-if="this.is_login">
             <el-dropdown>
-          <img class="head-pic" src='../../assets/avatar/head.jpeg' alt="banner" @click="toSpace">
+          <img class="head-pic" :src="loginUserAvatar" alt="banner" @click="toSpace">
               <el-dropdown-menu slot="dropdown">
                 <el-dropdown-item @click.native="toSpace">我的关注:{{loginUserFollow}}</el-dropdown-item>
                 <el-dropdown-item @click.native="toSpace">我的粉丝:{{loginUserFans}}</el-dropdown-item>
@@ -75,7 +75,7 @@ export default {
       loginUserFollow: 66,
       loginUserFans: 66,
       loginUserVideos: 66,
-      loginUserHead:"",
+      loginUserAvatar: "../../assets/avatar/head.jpeg"
     }
   },
   created() {
@@ -96,7 +96,7 @@ export default {
           this.loginUserFans=resdata.userFansNum
           this.loginUserVideos=resdata.userVideosNum
           this.loginUserFollow=resdata.userFollowNum
-          this.loginUserHead=resdata.userAvatar
+          this.loginUserAvatar=resdata.userAvatar
         }else {
           this.$message.warning(res.data.error)
         }

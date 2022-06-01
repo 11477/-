@@ -6,6 +6,7 @@
              :userIntro=userIntroDisplay
              :userBirthday=userBirthday
              :userSex=userSex
+             :pageUserID=pageUserID
              :isMine="true"></UserBar>
     <div class="menu-box">
       <el-menu :default-active="activeIndex" class="el-menu-demo" mode="horizontal" @select="handleSelect">
@@ -96,6 +97,7 @@
              :userBirthday=userBirthday
              :userSex=userSex
              :isMine="false"
+             :pageUserID=pageUserID
              :hasLogin=hasLogin></UserBar>
     <div class="menu-box">
       <el-menu :default-active="activeIndex" class="el-menu-demo" mode="horizontal" @select="handleSelect">
