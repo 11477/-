@@ -9,11 +9,11 @@
       </div>
       <div class="upload-right-block" @click="toUser" v-if="this.isLogin">
         <el-avatar :src=this.avatarSrc size="small"></el-avatar>
-        <div class="upload-user-id">{{this.userId}}</div>
+        <div class="upload-user-id">{{this.username}}</div>
       </div>
       <div class="upload-right-block" @click="toLogin" v-else>
         <div class="login-button">登录</div>
-        <img class="head-pic" v-if="$store.state.islogin" src="../../assets/avatar/head.jpeg" alt="banner">
+        <img class="head-pic" v-if="$store.state.islogin" src="avatarSrc" alt="banner">
       </div>
     </div>
   </div>
@@ -28,14 +28,33 @@ export default {
     return {
       isLogin:false,
       title: "上传页面",
-      userId: "nohesitate",
-      avatarSrc: "https://cube.elemecdn.com/3/7c/3ea6beec64369c2642b92c6726f1epng.png"
+      userId: user.getters.getUser(user.state()).user.userID,
+      avatarSrc: "",
+      username:''
     };
   },
   created() {
+    var userInfo = user.getters.getUser(user.state())
     if(user.getters.getUser(user.state()).user.userID)
       this.isLogin=true
+    this.userId = userInfo.user.userID
+    const fdata = new FormData
+    fdata.append('userID',userInfo.user.userID)
+    this.$axios({
+      method: 'post',
+      url: '/Websurf/getUserInfoByID/',
+      data: fdata
+    }).then(res =>{
+      if(res.data.error===0){
+        const resdata=JSON.parse(res.data.user_info)
+        this.avatarSrc=resdata.userAvatar
+        this.username=resdata.username
+      }else {
+        this.$message.warning(res.data.error)
+      }
+    })
   },
+
   methods: {
     handleSelect(key, keyPath) {
       console.log(key, keyPath);
