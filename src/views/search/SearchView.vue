@@ -67,7 +67,9 @@ export default {
 
 <style>
 #search-view {
-  margin-top: 20px;
+  position: absolute;
+  margin-top: 70px;
+  margin-left: 250px;
 }
 .flex-center{
   display: flex;
@@ -79,7 +81,7 @@ export default {
 .search-input-wrap{
   position: relative;
   width: 640px;
-  margin: 0 auto;
+  margin-left: 0;
   padding: 5px;
   background: #ffffff;
   border: 1px solid #00aeec;
@@ -107,6 +109,6 @@ export default {
   background: transparent;
 }
 .menu-box{
-  padding: 0 10%;
+  margin-left: 0;
 }
 </style>

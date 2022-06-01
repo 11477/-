@@ -1,5 +1,6 @@
 <template>
-  <div class="user" v-if="isMine">
+  <div class="userview">
+  <div v-if="isMine">
     <UserBar :username=username
              :userPortrait=userPortrait
              :userIntro=userIntroDisplay
@@ -151,6 +152,7 @@
                      v-for="user in this.fansList" v-bind:key="user.userID"></UserDisplay>
       </div>
     </div>
+  </div>
   </div>
 </template>
 
@@ -304,6 +306,11 @@ export default {
 </script>
 
 <style>
+.userview{
+  position: absolute;
+  margin-top: 60px;
+  margin-left: 100px;
+}
 .menu-box{
   padding: 0 10%;
 }

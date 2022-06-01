@@ -20,6 +20,9 @@
           </div>
         </form>
       </div>
+      <div v-else>
+        <img src="@/assets/images/blank.png" height="60px" width="500px">
+      </div>
       <div class="right-entry">
         <div class="right-button">
           <div v-if="this.is_login">
@@ -173,9 +176,10 @@ export default {
 
 <style>
 #nav-bar {
+  margin: auto 0;
   position: absolute;
   padding: 0 10% 0 10%;
-  height: 61px;
+  height: 60px;
 }
 .logo-pic {
   width: 150px;
@@ -187,7 +191,8 @@ export default {
 .head-pic {
   width: 41px;
   margin-top: -5px;
-  margin-right: 20px;
+  margin-right: -10px;
+  margin-left: 10px;
 }
 .login-button{
   width: 36px;
@@ -202,8 +207,13 @@ export default {
 }
 .searchBar {
   display: inline-block;
-  width: 40%;
+  width: 500px;
   margin-top: 7px;
+}
+.searchBarImg {
+  display: inline-block;
+  width: 500px;
+  height: 60px;
 }
 #nav-searchForm{
   display: flex;
@@ -268,9 +278,9 @@ el-menu-item {
   flex-direction: column;
 }
 .right-button{
-  display: flex;
   flex-direction: column;
   margin: 10px 20px;
+  margin-right: 10px;
   width: max-content;
 }
 .right-button :hover{

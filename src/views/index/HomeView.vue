@@ -71,6 +71,7 @@ export default {
 <style>
 
 .home{
+  margin-top: 60px;
   position: absolute;
   background: url("../../assets/images/home-background.jpg") no-repeat;
   width: 100%;

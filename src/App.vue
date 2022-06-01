@@ -1,7 +1,7 @@
 <template>
   <div id="app">
-    <NavBar v-if="!$route.meta.unShowNav" style="position: relative"/>
-    <router-view/>
+    <NavBar v-if="!$route.meta.unShowNav"/>
+    <router-view />
   </div>
 </template>
 

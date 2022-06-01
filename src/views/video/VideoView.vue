@@ -1,5 +1,5 @@
 <template>
-  <div style="position: absolute">
+  <div style="position: absolute;margin-top: 60px">
   <div v-if="showVideo" class="video-wrap" id="video-wrap">
     <div class="video-info" id="video-info">
       <div class="l-con" id="l-con">
