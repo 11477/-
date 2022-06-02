@@ -24,7 +24,7 @@
         <img src="@/assets/images/blank.png" height="60px" width="500px">
       </div>
       <div class="right-entry">
-        <div class="right-button">
+        <div class="first-right-button">
           <div v-if="this.is_login">
             <el-dropdown>
           <img class="head-pic" :src="loginUserAvatar" alt="banner" @click="toSpace">
@@ -306,6 +306,16 @@ el-menu-item {
   display: flex;
   flex-direction: column;
 }
+.first-right-button{
+  flex-direction: column;
+  margin: 10px 20px;
+  margin-right: 10px;
+  width: max-content;
+  cursor: pointer;
+  //margin-left: 100px;
+
+}
+
 .right-button{
   flex-direction: column;
   margin: 10px 20px;
