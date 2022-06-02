@@ -159,6 +159,10 @@
       </div>
     </div>
   </div>
+    <div class="pic-right" style="margin-top: 80px">
+      <el-image style="width: 200px; height: 200px; margin-left: 0; margin-top: 0"
+                v-for="url in urls" :key="url" :src="url" lazy></el-image>
+    </div>
   </div>
 </template>
 
@@ -259,6 +263,20 @@ export default {
   },
   data() {
     return {
+      urls: [
+        'https://iconfont.alicdn.com/t/befc4847-fa04-4dda-b7f4-1181861d56fd.png@500h_500w.png',
+        'https://iconfont.alicdn.com/t/befc4847-fa04-4dda-b7f4-1181861d56fd.png@500h_500w.png',
+        'https://iconfont.alicdn.com/t/befc4847-fa04-4dda-b7f4-1181861d56fd.png@500h_500w.png',
+        'https://iconfont.alicdn.com/t/d640f597-1555-4e6f-a464-f2bd041a7e3a.png@500h_500w.png',
+        'https://iconfont.alicdn.com/t/d1089c34-3986-4992-9c6a-f550822dcc11.png@500h_500w.png',
+        'https://iconfont.alicdn.com/t/64995fce-0fd2-4bbf-8fcb-a1fd2ce98274.png@500h_500w.png',
+        'https://iconfont.alicdn.com/t/e28d62b4-171d-4ba2-82bc-c6cf2fe96e96.png@500h_500w.png',
+        'https://iconfont.alicdn.com/t/4f4d7075-f50d-4a03-ae92-baec66f9d964.png@500h_500w.png',
+        'https://iconfont.alicdn.com/t/dcb8d2bc-b721-46b0-9979-f017a64ed769.png@500h_500w.png',
+        'https://iconfont.alicdn.com/t/1192c5bf-17b0-4c19-a0cb-eed122049893.png@500h_500w.png',
+        'https://iconfont.alicdn.com/t/1192c5bf-17b0-4c19-a0cb-eed122049893.png@500h_500w.png',
+        'https://iconfont.alicdn.com/t/aa0b17d0-f447-45f8-8a64-2b6a357a38ca.png@500h_500w.png',
+      ],
       activeIndex: '1',
       loginUserID: 0,
       pageUserID: 0,
@@ -317,6 +335,12 @@ export default {
   position: absolute;
   margin-top: 60px;
   margin-left: 100px;
+  display: flex;
+  flex-direction: row;
+}
+.pic-right{
+  display: flex;
+  flex-direction: column;
 }
 .menu-box{
   padding: 0 10%;
@@ -347,6 +371,7 @@ export default {
   flex-direction: column;
 }
 .sub-title{
+  color: #409EFF;
   font-size: 20px;
   text-align: left;
   margin-top: 20px;
