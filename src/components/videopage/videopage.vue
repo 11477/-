@@ -167,17 +167,20 @@ export default {
 
 .bottom-line{
   position: absolute;
-  bottom: 45px;
-  left: 5px;
+  bottom: 43px;
+  //left: 5px;
   z-index: 2;
   width: 100%;
   display: flex;
   align-items: center;
+  background-color: rgba(128,128,128,0.4);
+  border-radius: 5px;
 }
 
 .bottom-line-left{
   min-width: 0;
   flex: 1;
+  margin-left: 5px;
   display: -webkit-flex;
   display: flex;
   align-items: center;

@@ -82,7 +82,7 @@ export default {
 .home{
   margin-top: 60px;
   position: absolute;
-  background: url("../../assets/images/home-background.jpg") no-repeat;
+  background: url("../../assets/images/background3.jpg") no-repeat;
   /*width: 100%;*/
   height: 800px;
   overflow-x:hidden;
@@ -132,7 +132,7 @@ export default {
   margin-top: 70px;
   margin-right: 50px;
   flex-flow: column;
-  background-color: rgba(255,255,255,0.5);
+  background-color: rgba(255,255,255,0.1);
   border-radius: 6px;
 }
 
@@ -165,7 +165,7 @@ export default {
   margin-top: 60px;
   margin-right: 50px;
   flex-flow: column;
-  background-color: rgba(255,255,255,0.5);
+  background-color: rgba(255,255,255,0.1);
   border-radius: 6px;
 }
 
