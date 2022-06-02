@@ -264,9 +264,9 @@ export default {
   data() {
     return {
       urls: [
+        'https://iconfont.alicdn.com/t/baf841bb-c1ec-47f8-b192-ac8e5dc8eb32.png@500h_500w.png',
         'https://iconfont.alicdn.com/t/befc4847-fa04-4dda-b7f4-1181861d56fd.png@500h_500w.png',
-        'https://iconfont.alicdn.com/t/befc4847-fa04-4dda-b7f4-1181861d56fd.png@500h_500w.png',
-        'https://iconfont.alicdn.com/t/befc4847-fa04-4dda-b7f4-1181861d56fd.png@500h_500w.png',
+        'https://iconfont.alicdn.com/t/4622ab5b-cb6c-41df-a25d-1ecaf0751de5.png@500h_500w.png',
         'https://iconfont.alicdn.com/t/d640f597-1555-4e6f-a464-f2bd041a7e3a.png@500h_500w.png',
         'https://iconfont.alicdn.com/t/d1089c34-3986-4992-9c6a-f550822dcc11.png@500h_500w.png',
         'https://iconfont.alicdn.com/t/64995fce-0fd2-4bbf-8fcb-a1fd2ce98274.png@500h_500w.png',
