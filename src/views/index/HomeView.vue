@@ -1,7 +1,7 @@
 <template>
   <div class="home">
     <div class="img-box">
-      <img src="../../assets/icons/home-wel.png">
+      <img src="../../assets/icons/home-wel.png" alt="pic">
     </div>
     <div class="channel-video">
         <div class="video-box" v-if="this.type==='Any'">
@@ -58,18 +58,18 @@
         </div>
       </div>
       <div class="video-channel">
-        <a class="channel-link" @click="C2K()">知识</a>
-        <a class="channel-link" @click="C2SC()">科技</a>
-        <a class="channel-link" @click="C2I()">资讯</a>
-        <a class="channel-link" @click="C2L()">生活</a>
-        <a class="channel-link" @click="C2C()">公益</a>
-        <a class="channel-link" @click="C2MC()">音乐</a>
-        <a class="channel-link" @click="C2D()">舞蹈</a>
-        <a class="channel-link" @click="C2F()">美食</a>
-        <a class="channel-link" @click="C2SP()">运动</a>
-        <a class="channel-link" @click="C2MV()">影视</a>
-        <a class="channel-link" @click="C2H()">历史</a>
-        <a class="channel-link" @click="C2E()">娱乐</a>
+        <a class="channel-link" id="channel-1" @click="C2K">知识</a>
+        <a class="channel-link" id="channel-2" @click="C2SC">科技</a>
+        <a class="channel-link" id="channel-3" @click="C2I">资讯</a>
+        <a class="channel-link" id="channel-4" @click="C2L">生活</a>
+        <a class="channel-link" id="channel-5" @click="C2C">公益</a>
+        <a class="channel-link" id="channel-6" @click="C2MC">音乐</a>
+        <a class="channel-link" id="channel-7" @click="C2D">舞蹈</a>
+        <a class="channel-link" id="channel-8" @click="C2F">美食</a>
+        <a class="channel-link" id="channel-9" @click="C2SP">运动</a>
+        <a class="channel-link" id="channel-10" @click="C2MV">影视</a>
+        <a class="channel-link" id="channel-11" @click="C2H">历史</a>
+        <a class="channel-link" id="channel-12" @click="C2E">娱乐</a>
       </div>
     </div>
     <div class="bottom-btn-box">
@@ -242,39 +242,111 @@ export default {
   methods:{
     C2K(){
       this.type='knowledge'
+      for(let i=1; i<=12;i++){
+      let div1 = document.getElementById('channel-' + i.toString())
+      div1.style.backgroundColor="rgba(246,247,248,0.7)"
+      }
+      let div1 = document.getElementById('channel-1')
+      div1.style.backgroundColor="rgba(128,128,128,0.7)"
     },
     C2SC(){
       this.type='science'
+      for(let i=1; i<=12;i++){
+        let div1 = document.getElementById('channel-' + i.toString())
+        div1.style.backgroundColor="rgba(246,247,248,0.7)"
+      }
+      let div1 = document.getElementById('channel-2')
+      div1.style.backgroundColor="rgba(128,128,128,0.7)"
     },
     C2I(){
       this.type='info'
+      for(let i=1; i<=12;i++){
+        let div1 = document.getElementById('channel-' + i.toString())
+        div1.style.backgroundColor="rgba(246,247,248,0.7)"
+      }
+      let div1 = document.getElementById('channel-3')
+      div1.style.backgroundColor="rgba(128,128,128,0.7)"
     },
     C2L(){
       this.type='life'
+      for(let i=1; i<=12;i++){
+        let div1 = document.getElementById('channel-' + i.toString())
+        div1.style.backgroundColor="rgba(246,247,248,0.7)"
+      }
+      let div1 = document.getElementById('channel-4')
+      div1.style.backgroundColor="rgba(128,128,128,0.7)"
     },
     C2C(){
       this.type='charity'
+      for(let i=1; i<=12;i++){
+        let div1 = document.getElementById('channel-' + i.toString())
+        div1.style.backgroundColor="rgba(246,247,248,0.7)"
+      }
+      let div1 = document.getElementById('channel-5')
+      div1.style.backgroundColor="rgba(128,128,128,0.7)"
     },
     C2MC(){
       this.type='music'
+      for(let i=1; i<=12;i++){
+        let div1 = document.getElementById('channel-' + i.toString())
+        div1.style.backgroundColor="rgba(246,247,248,0.7)"
+      }
+      let div1 = document.getElementById('channel-6')
+      div1.style.backgroundColor="rgba(128,128,128,0.7)"
     },
     C2D(){
       this.type='dance'
+      for(let i=1; i<=12;i++){
+        let div1 = document.getElementById('channel-' + i.toString())
+        div1.style.backgroundColor="rgba(246,247,248,0.7)"
+      }
+      let div1 = document.getElementById('channel-7')
+      div1.style.backgroundColor="rgba(128,128,128,0.7)"
     },
     C2F(){
       this.type='food'
+      for(let i=1; i<=12;i++){
+        let div1 = document.getElementById('channel-' + i.toString())
+        div1.style.backgroundColor="rgba(246,247,248,0.7)"
+      }
+      let div1 = document.getElementById('channel-8')
+      div1.style.backgroundColor="rgba(128,128,128,0.7)"
     },
     C2SP(){
       this.type='sport'
+      for(let i=1; i<=12;i++){
+        let div1 = document.getElementById('channel-' + i.toString())
+        div1.style.backgroundColor="rgba(246,247,248,0.7)"
+      }
+      let div1 = document.getElementById('channel-9')
+      div1.style.backgroundColor="rgba(128,128,128,0.7)"
     },
     C2MV(){
       this.type='movie'
+      for(let i=1; i<=12;i++){
+        let div1 = document.getElementById('channel-' + i.toString())
+        div1.style.backgroundColor="rgba(246,247,248,0.7)"
+      }
+      let div1 = document.getElementById('channel-10')
+      div1.style.backgroundColor="rgba(128,128,128,0.7)"
     },
     C2H(){
       this.type='history'
+      for(let i=1; i<=12;i++){
+        let div1 = document.getElementById('channel-' + i.toString())
+        div1.style.backgroundColor="rgba(246,247,248,0.7)"
+      }
+      let div1 = document.getElementById('channel-11')
+      div1.style.backgroundColor="rgba(128,128,128,0.7)"
     },
     C2E(){
       this.type='entertainment'
+      for(let i=1; i<=12;i++){
+        let div1 = document.getElementById('channel-' + i.toString())
+        div1.style.backgroundColor="rgba(246,247,248,0.7)"
+      }
+      let div1 = document.getElementById('channel-12')
+      div1.style.backgroundColor="rgba(128,128,128,0.7)"
     },
     addNewVideo(){
       const requestForm = new FormData()
