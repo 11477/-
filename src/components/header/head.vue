@@ -75,7 +75,7 @@ export default {
       loginUserFollow: 66,
       loginUserFans: 66,
       loginUserVideos: 66,
-      loginUserAvatar: "../../assets/avatar/head.jpeg"
+      loginUserAvatar: require("../../assets/avatar/head.jpeg")
     }
   },
   created() {

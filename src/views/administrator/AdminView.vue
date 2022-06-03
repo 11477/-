@@ -3,12 +3,20 @@
       <el-tabs class="audit-tab" :tab-position="tabPosition" :stretch="true" type="border-card" @tab-click="handleTabClick">
         <el-tab-pane label="视频列表">
           <div class="audit-videos">
-              <VideoCover :videoID=colum v-for="colum in auditVideoList" v-bind:key="colum"></VideoCover>
+              <div v-for="colum in auditVideoList" v-bind:key="colum">
+                <VideoCover :videoID=colum></VideoCover>
+                <el-button type="danger" size="mini" @click="deleteVideo(AdministratorID,colum)">删除</el-button>
+              </div>
           </div>
         </el-tab-pane>
         <el-tab-pane label="投诉处理">
           <div class="audit-videos">
-            <VideoCover :videoID=colum v-for="colum in auditVideoList" v-bind:key="colum"></VideoCover>
+            <div v-for="colum in auditVideoList" v-bind:key="colum">
+              <VideoCover :videoID=colum></VideoCover>
+              <el-button type="danger" size="mini" @click="auditVideo(AdministratorID,false)">删除</el-button>
+              {{114}}
+              <el-button type="primary" size="mini" @click="auditVideo(AdministratorID,true)">通过</el-button>
+            </div>
           </div>
         </el-tab-pane>
       </el-tabs>
@@ -20,6 +28,7 @@
 
 <script>
 import VideoCover from "@/components/videopage/videopage";
+import user from "@/store/user";
 export default {
   components: {VideoCover},
   data() {
@@ -28,14 +37,18 @@ export default {
       ],
       tabPosition: 'left',
       reason: "看他不爽",
-      AdministratorID: 1,
+      AdministratorID: 0,
       AdministratorName: "nohesitate",
       AuditResult:  true,
       stateNow: "any",
+      auditInfo:[],
     }
   },
   created() {
-    this.getAny()
+    const userInfo = user.getters.getUser(user.state())
+    if (userInfo) {
+      this.AdministratorID=userInfo.user.userID
+    }
   },
   methods: {
     reloadList(){
@@ -57,21 +70,48 @@ export default {
         this.stateNow="audit"
       }
     },
+    auditVideo(aid,result){
+
+    },
     getAny(){
       const requestForm = new FormData()
       requestForm.append('Type','Any')
+      console.log('getAny')
       this.$axios({
         method: 'post',
         url: '/VideoManager/getVideoIDByCondition/',
         data: requestForm
       })
           .then(res=>{
+            console.log(res)
             this.auditVideoList=res.data.videoID_list
           })
+    },
+    deleteVideo(aid,vid){
+      let userID = aid
+      let videoID = vid
+      const deleteForm = new FormData
+      deleteForm.append('userID',userID)
+      deleteForm.append('videoID',videoID)
+      this.$axios({
+        method: 'post',
+        url: '/VideoManager/deletevideo/',
+        data: deleteForm
+      })
+      .then(res=>{
+        if(res.data.error)
+        {
+          this.$message.error(res.data.error)
+        }else {
+          this.$message.success('删除视频成功')
+          location.reload()
+        }
+      })
     },
     getAudit(){
       const requestForm = new FormData()
       requestForm.append('Type','Audit')
+      console.log('Audit')
       this.$axios({
         method: 'post',
         url: '/VideoManager/getVideoIDByCondition/',
@@ -79,6 +119,10 @@ export default {
       })
           .then(res=>{
             this.auditVideoList=res.data.videoID_list
+            for(var i in this.auditVideoList){
+              this.auditInfo.push(i)
+            }
+            console.log(this.auditInfo)
           })
     }
   }
