@@ -15,9 +15,21 @@
     </div>
     <div class="menu-box">
       <el-menu :default-active="activeIndex" class="el-menu-demo" mode="horizontal" @select="handleSelect">
-        <el-menu-item index="1">视频</el-menu-item>
-        <el-menu-item index="2">用户</el-menu-item>
+        <el-menu-item index="1" @click="toVideo">视频</el-menu-item>
+        <el-menu-item index="2" @click="toUser">用户</el-menu-item>
       </el-menu>
+    </div>
+    <div class="video-in-search" v-if="activeIndex==='1'">
+      <img class="pic404" src="../../assets/images/404.png" alt="404 not found" v-if="video404">
+      <div v-else>
+        有video！
+      </div>
+    </div>
+    <div class="user-in-search" v-else>
+      <img class="pic404" src="../../assets/images/404.png" alt="404 not found" v-if="user404">
+      <div v-else>
+        有user！
+      </div>
     </div>
   </div>
 </template>
@@ -29,7 +41,11 @@ export default {
     return {
       input2: '',
       activeIndex: '1',
-      placeHolder: '请输入关键词搜索'
+      placeHolder: '请输入关键词搜索',
+      videoList: [],
+      userList: [],
+      video404: false,
+      user404: false,
     }
   },
   created() {
@@ -43,10 +59,25 @@ export default {
       url: '/Websurf/search/',
       data: searchForm
     })
-    .then(res=>{
-      console.log(res)
-      this.$message.success(res.data.error)
-    })}
+        .then(res=>{
+          switch (res.data.error) {
+            case 0:
+              this.videoList = JSON.parse(res.data.video_list)
+              this.userList = JSON.parse(res.data.user_list)
+              console.log(this.userList.length)
+              console.log(this.userList)
+              console.log(this.videoList.length);
+              console.log(this.videoList);
+              break;
+            case 4004:
+              this.user404 = true;
+              this.video404 = true;
+              break;
+          }
+        })
+        .catch(err => {
+          console.log(err);
+        })}
   },
   methods: {
     searchContent() {
@@ -58,7 +89,13 @@ export default {
     },
     handleSelect(key, keyPath) {
       console.log(key, keyPath);
-    }
+    },
+    toVideo() {
+      this.activeIndex = '1';
+    },
+    toUser() {
+      this.activeIndex = '2';
+    },
   }
 }
 </script>
@@ -112,5 +149,9 @@ export default {
 .menu-box{
   margin-left: 0;
   width: 1000px;
+}
+.pic404{
+  padding-left: 0;
+  height: 550px;
 }
 </style>
