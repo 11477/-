@@ -64,6 +64,7 @@ export default {
                     'email': this.form.email,
                     'confirmed': true,
                     'userID':res.data.userID,
+                    'isAudit':res.data.isAudit
                   }});
                 console.log(res.data.userID)
                 var curr = localStorage.getItem('preRoute');

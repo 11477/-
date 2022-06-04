@@ -14,9 +14,11 @@
         <div class="audit-videos">
           <div v-for="(colum,index) in auditVideoList" v-bind:key="index">
             <VideoCover :videoID=colum></VideoCover>
-            <el-button type="danger" size="mini" @click="auditVideo(AdministratorID,false)">删除</el-button>
-            {{ auditInfo[colum] }}
-            <el-button type="primary" size="mini" @click="auditVideo(AdministratorID,true)">通过</el-button>
+            <el-button type="danger" size="mini" @click="auditVideo(AdministratorID,0,auditID[index])">删除
+            </el-button>
+            {{ auditReason[index] }}
+            <el-button type="primary" size="mini" @click="auditVideo(AdministratorID,1,auditID[index])">通过
+            </el-button>
           </div>
         </div>
       </el-tab-pane>
@@ -37,13 +39,15 @@ export default {
     return {
       reloadKey: 0,
       auditVideoList: [],
+      vidList: [],
       tabPosition: 'left',
       reason: "看他不爽",
       AdministratorID: 0,
       AdministratorName: "nohesitate",
       AuditResult: true,
       stateNow: "any",
-      auditInfo: [],
+      auditID: [],
+      auditReason: [],
     }
   },
   created() {
@@ -52,7 +56,6 @@ export default {
       this.AdministratorID = userInfo.user.userID
     }
     this.getAny()
-    console.log('created',this.auditVideoList)
   },
   methods: {
     reloadList() {
@@ -62,7 +65,7 @@ export default {
       } else {
         this.getAudit()
       }
-      this.reloadKey=!this.reloadKey
+      this.reloadKey = !this.reloadKey
     },
     handleTabClick(tab) {
       if (tab.label === "视频列表") {
@@ -73,8 +76,26 @@ export default {
         this.stateNow = "audit"
       }
     },
-    auditVideo(aid, result) {
-
+    auditVideo(adminID, result, auditID) {
+      console.log('adminID', adminID, 'result', result, 'auditID', auditID)
+      const auditForm = new FormData
+      auditForm.append('AdministratorID', adminID)
+      auditForm.append('AuditID', auditID)
+      auditForm.append('AuditResult', result)
+      this.$axios({
+        method: 'post',
+        url: '/VideoManager/auditvideo/',
+        data: auditForm
+      }).then(res => {
+        if (res.data.error === 0) {
+          this.$message.success('处理成功！')
+        } else {
+          this.$message.error(res.data.error)
+        }
+      })
+          .finally(() => {
+            this.getAudit()
+          })
     },
     getAny() {
       const requestForm = new FormData()
@@ -85,11 +106,11 @@ export default {
         url: '/VideoManager/getVideoIDByCondition/',
         data: requestForm
       })
-      .then(res=>{
-        console.log(res.data)
-        this.auditVideoList=res.data.videoID_list
-        this.reloadKey=!this.reloadKey
-      })
+          .then(res => {
+            // console.log(res.data)
+            this.auditVideoList = res.data.videoID_list
+            this.reloadKey = !this.reloadKey
+          })
     },
     deleteVideo(aid, vid) {
       let userID = aid
@@ -123,7 +144,11 @@ export default {
         if (res.data.error) {
           this.$message.error(res.data.error)
         } else {
-          console.log('auditInfo:',res.data)
+          let cReason = res.data.complainReason
+          this.auditVideoList.push(vid)
+          this.auditID.push(res.data.auditID)
+          this.auditReason.push(cReason)
+          console.log('vid:', vid, ' auditID:', res.data.auditID, ' auditReason:', cReason)
         }
       })
     },
@@ -137,13 +162,22 @@ export default {
         data: requestForm
       })
           .then(res => {
-            console.log(res)
-            this.auditVideoList = res.data.videoID_list
-            console.log(this.auditVideoList)
-            this.reloadKey=!this.reloadKey
-            for (const i in this.auditVideoList) {
-              this.getAuditInfo(this.auditVideoList[i])
+            // console.log(res)
+            this.vidList = res.data.videoID_list
+            // console.log('vidList:',this.vidList)
+            this.auditInfo = []
+            this.auditReason = []
+            this.auditVideoList = []
+            for (const i in this.vidList) {
+              this.getAuditInfo(this.vidList[i])
             }
+            // console.log('auditInfo[]:',this.auditInfo)
+            // console.log('auditReason[]:',this.auditReason)
+          })
+          .finally(() => {
+
+            // console.log('auditVideoList[]:',this.auditVideoList)
+            this.reloadKey = !this.reloadKey
           })
     }
   }

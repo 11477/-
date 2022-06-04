@@ -33,6 +33,7 @@
                 <el-dropdown-item @click.native="toSpace">我的粉丝:{{loginUserFans}}</el-dropdown-item>
                 <el-dropdown-item @click.native="toSpace">我的投稿:{{loginUserVideos}}</el-dropdown-item>
                 <el-dropdown-item style="color: crimson;text-align: center" @click.native="logout" >退出登录</el-dropdown-item>
+                <el-dropdown-item style="color: deepskyblue;text-align: center" @click.native="toAudit" v-if="isAudit">前往审核</el-dropdown-item>
               </el-dropdown-menu>
             </el-dropdown>
           </div>
@@ -69,6 +70,7 @@ export default {
   name: 'NavBar',
   data() {
     return {
+      isAudit: false,
       input: '',
       is_login: false,
       loginUserID: 2,
@@ -83,6 +85,8 @@ export default {
     if (userInfo) {
       this.is_login = true
       this.loginUserID = userInfo.user.userID
+      this.isAudit = userInfo.user.isAudit
+      console.log(userInfo)
       const fdata = new FormData
       fdata.append('userID',userInfo.user.userID)
       this.$axios({
@@ -106,6 +110,9 @@ export default {
   methods:{
     toHome() {
       window.location.href = '/';
+    },
+    toAudit(){
+      window.location.href = '/administrator'
     },
     handleSelect() {
       console.log("select")

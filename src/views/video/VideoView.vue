@@ -106,8 +106,8 @@
                      @doSend="sendComment"
                      :commentNum="this.commentNum"></BrightComment>
     </div>
-    <div v-else>
-      <span>视频似乎不存在捏</span>
+    <div v-else style="text-align: center;margin-left: 300px">
+      <img src="https://nohesitate-1312201606.cos.ap-beijing.myqcloud.com/src/404.png" height="600px" width="800px">
     </div>
   </div>
 </template>
@@ -170,8 +170,10 @@ export default {
         settings: [
           {
             html: '循环播放',
+            tooltip: '关闭',
             selector: [
               {
+                default: true,
                 html: '关闭',
               },
               {
@@ -181,6 +183,7 @@ export default {
             onSelect: function (item) {
               const self = this
               self.option.loop = item.html !== '关闭';
+              return item.html
             }
           }
         ],
@@ -237,7 +240,7 @@ export default {
       }).then(res => {
         console.log("browse success")
         if (res.data.error != 0) {
-          this.$message.error(res.data.error)
+          this.$message.error(res.data.msg)
               console.log("browse success?")
         }
       })
@@ -278,11 +281,12 @@ export default {
             }
         )
         .finally(() => {
+          if(this.showVideo){
               const height = this.$refs.videoDesc.offsetHeight
               // console.log(height)
               if (height === 63) {
                 this.descMayOverflow = true
-              }
+              }}
             }
         )
     if (this.loginUserID != 0) {
@@ -805,4 +809,5 @@ export default {
   width: 320px;
   margin-left: 30px;
 }
+
 </style>
