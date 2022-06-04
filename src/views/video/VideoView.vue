@@ -235,6 +235,7 @@ export default {
         console.log("browse success")
         if (res.data.error != 0) {
           this.$message.error(res.data.error)
+              console.log("browse success?")
         }
       })
     }

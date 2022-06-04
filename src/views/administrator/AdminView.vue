@@ -1,25 +1,26 @@
 <template>
   <div class="AdminView">
-      <el-tabs class="audit-tab" :tab-position="tabPosition" :stretch="true" type="border-card" @tab-click="handleTabClick">
-        <el-tab-pane label="视频列表">
-          <div class="audit-videos">
-              <div v-for="colum in auditVideoList" v-bind:key="colum">
-                <VideoCover :videoID=colum></VideoCover>
-                <el-button type="danger" size="mini" @click="deleteVideo(AdministratorID,colum)">删除</el-button>
-              </div>
+    <el-tabs class="audit-tab" :tab-position="tabPosition" :stretch="true" type="border-card"
+             @tab-click="handleTabClick">
+      <el-tab-pane label="视频列表">
+        <div class="audit-videos">
+          <div v-for="(colum,index) in auditVideoList" v-bind:key="index">
+            <VideoCover :videoID=colum></VideoCover>
+            <el-button type="danger" size="mini" @click="deleteVideo(AdministratorID,colum)">删除</el-button>
           </div>
-        </el-tab-pane>
-        <el-tab-pane label="投诉处理">
-          <div class="audit-videos">
-            <div v-for="colum in auditVideoList" v-bind:key="colum">
-              <VideoCover :videoID=colum></VideoCover>
-              <el-button type="danger" size="mini" @click="auditVideo(AdministratorID,false)">删除</el-button>
-              {{114}}
-              <el-button type="primary" size="mini" @click="auditVideo(AdministratorID,true)">通过</el-button>
-            </div>
+        </div>
+      </el-tab-pane>
+      <el-tab-pane label="投诉处理">
+        <div class="audit-videos">
+          <div v-for="(colum,index) in auditVideoList" v-bind:key="index">
+            <VideoCover :videoID=colum></VideoCover>
+            <el-button type="danger" size="mini" @click="auditVideo(AdministratorID,false)">删除</el-button>
+            {{ auditInfo[colum] }}
+            <el-button type="primary" size="mini" @click="auditVideo(AdministratorID,true)">通过</el-button>
           </div>
-        </el-tab-pane>
-      </el-tabs>
+        </div>
+      </el-tab-pane>
+    </el-tabs>
     <div class="refresh" @click="reloadList()">
       换一批视频
     </div>
@@ -29,110 +30,126 @@
 <script>
 import VideoCover from "@/components/videopage/videopage";
 import user from "@/store/user";
+
 export default {
   components: {VideoCover},
   data() {
     return {
-      auditVideoList:[
-      ],
+      auditVideoList: [],
       tabPosition: 'left',
       reason: "看他不爽",
       AdministratorID: 0,
       AdministratorName: "nohesitate",
-      AuditResult:  true,
+      AuditResult: true,
       stateNow: "any",
-      auditInfo:[],
+      auditInfo: [],
     }
   },
   created() {
     const userInfo = user.getters.getUser(user.state())
     if (userInfo) {
-      this.AdministratorID=userInfo.user.userID
+      this.AdministratorID = userInfo.user.userID
     }
+    this.getAudit()
   },
   methods: {
-    reloadList(){
+    reloadList() {
       console.log(this.stateNow)
-      if(this.stateNow==="any"){
+      if (this.stateNow === "any") {
         this.getAny()
-      }
-      else {
+      } else {
         this.getAudit()
       }
     },
-    handleTabClick(tab){
-      if(tab.label==="视频列表"){
+    handleTabClick(tab) {
+      if (tab.label === "视频列表") {
         this.getAny()
-        this.stateNow="any"
-      }
-      else {
+        this.stateNow = "any"
+      } else {
         this.getAudit()
-        this.stateNow="audit"
+        this.stateNow = "audit"
       }
     },
-    auditVideo(aid,result){
+    auditVideo(aid, result) {
 
     },
-    getAny(){
+    getAny() {
       const requestForm = new FormData()
-      requestForm.append('Type','Any')
+      requestForm.append('Type', 'Any')
       console.log('getAny')
       this.$axios({
         method: 'post',
         url: '/VideoManager/getVideoIDByCondition/',
         data: requestForm
       })
-          .then(res=>{
-            console.log(res)
-            this.auditVideoList=res.data.videoID_list
-          })
+      .then(res=>{
+        console.log(res.data)
+        this.auditVideoList=res.data.videoID_list
+      })
     },
-    deleteVideo(aid,vid){
+    deleteVideo(aid, vid) {
       let userID = aid
       let videoID = vid
       const deleteForm = new FormData
-      deleteForm.append('userID',userID)
-      deleteForm.append('videoID',videoID)
+      deleteForm.append('userID', userID)
+      deleteForm.append('videoID', videoID)
       this.$axios({
         method: 'post',
         url: '/VideoManager/deletevideo/',
         data: deleteForm
       })
-      .then(res=>{
-        if(res.data.error)
-        {
+          .then(res => {
+            if (res.data.error) {
+              this.$message.error(res.data.error)
+            } else {
+              this.$message.success('删除视频成功')
+              location.reload()
+            }
+          })
+    },
+    getAuditInfo(vid) {
+      let videoID = vid
+      const form = new FormData
+      form.append('videoID', videoID)
+      this.$axios({
+        method: 'post',
+        url: '/VideoManager/getAuditInfo/',
+        data: form
+      }).then(res => {
+        if (res.data.error) {
           this.$message.error(res.data.error)
-        }else {
-          this.$message.success('删除视频成功')
-          location.reload()
+        } else {
+          console.log(res.data.auditInfo)
+          this.auditInfo.push(res.data.auditInfo)
         }
       })
     },
-    getAudit(){
+    getAudit() {
       const requestForm = new FormData()
-      requestForm.append('Type','Audit')
+      requestForm.append('Type', 'Audit')
       console.log('Audit')
       this.$axios({
         method: 'post',
         url: '/VideoManager/getVideoIDByCondition/',
         data: requestForm
       })
-          .then(res=>{
-            this.auditVideoList=res.data.videoID_list
-            for(var i in this.auditVideoList){
-              this.auditInfo.push(i)
+          .then(res => {
+            console.log(res)
+            this.auditVideoList = res.data.videoID_list
+            for (const i in this.auditVideoList) {
+              this.getAuditInfo(i)
             }
-            console.log(this.auditInfo)
           })
     }
   }
 }
 </script>
 <style scoped>
-.audit-tab{
+.audit-tab {
   width: 1440px;
 }
-.refresh{
+
+.refresh {
   background-color: #00A1D6;
   margin-right: 20px;
   margin-left: 20px;
@@ -144,15 +161,18 @@ export default {
   font-size: 40px;
   color: white;
 }
-.refresh:hover{
+
+.refresh:hover {
   background-color: #66ccff;
   cursor: pointer;
 }
+
 .AdminView {
   position: absolute;
   display: flex;
 }
-.audit-videos{
+
+.audit-videos {
   display: flex;
   flex-wrap: wrap;
 }
@@ -164,10 +184,12 @@ export default {
   margin-top: 30px;
   font-size: 14px;
 }
-.audit-reason{
+
+.audit-reason {
   color: #000000;
 }
-.audit-button{
+
+.audit-button {
   height: 80%;
   margin-left: 170px;
 }

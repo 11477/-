@@ -5,43 +5,43 @@
     </div>
     <div class="channel-video">
         <div class="video-box" v-if="this.type==='Any'">
-          <VideoCover :videoID=column v-for="column in auditVideoList" v-bind:key="column"></VideoCover>
+          <VideoCover :videoID=column v-for="(column,index) in auditVideoList" v-bind:key="index"></VideoCover>
         </div>
         <div class="video-box" v-else-if="this.type==='knowledge'">
-          <VideoCover :videoID=column v-for="column in klgVideoList" v-bind:key="column"></VideoCover>
+          <VideoCover :videoID=column v-for="(column,index) in klgVideoList" v-bind:key="index"></VideoCover>
         </div>
         <div class="video-box" v-else-if="this.type==='science'">
-          <VideoCover :videoID=column v-for="column in sciVideoList" v-bind:key="column"></VideoCover>
+          <VideoCover :videoID=column v-for="(column,index) in sciVideoList" v-bind:key="index"></VideoCover>
         </div>
         <div class="video-box" v-else-if="this.type==='info'">
-          <VideoCover :videoID=column v-for="column in infVideoList" v-bind:key="column"></VideoCover>
+          <VideoCover :videoID=column v-for="(column,index) in infVideoList" v-bind:key="index"></VideoCover>
         </div>
         <div class="video-box" v-else-if="this.type==='life'">
-          <VideoCover :videoID=column v-for="column in lifVideoList" v-bind:key="column"></VideoCover>
+          <VideoCover :videoID=column v-for="(column,index) in lifVideoList" v-bind:key="index"></VideoCover>
         </div>
         <div class="video-box" v-else-if="this.type==='charity'">
-          <VideoCover :videoID=column v-for="column in crtVideoList" v-bind:key="column"></VideoCover>
+          <VideoCover :videoID=column v-for="(column,index) in crtVideoList" v-bind:key="index"></VideoCover>
         </div>
         <div class="video-box" v-else-if="this.type==='music'">
-          <VideoCover :videoID=column v-for="column in mscVideoList" v-bind:key="column"></VideoCover>
+          <VideoCover :videoID=column v-for="(column,index) in mscVideoList" v-bind:key="index"></VideoCover>
         </div>
         <div class="video-box" v-else-if="this.type==='dance'">
-          <VideoCover :videoID=column v-for="column in dncVideoList" v-bind:key="column"></VideoCover>
+          <VideoCover :videoID=column v-for="(column,index) in dncVideoList" v-bind:key="index"></VideoCover>
         </div>
         <div class="video-box" v-else-if="this.type==='food'">
-          <VideoCover :videoID=column v-for="column in fodVideoList" v-bind:key="column"></VideoCover>
+          <VideoCover :videoID=column v-for="(column,index) in fodVideoList" v-bind:key="index"></VideoCover>
         </div>
         <div class="video-box" v-else-if="this.type==='sport'">
-          <VideoCover :videoID=column v-for="column in sptVideoList" v-bind:key="column"></VideoCover>
+          <VideoCover :videoID=column v-for="(column,index) in sptVideoList" v-bind:key="index"></VideoCover>
         </div>
         <div class="video-box" v-else-if="this.type==='movie'">
-          <VideoCover :videoID=column v-for="column in movVideoList" v-bind:key="column"></VideoCover>
+          <VideoCover :videoID=column v-for="(column,index) in movVideoList" v-bind:key="index"></VideoCover>
         </div>
         <div class="video-box" v-else-if="this.type==='history'">
-          <VideoCover :videoID=column v-for="column in hisVideoList" v-bind:key="column"></VideoCover>
+          <VideoCover :videoID=column v-for="(column,index) in hisVideoList" v-bind:key="index"></VideoCover>
         </div>
         <div class="video-box" v-else-if="this.type==='entertainment'">
-          <VideoCover :videoID=column v-for="column in entVideoList" v-bind:key="column"></VideoCover>
+          <VideoCover :videoID=column v-for="(column,index) in entVideoList" v-bind:key="index"></VideoCover>
         </div>
       <div class="switch-box">
         <div class="home-btn" @click="toHome">
