@@ -797,14 +797,21 @@ export default {
   height: 100%;
   //border: solid 1px lightskyblue;
   margin-left: 60px;
-  background-color: lightsalmon;
+  background-color: indianred;
   border-radius: 15px;
   cursor: pointer;
+  transition: background-color .3s,color .3s;
 }
 
 .space-btn span{
   font-family: "user-name-black", serif;
 }
+
+.space-btn:hover{
+  background-color: lightsalmon;
+  font-size: 20px;
+}
+
 
 .manage-btn{
   display: flex;
@@ -816,10 +823,16 @@ export default {
   background-color: lightpink;
   border-radius: 15px;
   cursor: pointer;
+  transition: background-color .3s,color .3s;
 }
 
 .manage-btn span{
   font-family: "user-name-black", serif;
+}
+
+.manage-btn:hover{
+  background-color: greenyellow;
+  font-size: 20px;
 }
 
 .time-inf{
