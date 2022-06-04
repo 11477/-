@@ -302,6 +302,25 @@ export default {
     }
   },
   methods:{
+    flash(){
+      location.reload();
+    },
+    toHome(){
+      window.location.href = '/';
+    },
+    ToTop(){
+      var timer = setInterval(function () {
+        let osTop =
+            document.documentElement.scrollTop || document.body.scrollTop;
+        let ispeed = Math.floor(-osTop / 5);
+        document.documentElement.scrollTop = document.body.scrollTop =
+            osTop + ispeed;
+        this.isTop = true;
+        if (osTop === 0) {
+          clearInterval(timer);
+        }
+      }, 10);
+    },
     handleSelect(key, keyPath) {
       console.log(key, keyPath);
     },

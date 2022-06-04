@@ -27,7 +27,7 @@
             <div class="upload-inf">
               <div class="title-inf-left">
                 <span>P友</span>
-                <span @click="ToUser">{{uploaderName}}</span>
+                <div class="title-inf-left-user" @click="ToUser">{{uploaderName}}</div>
               </div>
               <div class="title-inf-right">
                 <span>{{videoDate}}</span>
@@ -35,7 +35,6 @@
             </div>
           </div>
         </div>
-
     </div>
   </div>
 </template>
@@ -144,10 +143,13 @@ export default {
 <style scoped>
 
 .video-card {
-  width: 400px;
-  height: 250px;
+
+  width: 270px;
+  height: 170px;
   text-align: center;
-  margin: 20px 15px;
+  margin-top: 10px;
+  margin-bottom: 50px;
+  margin-left: 15px;
 }
 
 .video-cover{
@@ -167,14 +169,14 @@ export default {
 
 .bottom-line{
   position: absolute;
-  bottom: 43px;
+  top:134px;
   //left: 5px;
   z-index: 2;
   width: 100%;
   display: flex;
   align-items: center;
-  background-color: rgba(128,128,128,0.4);
-  border-radius: 5px;
+  background-color: rgba(128,128,128,0.3);
+  border-radius: 6px;
 }
 
 .bottom-line-left{
@@ -211,15 +213,20 @@ export default {
 .upload-inf{
   flex: 1;
   display: flex;
+  position: absolute;
+  top:50px;
 }
 
 .video-title{
   float: left;
+  text-align: center;
 }
 
 .video-title span{
   font-weight: 1000;
+  font-size: 15px;
   cursor: pointer;
+  text-align: left;
   transition: background-color .3s,color .3s;
   float: left;
 }
@@ -235,6 +242,7 @@ export default {
   flex-flow: column;
   display: flex;
   border-radius: 6px;
+  position: absolute;
 }
 
 .title-inf-left{
@@ -243,28 +251,40 @@ export default {
   float: left;
 }
 
-.title-inf-left{
-  float: left;
-}
-
 .title-inf-left span{
-  font-size: 15px;
+  font-size: 10px;
+  width: 25px;
   color:gray;
-  margin-left: 5px;
+  text-align: left;
   float: left;
+  //border: solid 1px lightgray;
   transition: background-color .3s,color .3s;
 }
 
-.title-inf-left span:hover{
+.title-inf-left-user{
+  font-size: 10px;
+  width: 100px;
+  color:gray;
+  float: left;
+  text-align: left;
+  margin-top: 1px;
+  //border: solid 1px lightgray;
+  transition: background-color .3s,color .3s;
+}
+
+.title-inf-left-user:hover{
   cursor: pointer;
   color: #00A1D6;
 }
 
 .title-inf-right span{
-  font-size: 15px;
+  font-size: 10px;
   color:gray;
-  margin-left: 5px;
+  position: absolute;
+  left: 170px;
+  margin-top: 3px;
   float: left;
+  width: 100px;
   transition: background-color .3s,color .3s;
 }
 
