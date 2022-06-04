@@ -79,6 +79,15 @@ export default {
   created() {
     if(user.getters.getUser(user.state()).user.userID)
       this.isLogin=true
+    this.$axios({
+      method:'get',
+      url: '/Websurf/getWebInfo/'
+    }).then(res=>{
+      this.users=res.data.userNum
+      this.uploaders=res.data.uploaderNum
+      this.reviews=res.data.admNum
+      this.videos=res.data.videoNum
+    })
   },
   methods: {
     handleUp() {
@@ -127,6 +136,7 @@ export default {
 
 .welcome .title{
   font-size: xx-large;
+  margin-top: 30px;
 }
 
 .welcome .button-row{

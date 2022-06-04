@@ -24,6 +24,7 @@
             </span>
           </el-upload>
         </el-form-item>
+        <canvas id="mycanvas" width="320" height="180" style="display:none"></canvas>
         <el-form-item label="视频标题" prop="videoTitle">
           <el-input v-model="form.videoTitle" maxlength="80" show-word-limit></el-input>
         </el-form-item>
@@ -114,8 +115,8 @@ import user from "@/store/user";
 const COS = require('cos-js-sdk-v5')
 // 填写自己腾讯云cos中的key和id (密钥)
 const cosImg = new COS({
-  SecretId: 'AKIDlNlupUt1vZx5zd2B4h4A0aFfohJfkZ8Q', // 身份识别ID
-  SecretKey: '5uXqthEVXKtDH6g290cz6yby6ze4FBsK' // 身份秘钥
+  SecretId: '***', // 身份识别ID
+  SecretKey: '***' // 身份秘钥
 })
 
 export default {
@@ -177,6 +178,26 @@ export default {
     };
   },
   methods: {
+    //截取视频第一帧作为播放前默认图片
+    findvideocover(url) {
+      //const  video = document.getElementById("upvideo"); // 获取视频对象
+       const video = document.createElement("video") // 也可以自己创建video
+      video.src=url // url地址 url跟 视频流是一样的s
+      var canvas = document.getElementById('mycanvas') // 获取 canvas 对象
+      const ctx = canvas.getContext('2d'); // 绘制2d
+      video.crossOrigin = 'anonymous' // 解决跨域问题，也就是提示污染资源无法转换视频
+      video.currentTime = 1 // 第一帧
+      video.oncanplay = () => {
+        console.log('video', video)
+        canvas.width = video.clientWidth // 获取视频宽度
+        canvas.height = video.clientHeight // 获取视频高度
+        // 利用canvas对象方法绘图
+        ctx.drawImage(video, 0, 0, video.clientWidth, video.clientHeight)
+        // 转换成base64形式
+        const imgUrl = canvas.toDataURL('image/png') // 截取后的视频封面
+        this.videoImg = [imgUrl]
+      }
+    },
     uploadPicture(name){
       this.cropperName = name;
       this.cropperModel = true;
@@ -200,7 +221,7 @@ export default {
         StorageClass: 'STANDARD',
         Body: file // 上传文件对象
       }, (err, data) => {
-        console.log(err || data)
+       // console.log(err || data)
         // 上传成功之后
         if (data.statusCode === 200) {
        //   console.log(data)
@@ -256,7 +277,7 @@ export default {
           this.percent = params.percent * 100
         }
       }, (err, data) => {
-        console.log(err || data)
+      //  console.log(err || data)
         // 上传成功之后
         if (data.statusCode === 200) {
       //    console.log(data)
@@ -264,6 +285,31 @@ export default {
           // this.imageUrl = `https:${data.Location}`
           this.$message.success('视频上传成功');
           this.showReload=true
+          this.findvideocover(this.form.videoPath,)
+          var config = {
+            // 需要替换成您自己的存储桶信息
+            Bucket: 'nohesitate-1312201606', /* 存储桶，必须 */
+            Region: 'ap-beijing', /* 存储桶所在地域，必须字段 */
+          };
+          cosImg.request({
+                Bucket: config.Bucket,
+                Region: config.Region,
+                Method: 'GET',
+                Key: 'Video/'+request.file.lastModified.toString(),  /* 存储桶内的媒体文件，必须字段 */
+                Query: {
+                  'ci-process': 'snapshot', /** 固定值，必须 */
+                  time: 1, /** 截图的时间点，单位为秒，必须 */
+                  // width: 0, /** 截图的宽，非必须 */
+                  // height: 0, /** 截图的高，非必须 */
+                  // format: 'jpg', /** 截图的格式，支持 jpg 和 png，默认 jpg，非必须 */
+                  // rotate: 'auto', /** 图片旋转方式，默认为'auto'，非必须 */
+                  // mode: 'exactframe', /** 截帧方式，默认为'exactframe'，非必须 */
+                },
+                RawBody: true,
+              },
+              function(err, data){
+                console.log(data.Body);
+              });
         }
       })
     },
