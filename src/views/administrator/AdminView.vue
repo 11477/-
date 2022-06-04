@@ -3,14 +3,14 @@
     <el-tabs class="audit-tab" :tab-position="tabPosition" :stretch="true" type="border-card"
              @tab-click="handleTabClick">
       <el-tab-pane label="视频列表">
-        <div class="audit-videos">
+        <div class="audit-videos" :key="reloadKey">
           <div v-for="(colum,index) in auditVideoList" v-bind:key="index">
             <VideoCover :videoID=colum></VideoCover>
             <el-button type="danger" size="mini" @click="deleteVideo(AdministratorID,colum)">删除</el-button>
           </div>
         </div>
       </el-tab-pane>
-      <el-tab-pane label="投诉处理">
+      <el-tab-pane label="投诉处理" :key="reloadKey">
         <div class="audit-videos">
           <div v-for="(colum,index) in auditVideoList" v-bind:key="index">
             <VideoCover :videoID=colum></VideoCover>
@@ -35,6 +35,7 @@ export default {
   components: {VideoCover},
   data() {
     return {
+      reloadKey: 0,
       auditVideoList: [],
       tabPosition: 'left',
       reason: "看他不爽",
@@ -50,7 +51,8 @@ export default {
     if (userInfo) {
       this.AdministratorID = userInfo.user.userID
     }
-    this.getAudit()
+    this.getAny()
+    console.log('created',this.auditVideoList)
   },
   methods: {
     reloadList() {
@@ -60,6 +62,7 @@ export default {
       } else {
         this.getAudit()
       }
+      this.reloadKey=!this.reloadKey
     },
     handleTabClick(tab) {
       if (tab.label === "视频列表") {
@@ -85,6 +88,7 @@ export default {
       .then(res=>{
         console.log(res.data)
         this.auditVideoList=res.data.videoID_list
+        this.reloadKey=!this.reloadKey
       })
     },
     deleteVideo(aid, vid) {
@@ -119,8 +123,7 @@ export default {
         if (res.data.error) {
           this.$message.error(res.data.error)
         } else {
-          console.log(res.data.auditInfo)
-          this.auditInfo.push(res.data.auditInfo)
+          console.log('auditInfo:',res.data)
         }
       })
     },
@@ -136,8 +139,10 @@ export default {
           .then(res => {
             console.log(res)
             this.auditVideoList = res.data.videoID_list
+            console.log(this.auditVideoList)
+            this.reloadKey=!this.reloadKey
             for (const i in this.auditVideoList) {
-              this.getAuditInfo(i)
+              this.getAuditInfo(this.auditVideoList[i])
             }
           })
     }

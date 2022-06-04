@@ -77,9 +77,9 @@ export default {
     //console.log("wtf",this.videoID)
     const vid = this.videoID
     const dataForm = new FormData()
-    dataForm.append("videoID",vid.toString())
+    dataForm.append("videoID",vid)
     dataForm.append("userID",uid)
-    //console.log('?',dataForm.get("videoID"))
+    //console.log('vid',dataForm.get("videoID"))
     this.$axios({
       method: 'post',
       url: '/VideoManager/getVideoByID/',
@@ -99,7 +99,7 @@ export default {
                 this.uploadID=res.data.upID
                 }
               else {
-                this.$message(res.data.msg)
+                console.log(res.data.msg)
               }
             }
         )

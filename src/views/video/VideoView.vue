@@ -60,7 +60,7 @@
             {{ favorNum }}
           </div>
           <div class="report">
-            <el-button type="primary" size="small" @click=" reportVisible=true">投诉稿件</el-button>
+            <el-button type="primary" size="small" @click="reportVisible=true">投诉稿件</el-button>
           </div>
           <el-dialog title="稿件投诉" :visible.sync="reportVisible">
             <el-form :model="reportForm" ref="reportForm" :rules="rules">
@@ -131,6 +131,7 @@ export default {
       showVideo: true,
       loginUserID: 0,
       loginUserAvatar: '',
+      curVideoID: 0,
       videoKey: 0,
       videoTitle: "你的名字",
       videoView: 114514,
@@ -214,6 +215,8 @@ export default {
   created() {
     // console.log(this.$route.params.VideoID)
     const vid = this.$route.params.VideoID
+    this.curVideoID=vid
+    console.log('curVID:',this.curVideoID)
     let uid;
     const userInfo = user.getters.getUser(user.state())
     if (userInfo) {
@@ -268,6 +271,7 @@ export default {
                 this.isFollow = res.data.isFollowed
                 this.upID = res.data.upID
                 this.upFans = res.data.upUserFansNum
+                console.log('upAvatar:',res.data.upAvatar)
               } else {
                 this.showVideo = false
               }
@@ -508,9 +512,28 @@ export default {
       } else {
         this.$refs.reportForm.validate((valid) => {
           if (valid) {
-            this.$message.info("已收到投诉")
-            this.reportVisible = false
-            this.$refs.reportForm.resetFields()
+            const complaintForm = new FormData
+            complaintForm.append('complaintUserID',uid)
+            console.log('1',uid)
+            complaintForm.append('complaintReason',this.reportForm.reportReason)
+            console.log('2',this.reportForm.reportReason)
+            complaintForm.append('videoID',parseInt(this.curVideoID))
+            console.log('3',parseInt(this.curVideoID))
+            this.$axios({
+              method: 'post',
+              url: '/VideoInteraction/complaintvideo/',
+              data: complaintForm
+            }).then(res=>{
+              if(res.data.error===0){
+                this.$message.info("已收到投诉")
+                this.reportVisible = false
+                this.$refs.reportForm.resetFields()
+              }
+              else {
+                console.log(res.data)
+                this.$message.error('投诉失败')
+              }
+            })
           } else {
             console.log('error submit!!');
           }
