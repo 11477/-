@@ -160,7 +160,7 @@
     </div>
   </div>
     <div class="pic-right" style="margin-top: 80px">
-      <el-image style="width: 200px; height: 200px; margin-left: 0; margin-top: 0"
+      <el-image style="width: 200px; height: 200px; margin-left: 50px; margin-top: 0"
                 v-for="url in urls" :key="url" :src="url" lazy></el-image>
     </div>
   </div>

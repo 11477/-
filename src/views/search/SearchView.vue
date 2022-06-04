@@ -1,4 +1,5 @@
 <template>
+  <div>
   <div id="search-view">
     <div class="flex-center">
       <div class="search-input-wrap">
@@ -13,7 +14,10 @@
         <el-button type="primary" icon="el-icon-search" @click="searchContent">搜索</el-button>
       </div>
     </div>
-    <div class="menu-box">
+
+  </div>
+  <div class="search-content">
+    <div class="menu-box" style="margin-left: 30px">
       <el-menu :default-active="activeIndex" class="el-menu-demo" mode="horizontal" @select="handleSelect">
         <el-menu-item index="1" @click="toVideo">视频</el-menu-item>
         <el-menu-item index="2" @click="toUser">用户</el-menu-item>
@@ -21,22 +25,32 @@
     </div>
     <div class="video-in-search" v-if="activeIndex==='1'">
       <img class="pic404" src="../../assets/images/404.png" alt="404 not found" v-if="video404">
-      <div v-else>
-        有video！
+      <div class="video-box-in-search" v-else>
+        <VideoCover :videoID=column.videoID v-for="column in this.videoList" v-bind:key="column.videoID"></VideoCover>
       </div>
     </div>
     <div class="user-in-search" v-else>
       <img class="pic404" src="../../assets/images/404.png" alt="404 not found" v-if="user404">
-      <div v-else>
-        有user！
+      <div class="user-box-in-search" v-else>
+        <UserSearch :userID="user.userID"
+                     :username="user.username"
+                     :userPortrait="user.userPortrait"
+                     :userInfo="user.userInformation"
+                     :hasLogin=hasLogin
+                     v-for="user in this.userList" v-bind:key="user.userID"></UserSearch>
       </div>
     </div>
+  </div>
   </div>
 </template>
 
 <script>
+import VideoCover from "@/components/videopage/videopage";
+import user from "@/store/user";
+import UserSearch from "@/components/User/UserSearch";
 export default {
   name: "SearchView",
+  components: {UserSearch, VideoCover,},
   data() {
     return {
       input2: '',
@@ -46,9 +60,12 @@ export default {
       userList: [],
       video404: false,
       user404: false,
+      hasLogin: false
     }
   },
   created() {
+    const userInfo = user.getters.getUser(user.state());
+    this.hasLogin = !!userInfo;
     const searchForm = new FormData()
     if(this.$route.query.searchContent){
     console.log(1)
@@ -64,10 +81,12 @@ export default {
             case 0:
               this.videoList = JSON.parse(res.data.video_list)
               this.userList = JSON.parse(res.data.user_list)
-              console.log(this.userList.length)
-              console.log(this.userList)
-              console.log(this.videoList.length);
-              console.log(this.videoList);
+              if(this.userList.length===0){
+                this.user404 = true
+              }
+              if(this.videoList.length===0){
+                this.video404 = true
+              }
               break;
             case 4004:
               this.user404 = true;
@@ -107,6 +126,11 @@ export default {
   margin-top: 70px;
   margin-left: 250px;
 }
+.search-content{
+  position: absolute;
+  margin-top: 135px;
+  margin-left: 100px
+}
 .flex-center{
   display: flex;
   width: 600px;
@@ -120,6 +144,7 @@ export default {
   position: relative;
   width: 640px;
   margin-left: 0;
+  margin-top: 10px;
   padding: 5px;
   background: #ffffff;
   border: 1px solid #00aeec;
@@ -151,7 +176,19 @@ export default {
   width: 1000px;
 }
 .pic404{
-  padding-left: 0;
+  padding-left: 200px;
   height: 550px;
+}
+.video-box-in-search{
+  display: flex;
+  flex-wrap: wrap;
+  margin-left: 0;
+  margin-top: 0;
+}
+.user-box-in-search{
+  display: flex;
+  flex-wrap: wrap;
+  margin-left: 0;
+  margin-top: 20px;
 }
 </style>
