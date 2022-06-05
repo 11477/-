@@ -1,11 +1,12 @@
 <template>
-  <div class="AdminView">
+  <div v-title :data-title=this.title>
+    <div class="AdminView" v-if="isAudit">
     <el-tabs class="audit-tab" :tab-position="tabPosition" :stretch="true" type="border-card"
              @tab-click="handleTabClick">
       <el-tab-pane label="视频列表">
         <div class="audit-videos" :key="reloadKey">
           <div v-for="(colum,index) in auditVideoList" v-bind:key="index">
-            <VideoCover :videoID=colum></VideoCover>
+            <VideoCover :videoID=colum class="admin-cover"></VideoCover>
             <el-button type="danger" size="mini" @click="deleteVideo(AdministratorID,colum)">删除</el-button>
           </div>
         </div>
@@ -13,11 +14,11 @@
       <el-tab-pane label="投诉处理" :key="reloadKey">
         <div class="audit-videos">
           <div v-for="(colum,index) in auditVideoList" v-bind:key="index">
-            <VideoCover :videoID=colum></VideoCover>
-            <el-button type="danger" size="mini" @click="auditVideo(AdministratorID,0,auditID[index])">删除
+            <VideoCover :videoID=colum class="admin-cover"></VideoCover>
+            <el-button type="danger" size="mini" @click="auditVideo(AdministratorID,0,auditID[index],colum)">删除
             </el-button>
             {{ auditReason[index] }}
-            <el-button type="primary" size="mini" @click="auditVideo(AdministratorID,1,auditID[index])">通过
+            <el-button type="primary" size="mini" @click="auditVideo(AdministratorID,1,auditID[index],colum)">通过
             </el-button>
           </div>
         </div>
@@ -26,17 +27,24 @@
     <div class="refresh" @click="reloadList()">
       换一批视频
     </div>
+    </div>
+    <div v-else>
+      <page-not-found></page-not-found>
+    </div>
   </div>
 </template>
 
 <script>
-import VideoCover from "@/components/videopage/videopage";
+import VideoCover from "@/components/videopage/AdminVideopage";
 import user from "@/store/user";
+import PageNotFound from "@/views/error/PageNotFound";
 
 export default {
-  components: {VideoCover},
+  components: {PageNotFound, VideoCover},
   data() {
     return {
+      title: '审核中心',
+      isAudit: false,
       reloadKey: 0,
       auditVideoList: [],
       vidList: [],
@@ -52,8 +60,9 @@ export default {
   },
   created() {
     const userInfo = user.getters.getUser(user.state())
-    if (userInfo) {
+    if (userInfo && userInfo.user.isAudit) {
       this.AdministratorID = userInfo.user.userID
+      this.isAudit=true
     }
     this.getAny()
   },
@@ -76,7 +85,7 @@ export default {
         this.stateNow = "audit"
       }
     },
-    auditVideo(adminID, result, auditID) {
+    auditVideo(adminID, result, auditID, videoID) {
       console.log('adminID', adminID, 'result', result, 'auditID', auditID)
       const auditForm = new FormData
       auditForm.append('AdministratorID', adminID)
@@ -88,6 +97,9 @@ export default {
         data: auditForm
       }).then(res => {
         if (res.data.error === 0) {
+          if(result===0){
+            this.deleteVideo(auditID,videoID)
+          }
           this.$message.success('处理成功！')
         } else {
           this.$message.error(res.data.error)
@@ -109,8 +121,9 @@ export default {
           .then(res => {
             // console.log(res.data)
             this.auditVideoList = res.data.videoID_list
-            this.reloadKey = !this.reloadKey
+
           })
+      .finally(()=>{this.reloadKey = !this.reloadKey})
     },
     deleteVideo(aid, vid) {
       let userID = aid

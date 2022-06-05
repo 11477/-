@@ -1,5 +1,5 @@
 <template>
-  <div style="position: absolute;margin-top: 60px">
+  <div style="position: absolute;margin-top: 60px" v-title :data-title=this.title :key="reloadKey">
     <div v-if="showVideo" class="video-wrap" id="video-wrap">
       <div class="video-info" id="video-info">
         <div class="l-con" id="l-con">
@@ -125,6 +125,8 @@ export default {
   name: "VideoView",
   data() {
     return {
+      reloadKey: false,
+      title: '',
       commentKey: 0,
       descClass: "desc-info",
       descMayOverflow: false,
@@ -255,6 +257,8 @@ export default {
               //console.log(res.data)
               if (res.data.error === 0) {
                 this.videoTitle = res.data.videoTitle
+                this.title=this.videoTitle + ' - Video-Share'
+                console.log('title:',this.title)
                 this.option.url = res.data.videoSrc
                 this.uploadDate = res.data.uploadDate
                 //this.commentList=res.data.videoComment
@@ -274,7 +278,7 @@ export default {
                 this.isFollow = res.data.isFollowed
                 this.upID = res.data.upID
                 this.upFans = res.data.upUserFansNum
-                console.log('upAvatar:',res.data.upAvatar)
+                this.reloadKey = !this.reloadKey
               } else {
                 this.showVideo = false
               }

@@ -1,6 +1,6 @@
 <template>
   <div>
-  <div id="search-view">
+  <div id="search-view"  v-title :data-title=this.title>
     <div class="flex-center">
       <div class="search-input-wrap">
         <div class="searchView-search-button">
@@ -53,6 +53,7 @@ export default {
   components: {UserSearch, VideoCover,},
   data() {
     return {
+      title: '搜索',
       input2: '',
       activeIndex: '1',
       placeHolder: '请输入关键词搜索',

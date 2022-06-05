@@ -1,5 +1,5 @@
 <template>
-  <div id="login" class="login">
+  <div id="login" class="login" v-title :data-title=this.title>
     <div >
       <img class="title1" src="../../assets/logos/logo-without-white-under.png" @click="handleToHome"/>
     </div>
@@ -36,6 +36,7 @@ export default {
   name: "LoginView.vue",
   data() {
     return {
+      title: '登录',
       is_login: true,
       form: {
         email: '',

@@ -1,5 +1,5 @@
 <template>
-  <div class="confirm">
+  <div class="confirm"  v-title data-title='验证中心'>
     <div v-if="success" class="register-success">
       <el-row>
         <div class="msg">

@@ -115,8 +115,8 @@ import user from "@/store/user";
 const COS = require('cos-js-sdk-v5')
 // 填写自己腾讯云cos中的key和id (密钥)
 const cosImg = new COS({
-  SecretId: '***', // 身份识别ID
-  SecretKey: '***' // 身份秘钥
+  SecretId: 'AKIDeCYjgQ0NZijjkdR3UnpolZWM4a2MYhiX', // 身份识别ID
+  SecretKey: 'gCfw4yf9RZVDgx3wc3KHzSj4D7mEUXP7' // 身份秘钥
 })
 
 export default {
@@ -178,26 +178,6 @@ export default {
     };
   },
   methods: {
-    //截取视频第一帧作为播放前默认图片
-    findvideocover(url) {
-      //const  video = document.getElementById("upvideo"); // 获取视频对象
-       const video = document.createElement("video") // 也可以自己创建video
-      video.src=url // url地址 url跟 视频流是一样的s
-      var canvas = document.getElementById('mycanvas') // 获取 canvas 对象
-      const ctx = canvas.getContext('2d'); // 绘制2d
-      video.crossOrigin = 'anonymous' // 解决跨域问题，也就是提示污染资源无法转换视频
-      video.currentTime = 1 // 第一帧
-      video.oncanplay = () => {
-        console.log('video', video)
-        canvas.width = video.clientWidth // 获取视频宽度
-        canvas.height = video.clientHeight // 获取视频高度
-        // 利用canvas对象方法绘图
-        ctx.drawImage(video, 0, 0, video.clientWidth, video.clientHeight)
-        // 转换成base64形式
-        const imgUrl = canvas.toDataURL('image/png') // 截取后的视频封面
-        this.videoImg = [imgUrl]
-      }
-    },
     uploadPicture(name){
       this.cropperName = name;
       this.cropperModel = true;
@@ -211,9 +191,9 @@ export default {
     },
     //图片上传成功后
     handleUploadImgSuccess (cover){
-      //console.log(cover.type);
+   //   console.log('getCover:',cover);
       let file = new window.File([cover], Date.now(), {type:cover.type})
-     // console.log(file)
+    //  console.log('file:',file)
       cosImg.putObject({
         Bucket: 'nohesitate-1312201606',
         Region: 'ap-beijing',
@@ -221,16 +201,19 @@ export default {
         StorageClass: 'STANDARD',
         Body: file // 上传文件对象
       }, (err, data) => {
-       // console.log(err || data)
+       // console.log(error || data)
         // 上传成功之后
         if (data.statusCode === 200) {
-       //   console.log(data)
+        //  console.log(data)
           this.form.videoCoverPath='https://' + data.Location
           this.$message.success('封面上传成功');
           // this.imageUrl = `https:${data.Location}`
         }
       })
       this.cropperModel=false
+    },
+    afterUploadVideo(file){
+
     },
     onSubmit() {
     //  console.log('submit!');
@@ -266,6 +249,7 @@ export default {
     },
     uploadVideo(request){
     //  console.log(request)
+      let self = this
       cosImg.putObject({
         Bucket: 'nohesitate-1312201606',
         Region: 'ap-beijing',
@@ -277,7 +261,7 @@ export default {
           this.percent = params.percent * 100
         }
       }, (err, data) => {
-      //  console.log(err || data)
+      //  console.log(error || data)
         // 上传成功之后
         if (data.statusCode === 200) {
       //    console.log(data)
@@ -285,7 +269,6 @@ export default {
           // this.imageUrl = `https:${data.Location}`
           this.$message.success('视频上传成功');
           this.showReload=true
-          this.findvideocover(this.form.videoPath,)
           var config = {
             // 需要替换成您自己的存储桶信息
             Bucket: 'nohesitate-1312201606', /* 存储桶，必须 */
@@ -308,7 +291,9 @@ export default {
                 RawBody: true,
               },
               function(err, data){
-                console.log(data.Body);
+              //  console.log('data:',data);
+              //  console.log('wtf:',data.Body)
+
               });
         }
       })

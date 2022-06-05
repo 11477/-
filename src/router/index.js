@@ -86,7 +86,14 @@ const routes = [
       unShowNav:true
     }
   },
-
+  {
+    path: '/*',
+    name: 'PageNotFound',
+    component: () => import('../views/error/PageNotFound'),
+    meta: {
+      unShowNav: true
+    }
+  },
 ]
 
 const router = new VueRouter({
@@ -98,6 +105,7 @@ router.beforeEach((to, from, next) => {
   if (to.path === '/login') {
     localStorage.setItem("preRoute", router.currentRoute.fullPath);
   }
+
   next()
 })
 export default router

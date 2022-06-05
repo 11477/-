@@ -1,36 +1,41 @@
 <template>
   <div id="VideoCover">
     <div class="video-card">
-        <div class="video-cover">
-          <div class="video-cover-img" @click="ToVideo">
-            <img :src=coverUrl alt="视频封面"/>
-          </div>
-          <div class="bottom-line">
-            <div class="bottom-line-left">
-              <div class="title-name">
-                <span @click="ToVideo">{{videoTitle}}</span>
-              </div>
+      <div class="video-cover">
+        <div class="video-cover-img" @click="ToVideo">
+          <img :src=coverUrl alt="视频封面"/>
+        </div>
+        <div class="bottom-line">
+          <div class="bottom-line-left">
+            <div class="view-line">
+              <span>播放：</span>
+              <span>{{viewNum}}</span>
+            </div>
+            <div class="comment-line">
+              <span>评论：</span>
+              <span>{{commentNum}}</span>
             </div>
           </div>
-          <div class="title-inf">
-            <div class="video-title">
-              <span @click="ToVideo"
-              style="display: block;
-                width: 530px;
-                height: 105px;
-                white-space: nowrap;
-                text-overflow: ellipsis;
-                overflow: hidden;
-                text-align: left;
-                font-size: 45px;
-                font-weight: 1000;
-                margin-top: 15px;
-                color: rgb(244,96,108);
-                cursor: pointer;
-              ">{{videoDesc}}</span>
+          <div class="bottom-line-right">
+            <span>{{videoTime}}</span>
+          </div>
+        </div>
+        <div class="title-inf">
+          <div class="video-title">
+            <span @click="ToVideo">{{videoTitle}}</span>
+          </div>
+          <div class="upload-inf">
+            <div class="title-inf-left">
+              <span>P友</span>
+              <span @click="ToUser">{{uploaderName}}</span>
+            </div>
+            <div class="title-inf-right">
+              <span>{{videoDate}}</span>
             </div>
           </div>
         </div>
+      </div>
+
     </div>
   </div>
 </template>
@@ -41,7 +46,7 @@ import user from "@/store/user";
 
 export default {
   // eslint-disable-next-line vue/multi-word-component-names
-  name: 'VideoCoverRnd',
+  name: 'AdminVideoCover',
   data(){
     return {
       viewNum: 22,
@@ -52,7 +57,6 @@ export default {
       videoDate: "2004-07-22",
       coverUrl: "https://nohesitate-1312201606.cos.ap-beijing.myqcloud.com/VideoCover/default-cover.png",
       uploadID:0,
-      videoDesc:"Welcome To ShareVideo",
     }
   },
   props:{
@@ -83,6 +87,7 @@ export default {
     })
         .then(
             res=>{
+              //console.log(res.data)
               if(res.data.error===0){
                 this.viewNum=res.data.videoPlayNum
                 this.videoTitle=res.data.videoTitle
@@ -92,8 +97,7 @@ export default {
                 this.coverUrl=res.data.VideoCover
                 this.getVideoDuration(res.data.videoSrc)
                 this.uploadID=res.data.upID
-                this.videoDesc=res.data.videoDesc
-                }
+              }
               else {
                 console.log(res.data.msg)
               }
@@ -138,11 +142,12 @@ export default {
 </script>
 
 <style scoped>
+
 .video-card {
-  width: 100%;
-  height: 100%;
+  width: 400px;
+  height: 250px;
   text-align: center;
-  margin-bottom: 50px;
+  margin: 20px 15px;
 }
 
 .video-cover{
@@ -155,77 +160,111 @@ export default {
 .video-cover-img img{
   width: 100%;
   height: 100%;
-  //border-radius: 6px;
+  border-radius: 6px;
   z-index: 1;
   cursor: pointer;
 }
 
 .bottom-line{
   position: absolute;
-  top:181px;
+  bottom: 43px;
+//left: 5px;
   z-index: 2;
   width: 100%;
+  display: flex;
   align-items: center;
+  background-color: rgba(128,128,128,0.4);
+  border-radius: 5px;
 }
 
 .bottom-line-left{
   min-width: 0;
-  margin: auto 0;
+  flex: 1;
+  margin-left: 5px;
+  display: -webkit-flex;
+  display: flex;
   align-items: center;
 }
 
 .bottom-line-left span{
   font-size: 10px;
-  margin: auto 0;
+  color: white;
 }
 
-.title-name{
-  height: 38px;
-  transition: background-color .3s,color .3s;
+.bottom-line-right{
+  min-width: 0;
+  display: -webkit-flex;
+  align-items: center;
 }
 
-.title-name:hover{
-  background-color: rgba(211,211,211,0.5);
+.bottom-line-right span{
+  font-size: 10px;
+  color: white;
+  float: right;
+  margin-right: 15px;
 }
 
-.title-name span{
+.view-line{
+  margin-right: 20px;
+}
+
+.upload-inf{
+  flex: 1;
+  display: flex;
+}
+
+.video-title{
+  float: left;
+}
+
+.video-title span{
   font-weight: 1000;
-  font-size: 25px;
   cursor: pointer;
   transition: background-color .3s,color .3s;
-  color: rgba(0,0,0,0);
+  float: left;
 }
 
-.title-name span:hover{
-  color: black;
+.video-title span:hover{
+  font-weight: 1000;
+  cursor: pointer;
+  color: #00A1D6;
 }
 
 .title-inf{
-  /*background-color: lightskyblue;*/
+  background-color: rgba(255,255,255,0.7);
   flex-flow: column;
   display: flex;
-  position: absolute;
+  border-radius: 6px;
+}
+
+.title-inf-left{
+  flex: 1;
+  display: flex;
+  float: left;
+}
+
+.title-inf-left{
+  float: left;
 }
 
 .title-inf-left span{
-  font-size: 10px;
-  width: 25px;
+  font-size: 15px;
   color:gray;
-  text-align: left;
+  margin-left: 5px;
   float: left;
-//border: solid 1px lightgray;
   transition: background-color .3s,color .3s;
 }
 
+.title-inf-left span:hover{
+  cursor: pointer;
+  color: #00A1D6;
+}
 
 .title-inf-right span{
-  font-size: 10px;
+  font-size: 15px;
   color:gray;
-  position: absolute;
-  left: 170px;
-  margin-top: 3px;
+  margin-left: 5px;
   float: left;
-  width: 100px;
   transition: background-color .3s,color .3s;
 }
 
@@ -233,7 +272,5 @@ export default {
   color: #00A1D6;
 }
 
-.video-title{
-  font-family: "user-name-black", serif;
-}
+
 </style>

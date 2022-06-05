@@ -38,8 +38,8 @@ import user from "@/store/user";
 const COS = require('cos-js-sdk-v5')
 // 填写自己腾讯云cos中的key和id (密钥)
 const cosImg = new COS({
-  SecretId: '***', // 身份识别ID
-  SecretKey: '***' // 身份秘钥
+  SecretId: 'AKIDeCYjgQ0NZijjkdR3UnpolZWM4a2MYhiX', // 身份识别ID
+  SecretKey: 'gCfw4yf9RZVDgx3wc3KHzSj4D7mEUXP7' // 身份秘钥
 })
 export default {
   components: { CropperImage},
@@ -93,7 +93,7 @@ export default {
         StorageClass: 'STANDARD',
         Body: file // 上传文件对象
       }, (err, data) => {
-      //  console.log(err || data)
+      //  console.log(error || data)
         // 上传成功之后
         if (data.statusCode === 200) {
            //  console.log(data)

@@ -1,5 +1,5 @@
 <template>
-  <div class="userview">
+  <div class="userview"  v-title :data-title=this.title :key="reloadKey">
   <div v-if="isMine">
     <UserBar :username=username
              :userPortrait=userPortrait
@@ -211,6 +211,7 @@ export default {
               const userMsg = JSON.parse(res.data.msg_list)[0];
               //console.log(userMsg);
               this.username = userMsg.username;
+              this.title=this.username+'的个人主页';
               this.userSex = userMsg.userSex;
               this.userPortrait = userMsg.userPortrait;
               this.userIntro = userMsg.userInformation;
@@ -246,6 +247,7 @@ export default {
               this.followList = JSON.parse(res.data.concerns_list);
               console.log('关注列表');
               console.log(this.followList);
+              this.reloadKey = !this.reloadKey
               break;
             case 2001:
               this.$message.warning('用户信息加载失败！');
@@ -263,6 +265,8 @@ export default {
   },
   data() {
     return {
+      title: '',
+      reloadKey: false,
       urls: [
         'https://iconfont.alicdn.com/t/baf841bb-c1ec-47f8-b192-ac8e5dc8eb32.png@500h_500w.png',
         'https://iconfont.alicdn.com/t/befc4847-fa04-4dda-b7f4-1181861d56fd.png@500h_500w.png',

@@ -28,15 +28,16 @@ export default {
     return {
       isLogin:false,
       title: "上传页面",
-      userId: user.getters.getUser(user.state()).user.userID,
+      userId: 0,
       avatarSrc: "",
       username:''
     };
   },
   created() {
     var userInfo = user.getters.getUser(user.state())
-    if(user.getters.getUser(user.state()).user.userID)
-      this.isLogin=true
+    if(userInfo){
+      this.isLogin=true}
+    if(this.isLogin){
     this.userId = userInfo.user.userID
     const fdata = new FormData
     fdata.append('userID',userInfo.user.userID)
@@ -52,7 +53,7 @@ export default {
       }else {
         this.$message.warning(res.data.error)
       }
-    })
+    })}
   },
 
   methods: {

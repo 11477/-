@@ -169,7 +169,7 @@ export default {
   methods: {
     //事件处理器
     handleClickAvatar(uid){
-      console.log('handle click avatar')
+     // console.log('handle click avatar')
       if(uid===0){
         this.$router.push('/login');
       }
@@ -222,8 +222,8 @@ export default {
     },
     showButton(index) {
       //this.showFlag = true;
-      console.log("fuck!")
-      console.log(index + "index");
+   //   console.log("fuck!")
+   //   console.log(index + "index");
       this.$set(this.buttonMap, index, true);
     },
     cancel(index) {
@@ -231,7 +231,7 @@ export default {
       if (index !== 0) {
         this.$set(this.replyMap, index, false);
       }
-      console.log(index + "index");
+   //   console.log(index + "index");
       //this.showFlag = false;
     },
     doSend() {
@@ -277,11 +277,11 @@ export default {
     },
     doReply(index) {
       this.$set(this.replyMap, index, true);
-      console.log(this.replyMap[index]);
+      //console.log(this.replyMap[index]);
     },
 
     pBodyStatus(index) {
-      console.log("wtf")
+      //console.log("wtf")
       this.$set(this.pBodyMap, index, !this.pBodyMap[index]);
     },
   },
@@ -297,7 +297,7 @@ export default {
     }else {
       this.localUserID=0}
     //生命周期函数
-    console.log(this.localUserID)
+    //console.log(this.localUserID)
   },
   mounted() {
     //页面加载完成后

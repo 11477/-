@@ -1,5 +1,5 @@
 <template>
-  <div class="home">
+  <div class="home" v-title :data-title=this.title>
     <div class="img-box">
       <img src="../../assets/images/home-long-back.png" alt="pic">
     </div>
@@ -118,6 +118,7 @@ export default {
   components: {VideoCoverRnd, VideoCoverRow, VideoCover},
   data(){
     return{
+      title: '短视频分享平台',
       is_Manager:false,
       rndVideoList:[],
       auditVideoList:[

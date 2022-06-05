@@ -1,5 +1,5 @@
 <template>
-  <div class="register">
+  <div class="register"  v-title data-title="注册">
     <div >
       <img class="title" src="../../assets/logos/logo-without-white-under.png" @click="handleToHome"/>
     </div>
