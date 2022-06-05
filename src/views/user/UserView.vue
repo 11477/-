@@ -256,7 +256,9 @@ export default {
               this.followList = JSON.parse(res.data.concerns_list);
               console.log('关注列表');
               console.log(this.followList);
-              this.reloadKey = !this.reloadKey
+              this.reloadKey = !this.reloadKey;
+              //this.activeIndex = this.$route.params.index;
+              this.activeIndex = this.$route.query.index;
               break;
             case 2001:
               this.$message.warning('用户信息加载失败！');

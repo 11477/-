@@ -29,8 +29,8 @@
             <el-dropdown>
           <img class="head-pic" :src="loginUserAvatar" alt="banner" @click="toSpace">
               <el-dropdown-menu slot="dropdown">
-                <el-dropdown-item @click.native="toSpace">我的关注:{{loginUserFollow}}</el-dropdown-item>
-                <el-dropdown-item @click.native="toSpace">我的粉丝:{{loginUserFans}}</el-dropdown-item>
+                <el-dropdown-item @click.native="toFollow">我的关注:{{loginUserFollow}}</el-dropdown-item>
+                <el-dropdown-item @click.native="toFans">我的粉丝:{{loginUserFans}}</el-dropdown-item>
                 <el-dropdown-item @click.native="toSpace">我的投稿:{{loginUserVideos}}</el-dropdown-item>
                 <el-dropdown-item style="color: crimson;text-align: center" @click.native="logout" >退出登录</el-dropdown-item>
                 <el-dropdown-item style="color: deepskyblue;text-align: center" @click.native="toAudit" v-if="isAudit">前往审核</el-dropdown-item>
@@ -133,8 +133,10 @@ export default {
           }
             }
         )
-      else
-        this.$router.push({path: '/user/' + this.loginUserID})
+      else{
+        let path = this.$router.resolve({path: '/user/' + this.loginUserID + "?index=5"})
+        window.open(path.href)
+      }
     },
     toStore() {
       if(!this.is_login)
@@ -144,8 +146,10 @@ export default {
             active:'2',
           }
         })
-      else
-        this.$router.push({path: '/user/' + this.loginUserID})
+      else{
+        let path = this.$router.resolve({path: '/user/' + this.loginUserID + "?index=2"})
+        window.open(path.href)
+      }
     },
     toHistory() {
       if(!this.is_login)
@@ -155,8 +159,10 @@ export default {
             active:'6',
           }
         })
-      else
-        this.$router.push({path: '/user/' + this.loginUserID})
+      else{
+        let path = this.$router.resolve({path: '/user/' + this.loginUserID + "?index=6"})
+        window.open(path.href)
+      }
     },
     toFollow() {
       if(!this.is_login)
@@ -166,8 +172,14 @@ export default {
             active:'3',
           }
         })
-      else
-        this.$router.push({path: '/user/' + this.loginUserID})
+      else{
+        let path = this.$router.resolve({path: '/user/' + this.loginUserID + "?index=3"})
+        window.open(path.href)
+      }
+    },
+    toFans(){
+      let path = this.$router.resolve({path: '/user/' + this.loginUserID + "?index=4"})
+      window.open(path.href)
     },
     toLogin() {
       this.$router.push({path: '/login'})
@@ -180,7 +192,7 @@ export default {
     },
     toSpace() {
       //console.log('tospace!')
-      let path = this.$router.resolve({path: '/user/' + this.loginUserID})
+      let path = this.$router.resolve({path: '/user/' + this.loginUserID + "?index=1"})
       //console.log(path)
         window.open(path.href)
     },
