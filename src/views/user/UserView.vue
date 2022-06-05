@@ -160,8 +160,17 @@
     </div>
   </div>
     <div class="pic-right" style="margin-top: 80px;overflow: hidden">
-      <el-image style="width: 200px; height: 200px; margin-left: 50px; margin-top: 0"
-                v-for="url in urls" :key="url" :src="url" lazy></el-image>
+      <img src="../../../src/assets/images/p1.png" style="width: 200px; height: 200px; margin-left: 50px; margin-top: 0" alt="图片"/>
+      <img src="../../../src/assets/images/p2.png" style="width: 200px; height: 200px; margin-left: 50px; margin-top: 0" alt="图片"/>
+      <img src="../../../src/assets/images/p4.png" style="width: 200px; height: 200px; margin-left: 50px; margin-top: 0" alt="图片"/>
+      <img src="../../../src/assets/images/p5.png" style="width: 200px; height: 200px; margin-left: 50px; margin-top: 0" alt="图片"/>
+      <img src="../../../src/assets/images/p6.png" style="width: 200px; height: 200px; margin-left: 50px; margin-top: 0" alt="图片"/>
+      <img src="../../../src/assets/images/p7.png" style="width: 200px; height: 200px; margin-left: 50px; margin-top: 0" alt="图片"/>
+      <img src="../../../src/assets/images/p8.png" style="width: 200px; height: 200px; margin-left: 50px; margin-top: 0" alt="图片"/>
+      <img src="../../../src/assets/images/p9.png" style="width: 200px; height: 200px; margin-left: 50px; margin-top: 0" alt="图片"/>
+      <img src="../../../src/assets/images/p10.png" style="width: 200px; height: 200px; margin-left: 50px; margin-top: 0" alt="图片"/>
+      <img src="../../../src/assets/images/p11.png" style="width: 200px; height: 200px; margin-left: 50px; margin-top: 0" alt="图片"/>
+      <img src="../../../src/assets/images/p12.png" style="width: 200px; height: 200px; margin-left: 50px; margin-top: 0" alt="图片"/>
     </div>
   </div>
 </template>
