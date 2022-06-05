@@ -1,5 +1,5 @@
 <template>
-  <div class="home" v-title :data-title=this.title>
+  <div class="home" >
     <div class="img-box">
       <img src="../../assets/images/home-long-back.png" alt="pic">
     </div>
@@ -160,6 +160,7 @@ export default {
     window.onscroll=this.pageScroll;
   },
   created() {
+    document.title=this.title
     var vm = this
     vm.timer = setInterval(() => {
       var y = new Date().getFullYear()
