@@ -14,7 +14,8 @@
         <el-menu-item index="2" @click="toFavor">收藏</el-menu-item>
         <el-menu-item index="3" @click="toFollow">关注</el-menu-item>
         <el-menu-item index="4" @click="toFans">粉丝</el-menu-item>
-        <el-menu-item index="5" @click="toNotice">通知</el-menu-item>
+          <el-menu-item index="5" @click="toNotice">通知</el-menu-item>
+          <sup class="el-badge__content is-fixed is-dot" style="right: 500px; top: 10px" v-if="hasNotice"></sup>
         <el-menu-item index="6" @click="toHistory">历史</el-menu-item>
         <el-menu-item index="7" @click="toInformation">个人信息</el-menu-item>
         <div class="user-statistic-box">
@@ -245,24 +246,28 @@ export default {
               this.playNum = userMsg.playNum;
               this.followNum = userMsg.concernsNum;
               this.likeNum = userMsg.likeNum;
-
+              console.log('data')
+              console.log(res.data);
+              if(this.isMine){
+                this.hasNotice = res.data.newLetterNum > 0;
+              }
               // eslint-disable-next-line no-case-declarations
               this.videoList = JSON.parse(res.data.video_list);
               this.favorList = JSON.parse(res.data.favour_list);
-              console.log('收藏列表')
-              console.log(this.favorList);
+              //console.log('收藏列表')
+              //console.log(this.favorList);
               this.fansList = JSON.parse(res.data.fans_list);
-              console.log('粉丝列表');
-              console.log(this.fansList);
+              //console.log('粉丝列表');
+              //console.log(this.fansList);
               this.historyList = JSON.parse(res.data.browse_list);
-              console.log('浏览列表');
-              console.log(this.historyList);
+              //console.log('浏览列表');
+              //console.log(this.historyList);
               this.noticeList = JSON.parse(res.data.letter_list);
-              console.log('通知列表');
-              console.log(this.noticeList);
+              //console.log('通知列表');
+              //console.log(this.noticeList);
               this.followList = JSON.parse(res.data.concerns_list);
-              console.log('关注列表');
-              console.log(this.followList);
+              //console.log('关注列表');
+              //console.log(this.followList);
               this.reloadKey = !this.reloadKey;
               //this.activeIndex = this.$route.params.index;
               if(this.$route.query.index) {
@@ -292,6 +297,7 @@ export default {
   },
   data() {
     return {
+      hasNotice: false,
       styleObject: {
         marginTop: '80px',
         overflow: 'hidden',
@@ -376,6 +382,26 @@ export default {
     toNotice(){
       this.activeIndex = '5';
       setTimeout(()=>{this.setHeight()},2000)
+      if(this.hasNotice){
+        this.hasNotice = false
+        const formData = new FormData();
+        formData.append("userID", this.pageUserID);
+        this.$axios({
+          method: 'post',
+          url: 'UserCommunication/readLetter/',
+          data: formData,
+        })
+            .then(res => {
+              switch (res.data.error) {
+                case 0:
+                  break;
+              }
+            })
+            .catch(err => {
+              console.log(err);
+            })
+      }
+
     },
     toInformation(){
       this.activeIndex = '7';
