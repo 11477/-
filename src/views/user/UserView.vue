@@ -275,7 +275,6 @@ export default {
               } else{
                 this.activeIndex = '1'
               }
-
               break;
             case 2001:
               this.$message.warning('用户信息加载失败！');
