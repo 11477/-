@@ -125,7 +125,7 @@
         </div>
       </el-menu>
     </div>
-    <div class="content-area">
+    <div class="content-area" ref="contentHeight">
       <div class="video" v-if="this.activeIndex==='1'">
         <div class="sub-title">TA的视频</div>
         <MyVideo :isMine="false"
@@ -159,7 +159,7 @@
       </div>
     </div>
   </div>
-    <div class="pic-right" style="margin-top: 80px;overflow: hidden">
+    <div class="pic-right" :style="styleObject">
       <img src="../../../src/assets/images/p1.png" style="width: 200px; height: 200px; margin-left: 50px; margin-top: 0" alt="图片"/>
       <img src="../../../src/assets/images/p2.png" style="width: 200px; height: 200px; margin-left: 50px; margin-top: 0" alt="图片"/>
       <img src="../../../src/assets/images/p4.png" style="width: 200px; height: 200px; margin-left: 50px; margin-top: 0" alt="图片"/>
@@ -184,6 +184,7 @@ import MyVideo from "@/components/User/MyVideo";
 import user from "@/store/user";
 import SetInfo from "@/components/User/SetInfo";
 import UserNotice from "@/components/User/UserNotice";
+
 export default {
   name: "UserView",
   components: {UserNotice, SetInfo, MyVideo, UserFavor, UserDisplay, UserBar, VideoHistory},
@@ -258,7 +259,12 @@ export default {
               console.log(this.followList);
               this.reloadKey = !this.reloadKey;
               //this.activeIndex = this.$route.params.index;
-              this.activeIndex = this.$route.query.index;
+              if(this.$route.query.index) {
+                this.activeIndex = this.$route.query.index;
+              } else{
+                this.activeIndex = '1'
+              }
+
               break;
             case 2001:
               this.$message.warning('用户信息加载失败！');
@@ -273,25 +279,20 @@ export default {
         .catch(err => {
           console.log(err);
         })
+        .finally(()=> {
+          console.log('finalheight:' +this.$refs.contentHeight.offsetHeight)
+          setTimeout('setHeight()',1000)
+        })
   },
   data() {
     return {
+      styleObject: {
+        marginTop: '80px',
+        overflow: 'hidden',
+        height: '600px'
+      },
       title: '',
       reloadKey: false,
-      urls: [
-        'https://iconfont.alicdn.com/t/baf841bb-c1ec-47f8-b192-ac8e5dc8eb32.png@500h_500w.png',
-        'https://iconfont.alicdn.com/t/befc4847-fa04-4dda-b7f4-1181861d56fd.png@500h_500w.png',
-        'https://iconfont.alicdn.com/t/4622ab5b-cb6c-41df-a25d-1ecaf0751de5.png@500h_500w.png',
-        'https://iconfont.alicdn.com/t/d640f597-1555-4e6f-a464-f2bd041a7e3a.png@500h_500w.png',
-        'https://iconfont.alicdn.com/t/d1089c34-3986-4992-9c6a-f550822dcc11.png@500h_500w.png',
-        'https://iconfont.alicdn.com/t/64995fce-0fd2-4bbf-8fcb-a1fd2ce98274.png@500h_500w.png',
-        'https://iconfont.alicdn.com/t/e28d62b4-171d-4ba2-82bc-c6cf2fe96e96.png@500h_500w.png',
-        'https://iconfont.alicdn.com/t/4f4d7075-f50d-4a03-ae92-baec66f9d964.png@500h_500w.png',
-        'https://iconfont.alicdn.com/t/dcb8d2bc-b721-46b0-9979-f017a64ed769.png@500h_500w.png',
-        'https://iconfont.alicdn.com/t/1192c5bf-17b0-4c19-a0cb-eed122049893.png@500h_500w.png',
-        'https://iconfont.alicdn.com/t/1192c5bf-17b0-4c19-a0cb-eed122049893.png@500h_500w.png',
-        'https://iconfont.alicdn.com/t/aa0b17d0-f447-45f8-8a64-2b6a357a38ca.png@500h_500w.png',
-      ],
       activeIndex: '1',
       loginUserID: 0,
       pageUserID: 0,
@@ -337,25 +338,46 @@ export default {
       }, 10);
     },
     handleSelect(key, keyPath) {
-      console.log(key, keyPath);
+      //console.log(key, keyPath);
+    },
+    setHeight(){
+      this.styleObject.height = (this.$refs.contentHeight.offsetHeight+100).toString()+'px'
     },
     toVideo() {
       this.activeIndex = '1';
+      this.setHeight()
+      this.setHeight()
+      setTimeout('setHeight()',1000)
     },
     toFans(){
       this.activeIndex = '4';
+      this.setHeight()
+      this.setHeight()
+      setTimeout('setHeight()',1000)
     },
     toFavor(){
       this.activeIndex = '2';
+      this.setHeight()
+      this.setHeight()
+      //setTimeout('this.setHeight()',1000)
     },
     toFollow(){
       this.activeIndex = '3';
+      this.setHeight()
+      this.setHeight()
+      setTimeout('setHeight()',1000)
     },
     toHistory(){
       this.activeIndex = '6';
+      this.setHeight()
+      this.setHeight()
+      //setTimeout('this.setHeight()',1000)
     },
     toNotice(){
       this.activeIndex = '5';
+      this.setHeight()
+      this.setHeight()
+      //setTimeout('this.setHeight()',1000)
     },
     toInformation(){
       this.activeIndex = '7';
