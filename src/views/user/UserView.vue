@@ -37,7 +37,7 @@
         </div>
       </el-menu>
     </div>
-    <div class="content-area">
+    <div class="content-area" ref="contentHeight">
       <div class="video" v-if="this.activeIndex==='1'">
         <div class="sub-title">我的视频</div>
         <MyVideo :isMine="true"
@@ -171,6 +171,12 @@
       <img src="../../../src/assets/images/p10.png" style="width: 200px; height: 200px; margin-left: 50px; margin-top: 0" alt="图片"/>
       <img src="../../../src/assets/images/p11.png" style="width: 200px; height: 200px; margin-left: 50px; margin-top: 0" alt="图片"/>
       <img src="../../../src/assets/images/p12.png" style="width: 200px; height: 200px; margin-left: 50px; margin-top: 0" alt="图片"/>
+      <img src="../../../src/assets/images/p1.png" style="width: 200px; height: 200px; margin-left: 50px; margin-top: 0" alt="图片"/>
+      <img src="../../../src/assets/images/p2.png" style="width: 200px; height: 200px; margin-left: 50px; margin-top: 0" alt="图片"/>
+      <img src="../../../src/assets/images/p4.png" style="width: 200px; height: 200px; margin-left: 50px; margin-top: 0" alt="图片"/>
+      <img src="../../../src/assets/images/p5.png" style="width: 200px; height: 200px; margin-left: 50px; margin-top: 0" alt="图片"/>
+      <img src="../../../src/assets/images/p6.png" style="width: 200px; height: 200px; margin-left: 50px; margin-top: 0" alt="图片"/>
+      <img src="../../../src/assets/images/p7.png" style="width: 200px; height: 200px; margin-left: 50px; margin-top: 0" alt="图片"/>
     </div>
   </div>
 </template>
@@ -281,7 +287,7 @@ export default {
         })
         .finally(()=> {
           console.log('finalheight:' +this.$refs.contentHeight.offsetHeight)
-          setTimeout('setHeight()',1000)
+          setTimeout(()=>{this.setHeight()},2000)
         })
   },
   data() {
@@ -341,43 +347,35 @@ export default {
       //console.log(key, keyPath);
     },
     setHeight(){
-      this.styleObject.height = (this.$refs.contentHeight.offsetHeight+100).toString()+'px'
+      if(this.$refs.contentHeight.offsetHeight < 500){
+        this.styleObject.height = '600px'
+      } else {
+        this.styleObject.height = (this.$refs.contentHeight.offsetHeight + 100).toString() + 'px'
+      }
     },
     toVideo() {
       this.activeIndex = '1';
-      this.setHeight()
-      this.setHeight()
-      setTimeout('setHeight()',1000)
+      setTimeout(()=>{this.setHeight()},2000)
     },
     toFans(){
       this.activeIndex = '4';
-      this.setHeight()
-      this.setHeight()
-      setTimeout('setHeight()',1000)
+      setTimeout(()=>{this.setHeight()},2000)
     },
     toFavor(){
       this.activeIndex = '2';
-      this.setHeight()
-      this.setHeight()
-      //setTimeout('this.setHeight()',1000)
+      setTimeout(()=>{this.setHeight()},2000)
     },
     toFollow(){
       this.activeIndex = '3';
-      this.setHeight()
-      this.setHeight()
-      setTimeout('setHeight()',1000)
+      setTimeout(()=>{this.setHeight()},2000)
     },
     toHistory(){
       this.activeIndex = '6';
-      this.setHeight()
-      this.setHeight()
-      //setTimeout('this.setHeight()',1000)
+      setTimeout(()=>{this.setHeight()},2000)
     },
     toNotice(){
       this.activeIndex = '5';
-      this.setHeight()
-      this.setHeight()
-      //setTimeout('this.setHeight()',1000)
+      setTimeout(()=>{this.setHeight()},2000)
     },
     toInformation(){
       this.activeIndex = '7';
