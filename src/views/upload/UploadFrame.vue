@@ -30,9 +30,9 @@
         </el-form-item>
             <el-form-item label="封面上传" prop="videoCoverPath" >
               <div class="list-img-box">
-                <div v-if="form.videoCoverPath !== ''">
+                <div v-if="form.videoCoverPath !== ''" style="display: flex">
                   <img :src="form.videoCoverPath" style='width:320px;height:180px' alt="自定义封面">
-                  <el-button type="primary" @click="uploadPicture('newImg')">更换封面</el-button>
+                  <el-button type="primary" @click="uploadPicture('newImg')" style="height: 40px;margin: 135px auto auto 20px;">更换封面</el-button>
                 </div>
                 <div v-else class="upload-btn" style="height: 120px; width: 300px" @click="uploadPicture('cover')">
                   <i class="el-icon-plus" style="font-size: 30px;"></i>
@@ -267,34 +267,12 @@ export default {
       //    console.log(data)
           this.form.videoPath='https://' + data.Location
           // this.imageUrl = `https:${data.Location}`
-          this.$message.success('视频上传成功');
+          this.$message.success('视频上传成功，5秒后生成自动封面');
           this.showReload=true
-          var config = {
-            // 需要替换成您自己的存储桶信息
-            Bucket: 'nohesitate-1312201606', /* 存储桶，必须 */
-            Region: 'ap-beijing', /* 存储桶所在地域，必须字段 */
-          };
-          cosImg.request({
-                Bucket: config.Bucket,
-                Region: config.Region,
-                Method: 'GET',
-                Key: 'Video/'+request.file.lastModified.toString(),  /* 存储桶内的媒体文件，必须字段 */
-                Query: {
-                  'ci-process': 'snapshot', /** 固定值，必须 */
-                  time: 1, /** 截图的时间点，单位为秒，必须 */
-                  // width: 0, /** 截图的宽，非必须 */
-                  // height: 0, /** 截图的高，非必须 */
-                  // format: 'jpg', /** 截图的格式，支持 jpg 和 png，默认 jpg，非必须 */
-                  // rotate: 'auto', /** 图片旋转方式，默认为'auto'，非必须 */
-                  // mode: 'exactframe', /** 截帧方式，默认为'exactframe'，非必须 */
-                },
-                RawBody: true,
-              },
-              function(err, data){
-              //  console.log('data:',data);
-              //  console.log('wtf:',data.Body)
-
-              });
+         setTimeout(()=>{
+           this.$message.success('封面生成成功！')
+           this.form.videoCoverPath='https://nohesitate-1312201606.cos.ap-beijing.myqcloud.com/VideoCover/'+request.file.lastModified.toString()+'_0.jpg'
+         },5000)
         }
       })
     },
