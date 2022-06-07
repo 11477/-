@@ -109,7 +109,7 @@
     <div v-else style="text-align: center;margin-left: 300px">
       <img src="https://nohesitate-1312201606.cos.ap-beijing.myqcloud.com/src/404.png" height="600px" width="800px">
     </div>
-    <div class="switch-box" v-if="this.scrollTop>200">
+    <div class="switch-box-2" v-if="this.scrollTop>200">
       <div class="home-btn" @click="toHome">
         <i class="el-icon-s-home"></i>
         <span>回到首页</span>
@@ -847,7 +847,7 @@ export default {
   margin-left: 30px;
 }
 
-.switch-box{
+.switch-box-2{
   position: fixed;
   text-align:center;
   width: 50px;

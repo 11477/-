@@ -89,7 +89,7 @@
           </div>
         </div>
       </div>
-      <div class="switch-box">
+      <div class="switch-box-1">
         <div class="home-btn" @click="toHome">
           <i class="el-icon-s-home"></i>
           <span>回到首页</span>
@@ -940,7 +940,7 @@ export default {
   background-color: rgba(128,128,128,0.7);
 }
 
-.switch-box{
+.switch-box-1{
   position: fixed;
   text-align:center;
   width: 50px;

@@ -1,6 +1,6 @@
 <template>
   <div class="userview"  v-title :data-title=this.title :key="reloadKey">
-    <div class="switch-box" v-if="this.scrollTop>200">
+    <div class="switch-box-3" v-if="this.scrollTop>200">
       <div class="home-btn" @click="toHome">
         <i class="el-icon-s-home"></i>
         <span>回到首页</span>
@@ -480,7 +480,7 @@ export default {
   display: flex;
 }
 
-.switch-box{
+.switch-box-3{
   position: fixed;
   text-align:center;
   width: 50px;
