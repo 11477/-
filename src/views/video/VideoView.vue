@@ -109,6 +109,16 @@
     <div v-else style="text-align: center;margin-left: 300px">
       <img src="https://nohesitate-1312201606.cos.ap-beijing.myqcloud.com/src/404.png" height="600px" width="800px">
     </div>
+    <div class="switch-box" v-if="this.scrollTop>200">
+      <div class="home-btn" @click="toHome">
+        <i class="el-icon-s-home"></i>
+        <span>回到首页</span>
+      </div>
+      <div class="back-top" @click="ToTop">
+        <i class="el-icon-upload2"></i>
+        <span>回到顶部</span>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -125,6 +135,7 @@ export default {
   name: "VideoView",
   data() {
     return {
+      scrollTop:0,
       reloadKey: false,
       title: '',
       commentKey: 0,
@@ -316,6 +327,9 @@ export default {
     }
   },
   methods: {
+    handleScroll(){
+      this.scrollTop = document.documentElement.scrollTop;//滚动高度
+    },
     toLogin() {
       this.$router.push({path: '/login'})
     },
@@ -576,6 +590,22 @@ export default {
         }
       }
     },
+    toHome(){
+      window.location.href = '/';
+    },
+    ToTop(){
+      var timer = setInterval(function () {
+        let osTop =
+            document.documentElement.scrollTop || document.body.scrollTop;
+        let ispeed = Math.floor(-osTop / 5);
+        document.documentElement.scrollTop = document.body.scrollTop =
+            osTop + ispeed;
+        this.isTop = true;
+        if (osTop === 0) {
+          clearInterval(timer);
+        }
+      }, 10);
+    },
     toUpSpace() {
       let path = this.$router.resolve({path: '/user/' + this.upID})
       window.open(path.href)
@@ -605,6 +635,9 @@ export default {
       }
     }
   },
+  mounted() {
+    window.addEventListener("scroll", this.handleScroll, true);
+  }
 }
 </script>
 
@@ -812,6 +845,20 @@ export default {
 .r-con {
   width: 320px;
   margin-left: 30px;
+}
+
+.switch-box{
+  position: fixed;
+  text-align:center;
+  width: 50px;
+  height: 220px;
+  margin-left: 1230px;
+  top: 550px;
+  margin-right: 50px;
+  flex-flow: column;
+  background-color: rgba(255,255,255,0.1);
+  border-radius: 10px;
+  z-index: 5;
 }
 
 </style>
