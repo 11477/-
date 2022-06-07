@@ -15,6 +15,8 @@
                 type="username"
                 v-model="ruleForm.username"
                 autocomplete="off"
+                maxlength="10"
+                show-word-limit
                 @keyup.enter.native="register('ruleForm')"
             ></el-input>
           </el-form-item>
