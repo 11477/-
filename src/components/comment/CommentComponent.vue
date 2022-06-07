@@ -58,6 +58,10 @@
                    style="font-size: 12px;margin-top: 0;float: right"
                    v-if="localUserID===item.commentUser.id"
                    @click="showEditFrame(item.content,item.id)">编辑</el-button>
+        <el-button type="text"
+                   style="font-size: 12px;margin-top: 0;margin-right: 10px;float: right;color: crimson"
+                   v-if="localUserID===item.commentUser.id"
+                   @click="showDeleteFrame(item.id)">删除</el-button>
       </div>
 
     </div>
@@ -176,6 +180,39 @@ export default {
       else {
         this.$router.push('/user/'+uid);
       }
+    },
+    showDeleteFrame(cid){
+      let self = this
+      this.$confirm('你要删除该评论吗？', '删除评论', {
+        confirmButtonText: '确定',
+        cancelButtonText: '取消',
+        type: 'warning'
+      }).then(() => {
+        const deleteDataForm = new FormData
+        deleteDataForm.append('commentID',cid)
+        self.$axios({
+          method: 'post',
+          url: '/VideoInteraction/cancelcomment/',
+          data: deleteDataForm
+        }).then(res=>{
+          if(res.data.error===0)
+          {
+            self.$message({
+              type: 'success',
+              message: '删除成功!'
+            });
+            location.reload()
+          }
+          else {
+            self.$message.error(res.data.msg)
+          }
+        })
+      }).catch(() => {
+        this.$message({
+          type: 'info',
+          message: '已取消删除'
+        });
+      });
     },
     showEditFrame(content,cid){
       this.contentInEdit=content

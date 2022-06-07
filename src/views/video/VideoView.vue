@@ -3,15 +3,15 @@
     <div v-if="showVideo" class="video-wrap" id="video-wrap">
       <div class="video-info" id="video-info">
         <div class="l-con" id="l-con">
-          <h1 class="video-title" id="video-title" title="???">
+          <h1 class="video-title" id="video-title" :title="videoTitle">
             <span class="tit">{{ videoTitle }}</span>
           </h1>
           <div class="video-data" id="video-data">
           <span title="view" class="video-view">
-            {{ videoView }}
+            <i class="el-icon-video-play"> </i>{{ videoView }}
           </span>
             <span>
-            {{ uploadDate }}
+             <i class="el-icon-time"></i> {{ uploadDate }}
           </span>
           </div>
         </div>

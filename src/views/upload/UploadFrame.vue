@@ -114,7 +114,7 @@ import user from "@/store/user";
 // 下面的代码是固定写法
 const COS = require('cos-js-sdk-v5')
 // 填写自己腾讯云cos中的key和id (密钥)
-const cosImg = new COS({
+const cos = new COS({
   SecretId: 'AKIDeCYjgQ0NZijjkdR3UnpolZWM4a2MYhiX', // 身份识别ID
   SecretKey: 'gCfw4yf9RZVDgx3wc3KHzSj4D7mEUXP7' // 身份秘钥
 })
@@ -194,7 +194,7 @@ export default {
    //   console.log('getCover:',cover);
       let file = new window.File([cover], Date.now(), {type:cover.type})
     //  console.log('file:',file)
-      cosImg.putObject({
+      cos.putObject({
         Bucket: 'nohesitate-1312201606',
         Region: 'ap-beijing',
         Key: 'VideoCover/'+file.lastModified.toString(),
@@ -250,10 +250,10 @@ export default {
     uploadVideo(request){
     //  console.log(request)
       let self = this
-      cosImg.putObject({
+      cos.putObject({
         Bucket: 'nohesitate-1312201606',
         Region: 'ap-beijing',
-        Key: 'Video/'+request.file.lastModified.toString(),
+        Key: 'Video/'+request.file.lastModified.toString() + '.mp4',
         StorageClass: 'STANDARD',
         Body: request.file, // 上传文件对象
           //进度条

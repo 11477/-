@@ -644,7 +644,6 @@ export default {
           })
     },
     flash(){
-      this.reloadKey=!this.reloadKey;
       if(this.type==='Any')
         this.getNewVideo();
       else if(this.type==='knowledge')
@@ -671,6 +670,8 @@ export default {
         this.getNewVideo11();
       else
         this.getNewVideo12();
+      setTimeout(()=>{ this.reloadKey=!this.reloadKey;},200)
+
     },
     ToTop(){
       var timer = setInterval(function () {
