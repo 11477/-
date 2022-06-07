@@ -185,6 +185,7 @@ export default {
   flex-wrap: wrap;
   margin-left: 0;
   margin-top: 0;
+  margin-right: 15px;
 }
 .user-box-in-search{
   display: flex;
