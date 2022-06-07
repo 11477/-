@@ -63,7 +63,6 @@ export default {
                 this.$message.success("登录成功");
                 this.$store.dispatch('saveUserInfo', {user: {
                     'email': this.form.email,
-                    'confirmed': true,
                     'userID':res.data.userID,
                     'isAudit':res.data.isAudit
                   }});

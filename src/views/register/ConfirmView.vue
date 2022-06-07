@@ -3,7 +3,7 @@
     <div v-if="success" class="register-success">
       <el-row>
         <div class="msg">
-          <h1>恭喜您验证成功！</h1>
+          <h1 style="font-size: 80px;text-align: center">恭喜您验证成功！</h1>
         </div>
       </el-row>
     </div>
@@ -31,6 +31,8 @@ export default {
           switch (res.data.error) {
             case 0:
               this.success = true;
+              this.$message.success('注册成功！3秒后回到主页')
+                setTimeout(()=>{this.$router.push({path: '/'})},3000)
               break;
             case 2001:
               this.$message.error('请求方式错误');
@@ -55,12 +57,17 @@ export default {
 
 <style scoped>
 .confirm {
-  margin-top: 15px;
+  width: 100%;
+  height: 800px;
+  background: url("../../assets/images/background5.jpg") no-repeat;
+  background-size: cover;
 }
 
 .msg{
   position: absolute;
-  margin: auto 0;
+  margin-top: 100px;
+  left: 50%;
+  transform: translate(-50%,0);
 }
 
 </style>

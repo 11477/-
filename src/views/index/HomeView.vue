@@ -94,10 +94,6 @@
           <i class="el-icon-s-home"></i>
           <span>回到首页</span>
         </div>
-        <div class="back-top" @click="ToTop">
-          <i class="el-icon-upload2"></i>
-          <span>回到顶部</span>
-        </div>
         <div class="switch-btn" @click="flash">
           <i class="el-icon-refresh"></i>
           <span>换换</span>
@@ -931,7 +927,7 @@ export default {
   width: 50px;
   height: 220px;
   margin-left: 1450px;
-  top: 350px;
+  top: 600px;
   margin-right: 50px;
   flex-flow: column;
   background-color: rgba(255,255,255,0.1);

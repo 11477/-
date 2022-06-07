@@ -225,10 +225,6 @@ export default {
                 console.log(res.data)
                 switch (res.data.error) {
                   case 0:
-                    this.$store.dispatch('saveUserInfo', {user: {
-                        'username': this.ruleForm.username,
-                        'confirmed': false,
-                      }});
                     this.$message.success('注册成功，请前往邮箱验证！');
                     this.$router.push("/login");
                     break;
