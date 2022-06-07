@@ -248,7 +248,7 @@ export default {
                     this.$message.error('两次密码不一致！');
                     break;
                   case 4005:
-                    this.$message.error('邮件验证码发送失败，请检查邮箱是否填写正确！');
+                    this.$message.error('邮件验证发送失败，请检查邮箱是否填写正确！');
                     break;
                 }
               })
