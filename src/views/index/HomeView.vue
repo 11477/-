@@ -494,6 +494,7 @@ export default {
       })
           .then(res=>{
             this.auditVideoList=res.data.videoID_list;
+            this.reloadKey=!this.reloadKey;
           })
 
       //console.log(this.type);
@@ -508,6 +509,7 @@ export default {
       })
           .then(res=>{
             this.klgVideoList=res.data.videoID_list;
+            this.reloadKey=!this.reloadKey;
           })
 
     },
@@ -521,6 +523,7 @@ export default {
       })
           .then(res=>{
             this.sciVideoList=res.data.videoID_list;
+            this.reloadKey=!this.reloadKey;
           })
     },
     getNewVideo3(){
@@ -533,6 +536,7 @@ export default {
       })
           .then(res=>{
             this.infVideoList=res.data.videoID_list;
+            this.reloadKey=!this.reloadKey;
           })
     },
     getNewVideo4(){
@@ -545,6 +549,7 @@ export default {
       })
           .then(res=>{
             this.lifVideoList=res.data.videoID_list;
+            this.reloadKey=!this.reloadKey;
           })
     },
     getNewVideo5(){
@@ -557,6 +562,7 @@ export default {
       })
           .then(res=>{
             this.crtVideoList=res.data.videoID_list;
+            this.reloadKey=!this.reloadKey;
           })
     },
     getNewVideo6(){
@@ -569,6 +575,7 @@ export default {
       })
           .then(res=>{
             this.mscVideoList=res.data.videoID_list;
+            this.reloadKey=!this.reloadKey;
           })
     },
     getNewVideo7(){
@@ -581,6 +588,7 @@ export default {
       })
           .then(res=>{
             this.dncVideoList=res.data.videoID_list;
+            this.reloadKey=!this.reloadKey;
           })
     },
     getNewVideo8(){
@@ -593,6 +601,7 @@ export default {
       })
           .then(res=>{
             this.fodVideoList=res.data.videoID_list;
+            this.reloadKey=!this.reloadKey;
           })
     },
     getNewVideo9(){
@@ -605,6 +614,7 @@ export default {
       })
           .then(res=>{
             this.sptVideoList=res.data.videoID_list;
+            this.reloadKey=!this.reloadKey;
           })
     },
     getNewVideo10(){
@@ -617,6 +627,7 @@ export default {
       })
           .then(res=>{
             this.movVideoList=res.data.videoID_list;
+            this.reloadKey=!this.reloadKey;
           })
     },
     getNewVideo11(){
@@ -629,6 +640,7 @@ export default {
       })
           .then(res=>{
             this.hisVideoList=res.data.videoID_list;
+            this.reloadKey=!this.reloadKey;
           })
     },
     getNewVideo12(){
@@ -641,6 +653,7 @@ export default {
       })
           .then(res=>{
             this.entVideoList=res.data.videoID_list;
+            this.reloadKey=!this.reloadKey;
           })
     },
     flash(){
@@ -670,7 +683,6 @@ export default {
         this.getNewVideo11();
       else
         this.getNewVideo12();
-      setTimeout(()=>{ this.reloadKey=!this.reloadKey;},200)
 
     },
     ToTop(){
