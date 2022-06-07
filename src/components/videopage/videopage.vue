@@ -162,6 +162,8 @@ export default {
 .video-cover-img img{
   width: 100%;
   height: 100%;
+  max-width: 270px;
+  max-height: 150px;
   border-radius: 6px;
   z-index: 1;
   cursor: pointer;
