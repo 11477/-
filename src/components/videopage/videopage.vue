@@ -167,6 +167,8 @@ export default {
   height:160px;
   max-width: 270px;
   max-height: 150px;
+  min-width: 270px;
+  min-height: 150px;
   border-radius: 6px;
   z-index: 1;
   cursor: pointer;

@@ -58,4 +58,9 @@ export default {
   margin-top: 15px;
 }
 
+.msg{
+  position: absolute;
+  margin: auto;
+}
+
 </style>
