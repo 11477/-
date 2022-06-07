@@ -150,6 +150,7 @@ export default {
   margin-top: 10px;
   margin-bottom: 50px;
   margin-left: 15px;
+  //border: solid 1px black;
 }
 
 .video-cover{
@@ -221,7 +222,7 @@ export default {
   flex: 1;
   display: flex;
   position: absolute;
-  top:50px;
+  top:30px;
 }
 
 .video-title{
@@ -236,6 +237,10 @@ export default {
   text-align: left;
   transition: background-color .3s,color .3s;
   float: left;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+  width: 275px;
 }
 
 .video-title span:hover{

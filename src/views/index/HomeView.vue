@@ -41,7 +41,7 @@
       </div>
       <div class="switch-six">
         <div class="switch-video-box">
-          <el-carousel :interval="5000" height="400px" style="border-radius: 10px">
+          <el-carousel :interval="5000" height="380px" style="border-radius: 10px">
             <el-carousel-item v-for="item in rndVideoList" :key="item">
               <VideoCoverRnd :videoID="item"></VideoCoverRnd>
             </el-carousel-item>
@@ -764,7 +764,7 @@ export default {
   //border: solid 1px lightcoral;
   text-align: right;
   width:100%;
-  height: 500px;
+  height: 465px;
 }
 
 
@@ -773,7 +773,7 @@ export default {
   /*display: flex;*/
   /*flex-wrap: wrap;*/
   width: 870px;
-  height: 470px;
+  height: 450px;
   //border: solid 1px lightskyblue;
   //background-color: lightskyblue;
   display: flex;
@@ -1037,7 +1037,6 @@ export default {
   margin-right: 10px;
   border-radius: 10px;
   //border: solid 1px lawngreen;
-
 }
 
 .el-carousel__item h3 {

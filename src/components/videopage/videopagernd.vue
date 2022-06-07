@@ -197,6 +197,11 @@ export default {
   cursor: pointer;
   transition: background-color .3s,color .3s;
   color: rgba(0,0,0,0);
+  display: block;
+  width: 530px;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
 }
 
 .title-name span:hover{
