@@ -719,7 +719,12 @@ export default {
       }
     },
     toHome(){
-      location.reload();
+      this.reloadKey=!this.reloadKey
+      this.type='Any'
+      for(let i=1; i<=12;i++){
+        let div1 = document.getElementById('channel-' + i.toString())
+        div1.style.backgroundColor="rgba(246,247,248,0.7)"
+      }
     }
   },
   beforeDestroy() {
