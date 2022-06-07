@@ -157,11 +157,14 @@ export default {
   z-index: 1;
   border-radius: 6px;
   margin: 0 auto;
+  width: 270px;
+  height: 150px;
+  //border: solid 2px black;
 }
 
 .video-cover-img img{
-  width: 100%;
-  height: 100%;
+  width: 270px;
+  height:160px;
   max-width: 270px;
   max-height: 150px;
   border-radius: 6px;
@@ -171,14 +174,14 @@ export default {
 
 .bottom-line{
   position: absolute;
-  top:134px;
+  top:132px;
   //left: 5px;
   z-index: 2;
   width: 100%;
   display: flex;
   align-items: center;
   background-color: rgba(128,128,128,0.3);
-  border-radius: 6px;
+  border-radius: 7px;
 }
 
 .bottom-line-left{
