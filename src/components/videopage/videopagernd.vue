@@ -150,11 +150,14 @@ export default {
   z-index: 1;
   border-radius: 6px;
   margin: 0 auto;
+  //border: solid 1px black;
+  width: 530px;
+  height: 300px;
 }
 
 .video-cover-img img{
   width: 100%;
-  height: 100%;
+  height: 300px;
   //border-radius: 6px;
   z-index: 1;
   cursor: pointer;
