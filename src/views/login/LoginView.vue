@@ -103,8 +103,7 @@ export default {
       this.$router.push("/register");
     },
     handleToHome() {
-      this.$router.push('/');
-      location.reload();
+      window.location.href = '/';
     },
   }
 }

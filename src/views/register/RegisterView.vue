@@ -268,7 +268,7 @@ export default {
       this.$router.push("/login");
     },
     handleToHome() {
-      this.$router.push('/');
+      window.location.href = '/';
     }
   }
 }
