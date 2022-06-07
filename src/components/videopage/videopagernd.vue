@@ -165,10 +165,11 @@ export default {
 
 .bottom-line{
   position: absolute;
-  top:181px;
+  top:171px;
   z-index: 2;
   width: 100%;
   align-items: center;
+  //border: solid 1px black;
 }
 
 .bottom-line-left{
