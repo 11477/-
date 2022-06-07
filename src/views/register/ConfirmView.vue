@@ -60,7 +60,7 @@ export default {
 
 .msg{
   position: absolute;
-  margin: auto;
+  margin: auto 0;
 }
 
 </style>
