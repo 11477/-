@@ -104,6 +104,7 @@ export default {
     },
     handleToHome() {
       this.$router.push('/');
+      location.reload();
     },
   }
 }
