@@ -201,126 +201,6 @@ export default {
         .then(res=>{
           this.auditVideoList=res.data.videoID_list
         })
-    const requestForm1 = new FormData()
-    requestForm1.append('Type','knowledge')
-    this.$axios({
-      method: 'post',
-      url: '/VideoManager/getVideoIDByCondition/',
-      data: requestForm1
-    })
-        .then(res=>{
-          this.klgVideoList=res.data.videoID_list
-        })
-    const requestForm2 = new FormData()
-    requestForm2.append('Type','science')
-    this.$axios({
-      method: 'post',
-      url: '/VideoManager/getVideoIDByCondition/',
-      data: requestForm2
-    })
-        .then(res=>{
-          this.sciVideoList=res.data.videoID_list
-        })
-    const requestForm3 = new FormData()
-    requestForm3.append('Type','info')
-    this.$axios({
-      method: 'post',
-      url: '/VideoManager/getVideoIDByCondition/',
-      data: requestForm3
-    })
-        .then(res=>{
-          this.infVideoList=res.data.videoID_list
-        })
-    const requestForm4 = new FormData()
-    requestForm4.append('Type','life')
-    this.$axios({
-      method: 'post',
-      url: '/VideoManager/getVideoIDByCondition/',
-      data: requestForm4
-    })
-        .then(res=>{
-          this.lifVideoList=res.data.videoID_list
-        })
-    const requestForm5 = new FormData()
-    requestForm5.append('Type','charity')
-    this.$axios({
-      method: 'post',
-      url: '/VideoManager/getVideoIDByCondition/',
-      data: requestForm5
-    })
-        .then(res=>{
-          this.crtVideoList=res.data.videoID_list
-        })
-    const requestForm6 = new FormData()
-    requestForm6.append('Type','music')
-    this.$axios({
-      method: 'post',
-      url: '/VideoManager/getVideoIDByCondition/',
-      data: requestForm6
-    })
-        .then(res=>{
-          this.mscVideoList=res.data.videoID_list
-        })
-    const requestForm7 = new FormData()
-    requestForm7.append('Type','dance')
-    this.$axios({
-      method: 'post',
-      url: '/VideoManager/getVideoIDByCondition/',
-      data: requestForm7
-    })
-        .then(res=>{
-          this.dncVideoList=res.data.videoID_list
-        })
-    const requestForm8 = new FormData()
-    requestForm8.append('Type','food')
-    this.$axios({
-      method: 'post',
-      url: '/VideoManager/getVideoIDByCondition/',
-      data: requestForm8
-    })
-        .then(res=>{
-          this.fodVideoList=res.data.videoID_list
-        })
-    const requestForm9 = new FormData()
-    requestForm9.append('Type','sport')
-    this.$axios({
-      method: 'post',
-      url: '/VideoManager/getVideoIDByCondition/',
-      data: requestForm9
-    })
-        .then(res=>{
-          this.sptVideoList=res.data.videoID_list
-        })
-    const requestForm10 = new FormData()
-    requestForm10.append('Type','movie')
-    this.$axios({
-      method: 'post',
-      url: '/VideoManager/getVideoIDByCondition/',
-      data: requestForm10
-    })
-        .then(res=>{
-          this.movVideoList=res.data.videoID_list
-        })
-    const requestForm11 = new FormData()
-    requestForm11.append('Type','history')
-    this.$axios({
-      method: 'post',
-      url: '/VideoManager/getVideoIDByCondition/',
-      data: requestForm11
-    })
-        .then(res=>{
-          this.hisVideoList=res.data.videoID_list
-        })
-    const requestForm12 = new FormData()
-    requestForm12.append('Type','entertainment')
-    this.$axios({
-      method: 'post',
-      url: '/VideoManager/getVideoIDByCondition/',
-      data: requestForm12
-    })
-        .then(res=>{
-          this.entVideoList=res.data.videoID_list
-        })
   },
   methods:{
     toSpace() {
@@ -365,6 +245,16 @@ export default {
           )
     },
     C2K(){
+      const requestForm1 = new FormData()
+      requestForm1.append('Type','knowledge')
+      this.$axios({
+        method: 'post',
+        url: '/VideoManager/getVideoIDByCondition/',
+        data: requestForm1
+      })
+          .then(res=>{
+            this.klgVideoList=res.data.videoID_list
+          })
       this.reloadKey=!this.reloadKey;
       this.type='knowledge'
       for(let i=1; i<=12;i++){
@@ -373,8 +263,19 @@ export default {
       }
       let div1 = document.getElementById('channel-1')
       div1.style.backgroundColor="rgba(128,128,128,0.7)"
+
     },
     C2SC(){
+      const requestForm2 = new FormData()
+      requestForm2.append('Type','science')
+      this.$axios({
+        method: 'post',
+        url: '/VideoManager/getVideoIDByCondition/',
+        data: requestForm2
+      })
+          .then(res=>{
+            this.sciVideoList=res.data.videoID_list
+          })
       this.reloadKey=!this.reloadKey;
       this.type='science'
       for(let i=1; i<=12;i++){
@@ -385,6 +286,16 @@ export default {
       div1.style.backgroundColor="rgba(128,128,128,0.7)"
     },
     C2I(){
+      const requestForm3 = new FormData()
+      requestForm3.append('Type','info')
+      this.$axios({
+        method: 'post',
+        url: '/VideoManager/getVideoIDByCondition/',
+        data: requestForm3
+      })
+          .then(res=>{
+            this.infVideoList=res.data.videoID_list
+          })
       this.reloadKey=!this.reloadKey;
       this.type='info'
       for(let i=1; i<=12;i++){
@@ -395,6 +306,16 @@ export default {
       div1.style.backgroundColor="rgba(128,128,128,0.7)"
     },
     C2L(){
+      const requestForm4 = new FormData()
+      requestForm4.append('Type','life')
+      this.$axios({
+        method: 'post',
+        url: '/VideoManager/getVideoIDByCondition/',
+        data: requestForm4
+      })
+          .then(res=>{
+            this.lifVideoList=res.data.videoID_list
+          })
       this.reloadKey=!this.reloadKey;
       this.type='life'
       for(let i=1; i<=12;i++){
@@ -405,6 +326,16 @@ export default {
       div1.style.backgroundColor="rgba(128,128,128,0.7)"
     },
     C2C(){
+      const requestForm5 = new FormData()
+      requestForm5.append('Type','charity')
+      this.$axios({
+        method: 'post',
+        url: '/VideoManager/getVideoIDByCondition/',
+        data: requestForm5
+      })
+          .then(res=>{
+            this.crtVideoList=res.data.videoID_list
+          })
       this.reloadKey=!this.reloadKey;
       this.type='charity'
       for(let i=1; i<=12;i++){
@@ -415,6 +346,16 @@ export default {
       div1.style.backgroundColor="rgba(128,128,128,0.7)"
     },
     C2MC(){
+      const requestForm6 = new FormData()
+      requestForm6.append('Type','music')
+      this.$axios({
+        method: 'post',
+        url: '/VideoManager/getVideoIDByCondition/',
+        data: requestForm6
+      })
+          .then(res=>{
+            this.mscVideoList=res.data.videoID_list
+          })
       this.reloadKey=!this.reloadKey;
       this.type='music'
       for(let i=1; i<=12;i++){
@@ -425,6 +366,16 @@ export default {
       div1.style.backgroundColor="rgba(128,128,128,0.7)"
     },
     C2D(){
+      const requestForm7 = new FormData()
+      requestForm7.append('Type','dance')
+      this.$axios({
+        method: 'post',
+        url: '/VideoManager/getVideoIDByCondition/',
+        data: requestForm7
+      })
+          .then(res=>{
+            this.dncVideoList=res.data.videoID_list
+          })
       this.reloadKey=!this.reloadKey;
       this.type='dance'
       for(let i=1; i<=12;i++){
@@ -435,6 +386,16 @@ export default {
       div1.style.backgroundColor="rgba(128,128,128,0.7)"
     },
     C2F(){
+      const requestForm8 = new FormData()
+      requestForm8.append('Type','food')
+      this.$axios({
+        method: 'post',
+        url: '/VideoManager/getVideoIDByCondition/',
+        data: requestForm8
+      })
+          .then(res=>{
+            this.fodVideoList=res.data.videoID_list
+          })
       this.reloadKey=!this.reloadKey;
       this.type='food'
       for(let i=1; i<=12;i++){
@@ -445,6 +406,16 @@ export default {
       div1.style.backgroundColor="rgba(128,128,128,0.7)"
     },
     C2SP(){
+      const requestForm9 = new FormData()
+      requestForm9.append('Type','sport')
+      this.$axios({
+        method: 'post',
+        url: '/VideoManager/getVideoIDByCondition/',
+        data: requestForm9
+      })
+          .then(res=>{
+            this.sptVideoList=res.data.videoID_list
+          })
       this.reloadKey=!this.reloadKey;
       this.type='sport'
       for(let i=1; i<=12;i++){
@@ -455,6 +426,16 @@ export default {
       div1.style.backgroundColor="rgba(128,128,128,0.7)"
     },
     C2MV(){
+      const requestForm10 = new FormData()
+      requestForm10.append('Type','movie')
+      this.$axios({
+        method: 'post',
+        url: '/VideoManager/getVideoIDByCondition/',
+        data: requestForm10
+      })
+          .then(res=>{
+            this.movVideoList=res.data.videoID_list
+          })
       this.reloadKey=!this.reloadKey;
       this.type='movie'
       for(let i=1; i<=12;i++){
@@ -465,6 +446,16 @@ export default {
       div1.style.backgroundColor="rgba(128,128,128,0.7)"
     },
     C2H(){
+      const requestForm11 = new FormData()
+      requestForm11.append('Type','history')
+      this.$axios({
+        method: 'post',
+        url: '/VideoManager/getVideoIDByCondition/',
+        data: requestForm11
+      })
+          .then(res=>{
+            this.hisVideoList=res.data.videoID_list
+          })
       this.reloadKey=!this.reloadKey;
       this.type='history'
       for(let i=1; i<=12;i++){
@@ -475,6 +466,16 @@ export default {
       div1.style.backgroundColor="rgba(128,128,128,0.7)"
     },
     C2E(){
+      const requestForm12 = new FormData()
+      requestForm12.append('Type','entertainment')
+      this.$axios({
+        method: 'post',
+        url: '/VideoManager/getVideoIDByCondition/',
+        data: requestForm12
+      })
+          .then(res=>{
+            this.entVideoList=res.data.videoID_list
+          })
       this.reloadKey=!this.reloadKey;
       this.type='entertainment'
       for(let i=1; i<=12;i++){
