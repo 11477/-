@@ -162,6 +162,8 @@ export default {
   height: 100%;
   max-height: 225px;
   max-width: 400px;
+  min-height: 225px;
+  max-width: 400px;
   border-radius: 6px;
   z-index: 1;
   cursor: pointer;
