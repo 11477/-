@@ -107,11 +107,12 @@ export default {
           url: '/VideoManager/sendResultInfo/',
           data: auditInfo
         }).then(res => {
-          if (res.data.error != 0) {
+          if (res.data.error !== 0) {
             this.$message.error(res.data.msg)
           }
         })
       }
+      console.log('nani?',auditForm.get('AdministratorID'))
       this.$axios({
         method: 'post',
         url: '/VideoManager/auditvideo/',
@@ -119,11 +120,11 @@ export default {
       }).then(res => {
         if (res.data.error === 0) {
           if (result === 0) {
-            this.deleteVideo(auditID, videoID, 0)
+            this.deleteVideo(adminID, videoID, 0)
           }
           this.$message.success('处理成功！')
         } else {
-          this.$message.error(res.data.error)
+          this.$message.error(res.data.msg)
         }
       })
           .finally(() => {
@@ -168,7 +169,7 @@ export default {
           url: '/VideoManager/sendResultInfo/',
           data: auditInfo
         }).then(res => {
-          if (res.data.error != 0) {
+          if (res.data.error !== 0) {
             this.$message.error(res.data.msg)
           }
         })
@@ -183,7 +184,7 @@ export default {
         })
             .then(res => {
               if (res.data.error) {
-                this.$message.error(res.data.error)
+                this.$message.error(res.data.msg)
               } else {
                 this.$message.success('删除视频成功')
                 location.reload()
@@ -205,7 +206,7 @@ export default {
         })
             .then(res => {
               if (res.data.error) {
-                this.$message.error(res.data.error)
+                this.$message.error(res.data.msg)
               } else {
                 this.$message.success('删除视频成功')
                 location.reload()
@@ -223,7 +224,7 @@ export default {
         data: form
       }).then(res => {
         if (res.data.error) {
-          this.$message.error(res.data.error)
+          this.$message.error(res.data.msg)
         } else {
           let cReason = res.data.complainReason
           this.auditVideoList.push(vid)

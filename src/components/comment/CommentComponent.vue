@@ -39,7 +39,7 @@
 
         <div class="comment-f">
           <div>
-            <div class="nickname author">
+            <div class="nickname author" @click="handleClickAvatar(item.commentUser.id)">
               {{ item.commentUser.nickName }}
             </div>
             <div v-if="item.commentUser.id === authorId" class="icon author">
@@ -1041,9 +1041,13 @@ export default {
 }
 .nickname {
   font-size: 14px;
+  cursor: pointer;
 }
 .author {
   display: inline-block;
+}
+.nickname:hover {
+  color: #66ccff;
 }
 .icon {
   background: #dff0d8;
