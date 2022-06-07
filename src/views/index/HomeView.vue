@@ -931,7 +931,7 @@ export default {
   width: 50px;
   height: 220px;
   margin-left: 1450px;
-  top: 350px;
+  top: 400px;
   margin-right: 50px;
   flex-flow: column;
   background-color: rgba(255,255,255,0.1);
