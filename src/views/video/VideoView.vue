@@ -644,7 +644,7 @@ export default {
 <style scoped>
 .video-main {
   width: 100%;
-  height: 90%;
+  height: calc(100% - 60px);
   background: url("../../assets/images/background4.jpg") no-repeat;
   background-size: cover;
   overflow: auto;
