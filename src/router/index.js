@@ -110,7 +110,7 @@ const router = new VueRouter({
   routes
 })
 router.beforeEach((to, from, next) => {
-  if (to.path === '/login'&&from.path!=='/register') {
+  if (to.path === '/login'&&from.path!=='/register'&&from.path!=='/forget') {
     localStorage.setItem("preRoute", router.currentRoute.fullPath);
   }
 
