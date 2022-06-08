@@ -942,7 +942,7 @@ export default {
   width: 50px;
   height: 220px;
   margin-left: 1450px;
-  top: 600px;
+  top: 550px;
   margin-right: 50px;
   flex-flow: column;
   background-color: rgba(255,255,255,0.1);

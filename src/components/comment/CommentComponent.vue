@@ -65,6 +65,7 @@
       </div>
 
     </div>
+    <div class="bottom-info">没有更多评论了</div>
   </div>
 </template>
 
@@ -1101,5 +1102,12 @@ export default {
   padding: 10px;
   width: 900px;
   margin-left: 50px;
+}
+
+.bottom-info{
+  text-align: center;
+  font-size: 14px;
+  color: #99a9bf;
+  margin-bottom: 20px;
 }
 </style>
