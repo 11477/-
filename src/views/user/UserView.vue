@@ -1,5 +1,15 @@
 <template>
   <div class="userview"  v-title :data-title=this.title :key="reloadKey">
+    <div class="switch-box-3" v-if="this.scrollTop>200">
+      <div class="home-btn" @click="toHome">
+        <i class="el-icon-s-home"></i>
+        <span>回到首页</span>
+      </div>
+      <div class="back-top" @click="ToTop">
+        <i class="el-icon-upload2"></i>
+        <span>回到顶部</span>
+      </div>
+    </div>
   <div v-if="isMine">
     <UserBar :username=username
              :userPortrait=userPortrait
@@ -296,6 +306,7 @@ export default {
   },
   data() {
     return {
+      scrollTop:0,
       hasNotice: false,
       styleObject: {
         marginTop: '80px',
@@ -329,6 +340,10 @@ export default {
     }
   },
   methods:{
+    handleScroll(){
+      this.scrollTop = document.documentElement.scrollTop;//滚动高度
+      console.log(this.scrollTop)
+    },
     flash(){
       location.reload();
     },
@@ -405,7 +420,11 @@ export default {
     toInformation(){
       this.activeIndex = '7';
     },
+  },
+  mounted() {
+    window.addEventListener("scroll", this.handleScroll, true);
   }
+
 }
 </script>
 
@@ -459,5 +478,19 @@ export default {
 }
 .el-menu-demo {
   display: flex;
+}
+
+.switch-box-3{
+  position: fixed;
+  text-align:center;
+  width: 50px;
+  height: 220px;
+  margin-left: 1200px;
+  top: 550px;
+  margin-right: 50px;
+  flex-flow: column;
+  background-color: rgba(255,255,255,0.1);
+  border-radius: 10px;
+  z-index: 5;
 }
 </style>

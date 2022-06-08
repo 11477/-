@@ -89,13 +89,13 @@
           </div>
         </div>
       </div>
-      <div class="switch-box">
+      <div class="switch-box-1">
         <div class="home-btn" @click="toHome">
           <i class="el-icon-s-home"></i>
           <span>回到首页</span>
         </div>
         <div class="switch-btn" @click="flash">
-          <i class="el-icon-refresh"></i>
+          <i :class="[rotate?'fa fa-arrow-down go':'fa fa-arrow-down aa']" class="el-icon-refresh"></i>
           <span>换换</span>
         </div>
       </div>
@@ -114,6 +114,7 @@ export default {
   components: {VideoCoverRnd, VideoCoverRow, VideoCover},
   data(){
     return{
+      rotate:false,
       title: '短视频分享平台',
       is_Manager:false,
       rndVideoList:[],
@@ -654,6 +655,7 @@ export default {
           })
     },
     flash(){
+      this.rotate=!this.rotate;
       if(this.type==='Any')
         this.getNewVideo();
       else if(this.type==='knowledge')
@@ -713,7 +715,12 @@ export default {
       }
     },
     toHome(){
-      location.reload();
+      this.reloadKey=!this.reloadKey
+      this.type='Any'
+      for(let i=1; i<=12;i++){
+        let div1 = document.getElementById('channel-' + i.toString())
+        div1.style.backgroundColor="rgba(246,247,248,0.7)"
+      }
     }
   },
   beforeDestroy() {
@@ -724,6 +731,14 @@ export default {
 }
 </script>
 <style>
+
+.aa{
+  transition: all .5s;
+}
+.go{
+  transform:rotate(-360deg);
+  transition: all .5s;
+}
 
 .home{
   margin-top: 60px;
@@ -788,7 +803,7 @@ export default {
   display: flex;
   flex-direction: row;
   //border: solid 1px red;
-  width: 1500px;
+  width: 1450px;
   margin-top: 10px;
 }
 
@@ -921,7 +936,7 @@ export default {
   background-color: rgba(128,128,128,0.7);
 }
 
-.switch-box{
+.switch-box-1{
   position: fixed;
   text-align:center;
   width: 50px;

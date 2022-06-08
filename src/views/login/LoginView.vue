@@ -102,7 +102,7 @@ export default {
       this.$router.push("/register");
     },
     handleToHome() {
-      this.$router.push('/');
+      window.location.href = '/';
     },
   }
 }
