@@ -1,5 +1,5 @@
 <template>
-  <div style="position: absolute;margin-top: 60px" v-title :data-title=this.title :key="reloadKey">
+  <div style="position: absolute;margin-top: 60px" v-title :data-title=this.title :key="reloadKey" class="video-main">
     <div v-if="showVideo" class="video-wrap" id="video-wrap">
       <div class="video-info" id="video-info">
         <div class="l-con" id="l-con">
@@ -642,14 +642,24 @@ export default {
 </script>
 
 <style scoped>
+.video-main {
+  width: 100%;
+  height: 90%;
+  background: url("../../assets/images/background4.jpg") no-repeat;
+  background-size: cover;
+  overflow: auto;
+}
+
 .video-wrap .video-desc {
   margin-top: 16px;
 }
 
 .video-comment {
   position: absolute;
-  width: 1000px;
-  margin: auto 0;
+  width: 1100px;
+  margin-left: 0;
+  background-color: white;
+  border-radius: 0 0 30px 30px;
 }
 
 .video-desc {
@@ -728,10 +738,13 @@ export default {
 
 .player {
   display: inline-block;
-  margin-right: 100px;
+  margin-right: 150px;
+  margin-left: 100px;
+  width: 900px;
 }
 
 .video-wrap .up-info {
+  border-top-right-radius: 30px;
   display: flex;
   box-sizing: border-box;
   height: 96px;
@@ -787,21 +800,22 @@ export default {
 }
 
 .video-wrap {
-  max-width: 1984px;
-  min-width: 988px;
-  margin-left: 250px;
+  width: 1100px;
+  margin-left: 200px;
   justify-content: center;
   background: #fff;
+  border-radius: 30px 30px 0 0;
 }
 
 .video-wrap .video-info {
   max-width: 1984px;
   min-width: 988px;
-  margin: 0 auto;
   display: flex;
   text-align: left;
+  margin: 0 auto 0 50px;
   justify-content: center;
   background: #fff;
+  border-radius: 30px;
 }
 
 .video-info .video-title {

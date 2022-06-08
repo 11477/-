@@ -1003,6 +1003,7 @@ export default {
 }
 .comm {
   padding: 20px;
+  margin-left: 50px;
 }
 .su {
   margin-top: 2px;
@@ -1026,6 +1027,7 @@ export default {
 }
 .hbl-comm {
   padding: 40px;
+  margin-left: 50px;
 }
 
 .reply {
@@ -1098,5 +1100,6 @@ export default {
 .hbl-child {
   padding: 10px;
   width: 900px;
+  margin-left: 50px;
 }
 </style>
