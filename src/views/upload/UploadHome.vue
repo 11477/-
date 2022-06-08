@@ -1,6 +1,6 @@
 <template>
-  <div v-title :data-title=this.title style="position: absolute;margin-left: 100px">
-    <UploadHead style="width: 1300px"></UploadHead>
+  <div v-title :data-title=this.title style="position: absolute;" class="uploadHome">
+    <UploadHead style="width: 100%"></UploadHead>
     <div class="welcome">
       <div>
         <el-container>
@@ -159,14 +159,21 @@ export default {
 </script>
 
 <style scoped>
+.uploadHome{
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background: url("../../assets/images/background4.png") no-repeat;
+  background-size: cover;
+}
+
 .data-row {
   display: flex;
 }
 
 .welcome {
   height: 100%;
-  background-size: cover;
-  position: absolute;
+
   display: flex;
 }
 

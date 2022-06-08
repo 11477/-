@@ -1,6 +1,6 @@
 <template>
-  <div v-title :data-title=this.title style="position: absolute;margin-left: 100px">
-    <UploadHead style="width: 1300px"></UploadHead>
+  <div v-title :data-title=this.title style="position: absolute; width: 100%" class="upload">
+    <UploadHead style="width: 100%"></UploadHead>
     <div class="uploader-frame">
       <div class="video-form">
       <el-form ref="form" :model="form" label-width="80px" :rules="formRule">
@@ -11,7 +11,7 @@
               :http-request="uploadVideo"
               :before-upload="beforeVideoUpload"
               :file-list="videoList"
-              accept="video/mp4, video/mkv"
+              accept="video/mp4"
               :limit="1">
             <el-progress
                 :text-inside="true"
@@ -287,7 +287,7 @@ export default {
       } catch (err) {
         suffix = '';
       }
-      const videoList = ['mp4', 'mkv'];
+      const videoList = ['mp4'];
       const judge = videoList.some(function (item) {
         return item === suffix;
       });
@@ -295,7 +295,7 @@ export default {
         isVideo = true;
       }
       if (!isVideo) {
-        this.$message.error('上传视频文件只能是 MP4/MKV 格式!');
+        this.$message.error('上传视频文件只能是 MP4 格式!');
       } else if (!isLt2M) {
         this.$message.error('上传视频文件大小不能超过 300MB!');
       }
@@ -309,6 +309,10 @@ export default {
 </script>
 
 <style scoped>
+.upload{
+
+}
+
 .uploader-frame {
   display: inline-block;
 }
