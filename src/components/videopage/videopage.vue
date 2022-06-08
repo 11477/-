@@ -183,7 +183,7 @@ export default {
   width: 100%;
   display: flex;
   align-items: center;
-  background-color: rgba(128,128,128,0.3);
+  background: linear-gradient(rgba(255,255,255,0.1),black);
   border-radius: 7px;
 }
 
@@ -250,7 +250,7 @@ export default {
 }
 
 .title-inf{
-  background-color: rgba(255,255,255,0.7);
+  //background-color: rgba(255,255,255,0.7);
   flex-flow: column;
   display: flex;
   border-radius: 6px;
