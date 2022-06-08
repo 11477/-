@@ -264,7 +264,7 @@ export default {
       this.$set(this.buttonMap, index, true);
     },
     cancel(index) {
-      this.$set(this.buttonMap, index, false);
+      this.$set(this.textareaMap, index, "");
       if (index !== 0) {
         this.$set(this.replyMap, index, false);
       }

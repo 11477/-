@@ -27,7 +27,7 @@
           <div class="upload-inf">
             <div class="title-inf-left">
               <span>P友</span>
-              <span @click="ToUser">{{uploaderName}}</span>
+              <div class="title-inf-left-user" @click="ToUser">{{uploaderName}}</div>
             </div>
             <div class="title-inf-right">
               <span>{{videoDate}}</span>
@@ -35,7 +35,6 @@
           </div>
         </div>
       </div>
-
     </div>
   </div>
 </template>
@@ -46,7 +45,7 @@ import user from "@/store/user";
 
 export default {
   // eslint-disable-next-line vue/multi-word-component-names
-  name: 'AdminVideoCover',
+  name: 'VideoCover',
   data(){
     return {
       viewNum: 22,
@@ -144,10 +143,13 @@ export default {
 <style scoped>
 
 .video-card {
-  width: 400px;
-  height: 250px;
+
+  width: 360px;
+  height: 230px;
   text-align: center;
-  margin: 20px 15px;
+  margin-top: 10px;
+  margin-bottom: 50px;
+  margin-left: 15px;
 }
 
 .video-cover{
@@ -155,15 +157,17 @@ export default {
   z-index: 1;
   border-radius: 6px;
   margin: 0 auto;
+  width: 360px;
+  height: 230px;
 }
 
 .video-cover-img img{
-  width: 100%;
-  height: 100%;
-  max-height: 225px;
-  max-width: 400px;
-  min-height: 225px;
-  max-width: 400px;
+  width: 360px;
+  height:220px;
+  max-width: 360px;
+  max-height: 220px;
+  min-width: 360px;
+  min-height: 220px;
   border-radius: 6px;
   z-index: 1;
   cursor: pointer;
@@ -171,14 +175,13 @@ export default {
 
 .bottom-line{
   position: absolute;
-  bottom: 43px;
-//left: 5px;
+  top:200px;
   z-index: 2;
   width: 100%;
   display: flex;
   align-items: center;
-  background-color: rgba(128,128,128,0.4);
-  border-radius: 5px;
+  background-color: rgba(128,128,128,0.3);
+  border-radius: 7px;
 }
 
 .bottom-line-left{
@@ -215,17 +218,26 @@ export default {
 .upload-inf{
   flex: 1;
   display: flex;
+  position: absolute;
+  top:30px;
 }
 
 .video-title{
   float: left;
+  text-align: center;
 }
 
 .video-title span{
   font-weight: 1000;
+  font-size: 15px;
   cursor: pointer;
+  text-align: left;
   transition: background-color .3s,color .3s;
   float: left;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+  width: 340px;
 }
 
 .video-title span:hover{
@@ -239,6 +251,7 @@ export default {
   flex-flow: column;
   display: flex;
   border-radius: 6px;
+  position: absolute;
 }
 
 .title-inf-left{
@@ -247,28 +260,38 @@ export default {
   float: left;
 }
 
-.title-inf-left{
-  float: left;
-}
-
 .title-inf-left span{
-  font-size: 15px;
+  font-size: 10px;
+  width: 25px;
   color:gray;
-  margin-left: 5px;
+  text-align: left;
   float: left;
   transition: background-color .3s,color .3s;
 }
 
-.title-inf-left span:hover{
+.title-inf-left-user{
+  font-size: 10px;
+  width: 100px;
+  color:gray;
+  float: left;
+  text-align: left;
+  margin-top: 1px;
+  transition: background-color .3s,color .3s;
+}
+
+.title-inf-left-user:hover{
   cursor: pointer;
   color: #00A1D6;
 }
 
 .title-inf-right span{
-  font-size: 15px;
+  font-size: 10px;
   color:gray;
-  margin-left: 5px;
+  position: absolute;
+  left: 250px;
+  margin-top: 3px;
   float: left;
+  width: 100px;
   transition: background-color .3s,color .3s;
 }
 

@@ -267,7 +267,7 @@ export default {
 </script>
 <style scoped>
 .audit-tab {
-  width: 1440px;
+  width: 1300px;
 }
 
 .refresh {
