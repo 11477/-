@@ -81,6 +81,7 @@ export default {
                 break;
               case 4001:
                 this.$message.warning('用户已登录！');
+                this.$router.push('/index');
                 break;
               case 4002:
                 this.$message.error('邮箱未注册！');
