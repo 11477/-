@@ -61,6 +61,14 @@ const routes = [
     component: () => import('../views/register/ConfirmView'),
   },
   {
+    path: '/forget',
+    name: 'Forget',
+    component: () => import('../views/login/ForgetView'),
+    meta:{
+      unShowNav:true
+    },
+  },
+  {
     path: '/upload/home',
     name: 'uploadHome',
     props: true,

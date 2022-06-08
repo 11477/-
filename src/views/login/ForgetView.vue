@@ -1,15 +1,21 @@
 <template>
-  <div id="login" class="login" v-title :data-title=this.title>
+  <div id="foget" class="forget" v-title :data-title=this.title>
     <div >
       <img class="title1" src="../../assets/logos/logo-without-white-under.png" @click="handleToHome"/>
     </div>
     <div class="login-word">
-      <span class="word" style="font-size: 38px;">登录</span>
+      <span class="word" style="font-size: 38px;font-weight: 600">密码找回</span>
     </div>
-    <div class="login-wrap">
+    <div class="forget-wrap">
       <el-form :model="form" ref="form" class="demo-ruleForm">
         <el-form-item prop="username">
-          <el-input placeholder="邮箱" type="username" v-model="form.email" autocomplete="off"></el-input>
+          <el-input placeholder="邮箱" v-model="form.email" autocomplete="off"></el-input>
+        </el-form-item>
+        <el-form-item class="login-btn">
+          <el-button type="primary" @click="forget">发送验证码</el-button>
+        </el-form-item>
+        <el-form-item prop="username">
+          <el-input placeholder="验证码" v-model="form.code" autocomplete="off"></el-input>
         </el-form-item>
         <el-form-item id="password" prop="pass">
           <el-input
@@ -17,18 +23,15 @@
               type="password"
               v-model="form.password"
               autocomplete="off"
-              @keyup.enter.native="login"
+              @keyup.enter.native="update"
           ></el-input>
         </el-form-item>
         <el-form-item class="login-btn">
-          <el-button type="primary" @click="login">登 录</el-button>
+          <el-button type="primary" @click="update">更改密码</el-button>
         </el-form-item>
       </el-form>
       <div class="register-text">
         <p @click="handleCommand">注册帐号</p>
-      </div>
-      <div class="forget-text">
-        <p @click="handleForget">忘记密码？</p>
       </div>
     </div>
   </div>
@@ -36,7 +39,7 @@
 
 <script>
 export default {
-  name: "LoginView.vue",
+  name: "ForgetView",
   data() {
     return {
       title: '登录',
@@ -44,52 +47,68 @@ export default {
       form: {
         email: '',
         password: '',
+        code:'',
       },
     };
   },
   methods: {
-    login() {
+    forget(){
       const self = this;
       const formData = new FormData();
       formData.append("email", self.form.email);
-      formData.append("password", self.form.password);
       self.$axios({
         method: 'post',
-        url: '/Weblogin/login/',
+        url: '/Weblogin/forget/',
         data: formData,
       })
           .then(res => {
             switch (res.data.error) {
               case 0:
                 // 前端保存用户信息
-                this.$message.success("登录成功");
-                this.$store.dispatch('saveUserInfo', {user: {
-                    'email': this.form.email,
-                    'userID':res.data.userID,
-                    'isAudit':res.data.isAudit
-                  }});
-                console.log(res.data.userID)
-                var curr = localStorage.getItem('preRoute');
-                if (curr == null) {
-                  this.$router.push('/index');
-                } else {
-                  this.$router.push({ path: curr });
-                }
+                this.$message.success("验证码已发送，请前往邮箱确认！");
                 break;
               case 3001:
-                this.$message.error('表单验证失败！');
+                this.$message.error('表单信息错误（未全部填写或数据类型有误）！');
                 break;
               case 4001:
-                this.$message.warning('用户已登录！');
+                this.$message.warning('邮件发送失败！');
                 break;
               case 4002:
                 this.$message.error('邮箱未注册！');
                 break;
-              case 4003:
-                this.$message.error('密码错误！');
+              case 2001:
+                this.$message.error('请求方式错误！');
                 break;
-              case 4004:
-                this.$message.error('用户未通过邮件确认，请及时确认！');
+            }
+          })
+    },
+    update(){
+      const self = this;
+      const formData = new FormData();
+      formData.append("useremail", self.form.email);
+      formData.append("password",self.form.password);
+      formData.append("code",self.form.code);
+      //console.log(self.code)
+      self.$axios({
+        method: 'post',
+        url: '/Weblogin/update/',
+        data: formData,
+      })
+          .then(res => {
+            switch (res.data.error) {
+              case 0:
+                // 前端保存用户信息
+                this.$message.success("密码修改成功！");
+                this.$router.push('/login');
+                break;
+              case 4001:
+                this.$message.error('密码违规！');
+                break;
+              case 4002:
+                this.$message.error('验证码错误！');
+                break;
+              case 2001:
+                this.$message.error('请求方式错误！');
                 break;
             }
           })
@@ -106,15 +125,12 @@ export default {
     handleToHome() {
       window.location.href = '/';
     },
-    handleForget(){
-      this.$router.push("/forget");
-    }
   }
 }
 </script>
 
 <style scoped>
-.login {
+.forget {
   width: 100%;
   height: 800px;
   background: url("../../assets/images/login_background.jpg") no-repeat;
@@ -152,9 +168,9 @@ export default {
   border-radius: 10px;
   text-align: center;
 }
-.login-wrap {
+.forget-wrap {
   width: 350px;
-  height: 220px;
+  height: 340px;
   padding: 20px 25px 0 25px;
   line-height: 40px;
   position: relative;
