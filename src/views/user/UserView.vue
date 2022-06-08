@@ -435,6 +435,10 @@ export default {
   margin-left: 100px;
   display: flex;
   flex-direction: row;
+  background: #F5FFFF;
+  background-size: cover;
+  overflow: auto;
+  border-radius: 30px;
 }
 .pic-right{
   display: flex;
