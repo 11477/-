@@ -197,7 +197,7 @@ export default {
       cos.putObject({
         Bucket: 'nohesitate-1312201606',
         Region: 'ap-beijing',
-        Key: 'VideoCover/'+file.lastModified.toString(),
+        Key: 'VideoCover/'+file.lastModified.toString() + '.jpg',
         StorageClass: 'STANDARD',
         Body: file // 上传文件对象
       }, (err, data) => {

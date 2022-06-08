@@ -89,7 +89,7 @@ export default {
       cosImg.putObject({
         Bucket: 'nohesitate-1312201606',
         Region: 'ap-beijing',
-        Key: 'UserAvatar/'+file.lastModified.toString(),
+        Key: 'UserAvatar/'+file.lastModified.toString() + '.jpg',
         StorageClass: 'STANDARD',
         Body: file // 上传文件对象
       }, (err, data) => {
